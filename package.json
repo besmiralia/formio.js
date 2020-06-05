@@ -19,7 +19,8 @@
     "lint"
   ],
   "scripts": {
-    "build": "esdoc;gulp build",
+    "build": "gulp build",
+    "builddoc": "esdoc;gulp build",
     "transpile": "babel ./src/ --out-dir ./lib/",
     "templates": "gulp templates",
     "watch": "babel -w ./src/ --out-dir ./lib/",
@@ -35,7 +36,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/formio/formio.js.git"
+    "url": "git+https://github.com/besmiralia/formio.js.git"
   },
   "contributors": [
     {
@@ -45,12 +46,12 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/formio/formio.js/issues"
+    "url": "https://github.com/besmiralia/formio.js/issues"
   },
   "browser": {
     "vm": false
   },
-  "homepage": "https://github.com/formio/formio.js#readme",
+  "homepage": "https://github.com/besmiralia/formio.js#readme",
   "dependencies": {
     "@formio/bootstrap3": "^2.6.1",
     "@formio/semantic": "^2.4.1",

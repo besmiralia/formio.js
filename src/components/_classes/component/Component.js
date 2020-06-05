@@ -27,6 +27,11 @@ export default class Component extends Element {
        * Determines if this component provides an input.
        */
       input: true,
+      /**
+       * GovPilot ID
+       */
+
+      gpid: '',
 
       /**
        * The data key for this component (how the data is stored in the database).
@@ -195,7 +200,7 @@ export default class Component extends Element {
    * @param options
    */
   /* eslint-disable no-unused-vars */
-  static tableView(value, options) {}
+  static tableView(value, options) { }
   /* eslint-enable no-unused-vars */
 
   /**
@@ -506,6 +511,9 @@ export default class Component extends Element {
     return Component.schema();
   }
 
+  get gpid() {
+    return _.get(this.component, 'gpid', '');
+  }
   get key() {
     return _.get(this.component, 'key', '');
   }
@@ -800,6 +808,7 @@ export default class Component extends Element {
     data.t = this.t.bind(this);
     data.transform = this.transform;
     data.id = data.id || this.id;
+    data.gpid = data.gpid || this.gpid;
     data.key = data.key || this.key;
     data.value = data.value || this.dataValue;
     data.disabled = this.disabled;
@@ -1411,7 +1420,7 @@ export default class Component extends Element {
    * @return {*}
    */
   errorMessage(type) {
-    return (this.component.errors && this.component.errors[type]) ? this.component.errors[type] :  type;
+    return (this.component.errors && this.component.errors[type]) ? this.component.errors[type] : type;
   }
 
   setContent(element, content) {
@@ -2349,7 +2358,7 @@ export default class Component extends Element {
    */
 
   convertNumberOrBoolToString(value) {
-    if (typeof value === 'number' || typeof value === 'boolean' ) {
+    if (typeof value === 'number' || typeof value === 'boolean') {
       return value.toString();
     }
     return value;
@@ -2814,7 +2823,7 @@ export default class Component extends Element {
   getRelativePath(path) {
     const keyPart = `.${this.key}`;
     const thisPath = this.isInputComponent ? this.path
-                                           : this.path.slice(0).replace(keyPart, '');
+      : this.path.slice(0).replace(keyPart, '');
     return path.replace(thisPath, '');
   }
 

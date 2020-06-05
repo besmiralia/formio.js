@@ -24,6 +24,9 @@
     ref="sidebar-group"
   >
     <div id="group-container-{{ctx.groupKey}}" class="card-body no-drop p-2" ref="sidebar-container">
+      {% if (ctx.groupKey == 'custom') { %}
+      <input type="search" placeholder="Search" class="form-control form-control-sm" id="search-custom-component">
+      {% } %}
       {% !ctx.group.componentOrder || ctx.group.componentOrder.forEach(function(componentKey) { %}
       <span
         data-group="{{ctx.groupKey}}"

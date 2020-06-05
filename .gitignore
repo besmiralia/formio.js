@@ -9,5 +9,4 @@ bower_components
 .idea
 .ruby-version
 .ruby-gemset
-docs/
-dist/
+docs

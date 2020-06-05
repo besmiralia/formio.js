@@ -27,6 +27,10 @@ export default {
         return;
       }
 
+      if (!component.gpid) {
+        component.gpid = Math.random().toString(16).substring(10);
+      }
+
       const newKey = uniqueKey(formKeys, component.key);
       if (newKey !== component.key) {
         component.key = newKey;

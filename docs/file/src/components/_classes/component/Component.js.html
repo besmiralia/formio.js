@@ -267,6 +267,11 @@ export default class Component extends Element {
        * Determines if this component provides an input.
        */
       input: true,
+      /**
+       * GovPilot ID
+       */
+
+      gpid: &apos;&apos;,
 
       /**
        * The data key for this component (how the data is stored in the database).
@@ -435,7 +440,7 @@ export default class Component extends Element {
    * @param options
    */
   /* eslint-disable no-unused-vars */
-  static tableView(value, options) {}
+  static tableView(value, options) { }
   /* eslint-enable no-unused-vars */
 
   /**
@@ -746,6 +751,9 @@ export default class Component extends Element {
     return Component.schema();
   }
 
+  get gpid() {
+    return _.get(this.component, &apos;gpid&apos;, &apos;&apos;);
+  }
   get key() {
     return _.get(this.component, &apos;key&apos;, &apos;&apos;);
   }
@@ -1040,6 +1048,7 @@ export default class Component extends Element {
     data.t = this.t.bind(this);
     data.transform = this.transform;
     data.id = data.id || this.id;
+    data.gpid = data.gpid || this.gpid;
     data.key = data.key || this.key;
     data.value = data.value || this.dataValue;
     data.disabled = this.disabled;
@@ -1651,7 +1660,7 @@ export default class Component extends Element {
    * @return {*}
    */
   errorMessage(type) {
-    return (this.component.errors &amp;&amp; this.component.errors[type]) ? this.component.errors[type] :  type;
+    return (this.component.errors &amp;&amp; this.component.errors[type]) ? this.component.errors[type] : type;
   }
 
   setContent(element, content) {
@@ -2589,7 +2598,7 @@ export default class Component extends Element {
    */
 
   convertNumberOrBoolToString(value) {
-    if (typeof value === &apos;number&apos; || typeof value === &apos;boolean&apos; ) {
+    if (typeof value === &apos;number&apos; || typeof value === &apos;boolean&apos;) {
       return value.toString();
     }
     return value;
@@ -3054,7 +3063,7 @@ export default class Component extends Element {
   getRelativePath(path) {
     const keyPart = `.${this.key}`;
     const thisPath = this.isInputComponent ? this.path
-                                           : this.path.slice(0).replace(keyPart, &apos;&apos;);
+      : this.path.slice(0).replace(keyPart, &apos;&apos;);
     return path.replace(thisPath, &apos;&apos;);
   }
 

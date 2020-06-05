@@ -4770,6 +4770,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/components/_classes/component/component.js~component#gpid",
+    "class/src/components/_classes/component/Component.js~Component.html#instance-get-gpid",
+    "src/components/_classes/component/Component.js~Component#gpid",
+    "member"
+  ],
+  [
     "src/components/_classes/component/component.js~component#haschanged",
     "class/src/components/_classes/component/Component.js~Component.html#instance-method-hasChanged",
     "src/components/_classes/component/Component.js~Component#hasChanged",

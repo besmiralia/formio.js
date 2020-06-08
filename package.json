@@ -1,6 +1,6 @@
 {
   "name": "formiojs",
-  "version": "4.10.0-rc.10",
+  "version": "4.10.0-rc.11",
   "description": "JavaScript powered Forms with JSON Form Builder",
   "main": "index.js",
   "types": "index.d.ts",
@@ -79,6 +79,7 @@
     "moment": "^2.26.0",
     "moment-timezone": "^0.5.31",
     "native-promise-only": "^0.8.1",
+    "quill": "^2.0.0-dev.3",
     "resize-observer-polyfill": "^1.5.1",
     "signature_pad": "^2.3.2",
     "string-hash": "^1.1.3",

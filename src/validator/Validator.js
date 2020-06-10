@@ -535,6 +535,8 @@ class ValidationChecker {
           }));
         },
         check(component, setting, value) {
+          if (component.isEmpty(value)) return true;
+
           const pattern = setting;
           if (!pattern) {
             return true;
@@ -752,6 +754,18 @@ class ValidationChecker {
               return true;
             }
           }
+        }
+      },
+      time: {
+        key: 'validate.time',
+        messageText: 'Invalid time',
+        message(component) {
+          return component.t(component.errorMessage(this.validators.time.messageText), {
+            field: component.errorLabel
+          });
+        },
+        check(component, setting, value, data, index) {
+          return moment(value, component.component.format).isValid();
         }
       },
     };

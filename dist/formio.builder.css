@@ -1107,6 +1107,10 @@ div[read-only="true"] .formio-component-textarea div[ref="input"] {
 .form-builder-panel .panel-body {
   padding: 5px; }
 
+.form-builder-panel .card-body {
+  max-height: 400px;
+  overflow: auto; }
+
 .formio-component-tabs .ui.tabular.menu .item {
   padding: 0.8em; }
 

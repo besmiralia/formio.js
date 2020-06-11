@@ -714,6 +714,40 @@ export default class EditGridComponent extends NestedArrayComponent {
     return this.attachComponents(modalContent, components);
   }
 
+  showDialog() {
+    const wrapper = this.ce(&apos;div&apos;, { ref: &apos;confirmationDialog&apos; });
+    const dialogContent =this.component.dialogTemplate || this.defaultDialogTemplate;
+
+    wrapper.innerHTML = dialogContent;
+    wrapper.refs = {};
+    this.loadRefs.call(wrapper, wrapper, {
+      dialogHeader: &apos;single&apos;,
+      dialogCancelButton: &apos;single&apos;,
+      dialogYesButton: &apos;single&apos;,
+    });
+
+    const dialog = this.createModal(wrapper);
+    const close = (event) =&gt; {
+      event.preventDefault();
+      dialog.close();
+    };
+    let dialogResult;
+
+    const promise = new NativePromise((resolve, reject) =&gt; {
+      dialogResult = { resolve, reject };
+    });
+
+    this.addEventListener(wrapper.refs.dialogYesButton, &apos;click&apos;, (event) =&gt; {
+      close(event);
+      dialogResult.resolve();
+    });
+    this.addEventListener(wrapper.refs.dialogCancelButton, &apos;click&apos;, (event) =&gt; {
+      close(event);
+      dialogResult.reject();
+    });
+    return promise;
+  }
+
   editRow(rowIndex) {
     const editRow = this.editRows[rowIndex];
     const isAlreadyEditing = editRow.state === EditRowState.Editing || editRow.state === EditRowState.New;

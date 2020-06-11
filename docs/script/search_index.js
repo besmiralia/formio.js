@@ -8958,6 +8958,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/components/editgrid/fixtures/comp6.js",
+    "file/src/components/editgrid/fixtures/comp6.js.html",
+    "src/components/editgrid/fixtures/comp6.js",
+    "file"
+  ],
+  [
     "src/components/editgrid/fixtures/index.js",
     "file/src/components/editgrid/fixtures/index.js.html",
     "src/components/editgrid/fixtures/index.js",

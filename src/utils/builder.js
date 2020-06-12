@@ -28,7 +28,7 @@ export default {
       }
 
       if (!component.gpid) {
-        component.gpid = Math.random().toString(16).substring(10);
+        component.gpid = this.generateKey();
       }
 
       const newKey = uniqueKey(formKeys, component.key);
@@ -95,5 +95,16 @@ export default {
       label: shortcut,
       value: shortcut,
     }));
+  },
+
+  generateKey() {
+    // Generate a hex key of 5 characters
+    var result           = '';
+    var characters       = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < 5; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
   }
 };

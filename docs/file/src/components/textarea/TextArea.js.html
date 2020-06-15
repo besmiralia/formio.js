@@ -24,7 +24,7 @@
   </span>
     <ul class="search-result"></ul>
   </div>
-<a style="position:relative; top:3px;" href="https://github.com/formio/formio.js"><img width="20px" src="./image/github.png"></a></header>
+<a style="position:relative; top:3px;" href="https://github.com/besmiralia/formio.js"><img width="20px" src="./image/github.png"></a></header>
 
 <nav class="navigation" data-ice="nav"><div>
   <ul>
@@ -437,19 +437,6 @@ export default class TextAreaComponent extends TextFieldComponent {
               return editor;
             });
           break;
-        case &apos;tiny&apos;:
-          if (!settings) {
-            settings = {};
-          }
-          settings.mode = this.component.as || &apos;javascript&apos;;
-          this.addTiny(element, settings, (newValue) =&gt; this.updateEditorValue(newValue))
-            .then((tiny) =&gt; {
-              this.editors[index] = tiny;
-              tiny.setContent(this.setConvertedValue(this.dataValue));
-              editorReady(tiny);
-              return tiny;
-            }).catch(err =&gt; console.warn(err));
-          break;
         default:
           super.attachElement(element, index);
           break;
@@ -558,9 +545,6 @@ export default class TextAreaComponent extends TextFieldComponent {
               break;
             case &apos;ckeditor&apos;:
               editor.data.set(this.setConvertedValue(value, index));
-              break;
-            case &apos;tiny&apos;:
-              editor.setContent(this.setConvertedValue(value));
               break;
           }
         }

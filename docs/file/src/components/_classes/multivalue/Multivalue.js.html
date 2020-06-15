@@ -24,7 +24,7 @@
   </span>
     <ul class="search-result"></ul>
   </div>
-<a style="position:relative; top:3px;" href="https://github.com/formio/formio.js"><img width="20px" src="./image/github.png"></a></header>
+<a style="position:relative; top:3px;" href="https://github.com/besmiralia/formio.js"><img width="20px" src="./image/github.png"></a></header>
 
 <nav class="navigation" data-ice="nav"><div>
   <ul>
@@ -281,7 +281,13 @@ export default class Multivalue extends Field {
   render() {
     // If single value field.
     if (!this.useWrapper()) {
-      return super.render(`&lt;div ref=&quot;element&quot;&gt;${this.renderElement(this.dataValue)}&lt;/div&gt;`);
+      return super.render(
+        `&lt;div ref=&quot;element&quot;&gt;
+          ${this.renderElement(
+            this.component.type !== &apos;hidden&apos; ? this.dataValue : &apos;&apos;
+          )}
+        &lt;/div&gt;`
+      );
     }
 
     // Make sure dataValue is in the correct array format.

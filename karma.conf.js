@@ -43,7 +43,7 @@ module.exports = function(config) {
     },
     files: [
       'app/bootstrap/css/bootstrap.min.css',
-      'app/fontawesome/css/font-awesome.min.css',
+      //'app/fontawesome/css/font-awesome.min.css',
       'dist/formio.full.min.css',
       {
         pattern: 'dist/fonts/*',

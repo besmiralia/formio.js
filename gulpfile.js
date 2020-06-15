@@ -110,7 +110,7 @@ gulp.task('styles-full', gulp.series('builder-fonts', function fullStyles() {
     './node_modules/choices.js/public/assets/styles/choices.min.css',
     './node_modules/dialog-polyfill/dialog-polyfill.css',
     './node_modules/dragula/dist/dragula.css',
-    './node_modules/font-awesome/css/font-awesome.css',
+    //'./node_modules/@fortawesome/fontawesome-pro/css/all.css',
     './src/sass/formio.form.scss',
     './src/sass/formio.form.builder.scss'
   ], 'formio.full');
@@ -140,7 +140,7 @@ gulp.task('scripts-embed', gulp.series('formio.embed.min.js', 'formio.embed.js')
 gulp.task('scripts-contrib', build('contrib/index.js', 'formio.contrib.js'));
 
 gulp.task('jquery', () => gulp.src('./node_modules/jquery/dist/**/*.*').pipe(gulp.dest('./app/jquery')));
-gulp.task('fontawesome', () => gulp.src('./node_modules/font-awesome/**/*.*').pipe(gulp.dest('./app/fontawesome')));
+//gulp.task('fontawesome', () => gulp.src('./node_modules/@fortawesome/fontawesome-pro/webfonts/*.*').pipe(gulp.dest('./app/fontawesome/webfonts')));
 gulp.task('bootstrap', () => gulp.src('./node_modules/bootstrap/dist/**/*.*').pipe(gulp.dest('./app/bootstrap')));
 gulp.task('bootswatch', () => gulp.src('./node_modules/bootswatch/**/*.*').pipe(gulp.dest('./app/bootswatch')));
 
@@ -181,7 +181,7 @@ gulp.task('build', gulp.series(
   gulp.parallel(
     'jquery',
     'timezones',
-    'fontawesome',
+    //'fontawesome',
     'bootstrap',
     'bootswatch'
   ),

@@ -1,6 +1,6 @@
 {
   "name": "formiojs",
-  "version": "4.10.3-rc.3",
+  "version": "4.10.3-rc.4",
   "description": "JavaScript powered Forms with JSON Form Builder",
   "main": "index.js",
   "types": "index.d.ts",
@@ -58,6 +58,7 @@
     "autocompleter": "^6.0.3",
     "browser-cookies": "^1.2.0",
     "choices.js": "^9.0.1",
+    "compare-versions": "^3.6.0",
     "core-js": "^3.6.5",
     "custom-event-polyfill": "^1.0.7",
     "dialog-polyfill": "^0.5.1",

@@ -52,243 +52,144 @@
     "filePath": "src/components/select/Select.js",
     "lines": [
       {
-        "lineNumber": 206,
-        "line": "  /**\r"
+        "lineNumber": 596,
+        "line": "  /**"
       },
       {
-        "lineNumber": 207,
-        "line": "   * Adds an option to the select dropdown.\r"
+        "lineNumber": 597,
+        "line": "   * Sets the JSON schema for the form to be rendered."
       },
       {
-        "lineNumber": 208,
-        "line": "   *\r"
+        "lineNumber": 598,
+        "line": "   *"
       },
       {
-        "lineNumber": 209,
-        "line": "   * @param value\r"
+        "lineNumber": 599,
+        "line": "   * @example"
       },
       {
-        "lineNumber": 210,
-        "line": "   * @param label\r"
+        "lineNumber": 600,
+        "line": "   * import Webform from 'formiojs/Webform';"
       },
       {
-        "lineNumber": 211,
-        "line": "   */\r"
+        "lineNumber": 601,
+        "line": "   * let form = new Webform(document.getElementById('formio'));"
       },
       {
-        "lineNumber": 212,
-        "line": "  addOption(value, label, attrs = {}, id) {\r"
-      }
-    ],
-    "codeParams": [
-      "value",
-      "label",
-      "attrs",
-      "id"
-    ],
-    "docParams": [
-      "value",
-      "label"
-    ]
-  },
-  {
-    "name": "SelectComponent#addCurrentChoices",
-    "filePath": "src/components/select/Select.js",
-    "lines": [
-      {
-        "lineNumber": 1024,
-        "line": "  /**\r"
+        "lineNumber": 602,
+        "line": "   * form.setForm({"
       },
       {
-        "lineNumber": 1025,
-        "line": "   * @param {*} value\r"
+        "lineNumber": 603,
+        "line": "   *   components: ["
       },
       {
-        "lineNumber": 1026,
-        "line": "   * @param {Array} items\r"
+        "lineNumber": 604,
+        "line": "   *     {"
       },
       {
-        "lineNumber": 1027,
-        "line": "   */\r"
+        "lineNumber": 605,
+        "line": "   *       type: 'textfield',"
       },
       {
-        "lineNumber": 1028,
-        "line": "  addCurrentChoices(values, items, keyValue) {\r"
-      }
-    ],
-    "codeParams": [
-      "values",
-      "items",
-      "keyValue"
-    ],
-    "docParams": [
-      "value",
-      "items"
-    ]
-  },
-  {
-    "name": "TextAreaComponent#updateEditorValue",
-    "filePath": "src/components/textarea/TextArea.js",
-    "lines": [
-      {
-        "lineNumber": 85,
-        "line": "  /**\r"
+        "lineNumber": 606,
+        "line": "   *       key: 'firstName',"
       },
       {
-        "lineNumber": 86,
-        "line": "   * Updates the editor value.\r"
+        "lineNumber": 607,
+        "line": "   *       label: 'First Name',"
       },
       {
-        "lineNumber": 87,
-        "line": "   *\r"
+        "lineNumber": 608,
+        "line": "   *       placeholder: 'Enter your first name.',"
       },
       {
-        "lineNumber": 88,
-        "line": "   * @param newValue\r"
+        "lineNumber": 609,
+        "line": "   *       input: true"
       },
       {
-        "lineNumber": 89,
-        "line": "   */\r"
+        "lineNumber": 610,
+        "line": "   *     },"
       },
       {
-        "lineNumber": 90,
-        "line": "  updateEditorValue(index, newValue) {\r"
-      }
-    ],
-    "codeParams": [
-      "index",
-      "newValue"
-    ],
-    "docParams": [
-      "newValue"
-    ]
-  },
-  {
-    "name": "Component#getModifiedSchema",
-    "filePath": "src/components/_classes/component/Component.js",
-    "lines": [
-      {
-        "lineNumber": 654,
-        "line": "  /**\r"
+        "lineNumber": 611,
+        "line": "   *     {"
       },
       {
-        "lineNumber": 655,
-        "line": "   * Returns only the schema that is different from the default.\r"
+        "lineNumber": 612,
+        "line": "   *       type: 'textfield',"
       },
       {
-        "lineNumber": 656,
-        "line": "   *\r"
+        "lineNumber": 613,
+        "line": "   *       key: 'lastName',"
       },
       {
-        "lineNumber": 657,
-        "line": "   * @param schema\r"
+        "lineNumber": 614,
+        "line": "   *       label: 'Last Name',"
       },
       {
-        "lineNumber": 658,
-        "line": "   * @param defaultSchema\r"
+        "lineNumber": 615,
+        "line": "   *       placeholder: 'Enter your last name',"
       },
       {
-        "lineNumber": 659,
-        "line": "   */\r"
+        "lineNumber": 616,
+        "line": "   *       input: true"
       },
       {
-        "lineNumber": 660,
-        "line": "  getModifiedSchema(schema, defaultSchema, recursion) {\r"
-      }
-    ],
-    "codeParams": [
-      "schema",
-      "defaultSchema",
-      "recursion"
-    ],
-    "docParams": [
-      "schema",
-      "defaultSchema"
-    ]
-  },
-  {
-    "name": "Component#sanitize",
-    "filePath": "src/components/_classes/component/Component.js",
-    "lines": [
-      {
-        "lineNumber": 842,
-        "line": "  /**\r"
+        "lineNumber": 617,
+        "line": "   *     },"
       },
       {
-        "lineNumber": 843,
-        "line": "   * Sanitize an html string.\r"
+        "lineNumber": 618,
+        "line": "   *     {"
       },
       {
-        "lineNumber": 844,
-        "line": "   *\r"
+        "lineNumber": 619,
+        "line": "   *       type: 'button',"
       },
       {
-        "lineNumber": 845,
-        "line": "   * @param string\r"
+        "lineNumber": 620,
+        "line": "   *       action: 'submit',"
       },
       {
-        "lineNumber": 846,
-        "line": "   * @returns {*}\r"
+        "lineNumber": 621,
+        "line": "   *       label: 'Submit',"
       },
       {
-        "lineNumber": 847,
-        "line": "   */\r"
+        "lineNumber": 622,
+        "line": "   *       theme: 'primary'"
       },
       {
-        "lineNumber": 848,
-        "line": "  sanitize(dirty) {\r"
-      }
-    ],
-    "codeParams": [
-      "dirty"
-    ],
-    "docParams": [
-      "string"
-    ]
-  },
-  {
-    "name": "Component#renderString",
-    "filePath": "src/components/_classes/component/Component.js",
-    "lines": [
-      {
-        "lineNumber": 852,
-        "line": "  /**\r"
+        "lineNumber": 623,
+        "line": "   *     }"
       },
       {
-        "lineNumber": 853,
-        "line": "   * Render a template string into html.\r"
+        "lineNumber": 624,
+        "line": "   *   ]"
       },
       {
-        "lineNumber": 854,
-        "line": "   *\r"
+        "lineNumber": 625,
+        "line": "   * });"
       },
       {
-        "lineNumber": 855,
-        "line": "   * @param template\r"
+        "lineNumber": 626,
+        "line": "   *"
       },
       {
-        "lineNumber": 856,
-        "line": "   * @param data\r"
+        "lineNumber": 627,
+        "line": "   * @param {Object} form - The JSON schema of the form @see https://examples.form.io/example for an example JSON schema."
       },
       {
-        "lineNumber": 857,
-        "line": "   * @param actions\r"
+        "lineNumber": 628,
+        "line": "   * @returns {*}"
       },
       {
-        "lineNumber": 858,
-        "line": "   *\r"
+        "lineNumber": 629,
+        "line": "   */"
       },
       {
-        "lineNumber": 859,
-        "line": "   * @return {HTMLElement} - The created element.\r"
-      },
-      {
-        "lineNumber": 860,
-        "line": "   */\r"
-      },
-      {
-        "lineNumber": 861,
-        "line": "  renderString(template, data) {\r"
+        "lineNumber": 630,
+        "line": "  setForm(form, flags) {"
       }
     ],
     "codeParams": [
@@ -306,32 +207,28 @@
     "filePath": "src/components/_classes/component/Component.js",
     "lines": [
       {
-        "lineNumber": 1175,
-        "line": "  /**\r"
+        "lineNumber": 795,
+        "line": "  /**"
       },
       {
-        "lineNumber": 1176,
-        "line": "   * Uses the widget to determine the output string.\r"
+        "lineNumber": 796,
+        "line": "   * Restores a draft submission based on the user who is authenticated."
       },
       {
-        "lineNumber": 1177,
-        "line": "   *\r"
+        "lineNumber": 797,
+        "line": "   *"
       },
       {
-        "lineNumber": 1178,
-        "line": "   * @param value\r"
+        "lineNumber": 798,
+        "line": "   * @param {userId} - The user id where we need to restore the draft from."
       },
       {
-        "lineNumber": 1179,
-        "line": "   * @return {*}\r"
+        "lineNumber": 799,
+        "line": "   */"
       },
       {
-        "lineNumber": 1180,
-        "line": "   */\r"
-      },
-      {
-        "lineNumber": 1181,
-        "line": "  getWidgetValueAsString(value, options) {\r"
+        "lineNumber": 800,
+        "line": "  restoreDraft(userId) {"
       }
     ],
     "codeParams": [
@@ -347,32 +244,32 @@
     "filePath": "src/components/_classes/component/Component.js",
     "lines": [
       {
-        "lineNumber": 1509,
-        "line": "  /**\r"
+        "lineNumber": 1107,
+        "line": "  /**"
       },
       {
-        "lineNumber": 1510,
-        "line": "   * Check if this component is conditionally visible.\r"
+        "lineNumber": 1108,
+        "line": "   * Show the errors of this form within the alert dialog."
       },
       {
-        "lineNumber": 1511,
-        "line": "   *\r"
+        "lineNumber": 1109,
+        "line": "   *"
       },
       {
-        "lineNumber": 1512,
-        "line": "   * @param data\r"
+        "lineNumber": 1110,
+        "line": "   * @param {Object} error - An optional additional error to display along with the component errors."
       },
       {
-        "lineNumber": 1513,
-        "line": "   * @return {boolean}\r"
+        "lineNumber": 1111,
+        "line": "   * @returns {*}"
       },
       {
-        "lineNumber": 1514,
-        "line": "   */\r"
+        "lineNumber": 1112,
+        "line": "   */"
       },
       {
-        "lineNumber": 1515,
-        "line": "  conditionallyVisible(data, row) {\r"
+        "lineNumber": 1113,
+        "line": "  showErrors(error, triggerEvent) {"
       }
     ],
     "codeParams": [
@@ -388,28 +285,32 @@
     "filePath": "src/components/_classes/component/Component.js",
     "lines": [
       {
-        "lineNumber": 1566,
-        "line": "  /**\r"
+        "lineNumber": 1254,
+        "line": "  /**"
       },
       {
-        "lineNumber": 1567,
-        "line": "   * Checks conditions for this component and any sub components.\r"
+        "lineNumber": 1255,
+        "line": "   * Trigger the change event for this form."
       },
       {
-        "lineNumber": 1568,
-        "line": "   * @param args\r"
+        "lineNumber": 1256,
+        "line": "   *"
       },
       {
-        "lineNumber": 1569,
-        "line": "   * @return {boolean}\r"
+        "lineNumber": 1257,
+        "line": "   * @param changed"
       },
       {
-        "lineNumber": 1570,
-        "line": "   */\r"
+        "lineNumber": 1258,
+        "line": "   * @param flags"
       },
       {
-        "lineNumber": 1571,
-        "line": "  checkConditions(data, flags, row) {\r"
+        "lineNumber": 1259,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 1260,
+        "line": "  onChange(flags, changed, modified, changes) {"
       }
     ],
     "codeParams": [
@@ -426,69 +327,88 @@
     "filePath": "src/components/_classes/component/Component.js",
     "lines": [
       {
-        "lineNumber": 1582,
-        "line": "  /**\r"
+        "lineNumber": 1446,
+        "line": "  /**"
       },
       {
-        "lineNumber": 1583,
-        "line": "   * Check all triggers and apply necessary actions.\r"
+        "lineNumber": 1447,
+        "line": "   * Submits the form."
       },
       {
-        "lineNumber": 1584,
-        "line": "   *\r"
+        "lineNumber": 1448,
+        "line": "   *"
       },
       {
-        "lineNumber": 1585,
-        "line": "   * @param data\r"
+        "lineNumber": 1449,
+        "line": "   * @example"
       },
       {
-        "lineNumber": 1586,
-        "line": "   */\r"
+        "lineNumber": 1450,
+        "line": "   * import Webform from 'formiojs/Webform';"
       },
       {
-        "lineNumber": 1587,
-        "line": "  fieldLogic(data, row) {\r"
-      }
-    ],
-    "codeParams": [
-      "data",
-      "row"
-    ],
-    "docParams": [
-      "data"
-    ]
-  },
-  {
-    "name": "Component#addMessages",
-    "filePath": "src/components/_classes/component/Component.js",
-    "lines": [
-      {
-        "lineNumber": 1729,
-        "line": "  /**\r"
+        "lineNumber": 1451,
+        "line": "   * let form = new Webform(document.getElementById('formio'));"
       },
       {
-        "lineNumber": 1730,
-        "line": "   * Add a new input error to this element.\r"
+        "lineNumber": 1452,
+        "line": "   * form.src = 'https://examples.form.io/example';"
       },
       {
-        "lineNumber": 1731,
-        "line": "   *\r"
+        "lineNumber": 1453,
+        "line": "   * form.submission = {data: {"
       },
       {
-        "lineNumber": 1732,
-        "line": "   * @param message\r"
+        "lineNumber": 1454,
+        "line": "   *   firstName: 'Joe',"
       },
       {
-        "lineNumber": 1733,
-        "line": "   * @param dirty\r"
+        "lineNumber": 1455,
+        "line": "   *   lastName: 'Smith',"
       },
       {
-        "lineNumber": 1734,
-        "line": "   */\r"
+        "lineNumber": 1456,
+        "line": "   *   email: 'joe@example.com'"
       },
       {
-        "lineNumber": 1735,
-        "line": "  addMessages(messages) {\r"
+        "lineNumber": 1457,
+        "line": "   * }};"
+      },
+      {
+        "lineNumber": 1458,
+        "line": "   * form.submit().then((submission) => {"
+      },
+      {
+        "lineNumber": 1459,
+        "line": "   *   console.log(submission);"
+      },
+      {
+        "lineNumber": 1460,
+        "line": "   * });"
+      },
+      {
+        "lineNumber": 1461,
+        "line": "   *"
+      },
+      {
+        "lineNumber": 1462,
+        "line": "   * @param {boolean} before - If this submission occured from the before handlers."
+      },
+      {
+        "lineNumber": 1463,
+        "line": "   *"
+      },
+      {
+        "lineNumber": 1464,
+        "line": "   * @returns {Promise} - A promise when the form is done submitting."
+      },
+      {
+        "lineNumber": 1465,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 1466,
+        "line": "  submit(before, options) {"
       }
     ],
     "codeParams": [
@@ -1094,32 +1014,32 @@
     "filePath": "src/Form.js",
     "lines": [
       {
-        "lineNumber": 223,
-        "line": "  /**\r"
+        "lineNumber": 2437,
+        "line": "  /**"
       },
       {
-        "lineNumber": 224,
-        "line": "   * Sanitize an html string.\r"
+        "lineNumber": 2438,
+        "line": "   * Performs calculations in this component plus any child components."
       },
       {
-        "lineNumber": 225,
-        "line": "   *\r"
+        "lineNumber": 2439,
+        "line": "   *"
       },
       {
-        "lineNumber": 226,
-        "line": "   * @param string\r"
+        "lineNumber": 2440,
+        "line": "   * @param args"
       },
       {
-        "lineNumber": 227,
-        "line": "   * @returns {*}\r"
+        "lineNumber": 2441,
+        "line": "   * @return {boolean}"
       },
       {
-        "lineNumber": 228,
-        "line": "   */\r"
+        "lineNumber": 2442,
+        "line": "   */"
       },
       {
-        "lineNumber": 229,
-        "line": "  sanitize(dirty) {\r"
+        "lineNumber": 2443,
+        "line": "  calculateValue(data, flags, row) {"
       }
     ],
     "codeParams": [
@@ -1134,60 +1054,88 @@
     "filePath": "src/utils/calendarUtils.js",
     "lines": [
       {
-        "lineNumber": 71,
-        "line": "/**\r"
+        "lineNumber": 2478,
+        "line": "  /**"
       },
       {
-        "lineNumber": 72,
-        "line": " * Checks the entered date for validity.\r"
+        "lineNumber": 2479,
+        "line": "   * Returns the invalid message, or empty string if the component is valid."
       },
       {
-        "lineNumber": 73,
-        "line": " *\r"
+        "lineNumber": 2480,
+        "line": "   *"
       },
       {
-        "lineNumber": 74,
-        "line": " * @param {String} value\r"
+        "lineNumber": 2481,
+        "line": "   * @param data"
       },
       {
-        "lineNumber": 75,
-        "line": " *   The value to check.\r"
+        "lineNumber": 2482,
+        "line": "   * @param dirty"
       },
       {
-        "lineNumber": 76,
-        "line": " * @param {[String]} format\r"
+        "lineNumber": 2483,
+        "line": "   * @return {*}"
       },
       {
-        "lineNumber": 77,
-        "line": " *   A moment formats.\r"
+        "lineNumber": 2484,
+        "line": "   */"
       },
       {
-        "lineNumber": 78,
-        "line": " * @param {Date} maxDate\r"
+        "lineNumber": 2485,
+        "line": "  invalidMessage(data, dirty, ignoreCondition, row) {"
+      }
+    ],
+    "codeParams": [
+      "data",
+      "dirty",
+      "ignoreCondition",
+      "row"
+    ],
+    "docParams": [
+      "data",
+      "dirty"
+    ]
+  },
+  {
+    "name": "Component#checkComponentValidity",
+    "filePath": "src/components/_classes/component/Component.js",
+    "lines": [
+      {
+        "lineNumber": 2525,
+        "line": "  /**"
       },
       {
-        "lineNumber": 79,
-        "line": " *   The max date.\r"
+        "lineNumber": 2526,
+        "line": "   * Checks the validity of this component and sets the error message if it is invalid."
       },
       {
-        "lineNumber": 80,
-        "line": " * @param {Date} minDate\r"
+        "lineNumber": 2527,
+        "line": "   *"
       },
       {
-        "lineNumber": 81,
-        "line": " *   The min date.\r"
+        "lineNumber": 2528,
+        "line": "   * @param data"
       },
       {
-        "lineNumber": 82,
-        "line": " * * @return {{message: string, result: boolean}}\r"
+        "lineNumber": 2529,
+        "line": "   * @param dirty"
       },
       {
-        "lineNumber": 83,
-        "line": " */\r"
+        "lineNumber": 2530,
+        "line": "   * @param row"
       },
       {
-        "lineNumber": 84,
-        "line": "export function checkInvalidDate(value, format, minDate, maxDate) {\r"
+        "lineNumber": 2531,
+        "line": "   * @return {boolean}"
+      },
+      {
+        "lineNumber": 2532,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 2533,
+        "line": "  checkComponentValidity(data, dirty, row, options = {}) {"
       }
     ],
     "codeParams": [
@@ -1208,52 +1156,44 @@
     "filePath": "src/utils/formUtils.js",
     "lines": [
       {
-        "lineNumber": 141,
-        "line": "/**\r"
+        "lineNumber": 2559,
+        "line": "  /**"
       },
       {
-        "lineNumber": 142,
-        "line": " * Get a component by its key\r"
+        "lineNumber": 2560,
+        "line": "   * Check the conditions, calculations, and validity of a single component and triggers an update if"
       },
       {
-        "lineNumber": 143,
-        "line": " *\r"
+        "lineNumber": 2561,
+        "line": "   * something changed."
       },
       {
-        "lineNumber": 144,
-        "line": " * @param {Object} components\r"
+        "lineNumber": 2562,
+        "line": "   *"
       },
       {
-        "lineNumber": 145,
-        "line": " *   The components to iterate.\r"
+        "lineNumber": 2563,
+        "line": "   * @param data - The root data of the change event."
       },
       {
-        "lineNumber": 146,
-        "line": " * @param {String|Object} key\r"
+        "lineNumber": 2564,
+        "line": "   * @param flags - The flags from this change event."
       },
       {
-        "lineNumber": 147,
-        "line": " *   The key of the component to get, or a query of the component to search.\r"
+        "lineNumber": 2565,
+        "line": "   *"
       },
       {
-        "lineNumber": 148,
-        "line": " *\r"
+        "lineNumber": 2566,
+        "line": "   * @return boolean - If component is valid or not."
       },
       {
-        "lineNumber": 149,
-        "line": " * @returns {Object}\r"
+        "lineNumber": 2567,
+        "line": "   */"
       },
       {
-        "lineNumber": 150,
-        "line": " *   The component that matches the given key, or undefined if not found.\r"
-      },
-      {
-        "lineNumber": 151,
-        "line": " */\r"
-      },
-      {
-        "lineNumber": 152,
-        "line": "export function getComponent(components, key, includeAll) {\r"
+        "lineNumber": 2568,
+        "line": "  checkData(data, flags, row) {"
       }
     ],
     "codeParams": [

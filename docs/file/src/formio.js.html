@@ -144,6 +144,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/providers/address/AzureAddressProvider.js~AzureAddressProvider.html">AzureAddressProvider</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/providers/address/CustomAddressProvider.js~CustomAddressProvider.html">CustomAddressProvider</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/providers/address/GoogleAddressProvider.js~GoogleAddressProvider.html">GoogleAddressProvider</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/providers/address/GovPilotAddressProvider.js~GovPilotAddressProvider.html">GovPilotAddressProvider</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/providers/address/NominatimAddressProvider.js~NominatimAddressProvider.html">NominatimAddressProvider</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#providers-storage">providers/storage</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-azure">azure</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-base64">base64</a></span></span></li>
@@ -185,6 +186,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertFormatToFlatpickr">convertFormatToFlatpickr</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertFormatToMask">convertFormatToMask</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertFormatToMoment">convertFormatToMoment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertStringToHTMLElement">convertStringToHTMLElement</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-currentTimezone">currentTimezone</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-delay">delay</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-evaluate">evaluate</a></span></span></li>
@@ -1238,7 +1240,6 @@ export default class Formio {
       Formio.tokens = {};
     }
 
-    Formio.tokens[tokenName] = token;
     if (!token) {
       if (!opts.fromUser) {
         opts.fromToken = true;
@@ -1251,10 +1252,12 @@ export default class Formio {
       catch (err) {
         cookies.erase(tokenName, { path: &apos;/&apos; });
       }
+      Formio.tokens[tokenName] = token;
       return Promise.resolve(null);
     }
 
     if (Formio.tokens[tokenName] !== token) {
+      Formio.tokens[tokenName] = token;
       // iOS in private browse mode will throw an error but we can&apos;t detect ahead of time that we are in private mode.
       try {
         localStorage.setItem(tokenName, token);

@@ -144,6 +144,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/providers/address/AzureAddressProvider.js~AzureAddressProvider.html">AzureAddressProvider</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/providers/address/CustomAddressProvider.js~CustomAddressProvider.html">CustomAddressProvider</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/providers/address/GoogleAddressProvider.js~GoogleAddressProvider.html">GoogleAddressProvider</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/providers/address/GovPilotAddressProvider.js~GovPilotAddressProvider.html">GovPilotAddressProvider</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/providers/address/NominatimAddressProvider.js~NominatimAddressProvider.html">NominatimAddressProvider</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#providers-storage">providers/storage</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-azure">azure</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-base64">base64</a></span></span></li>
@@ -185,6 +186,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertFormatToFlatpickr">convertFormatToFlatpickr</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertFormatToMask">convertFormatToMask</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertFormatToMoment">convertFormatToMoment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertStringToHTMLElement">convertStringToHTMLElement</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-currentTimezone">currentTimezone</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-delay">delay</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-evaluate">evaluate</a></span></span></li>
@@ -255,7 +257,7 @@ import Templates from &apos;./templates/Templates&apos;;
 require(&apos;./components/builder&apos;);
 
 export default class WebformBuilder extends Component {
-// eslint-disable-next-line max-statements
+  // eslint-disable-next-line max-statements
   constructor() {
     let element, options;
     if (arguments[0] instanceof HTMLElement || arguments[1]) {
@@ -567,7 +569,7 @@ export default class WebformBuilder extends Component {
             this.groups.resource = {
               title: resourceOptions ? resourceOptions.title : &apos;Existing Resource Fields&apos;,
               key: &apos;resource&apos;,
-              weight: resourceOptions ? resourceOptions.weight :  50,
+              weight: resourceOptions ? resourceOptions.weight : 50,
               subgroups: [],
               components: [],
               componentOrder: []
@@ -822,7 +824,7 @@ export default class WebformBuilder extends Component {
                   groupId === clickedParentId ||
                   groupIndex === index
                 )
-                ? &apos;inherit&apos; : &apos;none&apos;;
+                  ? &apos;inherit&apos; : &apos;none&apos;;
             });
           }, true);
         });
@@ -929,8 +931,8 @@ export default class WebformBuilder extends Component {
     let tabIndex = 0;
     switch (parent.type) {
       case &apos;table&apos;:
-        tableRowIndex = _.findIndex(parent.rows, row =&gt; row.some(column =&gt; column.components.some(comp =&gt; comp.key  === component.key)));
-        tableColumnIndex = _.findIndex(parent.rows[tableRowIndex], (column =&gt; column.components.some(comp =&gt; comp.key  === component.key)));
+        tableRowIndex = _.findIndex(parent.rows, row =&gt; row.some(column =&gt; column.components.some(comp =&gt; comp.key === component.key)));
+        tableColumnIndex = _.findIndex(parent.rows[tableRowIndex], (column =&gt; column.components.some(comp =&gt; comp.key === component.key)));
         path = `rows[${tableRowIndex}][${tableColumnIndex}].components`;
         break;
       case &apos;columns&apos;:
@@ -938,7 +940,7 @@ export default class WebformBuilder extends Component {
         path = `columns[${columnIndex}].components`;
         break;
       case &apos;tabs&apos;:
-        tabIndex = _.findIndex(parent.components, tab =&gt; tab.components.some(comp =&gt; comp.key  === component.key));
+        tabIndex = _.findIndex(parent.components, tab =&gt; tab.components.some(comp =&gt; comp.key === component.key));
         path = `components[${tabIndex}].components`;
         break;
     }
@@ -1022,7 +1024,7 @@ export default class WebformBuilder extends Component {
       parent.addChildComponent(info, element, target, source, sibling);
     }
 
-    if (isNew &amp;&amp; !this.options.noNewEdit) {
+    if (isNew &amp;&amp; !this.options.noNewEdit &amp;&amp; !info.noNewModal) {
       this.editComponent(info, target, isNew);
     }
 
@@ -1052,8 +1054,8 @@ export default class WebformBuilder extends Component {
     }
 
     return rebuild.then(() =&gt; {
-      this.emit(&apos;addComponent&apos;, info, parent, path, index, isNew &amp;&amp; !this.options.noNewEdit);
-      if (!isNew || this.options.noNewEdit) {
+      this.emit(&apos;addComponent&apos;, info, parent, path, index, isNew &amp;&amp; !this.options.noNewEdit &amp;&amp; !info.noNewModal);
+      if (!isNew || this.options.noNewEdit || info.noNewModal) {
         this.emit(&apos;change&apos;, this.form);
       }
     });
@@ -1158,14 +1160,16 @@ export default class WebformBuilder extends Component {
   updateComponent(component, changed) {
     // Update the preview.
     if (this.preview) {
-      this.preview.form = { components: [_.omit(component, [
-        &apos;hidden&apos;,
-        &apos;conditional&apos;,
-        &apos;calculateValue&apos;,
-        &apos;logic&apos;,
-        &apos;autofocus&apos;,
-        &apos;customConditional&apos;,
-      ])] };
+      this.preview.form = {
+        components: [_.omit(component, [
+          &apos;hidden&apos;,
+          &apos;conditional&apos;,
+          &apos;calculateValue&apos;,
+          &apos;logic&apos;,
+          &apos;autofocus&apos;,
+          &apos;customConditional&apos;,
+        ])]
+      };
       const previewElement = this.componentEdit.querySelector(&apos;[ref=&quot;preview&quot;]&apos;);
       if (previewElement) {
         this.setContent(previewElement, this.preview.render());
@@ -1302,7 +1306,7 @@ export default class WebformBuilder extends Component {
       }
       const rebuild = parentComponent.rebuild() || NativePromise.resolve();
       return rebuild.then(() =&gt; {
-        const schema = parentContainer ? parentContainer[index]: (comp ? comp.schema : []);
+        const schema = parentContainer ? parentContainer[index] : (comp ? comp.schema : []);
         this.emit(&apos;saveComponent&apos;,
           schema,
           originalComp,
@@ -1377,8 +1381,8 @@ export default class WebformBuilder extends Component {
         componentJson: instance.component
       },
     } : {
-      data: instance.component,
-    };
+        data: instance.component,
+      };
 
     if (this.preview) {
       this.preview.destroy();

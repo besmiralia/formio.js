@@ -1,28 +1,28 @@
 {
   "type": "File",
   "start": 0,
-  "end": 520,
+  "end": 650,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 12,
+      "line": 14,
       "column": 0
     }
   },
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 520,
+    "end": 650,
     "loc": {
       "start": {
         "line": 1,
         "column": 0
       },
       "end": {
-        "line": 12,
+        "line": 14,
         "column": 0
       }
     },
@@ -31,7 +31,7 @@
       {
         "type": "ImportDeclaration",
         "start": 0,
-        "end": 62,
+        "end": 68,
         "loc": {
           "start": {
             "line": 1,
@@ -39,14 +39,14 @@
           },
           "end": {
             "line": 1,
-            "column": 62
+            "column": 68
           }
         },
         "specifiers": [
           {
             "type": "ImportSpecifier",
             "start": 9,
-            "end": 29,
+            "end": 32,
             "loc": {
               "start": {
                 "line": 1,
@@ -54,13 +54,13 @@
               },
               "end": {
                 "line": 1,
-                "column": 29
+                "column": 32
               }
             },
             "imported": {
               "type": "Identifier",
               "start": 9,
-              "end": 29,
+              "end": 32,
               "loc": {
                 "start": {
                   "line": 1,
@@ -68,6 +68,92 @@
                 },
                 "end": {
                   "line": 1,
+                  "column": 32
+                },
+                "identifierName": "GovPilotAddressProvider"
+              },
+              "name": "GovPilotAddressProvider"
+            },
+            "local": {
+              "type": "Identifier",
+              "start": 9,
+              "end": 32,
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 9
+                },
+                "end": {
+                  "line": 1,
+                  "column": 32
+                },
+                "identifierName": "GovPilotAddressProvider"
+              },
+              "name": "GovPilotAddressProvider"
+            }
+          }
+        ],
+        "source": {
+          "type": "StringLiteral",
+          "start": 40,
+          "end": 67,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 40
+            },
+            "end": {
+              "line": 1,
+              "column": 67
+            }
+          },
+          "extra": {
+            "rawValue": "./GovPilotAddressProvider",
+            "raw": "'./GovPilotAddressProvider'"
+          },
+          "value": "./GovPilotAddressProvider"
+        }
+      },
+      {
+        "type": "ImportDeclaration",
+        "start": 70,
+        "end": 132,
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 0
+          },
+          "end": {
+            "line": 2,
+            "column": 62
+          }
+        },
+        "specifiers": [
+          {
+            "type": "ImportSpecifier",
+            "start": 79,
+            "end": 99,
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 9
+              },
+              "end": {
+                "line": 2,
+                "column": 29
+              }
+            },
+            "imported": {
+              "type": "Identifier",
+              "start": 79,
+              "end": 99,
+              "loc": {
+                "start": {
+                  "line": 2,
+                  "column": 9
+                },
+                "end": {
+                  "line": 2,
                   "column": 29
                 },
                 "identifierName": "AzureAddressProvider"
@@ -76,15 +162,15 @@
             },
             "local": {
               "type": "Identifier",
-              "start": 9,
-              "end": 29,
+              "start": 79,
+              "end": 99,
               "loc": {
                 "start": {
-                  "line": 1,
+                  "line": 2,
                   "column": 9
                 },
                 "end": {
-                  "line": 1,
+                  "line": 2,
                   "column": 29
                 },
                 "identifierName": "AzureAddressProvider"
@@ -95,15 +181,15 @@
         ],
         "source": {
           "type": "StringLiteral",
-          "start": 37,
-          "end": 61,
+          "start": 107,
+          "end": 131,
           "loc": {
             "start": {
-              "line": 1,
+              "line": 2,
               "column": 37
             },
             "end": {
-              "line": 1,
+              "line": 2,
               "column": 61
             }
           },
@@ -116,44 +202,44 @@
       },
       {
         "type": "ImportDeclaration",
-        "start": 64,
-        "end": 128,
+        "start": 134,
+        "end": 198,
         "loc": {
           "start": {
-            "line": 2,
+            "line": 3,
             "column": 0
           },
           "end": {
-            "line": 2,
+            "line": 3,
             "column": 64
           }
         },
         "specifiers": [
           {
             "type": "ImportSpecifier",
-            "start": 73,
-            "end": 94,
+            "start": 143,
+            "end": 164,
             "loc": {
               "start": {
-                "line": 2,
+                "line": 3,
                 "column": 9
               },
               "end": {
-                "line": 2,
+                "line": 3,
                 "column": 30
               }
             },
             "imported": {
               "type": "Identifier",
-              "start": 73,
-              "end": 94,
+              "start": 143,
+              "end": 164,
               "loc": {
                 "start": {
-                  "line": 2,
+                  "line": 3,
                   "column": 9
                 },
                 "end": {
-                  "line": 2,
+                  "line": 3,
                   "column": 30
                 },
                 "identifierName": "CustomAddressProvider"
@@ -162,15 +248,15 @@
             },
             "local": {
               "type": "Identifier",
-              "start": 73,
-              "end": 94,
+              "start": 143,
+              "end": 164,
               "loc": {
                 "start": {
-                  "line": 2,
+                  "line": 3,
                   "column": 9
                 },
                 "end": {
-                  "line": 2,
+                  "line": 3,
                   "column": 30
                 },
                 "identifierName": "CustomAddressProvider"
@@ -181,15 +267,15 @@
         ],
         "source": {
           "type": "StringLiteral",
-          "start": 102,
-          "end": 127,
+          "start": 172,
+          "end": 197,
           "loc": {
             "start": {
-              "line": 2,
+              "line": 3,
               "column": 38
             },
             "end": {
-              "line": 2,
+              "line": 3,
               "column": 63
             }
           },
@@ -202,44 +288,44 @@
       },
       {
         "type": "ImportDeclaration",
-        "start": 130,
-        "end": 194,
+        "start": 200,
+        "end": 264,
         "loc": {
           "start": {
-            "line": 3,
+            "line": 4,
             "column": 0
           },
           "end": {
-            "line": 3,
+            "line": 4,
             "column": 64
           }
         },
         "specifiers": [
           {
             "type": "ImportSpecifier",
-            "start": 139,
-            "end": 160,
+            "start": 209,
+            "end": 230,
             "loc": {
               "start": {
-                "line": 3,
+                "line": 4,
                 "column": 9
               },
               "end": {
-                "line": 3,
+                "line": 4,
                 "column": 30
               }
             },
             "imported": {
               "type": "Identifier",
-              "start": 139,
-              "end": 160,
+              "start": 209,
+              "end": 230,
               "loc": {
                 "start": {
-                  "line": 3,
+                  "line": 4,
                   "column": 9
                 },
                 "end": {
-                  "line": 3,
+                  "line": 4,
                   "column": 30
                 },
                 "identifierName": "GoogleAddressProvider"
@@ -248,15 +334,15 @@
             },
             "local": {
               "type": "Identifier",
-              "start": 139,
-              "end": 160,
+              "start": 209,
+              "end": 230,
               "loc": {
                 "start": {
-                  "line": 3,
+                  "line": 4,
                   "column": 9
                 },
                 "end": {
-                  "line": 3,
+                  "line": 4,
                   "column": 30
                 },
                 "identifierName": "GoogleAddressProvider"
@@ -267,15 +353,15 @@
         ],
         "source": {
           "type": "StringLiteral",
-          "start": 168,
-          "end": 193,
+          "start": 238,
+          "end": 263,
           "loc": {
             "start": {
-              "line": 3,
+              "line": 4,
               "column": 38
             },
             "end": {
-              "line": 3,
+              "line": 4,
               "column": 63
             }
           },
@@ -288,44 +374,44 @@
       },
       {
         "type": "ImportDeclaration",
-        "start": 196,
-        "end": 266,
+        "start": 266,
+        "end": 336,
         "loc": {
           "start": {
-            "line": 4,
+            "line": 5,
             "column": 0
           },
           "end": {
-            "line": 4,
+            "line": 5,
             "column": 70
           }
         },
         "specifiers": [
           {
             "type": "ImportSpecifier",
-            "start": 205,
-            "end": 229,
+            "start": 275,
+            "end": 299,
             "loc": {
               "start": {
-                "line": 4,
+                "line": 5,
                 "column": 9
               },
               "end": {
-                "line": 4,
+                "line": 5,
                 "column": 33
               }
             },
             "imported": {
               "type": "Identifier",
-              "start": 205,
-              "end": 229,
+              "start": 275,
+              "end": 299,
               "loc": {
                 "start": {
-                  "line": 4,
+                  "line": 5,
                   "column": 9
                 },
                 "end": {
-                  "line": 4,
+                  "line": 5,
                   "column": 33
                 },
                 "identifierName": "NominatimAddressProvider"
@@ -334,15 +420,15 @@
             },
             "local": {
               "type": "Identifier",
-              "start": 205,
-              "end": 229,
+              "start": 275,
+              "end": 299,
               "loc": {
                 "start": {
-                  "line": 4,
+                  "line": 5,
                   "column": 9
                 },
                 "end": {
-                  "line": 4,
+                  "line": 5,
                   "column": 33
                 },
                 "identifierName": "NominatimAddressProvider"
@@ -353,15 +439,15 @@
         ],
         "source": {
           "type": "StringLiteral",
-          "start": 237,
-          "end": 265,
+          "start": 307,
+          "end": 335,
           "loc": {
             "start": {
-              "line": 4,
+              "line": 5,
               "column": 41
             },
             "end": {
-              "line": 4,
+              "line": 5,
               "column": 69
             }
           },
@@ -374,44 +460,129 @@
       },
       {
         "type": "ExportDefaultDeclaration",
-        "start": 270,
-        "end": 518,
+        "start": 340,
+        "end": 648,
         "loc": {
           "start": {
-            "line": 6,
+            "line": 7,
             "column": 0
           },
           "end": {
-            "line": 11,
+            "line": 13,
             "column": 2
           }
         },
         "declaration": {
           "type": "ObjectExpression",
-          "start": 285,
-          "end": 517,
+          "start": 355,
+          "end": 647,
           "loc": {
             "start": {
-              "line": 6,
+              "line": 7,
               "column": 15
             },
             "end": {
-              "line": 11,
+              "line": 13,
               "column": 1
             }
           },
           "properties": [
             {
               "type": "ObjectProperty",
-              "start": 290,
-              "end": 339,
+              "start": 360,
+              "end": 415,
               "loc": {
                 "start": {
-                  "line": 7,
+                  "line": 8,
                   "column": 2
                 },
                 "end": {
-                  "line": 7,
+                  "line": 8,
+                  "column": 57
+                }
+              },
+              "method": false,
+              "shorthand": false,
+              "computed": true,
+              "key": {
+                "type": "MemberExpression",
+                "start": 361,
+                "end": 389,
+                "loc": {
+                  "start": {
+                    "line": 8,
+                    "column": 3
+                  },
+                  "end": {
+                    "line": 8,
+                    "column": 31
+                  }
+                },
+                "object": {
+                  "type": "Identifier",
+                  "start": 361,
+                  "end": 384,
+                  "loc": {
+                    "start": {
+                      "line": 8,
+                      "column": 3
+                    },
+                    "end": {
+                      "line": 8,
+                      "column": 26
+                    },
+                    "identifierName": "GovPilotAddressProvider"
+                  },
+                  "name": "GovPilotAddressProvider"
+                },
+                "property": {
+                  "type": "Identifier",
+                  "start": 385,
+                  "end": 389,
+                  "loc": {
+                    "start": {
+                      "line": 8,
+                      "column": 27
+                    },
+                    "end": {
+                      "line": 8,
+                      "column": 31
+                    },
+                    "identifierName": "name"
+                  },
+                  "name": "name"
+                },
+                "computed": false
+              },
+              "value": {
+                "type": "Identifier",
+                "start": 392,
+                "end": 415,
+                "loc": {
+                  "start": {
+                    "line": 8,
+                    "column": 34
+                  },
+                  "end": {
+                    "line": 8,
+                    "column": 57
+                  },
+                  "identifierName": "GovPilotAddressProvider"
+                },
+                "name": "GovPilotAddressProvider"
+              }
+            },
+            {
+              "type": "ObjectProperty",
+              "start": 420,
+              "end": 469,
+              "loc": {
+                "start": {
+                  "line": 9,
+                  "column": 2
+                },
+                "end": {
+                  "line": 9,
                   "column": 51
                 }
               },
@@ -420,29 +591,29 @@
               "computed": true,
               "key": {
                 "type": "MemberExpression",
-                "start": 291,
-                "end": 316,
+                "start": 421,
+                "end": 446,
                 "loc": {
                   "start": {
-                    "line": 7,
+                    "line": 9,
                     "column": 3
                   },
                   "end": {
-                    "line": 7,
+                    "line": 9,
                     "column": 28
                   }
                 },
                 "object": {
                   "type": "Identifier",
-                  "start": 291,
-                  "end": 311,
+                  "start": 421,
+                  "end": 441,
                   "loc": {
                     "start": {
-                      "line": 7,
+                      "line": 9,
                       "column": 3
                     },
                     "end": {
-                      "line": 7,
+                      "line": 9,
                       "column": 23
                     },
                     "identifierName": "AzureAddressProvider"
@@ -451,15 +622,15 @@
                 },
                 "property": {
                   "type": "Identifier",
-                  "start": 312,
-                  "end": 316,
+                  "start": 442,
+                  "end": 446,
                   "loc": {
                     "start": {
-                      "line": 7,
+                      "line": 9,
                       "column": 24
                     },
                     "end": {
-                      "line": 7,
+                      "line": 9,
                       "column": 28
                     },
                     "identifierName": "name"
@@ -470,15 +641,15 @@
               },
               "value": {
                 "type": "Identifier",
-                "start": 319,
-                "end": 339,
+                "start": 449,
+                "end": 469,
                 "loc": {
                   "start": {
-                    "line": 7,
+                    "line": 9,
                     "column": 31
                   },
                   "end": {
-                    "line": 7,
+                    "line": 9,
                     "column": 51
                   },
                   "identifierName": "AzureAddressProvider"
@@ -488,15 +659,15 @@
             },
             {
               "type": "ObjectProperty",
-              "start": 344,
-              "end": 395,
+              "start": 474,
+              "end": 525,
               "loc": {
                 "start": {
-                  "line": 8,
+                  "line": 10,
                   "column": 2
                 },
                 "end": {
-                  "line": 8,
+                  "line": 10,
                   "column": 53
                 }
               },
@@ -505,29 +676,29 @@
               "computed": true,
               "key": {
                 "type": "MemberExpression",
-                "start": 345,
-                "end": 371,
+                "start": 475,
+                "end": 501,
                 "loc": {
                   "start": {
-                    "line": 8,
+                    "line": 10,
                     "column": 3
                   },
                   "end": {
-                    "line": 8,
+                    "line": 10,
                     "column": 29
                   }
                 },
                 "object": {
                   "type": "Identifier",
-                  "start": 345,
-                  "end": 366,
+                  "start": 475,
+                  "end": 496,
                   "loc": {
                     "start": {
-                      "line": 8,
+                      "line": 10,
                       "column": 3
                     },
                     "end": {
-                      "line": 8,
+                      "line": 10,
                       "column": 24
                     },
                     "identifierName": "CustomAddressProvider"
@@ -536,15 +707,15 @@
                 },
                 "property": {
                   "type": "Identifier",
-                  "start": 367,
-                  "end": 371,
+                  "start": 497,
+                  "end": 501,
                   "loc": {
                     "start": {
-                      "line": 8,
+                      "line": 10,
                       "column": 25
                     },
                     "end": {
-                      "line": 8,
+                      "line": 10,
                       "column": 29
                     },
                     "identifierName": "name"
@@ -555,15 +726,15 @@
               },
               "value": {
                 "type": "Identifier",
-                "start": 374,
-                "end": 395,
+                "start": 504,
+                "end": 525,
                 "loc": {
                   "start": {
-                    "line": 8,
+                    "line": 10,
                     "column": 32
                   },
                   "end": {
-                    "line": 8,
+                    "line": 10,
                     "column": 53
                   },
                   "identifierName": "CustomAddressProvider"
@@ -573,15 +744,15 @@
             },
             {
               "type": "ObjectProperty",
-              "start": 400,
-              "end": 451,
+              "start": 530,
+              "end": 581,
               "loc": {
                 "start": {
-                  "line": 9,
+                  "line": 11,
                   "column": 2
                 },
                 "end": {
-                  "line": 9,
+                  "line": 11,
                   "column": 53
                 }
               },
@@ -590,29 +761,29 @@
               "computed": true,
               "key": {
                 "type": "MemberExpression",
-                "start": 401,
-                "end": 427,
+                "start": 531,
+                "end": 557,
                 "loc": {
                   "start": {
-                    "line": 9,
+                    "line": 11,
                     "column": 3
                   },
                   "end": {
-                    "line": 9,
+                    "line": 11,
                     "column": 29
                   }
                 },
                 "object": {
                   "type": "Identifier",
-                  "start": 401,
-                  "end": 422,
+                  "start": 531,
+                  "end": 552,
                   "loc": {
                     "start": {
-                      "line": 9,
+                      "line": 11,
                       "column": 3
                     },
                     "end": {
-                      "line": 9,
+                      "line": 11,
                       "column": 24
                     },
                     "identifierName": "GoogleAddressProvider"
@@ -621,15 +792,15 @@
                 },
                 "property": {
                   "type": "Identifier",
-                  "start": 423,
-                  "end": 427,
+                  "start": 553,
+                  "end": 557,
                   "loc": {
                     "start": {
-                      "line": 9,
+                      "line": 11,
                       "column": 25
                     },
                     "end": {
-                      "line": 9,
+                      "line": 11,
                       "column": 29
                     },
                     "identifierName": "name"
@@ -640,15 +811,15 @@
               },
               "value": {
                 "type": "Identifier",
-                "start": 430,
-                "end": 451,
+                "start": 560,
+                "end": 581,
                 "loc": {
                   "start": {
-                    "line": 9,
+                    "line": 11,
                     "column": 32
                   },
                   "end": {
-                    "line": 9,
+                    "line": 11,
                     "column": 53
                   },
                   "identifierName": "GoogleAddressProvider"
@@ -658,15 +829,15 @@
             },
             {
               "type": "ObjectProperty",
-              "start": 456,
-              "end": 513,
+              "start": 586,
+              "end": 643,
               "loc": {
                 "start": {
-                  "line": 10,
+                  "line": 12,
                   "column": 2
                 },
                 "end": {
-                  "line": 10,
+                  "line": 12,
                   "column": 59
                 }
               },
@@ -675,29 +846,29 @@
               "computed": true,
               "key": {
                 "type": "MemberExpression",
-                "start": 457,
-                "end": 486,
+                "start": 587,
+                "end": 616,
                 "loc": {
                   "start": {
-                    "line": 10,
+                    "line": 12,
                     "column": 3
                   },
                   "end": {
-                    "line": 10,
+                    "line": 12,
                     "column": 32
                   }
                 },
                 "object": {
                   "type": "Identifier",
-                  "start": 457,
-                  "end": 481,
+                  "start": 587,
+                  "end": 611,
                   "loc": {
                     "start": {
-                      "line": 10,
+                      "line": 12,
                       "column": 3
                     },
                     "end": {
-                      "line": 10,
+                      "line": 12,
                       "column": 27
                     },
                     "identifierName": "NominatimAddressProvider"
@@ -706,15 +877,15 @@
                 },
                 "property": {
                   "type": "Identifier",
-                  "start": 482,
-                  "end": 486,
+                  "start": 612,
+                  "end": 616,
                   "loc": {
                     "start": {
-                      "line": 10,
+                      "line": 12,
                       "column": 28
                     },
                     "end": {
-                      "line": 10,
+                      "line": 12,
                       "column": 32
                     },
                     "identifierName": "name"
@@ -725,15 +896,15 @@
               },
               "value": {
                 "type": "Identifier",
-                "start": 489,
-                "end": 513,
+                "start": 619,
+                "end": 643,
                 "loc": {
                   "start": {
-                    "line": 10,
+                    "line": 12,
                     "column": 35
                   },
                   "end": {
-                    "line": 10,
+                    "line": 12,
                     "column": 59
                   },
                   "identifierName": "NominatimAddressProvider"
@@ -816,9 +987,9 @@
         "postfix": false,
         "binop": null
       },
-      "value": "AzureAddressProvider",
+      "value": "GovPilotAddressProvider",
       "start": 9,
-      "end": 29,
+      "end": 32,
       "loc": {
         "start": {
           "line": 1,
@@ -826,6 +997,189 @@
         },
         "end": {
           "line": 1,
+          "column": 32
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 33,
+      "end": 34,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 33
+        },
+        "end": {
+          "line": 1,
+          "column": 34
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "from",
+      "start": 35,
+      "end": 39,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 35
+        },
+        "end": {
+          "line": 1,
+          "column": 39
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "./GovPilotAddressProvider",
+      "start": 40,
+      "end": 67,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 40
+        },
+        "end": {
+          "line": 1,
+          "column": 67
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 67,
+      "end": 68,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 67
+        },
+        "end": {
+          "line": 1,
+          "column": 68
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "import",
+        "keyword": "import",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "import",
+      "start": 70,
+      "end": 76,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 0
+        },
+        "end": {
+          "line": 2,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 77,
+      "end": 78,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 7
+        },
+        "end": {
+          "line": 2,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "AzureAddressProvider",
+      "start": 79,
+      "end": 99,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 9
+        },
+        "end": {
+          "line": 2,
           "column": 29
         }
       }
@@ -842,15 +1196,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 30,
-      "end": 31,
+      "start": 100,
+      "end": 101,
       "loc": {
         "start": {
-          "line": 1,
+          "line": 2,
           "column": 30
         },
         "end": {
-          "line": 1,
+          "line": 2,
           "column": 31
         }
       }
@@ -868,15 +1222,15 @@
         "binop": null
       },
       "value": "from",
-      "start": 32,
-      "end": 36,
+      "start": 102,
+      "end": 106,
       "loc": {
         "start": {
-          "line": 1,
+          "line": 2,
           "column": 32
         },
         "end": {
-          "line": 1,
+          "line": 2,
           "column": 36
         }
       }
@@ -895,15 +1249,15 @@
         "updateContext": null
       },
       "value": "./AzureAddressProvider",
-      "start": 37,
-      "end": 61,
+      "start": 107,
+      "end": 131,
       "loc": {
         "start": {
-          "line": 1,
+          "line": 2,
           "column": 37
         },
         "end": {
-          "line": 1,
+          "line": 2,
           "column": 61
         }
       }
@@ -921,15 +1275,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 61,
-      "end": 62,
+      "start": 131,
+      "end": 132,
       "loc": {
         "start": {
-          "line": 1,
+          "line": 2,
           "column": 61
         },
         "end": {
-          "line": 1,
+          "line": 2,
           "column": 62
         }
       }
@@ -949,15 +1303,15 @@
         "updateContext": null
       },
       "value": "import",
-      "start": 64,
-      "end": 70,
+      "start": 134,
+      "end": 140,
       "loc": {
         "start": {
-          "line": 2,
+          "line": 3,
           "column": 0
         },
         "end": {
-          "line": 2,
+          "line": 3,
           "column": 6
         }
       }
@@ -974,15 +1328,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 71,
-      "end": 72,
+      "start": 141,
+      "end": 142,
       "loc": {
         "start": {
-          "line": 2,
+          "line": 3,
           "column": 7
         },
         "end": {
-          "line": 2,
+          "line": 3,
           "column": 8
         }
       }
@@ -1000,15 +1354,15 @@
         "binop": null
       },
       "value": "CustomAddressProvider",
-      "start": 73,
-      "end": 94,
+      "start": 143,
+      "end": 164,
       "loc": {
         "start": {
-          "line": 2,
+          "line": 3,
           "column": 9
         },
         "end": {
-          "line": 2,
+          "line": 3,
           "column": 30
         }
       }
@@ -1025,15 +1379,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 95,
-      "end": 96,
+      "start": 165,
+      "end": 166,
       "loc": {
         "start": {
-          "line": 2,
+          "line": 3,
           "column": 31
         },
         "end": {
-          "line": 2,
+          "line": 3,
           "column": 32
         }
       }
@@ -1051,15 +1405,15 @@
         "binop": null
       },
       "value": "from",
-      "start": 97,
-      "end": 101,
+      "start": 167,
+      "end": 171,
       "loc": {
         "start": {
-          "line": 2,
+          "line": 3,
           "column": 33
         },
         "end": {
-          "line": 2,
+          "line": 3,
           "column": 37
         }
       }
@@ -1078,15 +1432,15 @@
         "updateContext": null
       },
       "value": "./CustomAddressProvider",
-      "start": 102,
-      "end": 127,
+      "start": 172,
+      "end": 197,
       "loc": {
         "start": {
-          "line": 2,
+          "line": 3,
           "column": 38
         },
         "end": {
-          "line": 2,
+          "line": 3,
           "column": 63
         }
       }
@@ -1104,15 +1458,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 127,
-      "end": 128,
+      "start": 197,
+      "end": 198,
       "loc": {
         "start": {
-          "line": 2,
+          "line": 3,
           "column": 63
         },
         "end": {
-          "line": 2,
+          "line": 3,
           "column": 64
         }
       }
@@ -1132,15 +1486,15 @@
         "updateContext": null
       },
       "value": "import",
-      "start": 130,
-      "end": 136,
+      "start": 200,
+      "end": 206,
       "loc": {
         "start": {
-          "line": 3,
+          "line": 4,
           "column": 0
         },
         "end": {
-          "line": 3,
+          "line": 4,
           "column": 6
         }
       }
@@ -1157,15 +1511,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 137,
-      "end": 138,
+      "start": 207,
+      "end": 208,
       "loc": {
         "start": {
-          "line": 3,
+          "line": 4,
           "column": 7
         },
         "end": {
-          "line": 3,
+          "line": 4,
           "column": 8
         }
       }
@@ -1183,15 +1537,15 @@
         "binop": null
       },
       "value": "GoogleAddressProvider",
-      "start": 139,
-      "end": 160,
+      "start": 209,
+      "end": 230,
       "loc": {
         "start": {
-          "line": 3,
+          "line": 4,
           "column": 9
         },
         "end": {
-          "line": 3,
+          "line": 4,
           "column": 30
         }
       }
@@ -1208,15 +1562,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 161,
-      "end": 162,
+      "start": 231,
+      "end": 232,
       "loc": {
         "start": {
-          "line": 3,
+          "line": 4,
           "column": 31
         },
         "end": {
-          "line": 3,
+          "line": 4,
           "column": 32
         }
       }
@@ -1234,15 +1588,15 @@
         "binop": null
       },
       "value": "from",
-      "start": 163,
-      "end": 167,
+      "start": 233,
+      "end": 237,
       "loc": {
         "start": {
-          "line": 3,
+          "line": 4,
           "column": 33
         },
         "end": {
-          "line": 3,
+          "line": 4,
           "column": 37
         }
       }
@@ -1261,15 +1615,15 @@
         "updateContext": null
       },
       "value": "./GoogleAddressProvider",
-      "start": 168,
-      "end": 193,
+      "start": 238,
+      "end": 263,
       "loc": {
         "start": {
-          "line": 3,
+          "line": 4,
           "column": 38
         },
         "end": {
-          "line": 3,
+          "line": 4,
           "column": 63
         }
       }
@@ -1287,15 +1641,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 193,
-      "end": 194,
+      "start": 263,
+      "end": 264,
       "loc": {
         "start": {
-          "line": 3,
+          "line": 4,
           "column": 63
         },
         "end": {
-          "line": 3,
+          "line": 4,
           "column": 64
         }
       }
@@ -1315,15 +1669,15 @@
         "updateContext": null
       },
       "value": "import",
-      "start": 196,
-      "end": 202,
+      "start": 266,
+      "end": 272,
       "loc": {
         "start": {
-          "line": 4,
+          "line": 5,
           "column": 0
         },
         "end": {
-          "line": 4,
+          "line": 5,
           "column": 6
         }
       }
@@ -1340,15 +1694,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 203,
-      "end": 204,
+      "start": 273,
+      "end": 274,
       "loc": {
         "start": {
-          "line": 4,
+          "line": 5,
           "column": 7
         },
         "end": {
-          "line": 4,
+          "line": 5,
           "column": 8
         }
       }
@@ -1366,15 +1720,15 @@
         "binop": null
       },
       "value": "NominatimAddressProvider",
-      "start": 205,
-      "end": 229,
+      "start": 275,
+      "end": 299,
       "loc": {
         "start": {
-          "line": 4,
+          "line": 5,
           "column": 9
         },
         "end": {
-          "line": 4,
+          "line": 5,
           "column": 33
         }
       }
@@ -1391,15 +1745,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 230,
-      "end": 231,
+      "start": 300,
+      "end": 301,
       "loc": {
         "start": {
-          "line": 4,
+          "line": 5,
           "column": 34
         },
         "end": {
-          "line": 4,
+          "line": 5,
           "column": 35
         }
       }
@@ -1417,15 +1771,15 @@
         "binop": null
       },
       "value": "from",
-      "start": 232,
-      "end": 236,
+      "start": 302,
+      "end": 306,
       "loc": {
         "start": {
-          "line": 4,
+          "line": 5,
           "column": 36
         },
         "end": {
-          "line": 4,
+          "line": 5,
           "column": 40
         }
       }
@@ -1444,15 +1798,15 @@
         "updateContext": null
       },
       "value": "./NominatimAddressProvider",
-      "start": 237,
-      "end": 265,
+      "start": 307,
+      "end": 335,
       "loc": {
         "start": {
-          "line": 4,
+          "line": 5,
           "column": 41
         },
         "end": {
-          "line": 4,
+          "line": 5,
           "column": 69
         }
       }
@@ -1470,15 +1824,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 265,
-      "end": 266,
+      "start": 335,
+      "end": 336,
       "loc": {
         "start": {
-          "line": 4,
+          "line": 5,
           "column": 69
         },
         "end": {
-          "line": 4,
+          "line": 5,
           "column": 70
         }
       }
@@ -1498,15 +1852,15 @@
         "updateContext": null
       },
       "value": "export",
-      "start": 270,
-      "end": 276,
+      "start": 340,
+      "end": 346,
       "loc": {
         "start": {
-          "line": 6,
+          "line": 7,
           "column": 0
         },
         "end": {
-          "line": 6,
+          "line": 7,
           "column": 6
         }
       }
@@ -1526,15 +1880,15 @@
         "updateContext": null
       },
       "value": "default",
-      "start": 277,
-      "end": 284,
+      "start": 347,
+      "end": 354,
       "loc": {
         "start": {
-          "line": 6,
+          "line": 7,
           "column": 7
         },
         "end": {
-          "line": 6,
+          "line": 7,
           "column": 14
         }
       }
@@ -1551,15 +1905,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 285,
-      "end": 286,
+      "start": 355,
+      "end": 356,
       "loc": {
         "start": {
-          "line": 6,
+          "line": 7,
           "column": 15
         },
         "end": {
-          "line": 6,
+          "line": 7,
           "column": 16
         }
       }
@@ -1577,15 +1931,223 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 290,
-      "end": 291,
+      "start": 360,
+      "end": 361,
       "loc": {
         "start": {
-          "line": 7,
+          "line": 8,
           "column": 2
         },
         "end": {
-          "line": 7,
+          "line": 8,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "GovPilotAddressProvider",
+      "start": 361,
+      "end": 384,
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 3
+        },
+        "end": {
+          "line": 8,
+          "column": 26
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ".",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 384,
+      "end": 385,
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 26
+        },
+        "end": {
+          "line": 8,
+          "column": 27
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "name",
+      "start": 385,
+      "end": 389,
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 27
+        },
+        "end": {
+          "line": 8,
+          "column": 31
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "]",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 389,
+      "end": 390,
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 31
+        },
+        "end": {
+          "line": 8,
+          "column": 32
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ":",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 390,
+      "end": 391,
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 32
+        },
+        "end": {
+          "line": 8,
+          "column": 33
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "GovPilotAddressProvider",
+      "start": 392,
+      "end": 415,
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 34
+        },
+        "end": {
+          "line": 8,
+          "column": 57
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ",",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 415,
+      "end": 416,
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 57
+        },
+        "end": {
+          "line": 8,
+          "column": 58
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "[",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 420,
+      "end": 421,
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 2
+        },
+        "end": {
+          "line": 9,
           "column": 3
         }
       }
@@ -1603,15 +2165,15 @@
         "binop": null
       },
       "value": "AzureAddressProvider",
-      "start": 291,
-      "end": 311,
+      "start": 421,
+      "end": 441,
       "loc": {
         "start": {
-          "line": 7,
+          "line": 9,
           "column": 3
         },
         "end": {
-          "line": 7,
+          "line": 9,
           "column": 23
         }
       }
@@ -1629,15 +2191,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 311,
-      "end": 312,
+      "start": 441,
+      "end": 442,
       "loc": {
         "start": {
-          "line": 7,
+          "line": 9,
           "column": 23
         },
         "end": {
-          "line": 7,
+          "line": 9,
           "column": 24
         }
       }
@@ -1655,15 +2217,15 @@
         "binop": null
       },
       "value": "name",
-      "start": 312,
-      "end": 316,
+      "start": 442,
+      "end": 446,
       "loc": {
         "start": {
-          "line": 7,
+          "line": 9,
           "column": 24
         },
         "end": {
-          "line": 7,
+          "line": 9,
           "column": 28
         }
       }
@@ -1681,15 +2243,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 316,
-      "end": 317,
+      "start": 446,
+      "end": 447,
       "loc": {
         "start": {
-          "line": 7,
+          "line": 9,
           "column": 28
         },
         "end": {
-          "line": 7,
+          "line": 9,
           "column": 29
         }
       }
@@ -1707,15 +2269,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 317,
-      "end": 318,
+      "start": 447,
+      "end": 448,
       "loc": {
         "start": {
-          "line": 7,
+          "line": 9,
           "column": 29
         },
         "end": {
-          "line": 7,
+          "line": 9,
           "column": 30
         }
       }
@@ -1733,15 +2295,15 @@
         "binop": null
       },
       "value": "AzureAddressProvider",
-      "start": 319,
-      "end": 339,
+      "start": 449,
+      "end": 469,
       "loc": {
         "start": {
-          "line": 7,
+          "line": 9,
           "column": 31
         },
         "end": {
-          "line": 7,
+          "line": 9,
           "column": 51
         }
       }
@@ -1759,15 +2321,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 339,
-      "end": 340,
+      "start": 469,
+      "end": 470,
       "loc": {
         "start": {
-          "line": 7,
+          "line": 9,
           "column": 51
         },
         "end": {
-          "line": 7,
+          "line": 9,
           "column": 52
         }
       }
@@ -1785,15 +2347,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 344,
-      "end": 345,
+      "start": 474,
+      "end": 475,
       "loc": {
         "start": {
-          "line": 8,
+          "line": 10,
           "column": 2
         },
         "end": {
-          "line": 8,
+          "line": 10,
           "column": 3
         }
       }
@@ -1811,15 +2373,15 @@
         "binop": null
       },
       "value": "CustomAddressProvider",
-      "start": 345,
-      "end": 366,
+      "start": 475,
+      "end": 496,
       "loc": {
         "start": {
-          "line": 8,
+          "line": 10,
           "column": 3
         },
         "end": {
-          "line": 8,
+          "line": 10,
           "column": 24
         }
       }
@@ -1837,15 +2399,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 366,
-      "end": 367,
+      "start": 496,
+      "end": 497,
       "loc": {
         "start": {
-          "line": 8,
+          "line": 10,
           "column": 24
         },
         "end": {
-          "line": 8,
+          "line": 10,
           "column": 25
         }
       }
@@ -1863,15 +2425,15 @@
         "binop": null
       },
       "value": "name",
-      "start": 367,
-      "end": 371,
+      "start": 497,
+      "end": 501,
       "loc": {
         "start": {
-          "line": 8,
+          "line": 10,
           "column": 25
         },
         "end": {
-          "line": 8,
+          "line": 10,
           "column": 29
         }
       }
@@ -1889,15 +2451,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 371,
-      "end": 372,
+      "start": 501,
+      "end": 502,
       "loc": {
         "start": {
-          "line": 8,
+          "line": 10,
           "column": 29
         },
         "end": {
-          "line": 8,
+          "line": 10,
           "column": 30
         }
       }
@@ -1915,15 +2477,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 372,
-      "end": 373,
+      "start": 502,
+      "end": 503,
       "loc": {
         "start": {
-          "line": 8,
+          "line": 10,
           "column": 30
         },
         "end": {
-          "line": 8,
+          "line": 10,
           "column": 31
         }
       }
@@ -1941,15 +2503,15 @@
         "binop": null
       },
       "value": "CustomAddressProvider",
-      "start": 374,
-      "end": 395,
+      "start": 504,
+      "end": 525,
       "loc": {
         "start": {
-          "line": 8,
+          "line": 10,
           "column": 32
         },
         "end": {
-          "line": 8,
+          "line": 10,
           "column": 53
         }
       }
@@ -1967,15 +2529,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 395,
-      "end": 396,
+      "start": 525,
+      "end": 526,
       "loc": {
         "start": {
-          "line": 8,
+          "line": 10,
           "column": 53
         },
         "end": {
-          "line": 8,
+          "line": 10,
           "column": 54
         }
       }
@@ -1993,15 +2555,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 400,
-      "end": 401,
+      "start": 530,
+      "end": 531,
       "loc": {
         "start": {
-          "line": 9,
+          "line": 11,
           "column": 2
         },
         "end": {
-          "line": 9,
+          "line": 11,
           "column": 3
         }
       }
@@ -2019,15 +2581,15 @@
         "binop": null
       },
       "value": "GoogleAddressProvider",
-      "start": 401,
-      "end": 422,
+      "start": 531,
+      "end": 552,
       "loc": {
         "start": {
-          "line": 9,
+          "line": 11,
           "column": 3
         },
         "end": {
-          "line": 9,
+          "line": 11,
           "column": 24
         }
       }
@@ -2045,15 +2607,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 422,
-      "end": 423,
+      "start": 552,
+      "end": 553,
       "loc": {
         "start": {
-          "line": 9,
+          "line": 11,
           "column": 24
         },
         "end": {
-          "line": 9,
+          "line": 11,
           "column": 25
         }
       }
@@ -2071,15 +2633,15 @@
         "binop": null
       },
       "value": "name",
-      "start": 423,
-      "end": 427,
+      "start": 553,
+      "end": 557,
       "loc": {
         "start": {
-          "line": 9,
+          "line": 11,
           "column": 25
         },
         "end": {
-          "line": 9,
+          "line": 11,
           "column": 29
         }
       }
@@ -2097,15 +2659,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 427,
-      "end": 428,
+      "start": 557,
+      "end": 558,
       "loc": {
         "start": {
-          "line": 9,
+          "line": 11,
           "column": 29
         },
         "end": {
-          "line": 9,
+          "line": 11,
           "column": 30
         }
       }
@@ -2123,15 +2685,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 428,
-      "end": 429,
+      "start": 558,
+      "end": 559,
       "loc": {
         "start": {
-          "line": 9,
+          "line": 11,
           "column": 30
         },
         "end": {
-          "line": 9,
+          "line": 11,
           "column": 31
         }
       }
@@ -2149,15 +2711,15 @@
         "binop": null
       },
       "value": "GoogleAddressProvider",
-      "start": 430,
-      "end": 451,
+      "start": 560,
+      "end": 581,
       "loc": {
         "start": {
-          "line": 9,
+          "line": 11,
           "column": 32
         },
         "end": {
-          "line": 9,
+          "line": 11,
           "column": 53
         }
       }
@@ -2175,15 +2737,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 451,
-      "end": 452,
+      "start": 581,
+      "end": 582,
       "loc": {
         "start": {
-          "line": 9,
+          "line": 11,
           "column": 53
         },
         "end": {
-          "line": 9,
+          "line": 11,
           "column": 54
         }
       }
@@ -2201,15 +2763,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 456,
-      "end": 457,
+      "start": 586,
+      "end": 587,
       "loc": {
         "start": {
-          "line": 10,
+          "line": 12,
           "column": 2
         },
         "end": {
-          "line": 10,
+          "line": 12,
           "column": 3
         }
       }
@@ -2227,15 +2789,15 @@
         "binop": null
       },
       "value": "NominatimAddressProvider",
-      "start": 457,
-      "end": 481,
+      "start": 587,
+      "end": 611,
       "loc": {
         "start": {
-          "line": 10,
+          "line": 12,
           "column": 3
         },
         "end": {
-          "line": 10,
+          "line": 12,
           "column": 27
         }
       }
@@ -2253,15 +2815,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 481,
-      "end": 482,
+      "start": 611,
+      "end": 612,
       "loc": {
         "start": {
-          "line": 10,
+          "line": 12,
           "column": 27
         },
         "end": {
-          "line": 10,
+          "line": 12,
           "column": 28
         }
       }
@@ -2279,15 +2841,15 @@
         "binop": null
       },
       "value": "name",
-      "start": 482,
-      "end": 486,
+      "start": 612,
+      "end": 616,
       "loc": {
         "start": {
-          "line": 10,
+          "line": 12,
           "column": 28
         },
         "end": {
-          "line": 10,
+          "line": 12,
           "column": 32
         }
       }
@@ -2305,15 +2867,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 486,
-      "end": 487,
+      "start": 616,
+      "end": 617,
       "loc": {
         "start": {
-          "line": 10,
+          "line": 12,
           "column": 32
         },
         "end": {
-          "line": 10,
+          "line": 12,
           "column": 33
         }
       }
@@ -2331,15 +2893,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 487,
-      "end": 488,
+      "start": 617,
+      "end": 618,
       "loc": {
         "start": {
-          "line": 10,
+          "line": 12,
           "column": 33
         },
         "end": {
-          "line": 10,
+          "line": 12,
           "column": 34
         }
       }
@@ -2357,15 +2919,15 @@
         "binop": null
       },
       "value": "NominatimAddressProvider",
-      "start": 489,
-      "end": 513,
+      "start": 619,
+      "end": 643,
       "loc": {
         "start": {
-          "line": 10,
+          "line": 12,
           "column": 35
         },
         "end": {
-          "line": 10,
+          "line": 12,
           "column": 59
         }
       }
@@ -2383,15 +2945,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 513,
-      "end": 514,
+      "start": 643,
+      "end": 644,
       "loc": {
         "start": {
-          "line": 10,
+          "line": 12,
           "column": 59
         },
         "end": {
-          "line": 10,
+          "line": 12,
           "column": 60
         }
       }
@@ -2408,15 +2970,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 516,
-      "end": 517,
+      "start": 646,
+      "end": 647,
       "loc": {
         "start": {
-          "line": 11,
+          "line": 13,
           "column": 0
         },
         "end": {
-          "line": 11,
+          "line": 13,
           "column": 1
         }
       }
@@ -2434,15 +2996,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 517,
-      "end": 518,
+      "start": 647,
+      "end": 648,
       "loc": {
         "start": {
-          "line": 11,
+          "line": 13,
           "column": 1
         },
         "end": {
-          "line": 11,
+          "line": 13,
           "column": 2
         }
       }
@@ -2460,15 +3022,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 520,
-      "end": 520,
+      "start": 650,
+      "end": 650,
       "loc": {
         "start": {
-          "line": 12,
+          "line": 14,
           "column": 0
         },
         "end": {
-          "line": 12,
+          "line": 14,
           "column": 0
         }
       }

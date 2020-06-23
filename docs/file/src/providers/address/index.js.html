@@ -144,6 +144,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/providers/address/AzureAddressProvider.js~AzureAddressProvider.html">AzureAddressProvider</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/providers/address/CustomAddressProvider.js~CustomAddressProvider.html">CustomAddressProvider</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/providers/address/GoogleAddressProvider.js~GoogleAddressProvider.html">GoogleAddressProvider</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/providers/address/GovPilotAddressProvider.js~GovPilotAddressProvider.html">GovPilotAddressProvider</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/providers/address/NominatimAddressProvider.js~NominatimAddressProvider.html">NominatimAddressProvider</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#providers-storage">providers/storage</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-azure">azure</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-base64">base64</a></span></span></li>
@@ -185,6 +186,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertFormatToFlatpickr">convertFormatToFlatpickr</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertFormatToMask">convertFormatToMask</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertFormatToMoment">convertFormatToMoment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertStringToHTMLElement">convertStringToHTMLElement</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-currentTimezone">currentTimezone</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-delay">delay</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-evaluate">evaluate</a></span></span></li>
@@ -239,12 +241,14 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/providers/address/index.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { AzureAddressProvider } from &apos;./AzureAddressProvider&apos;;
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { GovPilotAddressProvider } from &apos;./GovPilotAddressProvider&apos;;
+import { AzureAddressProvider } from &apos;./AzureAddressProvider&apos;;
 import { CustomAddressProvider } from &apos;./CustomAddressProvider&apos;;
 import { GoogleAddressProvider } from &apos;./GoogleAddressProvider&apos;;
 import { NominatimAddressProvider } from &apos;./NominatimAddressProvider&apos;;
 
 export default {
+  [GovPilotAddressProvider.name]: GovPilotAddressProvider,
   [AzureAddressProvider.name]: AzureAddressProvider,
   [CustomAddressProvider.name]: CustomAddressProvider,
   [GoogleAddressProvider.name]: GoogleAddressProvider,

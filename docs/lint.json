@@ -959,31 +959,31 @@
     "filePath": "src/components/_classes/nested/NestedComponent.js",
     "lines": [
       {
-        "lineNumber": 283,
+        "lineNumber": 284,
         "line": "  /**\r"
       },
       {
-        "lineNumber": 284,
+        "lineNumber": 285,
         "line": "   * Create a new component and add it to the components array.\r"
       },
       {
-        "lineNumber": 285,
+        "lineNumber": 286,
         "line": "   *\r"
       },
       {
-        "lineNumber": 286,
+        "lineNumber": 287,
         "line": "   * @param component\r"
       },
       {
-        "lineNumber": 287,
+        "lineNumber": 288,
         "line": "   * @param data\r"
       },
       {
-        "lineNumber": 288,
+        "lineNumber": 289,
         "line": "   */\r"
       },
       {
-        "lineNumber": 289,
+        "lineNumber": 290,
         "line": "  createComponent(component, options, data, before) {\r"
       }
     ],
@@ -1003,27 +1003,27 @@
     "filePath": "src/components/_classes/nested/NestedComponent.js",
     "lines": [
       {
-        "lineNumber": 350,
+        "lineNumber": 351,
         "line": "  /**\r"
       },
       {
-        "lineNumber": 351,
+        "lineNumber": 352,
         "line": "   *\r"
       },
       {
-        "lineNumber": 352,
+        "lineNumber": 353,
         "line": "   * @param element\r"
       },
       {
-        "lineNumber": 353,
+        "lineNumber": 354,
         "line": "   * @param data\r"
       },
       {
-        "lineNumber": 354,
+        "lineNumber": 355,
         "line": "   */\r"
       },
       {
-        "lineNumber": 355,
+        "lineNumber": 356,
         "line": "  addComponents(data, options) {\r"
       }
     ],
@@ -1041,39 +1041,39 @@
     "filePath": "src/components/_classes/nested/NestedComponent.js",
     "lines": [
       {
-        "lineNumber": 367,
+        "lineNumber": 368,
         "line": "  /**\r"
       },
       {
-        "lineNumber": 368,
+        "lineNumber": 369,
         "line": "   * Add a new component to the components array.\r"
       },
       {
-        "lineNumber": 369,
+        "lineNumber": 370,
         "line": "   *\r"
       },
       {
-        "lineNumber": 370,
+        "lineNumber": 371,
         "line": "   * @param {Object} component - The component JSON schema to add.\r"
       },
       {
-        "lineNumber": 371,
+        "lineNumber": 372,
         "line": "   * @param {Object} data - The submission data object to house the data for this component.\r"
       },
       {
-        "lineNumber": 372,
+        "lineNumber": 373,
         "line": "   * @param {HTMLElement} before - A DOM element to insert this element before.\r"
       },
       {
-        "lineNumber": 373,
+        "lineNumber": 374,
         "line": "   * @return {Component} - The created component instance.\r"
       },
       {
-        "lineNumber": 374,
+        "lineNumber": 375,
         "line": "   */\r"
       },
       {
-        "lineNumber": 375,
+        "lineNumber": 376,
         "line": "  addComponent(component, data, before, noAdd) {\r"
       }
     ],

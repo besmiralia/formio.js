@@ -6774,6 +6774,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/components/button/button.js~buttoncomponent#oauthconfig",
+    "class/src/components/button/Button.js~ButtonComponent.html#instance-get-oauthConfig",
+    "src/components/button/Button.js~ButtonComponent#oauthConfig",
+    "member"
+  ],
+  [
     "src/components/button/button.js~buttoncomponent#onclick",
     "class/src/components/button/Button.js~ButtonComponent.html#instance-method-onClick",
     "src/components/button/Button.js~ButtonComponent#onClick",
@@ -8862,6 +8868,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/components/editgrid/editgrid.js~editgridcomponent#hasopenrows",
+    "class/src/components/editgrid/EditGrid.js~EditGridComponent.html#instance-method-hasOpenRows",
+    "src/components/editgrid/EditGrid.js~EditGridComponent#hasOpenRows",
+    "method"
+  ],
+  [
     "src/components/editgrid/editgrid.js~editgridcomponent#hasremovebuttons",
     "class/src/components/editgrid/EditGrid.js~EditGridComponent.html#instance-method-hasRemoveButtons",
     "src/components/editgrid/EditGrid.js~EditGridComponent#hasRemoveButtons",
@@ -8890,6 +8902,12 @@ window.esdocSearchIndex = [
     "class/src/components/editgrid/EditGrid.js~EditGridComponent.html#instance-get-iteratableRows",
     "src/components/editgrid/EditGrid.js~EditGridComponent#iteratableRows",
     "member"
+  ],
+  [
+    "src/components/editgrid/editgrid.js~editgridcomponent#loadrefs",
+    "class/src/components/editgrid/EditGrid.js~EditGridComponent.html#instance-method-loadRefs",
+    "src/components/editgrid/EditGrid.js~EditGridComponent#loadRefs",
+    "method"
   ],
   [
     "src/components/editgrid/editgrid.js~editgridcomponent#minlength",

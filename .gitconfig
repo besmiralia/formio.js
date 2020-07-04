@@ -1,2 +1,0 @@
-[alias]
-fnm = !git fetch upstream && git merge --no-log --no-ff --no-commit upstream/master

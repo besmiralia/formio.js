@@ -19,6 +19,7 @@
     "lint"
   ],
   "scripts": {
+    "full": "gulp full",
     "build": "gulp build",
     "builddoc": "esdoc;gulp build",
     "transpile": "babel ./src/ --out-dir ./lib/",

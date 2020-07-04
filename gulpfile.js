@@ -200,6 +200,27 @@ gulp.task('build', gulp.series(
   'types',
   'readme'
 ));
+// Create a new build.
+gulp.task('full', gulp.series(
+  //'clean',
+  'babel',
+  'templates',
+  'package-version',
+  /*gulp.parallel(
+    'jquery',
+    'timezones',
+    //'fontawesome',
+    'bootstrap',
+    'bootswatch'
+  ),*/
+  gulp.parallel(
+    'styles-full',
+    'scripts-full'
+  ),
+  //'dist',
+  //'types',
+  //'readme'
+));
 
 // Create a new build (scripts only)
 gulp.task('rebuild-scripts', gulp.series(

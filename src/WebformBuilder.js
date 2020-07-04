@@ -428,24 +428,24 @@ export default class WebformBuilder extends Component {
     return {
       basic: {
         title: 'Basic',
-        weight: 0,
+        weight: 10,
         default: true,
       },
       advanced: {
         title: 'Advanced',
-        weight: 10
+        weight: 20
       },
       layout: {
         title: 'Layout',
-        weight: 20
+        weight: 30
       },
       data: {
         title: 'Data',
-        weight: 30
+        weight: 40
       },
       premium: {
         title: 'Premium',
-        weight: 40
+        weight: 50
       },
     };
   }

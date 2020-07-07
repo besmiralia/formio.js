@@ -424,32 +424,36 @@
     "filePath": "src/components/_classes/component/Component.js",
     "lines": [
       {
-        "lineNumber": 2209,
-        "line": "  /**\r"
+        "lineNumber": 1026,
+        "line": "  /**"
       },
       {
-        "lineNumber": 2210,
-        "line": "   * Set the value at a specific index.\r"
+        "lineNumber": 1027,
+        "line": "   * Called when a new component is saved."
       },
       {
-        "lineNumber": 2211,
-        "line": "   *\r"
+        "lineNumber": 1028,
+        "line": "   *"
       },
       {
-        "lineNumber": 2212,
-        "line": "   * @param index\r"
+        "lineNumber": 1029,
+        "line": "   * @param parent"
       },
       {
-        "lineNumber": 2213,
-        "line": "   * @param value\r"
+        "lineNumber": 1030,
+        "line": "   * @param component"
       },
       {
-        "lineNumber": 2214,
-        "line": "   */\r"
+        "lineNumber": 1031,
+        "line": "   * @return {boolean}"
       },
       {
-        "lineNumber": 2215,
-        "line": "  setValueAt(index, value, flags = {}) {\r"
+        "lineNumber": 1032,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 1033,
+        "line": "  saveComponent(component, parent, isNew, original) {"
       }
     ],
     "codeParams": [

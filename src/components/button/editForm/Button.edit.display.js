@@ -25,6 +25,7 @@ export default [
     data: {
       values: [
         { label: 'Submit', value: 'submit' },
+        { label: 'Pay', value: 'pay' },
         { label: 'Save in state', value: 'saveState' },
         { label: 'Event', value: 'event' },
         { label: 'Custom', value: 'custom' },
@@ -86,6 +87,17 @@ export default [
     tooltip: 'The event to fire when the button is clicked.',
     conditional: {
       json: { '===': [{ var: 'data.action' }, 'event'] },
+    },
+  },
+  {
+    type: 'textfield',
+    label: 'Pay Amount Field',
+    key: 'payAmount',
+    input: true,
+    weight: 116,
+    tooltip: 'The field which contains the amount to pay when the button is clicked.',
+    conditional: {
+      json: { '===': [{ var: 'data.action' }, 'pay'] },
     },
   },
   {

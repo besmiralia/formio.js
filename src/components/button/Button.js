@@ -334,6 +334,11 @@ export default class ButtonComponent extends Field {
         this.openOauth(this.oauthConfig);
 
         break;
+      case 'pay':
+        this.emit('payButton', {
+          amount: 0//Amount field or value from the data
+        });
+        break;
     }
   }
 

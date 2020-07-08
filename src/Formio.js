@@ -70,6 +70,9 @@ export default class Formio {
     this.vUrl = '';
     this.query = '';
 
+    this.tid = '';
+    this.uid = '';
+
     // Store the original path and options.
     this.path = path;
     this.options = options;

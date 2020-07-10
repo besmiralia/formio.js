@@ -87,6 +87,13 @@ export default class Formio {
       this.base = window.location.href.match(/http[s]?:\/\/api./)[0];
     }
 
+    if (options.hasOwnProperty('tid')) {
+      this.tid = options.tid;
+    }
+    if (options.hasOwnProperty('uid')) {
+      this.uid = options.uid;
+    }
+
     if (!path) {
       // Allow user to create new projects if this was instantiated without
       // a url

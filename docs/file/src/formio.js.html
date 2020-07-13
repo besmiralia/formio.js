@@ -313,6 +313,9 @@ export default class Formio {
     this.vUrl = &apos;&apos;;
     this.query = &apos;&apos;;
 
+    this.tid = &apos;&apos;;
+    this.uid = &apos;&apos;;
+
     // Store the original path and options.
     this.path = path;
     this.options = options;
@@ -325,6 +328,13 @@ export default class Formio {
     }
     else {
       this.base = window.location.href.match(/http[s]?:\/\/api./)[0];
+    }
+
+    if (options.hasOwnProperty(&apos;tid&apos;)) {
+      this.tid = options.tid;
+    }
+    if (options.hasOwnProperty(&apos;uid&apos;)) {
+      this.uid = options.uid;
     }
 
     if (!path) {

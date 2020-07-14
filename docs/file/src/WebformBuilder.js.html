@@ -553,8 +553,10 @@ export default class WebformBuilder extends Component {
     const formio = new Formio(Formio.projectUrl);
     const isResourcesDisabled = this.options.builder &amp;&amp; this.options.builder.resource === false;
 
-    if (!formio.noProject &amp;&amp; !isResourcesDisabled) {
+    if (/*!formio.noProject &amp;&amp; */!isResourcesDisabled) {
       const resourceOptions = this.options.builder &amp;&amp; this.options.builder.resource;
+      console.log(&apos;loading form resources, formio:&apos;, formio);
+      query.params.tid = formio.tid;
       formio.loadForms(query)
         .then((resources) =&gt; {
           if (resources.length) {
@@ -671,24 +673,24 @@ export default class WebformBuilder extends Component {
     return {
       basic: {
         title: &apos;Basic&apos;,
-        weight: 0,
+        weight: 10,
         default: true,
       },
       advanced: {
         title: &apos;Advanced&apos;,
-        weight: 10
+        weight: 20
       },
       layout: {
         title: &apos;Layout&apos;,
-        weight: 20
+        weight: 30
       },
       data: {
         title: &apos;Data&apos;,
-        weight: 30
+        weight: 40
       },
       premium: {
         title: &apos;Premium&apos;,
-        weight: 40
+        weight: 50
       },
     };
   }
@@ -1084,7 +1086,8 @@ export default class WebformBuilder extends Component {
     }
 
     if (this.webform) {
-      const shouldRebuild = !this.webform.form.components;
+      const shouldRebuild = !this.webform.form.components ||
+        (form.components.length !== this.webform.form.components.length);
       return this.webform.setForm(form).then(() =&gt; {
         if (this.refs.form) {
           this.builderHeight = this.refs.form.offsetHeight;

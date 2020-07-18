@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 4.11.1-rc.5
+#### Fixed
+ - FJS-1061: 400 errors are not displaying on the front end when button action fails
+ - [FJS-1062] Fixed matching dataValue to dataFormat of time component on input and blur events.
+
+### 4.11.1-rc.4
+#### Fixed
+ - PDF-81 (IE11): Update data type and value to resolve ie11 issue
+ - PDF-83: Create method to set placeholder
+ - FJS-1074: added using decimal keyboard if decimal is allowed
+
 ### 4.11.1-rc.3
 #### Changed
  - Downgrade core-js@3.5.0 to fix Select dropdown URL with IE11.

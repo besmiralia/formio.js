@@ -1,5 +1,7 @@
 import BuilderUtils from '../../../utils/builder';
 import _ from 'lodash';
+import { getContextComponents } from '../../../../utils/utils';
+
 
 export default [
   {
@@ -90,12 +92,19 @@ export default [
     },
   },
   {
-    type: 'textfield',
+    type: 'select',
+    input: true,
     label: 'Pay Amount Field',
     key: 'payAmount',
-    input: true,
+    dataSrc: 'custom',
+    valueProperty: 'value',
     weight: 116,
     tooltip: 'The field which contains the amount to pay when the button is clicked.',
+    data: {
+      custom(context) {
+        return getContextComponents(context);
+      }
+    },
     conditional: {
       json: { '===': [{ var: 'data.action' }, 'pay'] },
     },

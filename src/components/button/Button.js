@@ -339,8 +339,15 @@ export default class ButtonComponent extends Field {
 
         break;
       case 'pay':
+        // Get the FormioForm at the root of this component's tree
+        const form = this.getRoot();
+        // Get the form's flattened schema components
+        console.log("test-form.component.components", form.component.components);
+        console.log("test-form.components", form.components);
+        console.log("test-this.payAmount", this.payAmount);
         this.emit('payButton', {
-          amount: 0//Amount field or value from the data
+          component: this.component,
+          amount: getComponent(form.components, this.payAmount).getValue()//Amount field or value from the data
         });
         break;
     }

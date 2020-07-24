@@ -1566,28 +1566,47 @@
         "line": " * @param component\r"
       },
       {
-        "lineNumber": 234,
-        "line": " * @param custom\r"
+        "lineNumber": 1028,
+        "line": "  addCurrentChoices(values, items, keyValue) {"
+      }
+    ],
+    "codeParams": [
+      "values",
+      "items",
+      "keyValue"
+    ],
+    "docParams": [
+      "value",
+      "items"
+    ]
+  },
+  {
+    "name": "TextAreaComponent#updateEditorValue",
+    "filePath": "src/components/textarea/TextArea.js",
+    "lines": [
+      {
+        "lineNumber": 87,
+        "line": "  /**"
       },
       {
-        "lineNumber": 235,
-        "line": " * @param row\r"
+        "lineNumber": 88,
+        "line": "   * Updates the editor value."
       },
       {
-        "lineNumber": 236,
-        "line": " * @param data\r"
+        "lineNumber": 89,
+        "line": "   *"
       },
       {
-        "lineNumber": 237,
-        "line": " * @returns {*}\r"
+        "lineNumber": 90,
+        "line": "   * @param newValue"
       },
       {
-        "lineNumber": 238,
-        "line": " */\r"
+        "lineNumber": 91,
+        "line": "   */"
       },
       {
-        "lineNumber": 239,
-        "line": "export function checkCustomConditional(component, custom, row, data, form, variable, onError, instance) {\r"
+        "lineNumber": 92,
+        "line": "  updateEditorValue(index, newValue) {"
       }
     ],
     "codeParams": [

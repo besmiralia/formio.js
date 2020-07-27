@@ -11,3 +11,4 @@ bower_components
 .ruby-gemset
 dist
 docs
+package-lock.json

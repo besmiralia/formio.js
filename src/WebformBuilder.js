@@ -320,6 +320,7 @@ export default class WebformBuilder extends Component {
             this.builder.resource = {
               title: resourceOptions ? resourceOptions.title : 'Existing Resource Fields',
               key: 'resource',
+              icon: resourceOptions ? resourceOptions.icon : 'fa fa-sitemap',
               weight: resourceOptions ? resourceOptions.weight : 50,
               subgroups: [],
               components: [],
@@ -328,6 +329,7 @@ export default class WebformBuilder extends Component {
             this.groups.resource = {
               title: resourceOptions ? resourceOptions.title : 'Existing Resource Fields',
               key: 'resource',
+              icon: resourceOptions ? resourceOptions.icon : 'fa fa-sitemap',
               weight: resourceOptions ? resourceOptions.weight : 50,
               subgroups: [],
               components: [],
@@ -356,6 +358,7 @@ export default class WebformBuilder extends Component {
       const subgroup = {
         key: resourceKey,
         title: resource.title,
+        icon: resource.icon || 'fa fa-database',
         components: [],
         componentOrder: [],
         default: index === 0,
@@ -432,22 +435,27 @@ export default class WebformBuilder extends Component {
         title: 'Basic',
         weight: 10,
         default: true,
+        icon: 'fa fa-cube'
       },
       advanced: {
         title: 'Advanced',
-        weight: 20
+        weight: 20,
+        icon: 'fa fa-cubes'
       },
       layout: {
         title: 'Layout',
-        weight: 30
+        weight: 30,
+        icon: 'fa fa-layer-group'
       },
       data: {
         title: 'Data',
-        weight: 40
+        weight: 40,
+        icon: 'fa fa-server'
       },
       premium: {
         title: 'Premium',
-        weight: 50
+        weight: 50,
+        icon: 'fa fa-star'
       },
     };
   }
@@ -522,7 +530,7 @@ export default class WebformBuilder extends Component {
           group: this.groups[groupKey],
           groupKey,
           groupId: `builder-sidebar-${this.id}`,
-          subgroups: this.groups[groupKey].subgroups.map((group) => this.renderTemplate('builderSidebarGroup', {
+          subgroups: this.groups[groupKey].subgroups.map((group) => this.renderTemplate('builderSidebarSubGroup', {
             group,
             groupKey: group.key,
             groupId: `group-container-${groupKey}`,

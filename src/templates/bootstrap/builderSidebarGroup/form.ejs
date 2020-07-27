@@ -11,6 +11,9 @@
         aria-controls="group-{{ctx.groupKey}}"
         ref="sidebar-anchor"
       >
+        {% if (ctx.group.icon) { %}
+        <i class="{{ctx.group.icon}}"></i>
+        {% } %}
         {{ctx.t(ctx.group.title)}}
       </button>
     </h5>
@@ -23,29 +26,7 @@
     aria-labelledby="heading-{{ctx.groupKey}}"
     ref="sidebar-group"
   >
-    <div id="group-container-{{ctx.groupKey}}" class="card-body no-drop p-2" ref="sidebar-container">
-      {% if (ctx.groupKey == 'custom') { %}
-      <div class="input-group input-group-sm">
-        <input id="search-custom-component" class="form-control form-control-sm" placeholder="Search" type="search">
-        <div class="input-group-append show">    
-            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <div class="dropdown-menu" id="dsgn-advanced-filter-dropdown">
-              <h6 class="dropdown-header">Filter by Type</h6>
-              <a class="dropdown-item dsgn-filter-by" data-filter-by="type" data-filter="textfield" href="#">Text Fields</a>
-              <a class="dropdown-item dsgn-filter-by" data-filter-by="type" data-filter="number" href="#">Number Fields</a>
-              <a class="dropdown-item dsgn-filter-by" data-filter-by="type" data-filter="formula" href="#">Formula Fields</a>
-              <a class="dropdown-item dsgn-filter-by" data-filter-by="type" data-filter="measure" href="#">Measure Fields</a>
-              <h6 class="dropdown-header">Filter by Source</h6>
-              <a class="dropdown-item dsgn-filter-by" data-filter-by="source" data-filter="dcee8" href="#">Construction Permit</a>
-              <a class="dropdown-item dsgn-filter-by" data-filter-by="source" data-filter="ad224" href="#">Building Subcode</a>
-              <a class="dropdown-item dsgn-filter-by" data-filter-by="source" data-filter="e6699" href="#">Electrical Subcode</a>
-              <a class="dropdown-item dsgn-filter-by" data-filter-by="source" data-filter="12345" href="#">Fire Subcode</a>
-            </div>
-          </div>
-        </div>
-      {% } %}
+    <div id="group-container-{{ctx.groupKey}}" class="card-body no-drop p-2" ref="sidebar-container">      
       {% !ctx.group.componentOrder || ctx.group.componentOrder.forEach(function(componentKey) { %}
       <span
         data-group="{{ctx.groupKey}}"

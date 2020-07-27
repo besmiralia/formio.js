@@ -6,6 +6,7 @@ import builderEditForm from './builderEditForm';
 import builderPlaceholder from './builderPlaceholder';
 import builderSidebar from './builderSidebar';
 import builderSidebarGroup from './builderSidebarGroup';
+import builderSidebarSubGroup from './builderSidebarSubGroup';
 import builderWizard from './builderWizard';
 import button from './button';
 import checkbox from './checkbox';
@@ -79,6 +80,7 @@ export default {
   builderPlaceholder,
   builderSidebar,
   builderSidebarGroup,
+  builderSidebarSubGroup,
   builderWizard,
   button,
   checkbox,

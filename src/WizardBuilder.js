@@ -126,7 +126,7 @@ export default class WizardBuilder extends WebformBuilder {
           group: this.groups[groupKey],
           groupKey,
           groupId: `builder-sidebar-${this.id}`,
-          subgroups: this.groups[groupKey].subgroups.map((group) => this.renderTemplate('builderSidebarGroup', {
+          subgroups: this.groups[groupKey].subgroups.map((group) => this.renderTemplate('builderSidebarSubGroup', {
             group,
             groupKey: group.key,
             groupId: `builder-sidebar-${groupKey}`,

@@ -141,7 +141,7 @@
     "karma-mocha-reporter": "^2.2.5",
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-webpack": "^4.0.2",
-    "marked": "^1.1.0",
+    "marked": "^1.1.1",
     "mocha": "^8.0.1",
     "natives": "^1.1.6",
     "power-assert": "^1.6.1",
@@ -150,7 +150,7 @@
     "pygments-css": "^1.0.0",
     "raw-loader": "^4.0.1",
     "sinon": "^9.0.2",
-    "webpack": "^4.43.0",
+    "webpack": "^4.44.0",
     "webpack-stream": "^5.2.1",
     "written-number": "^0.9.1"
   }

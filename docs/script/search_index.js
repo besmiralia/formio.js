@@ -4170,6 +4170,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/components/components.js~components.editformutils",
+    "class/src/components/Components.js~Components.html#static-get-EditFormUtils",
+    "src/components/Components.js~Components.EditFormUtils",
+    "member"
+  ],
+  [
     "src/components/components.js~components.addcomponent",
     "class/src/components/Components.js~Components.html#static-method-addComponent",
     "src/components/Components.js~Components.addComponent",
@@ -5511,6 +5517,12 @@ window.esdocSearchIndex = [
     "src/components/_classes/component/component.js~component#wysiwygdefault",
     "class/src/components/_classes/component/Component.js~Component.html#instance-get-wysiwygDefault",
     "src/components/_classes/component/Component.js~Component#wysiwygDefault",
+    "member"
+  ],
+  [
+    "src/components/_classes/component/component.js~component.validator",
+    "class/src/components/_classes/component/Component.js~Component.html#static-get-Validator",
+    "src/components/_classes/component/Component.js~Component.Validator",
     "member"
   ],
   [

@@ -38,7 +38,14 @@ export default class NestedArrayComponent extends NestedDataComponent {
 
   checkRows(method, data, opts, defaultValue, silentCheck) {
     return this.iteratableRows.reduce(
-      (valid, row) => this.checkRow(method, data, opts, row.data, row.components, silentCheck) && valid,
+      (valid, row, rowIndex) => {
+        if (!opts?.rowIndex || opts?.rowIndex === rowIndex ) {
+          return this.checkRow(method, data, opts, row.data, row.components, silentCheck) && valid;
+        }
+        else {
+          return valid;
+        }
+      },
       defaultValue,
     );
   }
@@ -133,7 +140,7 @@ export default class NestedArrayComponent extends NestedDataComponent {
             <tr>
       `);
 
-      this.component.components.forEach((component) => {
+      this.component.components?.forEach((component) => {
         const label = component.label || component.key;
         result += `<th style="padding: 5px 10px;">${label}</th>`;
       });
@@ -162,6 +169,10 @@ export default class NestedArrayComponent extends NestedDataComponent {
       `);
 
       return result;
+    }
+
+    if (!value || !value.length) {
+      return '';
     }
 
     return super.getValueAsString(value, options);

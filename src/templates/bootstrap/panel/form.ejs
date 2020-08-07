@@ -1,7 +1,7 @@
-<div class="panel panel-{{ctx.component.theme}}">
+<div class="card card-{{ctx.component.theme}}">
   {% if (!ctx.component.hideLabel || ctx.builder || ctx.component.collapsible || ctx.component.tooltip) { %}
-  <div class="panel-heading" ref="header">
-    <h4 class="mb-0 panel-title">
+  <div class="card-header" ref="header">
+    <h4 class="mb-0 card-title">
       {% if (ctx.component.collapsible) { %}
         <i class="formio-collapse-icon {{ctx.iconClass(ctx.collapsed ? 'plus' : 'minus')}} text-muted" data-title="Collapse Panel"></i>
       {% } %}  
@@ -15,7 +15,7 @@
   </div>
   {% } %}
   {% if (!ctx.collapsed || ctx.builder) { %}
-  <div class="panel-body" ref="{{ctx.nestedKey}}">
+  <div class="card-body" ref="{{ctx.nestedKey}}">
     {{ctx.children}}
   </div>
   {% } %}

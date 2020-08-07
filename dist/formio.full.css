@@ -586,7 +586,7 @@ body.formio-dialog-open {
   background: #e0e0e0;
   color: #777; }
 
-.formio-dialog-content .panel {
+.formio-dialog-content .card {
   margin: 0; }
 
 .formio-placeholder {
@@ -1034,8 +1034,8 @@ div[read-only="true"] .formio-component-textarea div[ref="input"] {
 
 .drag-container.formio-builder-form,
 .drag-container.formio-builder-form:hover,
-.panel-body > .drag-container.formio-builder-components,
-.panel-body > .drag-container.formio-builder-components:hover,
+.card-body > .drag-container.formio-builder-components,
+.card-body > .drag-container.formio-builder-components:hover,
 .tab-pane > .drag-container.formio-builder-components,
 .tab-pane > .drag-container.formio-builder-components:hover {
   padding: 0 0 1rem 0;
@@ -1106,10 +1106,8 @@ div[read-only="true"] .formio-component-textarea div[ref="input"] {
   line-height: 1.2;
   border-radius: 0.3em; }
 
-.form-builder-panel .panel-body {
-  padding: 5px; }
-
 .form-builder-panel .card-body {
+  padding: 5px;
   max-height: 400px;
   overflow: auto; }
 
@@ -1139,7 +1137,7 @@ div[read-only="true"] .formio-component-textarea div[ref="input"] {
   cursor: pointer;
   border-radius: 0; }
 
-.panel-body .drag-and-drop-alert {
+.card-body .drag-and-drop-alert {
   margin-bottom: 0; }
 
 .builder-sidebar_scroll {

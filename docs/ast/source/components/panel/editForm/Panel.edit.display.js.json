@@ -7898,15 +7898,9 @@
         "binop": null,
         "updateContext": null
       },
-<<<<<<< HEAD
-      "value": "hideLabel",
+      "value": "autofocus",
       "start": 196,
       "end": 207,
-=======
-      "value": "autofocus",
-      "start": 182,
-      "end": 193,
->>>>>>> upstream/master
       "loc": {
         "start": {
           "line": 15,
@@ -8165,15 +8159,9 @@
         "binop": null,
         "updateContext": null
       },
-<<<<<<< HEAD
-      "value": "autofocus",
+      "value": "tableView",
       "start": 248,
       "end": 259,
-=======
-      "value": "tableView",
-      "start": 230,
-      "end": 241,
->>>>>>> upstream/master
       "loc": {
         "start": {
           "line": 19,

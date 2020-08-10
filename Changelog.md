@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 4.12.0-rc.2
+#### Fixed
+ - FJS-1118: fixes an issue where initially collapsed panels are opened when have required component inside
+ - FJS-1041: added possibility to interpolate dataGrid max/min length
+ - FOR-2714: Fix Webhook Action authentication part autocompleting
+ - FJS-1058: fixes an issuewhere the Signature has different dimensions in the View and Edit modes
+ - FJS-1035: Fix Conditional add button for EditGrid
+
 ### 4.12.0-rc.1
 #### Fixed
  - FJS-1109: replaced scope with alternative selector for working in IE11
@@ -39,6 +47,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
  - Adding config upload only option to file.edit
  - Retain key if provided when drag/dropping an element
  - FJS-1050: added hide label option for panel component
+
+### 4.11.1
+#### Changes
+ - No changes. Released 4.11.1-rc.9 as official release.
 
 ### 4.11.1-rc.9
 #### Fixed

@@ -1095,129 +1095,129 @@ export default class Formio {
     // Allow plugins to alter the options.
     options = Formio.pluginAlter(&apos;requestOptions&apos;, options, url);
     if (options.namespace || Formio.namespace) {
-      opts.namespace = options.namespace ||  Formio.namespace;
+      opts.namespace = options.namespace || Formio.namespace;
     }
 
     const requestToken = options.headers[&apos;x-jwt-token&apos;];
     const result = Formio.pluginAlter(&apos;wrapFetchRequestPromise&apos;, Formio.fetch(url, options),
       { url, method, data, opts }).then((response) =&gt; {
-      // Allow plugins to respond.
-      response = Formio.pluginAlter(&apos;requestResponse&apos;, response, Formio, data);
+        // Allow plugins to respond.
+        response = Formio.pluginAlter(&apos;requestResponse&apos;, response, Formio, data);
 
-      if (!response.ok) {
-        if (response.status === 440) {
-          Formio.setToken(null, opts);
-          Formio.events.emit(&apos;formio.sessionExpired&apos;, response.body);
-        }
-        else if (response.status === 401) {
-          Formio.events.emit(&apos;formio.unauthorized&apos;, response.body);
-        }
-        else if (response.status === 416) {
-          Formio.events.emit(&apos;formio.rangeIsNotSatisfiable&apos;, response.body);
-        }
-        // Parse and return the error as a rejected promise to reject this promise
-        return (response.headers.get(&apos;content-type&apos;).includes(&apos;application/json&apos;)
-          ? response.json()
-          : response.text())
-          .then((error) =&gt; {
-            return NativePromise.reject(error);
-          });
-      }
-
-      // Handle fetch results
-      const token = response.headers.get(&apos;x-jwt-token&apos;);
-
-      // In some strange cases, the fetch library will return an x-jwt-token without sending
-      // one to the server. This has even been debugged on the server to verify that no token
-      // was introduced with the request, but the response contains a token. This is an Invalid
-      // case where we do not send an x-jwt-token and get one in return for any GET request.
-      let tokenIntroduced = false;
-      if (
-        (method === &apos;GET&apos;) &amp;&amp;
-        !requestToken &amp;&amp;
-        token &amp;&amp;
-        !opts.external &amp;&amp;
-        !url.includes(&apos;token=&apos;) &amp;&amp;
-        !url.includes(&apos;x-jwt-token=&apos;)
-      ) {
-        console.warn(&apos;Token was introduced in request.&apos;);
-        tokenIntroduced = true;
-      }
-
-      if (
-        response.status &gt;= 200 &amp;&amp;
-        response.status &lt; 300 &amp;&amp;
-        token &amp;&amp;
-        token !== &apos;&apos; &amp;&amp;
-        !tokenIntroduced
-      ) {
-        Formio.setToken(token, opts);
-      }
-      // 204 is no content. Don&apos;t try to .json() it.
-      if (response.status === 204) {
-        return {};
-      }
-
-      const getResult = response.headers.get(&apos;content-type&apos;).includes(&apos;application/json&apos;)
-        ? response.json()
-        : response.text();
-      return getResult.then((result) =&gt; {
-        // Add some content-range metadata to the result here
-        let range = response.headers.get(&apos;content-range&apos;);
-        if (range &amp;&amp; isObject(result)) {
-          range = range.split(&apos;/&apos;);
-          if (range[0] !== &apos;*&apos;) {
-            const skipLimit = range[0].split(&apos;-&apos;);
-            result.skip = Number(skipLimit[0]);
-            result.limit = skipLimit[1] - skipLimit[0] + 1;
+        if (!response.ok) {
+          if (response.status === 440) {
+            Formio.setToken(null, opts);
+            Formio.events.emit(&apos;formio.sessionExpired&apos;, response.body);
           }
-          result.serverCount = range[1] === &apos;*&apos; ? range[1] : Number(range[1]);
+          else if (response.status === 401) {
+            Formio.events.emit(&apos;formio.unauthorized&apos;, response.body);
+          }
+          else if (response.status === 416) {
+            Formio.events.emit(&apos;formio.rangeIsNotSatisfiable&apos;, response.body);
+          }
+          // Parse and return the error as a rejected promise to reject this promise
+          return (response.headers.get(&apos;content-type&apos;).includes(&apos;application/json&apos;)
+            ? response.json()
+            : response.text())
+            .then((error) =&gt; {
+              return NativePromise.reject(error);
+            });
         }
 
-        if (!opts.getHeaders) {
+        // Handle fetch results
+        const token = response.headers.get(&apos;x-jwt-token&apos;);
+
+        // In some strange cases, the fetch library will return an x-jwt-token without sending
+        // one to the server. This has even been debugged on the server to verify that no token
+        // was introduced with the request, but the response contains a token. This is an Invalid
+        // case where we do not send an x-jwt-token and get one in return for any GET request.
+        let tokenIntroduced = false;
+        if (
+          (method === &apos;GET&apos;) &amp;&amp;
+          !requestToken &amp;&amp;
+          token &amp;&amp;
+          !opts.external &amp;&amp;
+          !url.includes(&apos;token=&apos;) &amp;&amp;
+          !url.includes(&apos;x-jwt-token=&apos;)
+        ) {
+          console.warn(&apos;Token was introduced in request.&apos;);
+          tokenIntroduced = true;
+        }
+
+        if (
+          response.status &gt;= 200 &amp;&amp;
+          response.status &lt; 300 &amp;&amp;
+          token &amp;&amp;
+          token !== &apos;&apos; &amp;&amp;
+          !tokenIntroduced
+        ) {
+          Formio.setToken(token, opts);
+        }
+        // 204 is no content. Don&apos;t try to .json() it.
+        if (response.status === 204) {
+          return {};
+        }
+
+        const getResult = response.headers.get(&apos;content-type&apos;).includes(&apos;application/json&apos;)
+          ? response.json()
+          : response.text();
+        return getResult.then((result) =&gt; {
+          // Add some content-range metadata to the result here
+          let range = response.headers.get(&apos;content-range&apos;);
+          if (range &amp;&amp; isObject(result)) {
+            range = range.split(&apos;/&apos;);
+            if (range[0] !== &apos;*&apos;) {
+              const skipLimit = range[0].split(&apos;-&apos;);
+              result.skip = Number(skipLimit[0]);
+              result.limit = skipLimit[1] - skipLimit[0] + 1;
+            }
+            result.serverCount = range[1] === &apos;*&apos; ? range[1] : Number(range[1]);
+          }
+
+          if (!opts.getHeaders) {
+            return result;
+          }
+
+          const headers = {};
+          response.headers.forEach((item, key) =&gt; {
+            headers[key] = item;
+          });
+
+          // Return the result with the headers.
+          return {
+            result,
+            headers,
+          };
+        });
+      })
+      .then((result) =&gt; {
+        if (opts.getHeaders) {
           return result;
         }
 
-        const headers = {};
-        response.headers.forEach((item, key) =&gt; {
-          headers[key] = item;
-        });
+        // Cache the response.
+        if (method === &apos;GET&apos;) {
+          Formio.cache[cacheKey] = result;
+        }
 
-        // Return the result with the headers.
-        return {
-          result,
-          headers,
-        };
+        return cloneResponse(result);
+      })
+      .catch((err) =&gt; {
+        if (err === &apos;Bad Token&apos;) {
+          Formio.setToken(null, opts);
+          Formio.events.emit(&apos;formio.badToken&apos;, err);
+        }
+        if (err.message) {
+          err.message = `Could not connect to API server (${err.message})`;
+          err.networkError = true;
+        }
+
+        if (method === &apos;GET&apos;) {
+          delete Formio.cache[cacheKey];
+        }
+
+        return NativePromise.reject(err);
       });
-    })
-    .then((result) =&gt; {
-      if (opts.getHeaders) {
-        return result;
-      }
-
-      // Cache the response.
-      if (method === &apos;GET&apos;) {
-        Formio.cache[cacheKey] = result;
-      }
-
-      return cloneResponse(result);
-    })
-    .catch((err) =&gt; {
-      if (err === &apos;Bad Token&apos;) {
-        Formio.setToken(null, opts);
-        Formio.events.emit(&apos;formio.badToken&apos;, err);
-      }
-      if (err.message) {
-        err.message = `Could not connect to API server (${err.message})`;
-        err.networkError = true;
-      }
-
-      if (method === &apos;GET&apos;) {
-        delete Formio.cache[cacheKey];
-      }
-
-      return NativePromise.reject(err);
-    });
 
     return result;
   }
@@ -1393,7 +1393,7 @@ export default class Formio {
     Formio.cache = {};
   }
 
-  static noop() {}
+  static noop() { }
   static identity(value) {
     return value;
   }

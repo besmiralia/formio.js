@@ -554,14 +554,15 @@ export default class WebformBuilder extends Component {
 
     if (/*!formio.noProject &amp;&amp; */!isResourcesDisabled) {
       const resourceOptions = this.options.builder &amp;&amp; this.options.builder.resource;
-      console.log(&apos;loading form resources, formio:&apos;, formio);
-      query.params.tid = formio.tid;
+      query.params.tid = resourceOptions.tid;
+      query.params.uid = resourceOptions.uid;
       formio.loadForms(query)
         .then((resources) =&gt; {
           if (resources.length) {
             this.builder.resource = {
               title: resourceOptions ? resourceOptions.title : &apos;Existing Resource Fields&apos;,
               key: &apos;resource&apos;,
+              icon: resourceOptions ? resourceOptions.icon : &apos;fa fa-sitemap&apos;,
               weight: resourceOptions ? resourceOptions.weight : 50,
               subgroups: [],
               components: [],
@@ -570,6 +571,7 @@ export default class WebformBuilder extends Component {
             this.groups.resource = {
               title: resourceOptions ? resourceOptions.title : &apos;Existing Resource Fields&apos;,
               key: &apos;resource&apos;,
+              icon: resourceOptions ? resourceOptions.icon : &apos;fa fa-sitemap&apos;,
               weight: resourceOptions ? resourceOptions.weight : 50,
               subgroups: [],
               components: [],
@@ -598,6 +600,7 @@ export default class WebformBuilder extends Component {
       const subgroup = {
         key: resourceKey,
         title: resource.title,
+        icon: resource.icon || &apos;fa fa-database&apos;,
         components: [],
         componentOrder: [],
         default: index === 0,
@@ -674,22 +677,27 @@ export default class WebformBuilder extends Component {
         title: &apos;Basic&apos;,
         weight: 10,
         default: true,
+        icon: &apos;fa fa-cube&apos;
       },
       advanced: {
         title: &apos;Advanced&apos;,
-        weight: 20
+        weight: 20,
+        icon: &apos;fa fa-cubes&apos;
       },
       layout: {
         title: &apos;Layout&apos;,
-        weight: 30
+        weight: 30,
+        icon: &apos;fa fa-layer-group&apos;
       },
       data: {
         title: &apos;Data&apos;,
-        weight: 40
+        weight: 40,
+        icon: &apos;fa fa-server&apos;
       },
       premium: {
         title: &apos;Premium&apos;,
-        weight: 50
+        weight: 50,
+        icon: &apos;fa fa-star&apos;
       },
     };
   }
@@ -764,7 +772,7 @@ export default class WebformBuilder extends Component {
           group: this.groups[groupKey],
           groupKey,
           groupId: `builder-sidebar-${this.id}`,
-          subgroups: this.groups[groupKey].subgroups.map((group) =&gt; this.renderTemplate(&apos;builderSidebarGroup&apos;, {
+          subgroups: this.groups[groupKey].subgroups.map((group) =&gt; this.renderTemplate(&apos;builderSidebarSubGroup&apos;, {
             group,
             groupKey: group.key,
             groupId: `group-container-${groupKey}`,

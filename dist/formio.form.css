@@ -563,7 +563,7 @@ body.formio-dialog-open {
   background: #e0e0e0;
   color: #777; }
 
-.formio-dialog-content .panel {
+.formio-dialog-content .card {
   margin: 0; }
 
 .formio-placeholder {

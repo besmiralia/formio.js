@@ -10134,6 +10134,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/components/panel/panel.js~panelcomponent#hasinvalidcomponent",
+    "class/src/components/panel/Panel.js~PanelComponent.html#instance-method-hasInvalidComponent",
+    "src/components/panel/Panel.js~PanelComponent#hasInvalidComponent",
+    "method"
+  ],
+  [
     "src/components/panel/panel.js~panelcomponent#nofield",
     "class/src/components/panel/Panel.js~PanelComponent.html#instance-member-noField",
     "src/components/panel/Panel.js~PanelComponent#noField",
@@ -11464,6 +11470,12 @@ window.esdocSearchIndex = [
     "class/src/components/signature/Signature.js~SignatureComponent.html#instance-member-scale",
     "src/components/signature/Signature.js~SignatureComponent#scale",
     "member"
+  ],
+  [
+    "src/components/signature/signature.js~signaturecomponent#setdatatosigaturepad",
+    "class/src/components/signature/Signature.js~SignatureComponent.html#instance-method-setDataToSigaturePad",
+    "src/components/signature/Signature.js~SignatureComponent#setDataToSigaturePad",
+    "method"
   ],
   [
     "src/components/signature/signature.js~signaturecomponent#setvalue",
@@ -14535,6 +14547,12 @@ window.esdocSearchIndex = [
     "src/templates/bootstrap/buildersidebargroup/index.js",
     "file/src/templates/bootstrap/builderSidebarGroup/index.js.html",
     "src/templates/bootstrap/builderSidebarGroup/index.js",
+    "file"
+  ],
+  [
+    "src/templates/bootstrap/buildersidebarsubgroup/index.js",
+    "file/src/templates/bootstrap/builderSidebarSubGroup/index.js.html",
+    "src/templates/bootstrap/builderSidebarSubGroup/index.js",
     "file"
   ],
   [

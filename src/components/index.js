@@ -20,6 +20,7 @@ import Input from './_classes/input/Input';
 import Multivalue from './_classes/multivalue/Multivalue';
 import Field from './_classes/field/Field';
 import HTMLComponent from './html/HTML';
+import LABELComponent from './gplabel/LABEL';
 import NestedComponent from './_classes/nested/NestedComponent';
 import NestedDataComponent from './_classes/nesteddata/NestedDataComponent';
 import NestedArrayComponent from './_classes/nestedarray/NestedArrayComponent';
@@ -69,6 +70,7 @@ export default {
   form: FormComponent,
   hidden: HiddenComponent,
   htmlelement: HTMLComponent,
+  gplabel: LABELComponent,
   nested: NestedComponent,
   nesteddata: NestedDataComponent,
   nestedarray: NestedArrayComponent,

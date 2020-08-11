@@ -366,6 +366,18 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "formiojs/src/components/gplabel/label.form.js~label",
+    "function/index.html#static-function-LABEL",
+    "<span>LABEL</span> <span class=\"search-result-import-path\">formiojs/src/components/gplabel/LABEL.form.js</span>",
+    "function"
+  ],
+  [
+    "formiojs/src/components/gplabel/label.js~labelcomponent",
+    "class/src/components/gplabel/LABEL.js~LABELComponent.html",
+    "<span>LABELComponent</span> <span class=\"search-result-import-path\">formiojs/src/components/gplabel/LABEL.js</span>",
+    "class"
+  ],
+  [
     "formiojs/src/contrib/location/location.form.js~location",
     "function/index.html#static-function-Location",
     "<span>Location</span> <span class=\"search-result-import-path\">formiojs/src/contrib/location/Location.form.js</span>",
@@ -9672,6 +9684,108 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/components/gplabel/label.form.js",
+    "file/src/components/gplabel/LABEL.form.js.html",
+    "src/components/gplabel/LABEL.form.js",
+    "file"
+  ],
+  [
+    "src/components/gplabel/label.js",
+    "file/src/components/gplabel/LABEL.js.html",
+    "src/components/gplabel/LABEL.js",
+    "file"
+  ],
+  [
+    "src/components/gplabel/label.js~labelcomponent#attach",
+    "class/src/components/gplabel/LABEL.js~LABELComponent.html#instance-method-attach",
+    "src/components/gplabel/LABEL.js~LABELComponent#attach",
+    "method"
+  ],
+  [
+    "src/components/gplabel/label.js~labelcomponent#checkrefreshon",
+    "class/src/components/gplabel/LABEL.js~LABELComponent.html#instance-method-checkRefreshOn",
+    "src/components/gplabel/LABEL.js~LABELComponent#checkRefreshOn",
+    "method"
+  ],
+  [
+    "src/components/gplabel/label.js~labelcomponent#content",
+    "class/src/components/gplabel/LABEL.js~LABELComponent.html#instance-get-content",
+    "src/components/gplabel/LABEL.js~LABELComponent#content",
+    "member"
+  ],
+  [
+    "src/components/gplabel/label.js~labelcomponent#defaultschema",
+    "class/src/components/gplabel/LABEL.js~LABELComponent.html#instance-get-defaultSchema",
+    "src/components/gplabel/LABEL.js~LABELComponent#defaultSchema",
+    "member"
+  ],
+  [
+    "src/components/gplabel/label.js~labelcomponent#render",
+    "class/src/components/gplabel/LABEL.js~LABELComponent.html#instance-method-render",
+    "src/components/gplabel/LABEL.js~LABELComponent#render",
+    "method"
+  ],
+  [
+    "src/components/gplabel/label.js~labelcomponent#rendercontent",
+    "class/src/components/gplabel/LABEL.js~LABELComponent.html#instance-method-renderContent",
+    "src/components/gplabel/LABEL.js~LABELComponent#renderContent",
+    "method"
+  ],
+  [
+    "src/components/gplabel/label.js~labelcomponent#singletags",
+    "class/src/components/gplabel/LABEL.js~LABELComponent.html#instance-get-singleTags",
+    "src/components/gplabel/LABEL.js~LABELComponent#singleTags",
+    "member"
+  ],
+  [
+    "src/components/gplabel/label.js~labelcomponent.builderinfo",
+    "class/src/components/gplabel/LABEL.js~LABELComponent.html#static-get-builderInfo",
+    "src/components/gplabel/LABEL.js~LABELComponent.builderInfo",
+    "member"
+  ],
+  [
+    "src/components/gplabel/label.js~labelcomponent.schema",
+    "class/src/components/gplabel/LABEL.js~LABELComponent.html#static-method-schema",
+    "src/components/gplabel/LABEL.js~LABELComponent.schema",
+    "method"
+  ],
+  [
+    "src/components/gplabel/label.unit.js",
+    "file/src/components/gplabel/LABEL.unit.js.html",
+    "src/components/gplabel/LABEL.unit.js",
+    "file"
+  ],
+  [
+    "src/components/gplabel/editform/label.edit.display.js",
+    "file/src/components/gplabel/editForm/LABEL.edit.display.js.html",
+    "src/components/gplabel/editForm/LABEL.edit.display.js",
+    "file"
+  ],
+  [
+    "src/components/gplabel/editform/label.edit.logic.js",
+    "file/src/components/gplabel/editForm/LABEL.edit.logic.js.html",
+    "src/components/gplabel/editForm/LABEL.edit.logic.js",
+    "file"
+  ],
+  [
+    "src/components/gplabel/fixtures/comp1.js",
+    "file/src/components/gplabel/fixtures/comp1.js.html",
+    "src/components/gplabel/fixtures/comp1.js",
+    "file"
+  ],
+  [
+    "src/components/gplabel/fixtures/comp2.js",
+    "file/src/components/gplabel/fixtures/comp2.js.html",
+    "src/components/gplabel/fixtures/comp2.js",
+    "file"
+  ],
+  [
+    "src/components/gplabel/fixtures/index.js",
+    "file/src/components/gplabel/fixtures/index.js.html",
+    "src/components/gplabel/fixtures/index.js",
+    "file"
+  ],
+  [
     "src/components/hidden/hidden.form.js",
     "file/src/components/hidden/Hidden.form.js.html",
     "src/components/hidden/Hidden.form.js",
@@ -14649,6 +14763,12 @@ window.esdocSearchIndex = [
     "src/templates/bootstrap/file/index.js",
     "file/src/templates/bootstrap/file/index.js.html",
     "src/templates/bootstrap/file/index.js",
+    "file"
+  ],
+  [
+    "src/templates/bootstrap/gplabel/index.js",
+    "file/src/templates/bootstrap/gplabel/index.js.html",
+    "src/templates/bootstrap/gplabel/index.js",
     "file"
   ],
   [

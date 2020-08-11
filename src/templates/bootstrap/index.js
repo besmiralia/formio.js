@@ -24,6 +24,7 @@ import fieldset from './fieldset';
 import file from './file';
 import html from './html';
 import gplabel from './gplabel';
+import gplabelbuilder from './gplabelbuilder';
 import icon from './icon';
 import iconClass from './iconClass';
 import input from './input';
@@ -99,6 +100,7 @@ export default {
   file,
   html,
   gplabel,
+  gplabelbuilder,
   icon,
   input,
   label,

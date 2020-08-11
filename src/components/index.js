@@ -20,7 +20,7 @@ import Input from './_classes/input/Input';
 import Multivalue from './_classes/multivalue/Multivalue';
 import Field from './_classes/field/Field';
 import HTMLComponent from './html/HTML';
-import LABELComponent from './gplabel/LABEL';
+import LabelComponent from './gplabel/Label';
 import NestedComponent from './_classes/nested/NestedComponent';
 import NestedDataComponent from './_classes/nesteddata/NestedDataComponent';
 import NestedArrayComponent from './_classes/nestedarray/NestedArrayComponent';
@@ -34,6 +34,7 @@ import ResourceComponent from './resource/Resource';
 import SelectBoxesComponent from './selectboxes/SelectBoxes';
 import SelectComponent from './select/Select';
 import SignatureComponent from './signature/Signature';
+import SerialNumberComponent from './serialnumber/SerialNumber';
 import SurveyComponent from './survey/Survey';
 import TableComponent from './table/Table';
 import TabsComponent from './tabs/Tabs';
@@ -70,7 +71,7 @@ export default {
   form: FormComponent,
   hidden: HiddenComponent,
   htmlelement: HTMLComponent,
-  gplabel: LABELComponent,
+  gplabel: LabelComponent,
   nested: NestedComponent,
   nesteddata: NestedDataComponent,
   nestedarray: NestedArrayComponent,
@@ -83,6 +84,7 @@ export default {
   resource: ResourceComponent,
   select: SelectComponent,
   selectboxes: SelectBoxesComponent,
+  serialnumber: SerialNumberComponent,
   signature: SignatureComponent,
   survey: SurveyComponent,
   table: TableComponent,

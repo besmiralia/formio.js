@@ -1,7 +1,7 @@
 import Component from '../_classes/component/Component';
 import _ from 'lodash';
 
-export default class LABELComponent extends Component {
+export default class LabelComponent extends Component {
   static schema(...extend) {
     return Component.schema({
       label: 'Label',
@@ -20,12 +20,12 @@ export default class LABELComponent extends Component {
       icon: 'heading',
       weight: 25,
       documentation: 'http://help.form.io/userguide/#html-element-component',
-      schema: LABELComponent.schema()
+      schema: LabelComponent.schema()
     };
   }
 
   get defaultSchema() {
-    return LABELComponent.schema();
+    return LabelComponent.schema();
   }
 
   get content() {
@@ -74,8 +74,33 @@ export default class LABELComponent extends Component {
     });
   }
 
+  renderBuilderContent() {
+    const submission = _.get(this.root, 'submission', {});
+    return this.renderTemplate('gplabelbuilder', {
+      component: this.component,
+      attrs: (this.component.attrs || []).map((attr) => {
+        return {
+          attr: attr.attr,
+          value: this.interpolate(attr.value, {
+            metadata: submission.metadata || {},
+            submission: submission,
+            data: this.rootValue,
+            row: this.data
+          })
+        };
+      }),
+      content: this.content,
+      singleTags: this.singleTags,
+    });
+  }
+
   render() {
-    return super.render(this.renderContent());
+    if (this.builderMode) {
+      return super.render(this.renderBuilderContent());
+    }
+    else {
+      return super.render(this.renderContent());
+    }
   }
 
   attach(element) {

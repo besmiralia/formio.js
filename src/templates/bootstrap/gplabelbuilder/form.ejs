@@ -1,0 +1,6 @@
+<div class="{{ ctx.component.className }}" ref="gplabel" title="{{ctx.component.label}}"
+  {% ctx.attrs.forEach(function(attr) { %}
+    {{attr.attr}}="{{attr.value}}"
+  {% }) %}>
+  {{ctx.content}}
+</div>

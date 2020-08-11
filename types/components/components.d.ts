@@ -47,6 +47,7 @@ export namespace Components {
     const resource: ClassWithEditForm<typeof Field>;
     const select: ClassWithEditForm<typeof Field>;
     const selectboxes: ClassWithEditForm<typeof Field>;
+    const serialnumber: ClassWithEditForm<typeof WidgetComponent>;
     const signature: ClassWithEditForm<typeof Input>;
     const sketchpad: ClassWithEditForm<typeof Field>;
     const survey: ClassWithEditForm<typeof Field>;

@@ -1,13 +1,13 @@
 import baseEditForm from '../_classes/component/Component.form';
 
-import LABELEditDisplay from './editForm/LABEL.edit.display';
-import LABELEditLogic from './editForm/LABEL.edit.logic';
+import LabelEditDisplay from './editForm/Label.edit.display';
+import LabelEditLogic from './editForm/Label.edit.logic';
 
 export default function(...extend) {
   return baseEditForm([
     {
       key: 'display',
-      components: LABELEditDisplay,
+      components: LabelEditDisplay,
     },
     {
       key: 'data',
@@ -19,7 +19,7 @@ export default function(...extend) {
     },
     {
       key: 'logic',
-      components: LABELEditLogic,
+      components: LabelEditLogic,
     },
   ], ...extend);
 }

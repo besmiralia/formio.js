@@ -1,6 +1,6 @@
 {
-  "coverage": "13.9%",
-  "expectCount": 2179,
+  "coverage": "13.83%",
+  "expectCount": 2190,
   "actualCount": 303,
   "files": {
     "src/builders/Builders.js": {
@@ -569,6 +569,29 @@
         591,
         624,
         642
+      ]
+    },
+    "src/components/gplabel/LABEL.form.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        6
+      ]
+    },
+    "src/components/gplabel/LABEL.js": {
+      "expectCount": 10,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        5,
+        16,
+        27,
+        31,
+        44,
+        48,
+        56,
+        77,
+        81
       ]
     },
     "src/components/hidden/Hidden.form.js": {

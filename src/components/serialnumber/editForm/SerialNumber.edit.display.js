@@ -1,4 +1,4 @@
-export default [
+export default [/*
   {
     type: 'select',
     input: true,
@@ -14,7 +14,7 @@ export default [
         { label: 'Label', value: 'div' },
       ]
     }
-  },
+  },*/
   {
     weight: 320,
     type: 'textfield',

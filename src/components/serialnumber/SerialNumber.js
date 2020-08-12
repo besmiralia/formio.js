@@ -1,4 +1,4 @@
-import _ from 'lodash';
+//import _ from 'lodash';
 import Input from '../_classes/input/Input';
 import { conformToMask } from 'vanilla-text-mask';
 import * as FormioUtils from '../../utils/utils';
@@ -60,51 +60,50 @@ export default class SerialNumberComponent extends Input {
     get emptyValue() {
         return '';
     }
-
-    renderElement(value, index) {
-        // Double quotes cause the input value to close so replace them with html quote char.
-        if (value && typeof value === 'string') {
-            value = value.replace(/"/g, '&quot;');
+    /*
+        renderElement(value, index) {
+            // Double quotes cause the input value to close so replace them with html quote char.
+            if (value && typeof value === 'string') {
+                value = value.replace(/"/g, '&quot;');
+            }
+            const info = this.inputInfo;
+            info.attr = info.attr || {};
+            info.attr.value = this.getValueAsString(this.formatValue(this.parseValue(value)));
+            if (this.isMultipleMasksField) {
+                info.attr.class += ' formio-multiple-mask-input';
+            }
+            if (this.component.tag === 'div') {
+                const submission = _.get(this.root, 'submission', {});
+                this.component.hideLabel = true;
+                this.renderTemplate('gplabel', {
+                    component: this.component,
+                    tag: this.component.tag,
+                    attrs: (this.component.attrs || []).map((attr) => {
+                        return {
+                            attr: attr.attr,
+                            value: this.interpolate(attr.value, {
+                                metadata: submission.metadata || {},
+                                submission: submission,
+                                data: this.rootValue,
+                                row: this.data
+                            })
+                        };
+                    }),
+                    content: this.formatValue(this.parseValue(value)),
+                    singleTags: this.singleTags || [],
+                });
+            }
+            else {
+                this.renderTemplate('input', {
+                    prefix: this.prefix,
+                    suffix: this.suffix,
+                    input: info,
+                    value: this.formatValue(this.parseValue(value)),
+                    index
+                });
+            }
         }
-        const info = this.inputInfo;
-        info.attr = info.attr || {};
-        info.attr.value = this.getValueAsString(this.formatValue(this.parseValue(value)));
-        if (this.isMultipleMasksField) {
-            info.attr.class += ' formio-multiple-mask-input';
-        }
-
-        if (this.component.tag === 'div') {
-            const submission = _.get(this.root, 'submission', {});
-            this.component.hideLabel = true;
-            this.renderTemplate('gplabel', {
-                component: this.component,
-                tag: this.component.tag,
-                attrs: (this.component.attrs || []).map((attr) => {
-                    return {
-                        attr: attr.attr,
-                        value: this.interpolate(attr.value, {
-                            metadata: submission.metadata || {},
-                            submission: submission,
-                            data: this.rootValue,
-                            row: this.data
-                        })
-                    };
-                }),
-                content: this.formatValue(this.parseValue(value)),
-                singleTags: this.singleTags || [],
-            });
-        }
-        else {
-            this.renderTemplate('input', {
-                prefix: this.prefix,
-                suffix: this.suffix,
-                input: info,
-                value: this.formatValue(this.parseValue(value)),
-                index
-            });
-        }
-    }
-
+    */
     /**
      * Returns the mask value object.
      *

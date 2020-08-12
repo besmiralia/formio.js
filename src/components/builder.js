@@ -1,6 +1,7 @@
 import Components from '.';
 import AddressForm from './address/Address.form';
 import ButtonForm from './button/Button.form';
+import PayButtonForm from './gppaybutton/PayButton.form';
 import CheckboxForm from './checkbox/Checkbox.form';
 import ColumnsForm from './columns/Columns.form';
 import ComponentForm from './_classes/component/Component.form';
@@ -45,6 +46,7 @@ import WellForm from './well/Well.form';
 
 Components.address.editForm = AddressForm;
 Components.button.editForm = ButtonForm;
+Components.gppaybutton.editForm = PayButtonForm;
 Components.checkbox.editForm = CheckboxForm;
 Components.columns.editForm = ColumnsForm;
 Components.component.editForm = ComponentForm;

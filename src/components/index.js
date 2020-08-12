@@ -1,5 +1,6 @@
 import AddressComponent from './address/Address';
 import ButtonComponent from './button/Button';
+import PayButtonComponent from './gppaybutton/PayButton';
 import CheckBoxComponent from './checkbox/Checkbox';
 import ColumnsComponent from './columns/Columns';
 import Component from './_classes/component/Component';
@@ -52,6 +53,7 @@ export default {
   base: Component,
   component: Component,
   button: ButtonComponent,
+  gppaybutton: PayButtonComponent,
   checkbox: CheckBoxComponent,
   columns: ColumnsComponent,
   container: ContainerComponent,

@@ -233,39 +233,15 @@ export default class PayButtonComponent extends Field {
     if (this.component.showValidations) {
       this.emit('checkValidity', this.data);
     }
-    switch (this.component.action) {
-      case 'saveState':
-      case 'submit':
-        event.preventDefault();
-        event.stopPropagation();
-        this.loading = true;
-        this.emit('submitButton', {
-          state: this.component.state || 'submitted',
-          component: this.component,
-          instance: this
-        });
-        break;
-      case 'event':
-        this.emit(this.interpolate(this.component.event), this.data);
-        this.events.emit(this.interpolate(this.component.event), this.data);
-        this.emit('customEvent', {
-          type: this.interpolate(this.component.event),
-          component: this.component,
-          data: this.data,
-          event: event
-        });
-        break;
-      case 'pay':
-        event.preventDefault();
-        event.stopPropagation();
-        this.loading = true;
-        this.emit('requestPayment', {
-          component: this.component,
-          instance: this,
-          amount: this.interpolate(`{{data['${this.component.payAmountField}']}}`, this.data)//Amount field or value from the data
-        });
-        break;
-    }
+
+    event.preventDefault();
+    event.stopPropagation();
+    this.loading = true;
+    this.emit('requestPayment', {
+      component: this.component,
+      instance: this,
+      amount: this.interpolate(`{{data['${this.component.payAmountField}']}}`, this.data)//Amount field or value from the data
+    });
   }
 
   focus() {

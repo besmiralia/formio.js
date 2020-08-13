@@ -80,8 +80,10 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-File">File</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-form">components/form</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/form/Form.js~FormComponent.html">FormComponent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Form">Form</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gplabel">components/gplabel</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/gplabel/LABEL.js~LABELComponent.html">LABELComponent</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-LABEL">LABEL</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gplabel">components/gplabel</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/gplabel/Label.js~LabelComponent.html">LabelComponent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Label">Label</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gppaybutton">components/gppaybutton</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/gppaybutton/PayButton.js~PayButtonComponent.html">PayButtonComponent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-PayButton">PayButton</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hidden">components/hidden</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/hidden/Hidden.js~HiddenComponent.html">HiddenComponent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Hidden">Hidden</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-html">components/html</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/html/HTML.js~HTMLComponent.html">HTMLComponent</a></span></span></li>
@@ -106,6 +108,8 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-multiSelectOptions">multiSelectOptions</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-selectboxes">components/selectboxes</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/selectboxes/SelectBoxes.js~SelectBoxesComponent.html">SelectBoxesComponent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-SelectBoxes">SelectBoxes</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-serialnumber">components/serialnumber</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/serialnumber/SerialNumber.js~SerialNumberComponent.html">SerialNumberComponent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-SerialNumber">SerialNumber</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-signature">components/signature</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/signature/Signature.js~SignatureComponent.html">SignatureComponent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Signature">Signature</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-survey">components/survey</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Survey">Survey</a></span></span></li>
@@ -244,6 +248,7 @@
 <div class="content" data-ice="content"><h1 data-ice="title">src/components/index.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import AddressComponent from &apos;./address/Address&apos;;
 import ButtonComponent from &apos;./button/Button&apos;;
+import PayButtonComponent from &apos;./gppaybutton/PayButton&apos;;
 import CheckBoxComponent from &apos;./checkbox/Checkbox&apos;;
 import ColumnsComponent from &apos;./columns/Columns&apos;;
 import Component from &apos;./_classes/component/Component&apos;;
@@ -264,7 +269,7 @@ import Input from &apos;./_classes/input/Input&apos;;
 import Multivalue from &apos;./_classes/multivalue/Multivalue&apos;;
 import Field from &apos;./_classes/field/Field&apos;;
 import HTMLComponent from &apos;./html/HTML&apos;;
-import LABELComponent from &apos;./gplabel/LABEL&apos;;
+import LabelComponent from &apos;./gplabel/Label&apos;;
 import NestedComponent from &apos;./_classes/nested/NestedComponent&apos;;
 import NestedDataComponent from &apos;./_classes/nesteddata/NestedDataComponent&apos;;
 import NestedArrayComponent from &apos;./_classes/nestedarray/NestedArrayComponent&apos;;
@@ -278,6 +283,7 @@ import ResourceComponent from &apos;./resource/Resource&apos;;
 import SelectBoxesComponent from &apos;./selectboxes/SelectBoxes&apos;;
 import SelectComponent from &apos;./select/Select&apos;;
 import SignatureComponent from &apos;./signature/Signature&apos;;
+import SerialNumberComponent from &apos;./serialnumber/SerialNumber&apos;;
 import SurveyComponent from &apos;./survey/Survey&apos;;
 import TableComponent from &apos;./table/Table&apos;;
 import TabsComponent from &apos;./tabs/Tabs&apos;;
@@ -295,6 +301,7 @@ export default {
   base: Component,
   component: Component,
   button: ButtonComponent,
+  gppaybutton: PayButtonComponent,
   checkbox: CheckBoxComponent,
   columns: ColumnsComponent,
   container: ContainerComponent,
@@ -314,7 +321,7 @@ export default {
   form: FormComponent,
   hidden: HiddenComponent,
   htmlelement: HTMLComponent,
-  gplabel: LABELComponent,
+  gplabel: LabelComponent,
   nested: NestedComponent,
   nesteddata: NestedDataComponent,
   nestedarray: NestedArrayComponent,
@@ -327,6 +334,7 @@ export default {
   resource: ResourceComponent,
   select: SelectComponent,
   selectboxes: SelectBoxesComponent,
+  serialnumber: SerialNumberComponent,
   signature: SignatureComponent,
   survey: SurveyComponent,
   table: TableComponent,

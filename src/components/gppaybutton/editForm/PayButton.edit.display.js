@@ -39,14 +39,28 @@ export default [
     },
   },
   {
-    type: 'textfield',
+    type: 'select',
     label: 'Pay Amount Field',
     key: 'payAmountField',
     input: true,
-    weight: 116,
+    weight: 19,
     tooltip: 'The field which contains the amount to pay when the button is clicked.',
-    conditional: {
-      json: { '===': [{ var: 'data.action' }, 'pay'] },
+    dataSrc: 'custom',
+    valueProperty: 'value',
+    data: {
+      custom(context) {
+        var values = [];
+        //values.push({ label: 'Any Change', value: 'data' });
+        context.utils.eachComponent(context.instance.options.editForm.components, function(component) {
+          if (component.key !== context.data.key && ['currency', 'number', 'formula'].includes(component.type)) {
+            values.push({
+              label: component.label || component.key,
+              value: component.key
+            });
+          }
+        });
+        return values;
+      }
     },
   },
   {
@@ -78,7 +92,7 @@ export default [
     weight: 150,
     data: {
       values: [
-        { label: 'Extra Small', value: 'xs' },
+        //{ label: 'Extra Small', value: 'xs' },
         { label: 'Small', value: 'sm' },
         { label: 'Medium', value: 'md' },
         { label: 'Large', value: 'lg' },

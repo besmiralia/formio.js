@@ -1,7 +1,7 @@
 {
-  "coverage": "13.83%",
-  "expectCount": 2190,
-  "actualCount": 303,
+  "coverage": "13.76%",
+  "expectCount": 2230,
+  "actualCount": 307,
   "files": {
     "src/builders/Builders.js": {
       "expectCount": 6,
@@ -111,24 +111,24 @@
       "undocumentLines": [
         4,
         5,
-        25,
-        36,
+        22,
+        33,
+        35,
         38,
-        41,
-        55,
-        59,
-        63,
-        67,
-        69,
-        90,
-        94,
-        101,
-        110,
-        114,
-        163,
-        167,
-        178,
-        182
+        52,
+        56,
+        60,
+        64,
+        66,
+        87,
+        91,
+        98,
+        107,
+        111,
+        160,
+        164,
+        175,
+        179
       ]
     },
     "src/components/Components.js": {
@@ -571,15 +571,15 @@
         642
       ]
     },
-    "src/components/gplabel/LABEL.form.js": {
+    "src/components/gplabel/Label.form.js": {
       "expectCount": 1,
       "actualCount": 0,
       "undocumentLines": [
         6
       ]
     },
-    "src/components/gplabel/LABEL.js": {
-      "expectCount": 10,
+    "src/components/gplabel/Label.js": {
+      "expectCount": 11,
       "actualCount": 0,
       "undocumentLines": [
         4,
@@ -591,7 +591,47 @@
         48,
         56,
         77,
-        81
+        97,
+        106
+      ]
+    },
+    "src/components/gppaybutton/PayButton.form.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        5
+      ]
+    },
+    "src/components/gppaybutton/PayButton.js": {
+      "expectCount": 26,
+      "actualCount": 0,
+      "undocumentLines": [
+        5,
+        6,
+        23,
+        34,
+        38,
+        57,
+        63,
+        67,
+        72,
+        74,
+        79,
+        83,
+        87,
+        91,
+        95,
+        101,
+        103,
+        111,
+        118,
+        130,
+        207,
+        220,
+        226,
+        232,
+        247,
+        253
       ]
     },
     "src/components/hidden/Hidden.form.js": {
@@ -935,6 +975,26 @@
         72,
         128,
         138
+      ]
+    },
+    "src/components/serialnumber/SerialNumber.form.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        6
+      ]
+    },
+    "src/components/serialnumber/SerialNumber.js": {
+      "expectCount": 11,
+      "actualCount": 4,
+      "undocumentLines": [
+        6,
+        7,
+        27,
+        38,
+        42,
+        60,
+        192
       ]
     },
     "src/components/signature/Signature.form.js": {

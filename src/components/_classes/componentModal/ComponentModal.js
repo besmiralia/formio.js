@@ -165,10 +165,10 @@ export default class ComponentModal {
   showDialog() {
     this.dialogElement = this.component.ce('div');
     const dialogContent = `
-      <h3 ref="dialogHeader">${this.component.t('Do you want to clear changes?')}</h3>
+      <h3 ref="dialogHeader">${this.component.t('Do you want to discard changes?')}</h3>
       <div style="display:flex; justify-content: flex-end;">
         <button ref="dialogCancelButton" class="btn btn-secondary">${this.component.t('Cancel')}</button>
-        <button ref="dialogYesButton" class="btn btn-primary">${this.component.t('Yes, delete it')}</button>
+        <button ref="dialogYesButton" class="btn btn-danger">${this.component.t('Yes, delete it')}</button>
       </div>
     `;
 

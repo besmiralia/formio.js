@@ -371,6 +371,7 @@ td > .form-group {
 }
 
 .formio-dialog {
+  display: flex;
   position: fixed;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -398,6 +399,7 @@ td > .form-group {
   right: 0;
   bottom: 0;
   left: 0;
+  backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   -webkit-animation: formio-dialog-fadein 0.5s;
   animation: formio-dialog-fadein 0.5s;
@@ -412,6 +414,7 @@ td > .form-group {
 }
 
 .formio-dialog.formio-dialog-closing .formio-dialog-overlay {
+  backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   -webkit-animation: formio-dialog-fadeout 0.5s;
   animation: formio-dialog-fadeout 0.5s;
@@ -419,14 +422,17 @@ td > .form-group {
 
 .formio-dialog-content {
   background: white;
+  backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   -webkit-animation: formio-dialog-fadein 0.5s;
   animation: formio-dialog-fadein 0.5s;
   pointer-events: all;
   overflow: auto;
+  max-height: 100%;
 }
 
 .formio-dialog.formio-dialog-closing .formio-dialog-content {
+  backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   -webkit-animation: formio-dialog-fadeout 0.5s;
   animation: formio-dialog-fadeout 0.5s;
@@ -525,7 +531,7 @@ body.formio-dialog-open {
   font-family: 'Helvetica',sans-serif;
   font-size: 1.1em;
   line-height: 1.5em;
-  margin: 0 auto;
+  margin: auto;
   max-width: 100%;
   padding: 1em;
   position: relative;
@@ -650,6 +656,7 @@ body.formio-dialog-open {
 
 .formio-dialog-content .card {
   margin: 0;
+  margin-bottom: 15px;
 }
 
 .formio-placeholder {
@@ -766,6 +773,24 @@ body.formio-dialog-open {
 
 .formio-component .table {
   margin-bottom: 0;
+}
+.formio-component .card{
+  margin-bottom: 15px;
+
+  &.card-primary{
+    border-color: var(--primary);
+    &>.card-header{
+      color: white;
+      background-color: var(--primary);
+    }
+  }
+  &.card-info{
+    border-color: var(--info);
+    &>.card-header{
+      color: white;
+      background-color: var(--info);
+    }
+  }
 }
 
 .formio-hide-label-panel-tooltip {

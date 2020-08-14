@@ -1,4 +1,5 @@
 import AddressComponent from './address/Address';
+import GovPilotAddressComponent from './gpaddress/Address';
 import ButtonComponent from './button/Button';
 import PayButtonComponent from './gppaybutton/PayButton';
 import CheckBoxComponent from './checkbox/Checkbox';
@@ -50,6 +51,7 @@ import WellComponent from './well/Well';
 
 export default {
   address: AddressComponent,
+  gpaddress: GovPilotAddressComponent,
   base: Component,
   component: Component,
   button: ButtonComponent,

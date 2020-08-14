@@ -14,9 +14,7 @@ export class GovPilotAddressProvider extends AddressProvider {
     return {
       params: {
         type: 'address',
-        cid: 0, //todo change them based on the account
-        mid: 0, //todo change them based on the account
-        pst: 'NJ' //todo change them based on the account
+        uid: ''
       },
     };
   }
@@ -50,6 +48,6 @@ export class GovPilotAddressProvider extends AddressProvider {
   getRequestUrl(options = {}) {
     const { params } = options;
 
-    return `https://map.govpilot.com/map/AddressLookup?${this.serialize(params)}`;
+    return `https://map-sandbox.govpilot.com/api/v1/address?${this.serialize(params)}`;
   }
 }

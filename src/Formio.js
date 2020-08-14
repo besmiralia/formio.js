@@ -1104,6 +1104,13 @@ export default class Formio {
     }
   }
 
+  static getAccount() {
+    return Formio.uid;
+  }
+  static setAccount(uid) {
+    Formio.uid = uid;
+  }
+
   static setBaseUrl(url) {
     Formio.baseUrl = url;
     if (!Formio.projectUrlSet) {

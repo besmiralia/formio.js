@@ -678,13 +678,15 @@ export default class WebformBuilder extends Component {
     }
 
     if (info) {
-      info.key = _.camelCase(
-        info.key ||
-        info.title ||
-        info.label ||
-        info.placeholder ||
-        info.type
-      );
+      if (!info.key) {
+        info.key = _.camelCase(
+          info.key ||
+          info.title ||
+          info.label ||
+          info.placeholder ||
+          info.type
+        );
+      }
     }
 
     return info;

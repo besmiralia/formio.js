@@ -409,12 +409,13 @@ export default class PDFBuilder extends WebformBuilder {
 
     const schema = fastCloneDeep(this.schemas[type]);
 
-    schema.key = _.camelCase(
-      schema.label ||
-      schema.placeholder ||
-      schema.type
-    );
-
+    if (!schema.key) {
+      schema.key = _.camelCase(
+        schema.label ||
+        schema.placeholder ||
+        schema.type
+      );
+    }
     // Set a unique key for this component.
     BuilderUtils.uniquify([this.webform.component], schema);
     this.webform.component.components.push(schema);

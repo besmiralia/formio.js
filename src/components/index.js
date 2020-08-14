@@ -1,5 +1,5 @@
 import AddressComponent from './address/Address';
-import GovPilotAddressComponent from './gpaddress/Address';
+import GovPilotAddressComponent from './gpaddress/GovPilotAddress';
 import ButtonComponent from './button/Button';
 import PayButtonComponent from './gppaybutton/PayButton';
 import CheckBoxComponent from './checkbox/Checkbox';

@@ -2,7 +2,7 @@ export default {
   'input': true,
   'tableView': true,
   'label': 'address',
-  'key': 'address',
+  'key': 'gpaddress',
   'placeholder': '',
   'multiple': false,
   'protected': false,
@@ -15,7 +15,7 @@ export default {
     'custom': '',
     'required': false,
   },
-  'type': 'address',
+  'type': 'gpaddress',
   'tags': [
 
   ],

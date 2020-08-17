@@ -47,6 +47,9 @@ export default [
     tooltip: 'The field which contains the amount to pay when the button is clicked.',
     dataSrc: 'custom',
     valueProperty: 'value',
+    validate: {
+      required: true
+    },
     data: {
       custom(context) {
         var values = [];

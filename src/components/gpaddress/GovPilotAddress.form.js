@@ -13,12 +13,12 @@ export default function(...extend) {
     {
       key: 'display',
       components: GovPilotAddressEditDisplay,
-    },
+    }/*,
     {
       label: 'Provider',
       key: 'provider',
       weight: 15,
       components: GovPilotAddressEditProvider,
-    },
+    },*/
   ], ...extend);
 }

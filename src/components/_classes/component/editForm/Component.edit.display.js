@@ -3,6 +3,16 @@ export default [
   {
     weight: 0,
     type: 'textfield',
+    input: false,
+    disabled: true,
+    key: 'key',
+    label: 'Key',
+    placeholder: 'Field Key',
+    tooltip: 'The key for this field that is used in logic.'
+  },
+  {
+    weight: 1,
+    type: 'textfield',
     input: true,
     key: 'label',
     label: 'Label',

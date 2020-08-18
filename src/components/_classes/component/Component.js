@@ -2207,7 +2207,8 @@ export default class Component extends Element {
       Array.isArray(this.defaultValue) &&
       this.refs.hasOwnProperty('input') &&
       this.refs.input &&
-      (this.refs.input.length !== value.length)
+      (this.refs.input.length !== value.length) &&
+      this.visible
     ) {
       this.redraw();
     }
@@ -2635,6 +2636,9 @@ export default class Component extends Element {
       isDirty = true;
     }
 
+    if (this.component.validateOn === 'blur' && flags.fromSubmission) {
+      return true;
+    }
     return this.checkComponentValidity(data, isDirty, row);
   }
 

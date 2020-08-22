@@ -91,7 +91,7 @@ export default [
     input: true,
     key: 'datePicker.disable',
     label: 'Disable specific dates or dates by range',
-    placeholder: '(yyyy-MM-dd) or (yyyy-MM-dd - yyyy-MM-dd)',
+    placeholder: '(MM/dd/yyyy) or (yyyy-MM-dd - yyyy-MM-dd)',
     tooltip: 'Add dates that you want to blacklist. For example: \n \n 2025-02-21',
     weight: 21
   },

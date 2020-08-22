@@ -9,7 +9,7 @@ export default class DateTimeComponent extends Input {
       type: 'datetime',
       label: 'Date / Time',
       key: 'dateTime',
-      format: 'yyyy-MM-dd hh:mm a',
+      format: 'MM/dd/yyyy hh:mm:ss a',
       useLocaleSettings: false,
       allowInput: true,
       enableDate: true,
@@ -60,16 +60,16 @@ export default class DateTimeComponent extends Input {
 
     // Change the format to map to the settings.
     if (!this.component.enableDate) {
-      this.component.format = this.component.format.replace(/yyyy-MM-dd /g, '');
+      this.component.format = this.component.format.replace(/MM\/dd\/yyyy /g, '');
     }
     if (!this.component.enableTime) {
-      this.component.format = this.component.format.replace(/ hh:mm a$/g, '');
+      this.component.format = this.component.format.replace(/ hh:mm:ss a$/g, '');
     }
     else if (time24hr) {
-      this.component.format = this.component.format.replace(/hh:mm a$/g, 'HH:mm');
+      this.component.format = this.component.format.replace(/hh:mm:ss a$/g, 'HH:mm');
     }
     else {
-      this.component.format = this.component.format.replace(/HH:mm$/g, 'hh:mm a');
+      this.component.format = this.component.format.replace(/HH:mm:ss$/g, 'hh:mm:ss a');
     }
 
     let customOptions = this.component.customOptions || {};
@@ -123,7 +123,7 @@ export default class DateTimeComponent extends Input {
   }
 
   get widget() {
-    const widget = this.component.widget ? new Widgets[this.component.widget.type](this.component.widget, this.component): null;
+    const widget = this.component.widget ? new Widgets[this.component.widget.type](this.component.widget, this.component) : null;
     return widget;
   }
 

@@ -91,7 +91,7 @@ export default class TextAreaComponent extends TextFieldComponent {
    * @param newValue
    */
   updateEditorValue(index, newValue) {
-    newValue = this.getConvertedValue(this.removeBlanks(newValue));
+    newValue = this.getConvertedValue(this.trimBlanks(newValue));
     const dataValue = this.dataValue;
     if (this.component.multiple && Array.isArray(dataValue)) {
       const newArray = _.clone(dataValue);
@@ -166,7 +166,7 @@ export default class TextAreaComponent extends TextFieldComponent {
               };
             }
             quill.root.spellcheck = this.component.spellcheck;
-            if (this.options.readOnly || this.component.disabled) {
+            if (this.options.readOnly || this.disabled) {
               quill.disable();
             }
 
@@ -183,8 +183,16 @@ export default class TextAreaComponent extends TextFieldComponent {
           this.addCKE(element, settings, (newValue) => this.updateEditorValue(index, newValue))
             .then((editor) => {
               this.editors[index] = editor;
-              if (this.options.readOnly || this.component.disabled) {
-                editor.isReadOnly = true;
+              let dataValue = this.dataValue;
+              dataValue = (this.component.multiple && Array.isArray(dataValue)) ? dataValue[index] : dataValue;
+              const value = this.setConvertedValue(dataValue, index);
+              const isReadOnly = this.options.readOnly || this.disabled;
+
+              if (getIEBrowserVersion()) {
+                editor.on('instanceReady', () => {
+                  editor.setReadOnly(isReadOnly);
+                  editor.setData(value);
+                });
               }
               const numRows = parseInt(this.component.rows, 10);
               if (_.isFinite(numRows) && _.has(editor, 'ui.view.editable.editableElement')) {
@@ -192,7 +200,7 @@ export default class TextAreaComponent extends TextFieldComponent {
                 const editorHeight = (numRows * 31) + 14;
                 editor.ui.view.editable.editableElement.style.height = `${(editorHeight)}px`;
               }
-              let dataValue = this.dataValue;
+              dataValue = this.dataValue;
               dataValue = (this.component.multiple && Array.isArray(dataValue)) ? dataValue[index] : dataValue;
               editor.data.set(this.setConvertedValue(dataValue, index));
               editorReady(editor);
@@ -245,21 +253,21 @@ export default class TextAreaComponent extends TextFieldComponent {
         quillInstance.enable(true);
         const Delta = Quill.import('delta');
         quillInstance.updateContents(new Delta()
-            .retain(range.index)
-            .delete(range.length)
-            .insert(
-              {
-                image: result.url
-              },
-              {
-                alt: JSON.stringify(requestData),
-              })
+          .retain(range.index)
+          .delete(range.length)
+          .insert(
+            {
+              image: result.url
+            },
+            {
+              alt: JSON.stringify(requestData),
+            })
           , Quill.sources.USER);
       }).catch(error => {
-      console.warn('Quill image upload failed');
-      console.warn(error);
-      quillInstance.enable(true);
-    });
+        console.warn('Quill image upload failed');
+        console.warn(error);
+        quillInstance.enable(true);
+      });
   }
 
   get isPlain() {
@@ -362,13 +370,13 @@ export default class TextAreaComponent extends TextFieldComponent {
       value = '';
     }
 
-    const htmlDoc = new DOMParser().parseFromString(value,'text/html');
+    const htmlDoc = new DOMParser().parseFromString(value, 'text/html');
     const images = htmlDoc.getElementsByTagName('img');
     if (images.length) {
       return this.setImagesUrl(images)
-        .then( () => {
+        .then(() => {
           value = htmlDoc.getElementsByTagName('body')[0].innerHTML;
-          return new XMLSerializer().serializeToString(value);
+          return value;
         });
     }
     else {
@@ -472,24 +480,26 @@ export default class TextAreaComponent extends TextFieldComponent {
     update();
   }
 
-  removeBlanks(value) {
+  trimBlanks(value) {
     if (!value) {
       return value;
     }
-    const removeBlanks = function(input) {
-      if (typeof input !== 'string') {
-        return input;
-      }
-      return input.replace(/<p>&nbsp;<\/p>|<p><br><\/p>|<p><br>&nbsp;<\/p>/g, '').trim();
+
+    const trimBlanks = (value) => {
+      const nbsp = '<p>&nbsp;</p>';
+      const br = '<p><br></p>';
+      const brNbsp = '<p><br>&nbsp;</p>';
+      const regExp = new RegExp(`^${nbsp}|${nbsp}$|^${br}|${br}$|^${brNbsp}|${brNbsp}$`, 'g');
+      return typeof value === 'string' ? value.replace(regExp, '').trim() : value;
     };
 
     if (Array.isArray(value)) {
       value.forEach((input, index) => {
-        value[index] = removeBlanks(input);
+        value[index] = trimBlanks(input);
       });
     }
     else {
-      value = removeBlanks(value);
+      value = trimBlanks(value);
     }
     return value;
   }
@@ -501,11 +511,11 @@ export default class TextAreaComponent extends TextFieldComponent {
   }
 
   hasChanged(newValue, oldValue) {
-    return super.hasChanged(this.removeBlanks(newValue), this.removeBlanks(oldValue));
+    return super.hasChanged(this.trimBlanks(newValue), this.trimBlanks(oldValue));
   }
 
   isEmpty(value = this.dataValue) {
-    return super.isEmpty(this.removeBlanks(value));
+    return super.isEmpty(this.trimBlanks(value));
   }
 
   get defaultValue() {

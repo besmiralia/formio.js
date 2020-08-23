@@ -79,6 +79,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-File">File</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-form">components/form</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/form/Form.js~FormComponent.html">FormComponent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Form">Form</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gpaddress">components/gpaddress</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-GovPilotAddress">GovPilotAddress</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gplabel">components/gplabel</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/gplabel/Label.js~LabelComponent.html">LabelComponent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Label">Label</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gppaybutton">components/gppaybutton</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/gppaybutton/PayButton.js~PayButtonComponent.html">PayButtonComponent</a></span></span></li>
@@ -238,8 +239,7 @@
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils-jsonlogic">utils/jsonlogic</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-lodashOperators">lodashOperators</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#validator">validator</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator/Rules.js~Rules.html">Rules</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator/Validator.js~ValidationChecker.html">ValidationChecker</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#widgets">widgets</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/widgets/CalendarWidget.js~CalendarWidget.html">CalendarWidget</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/widgets/InputWidget.js~InputWidget.html">InputWidget</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#widgets">widgets</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/widgets/InputWidget.js~InputWidget.html">InputWidget</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -983,9 +983,9 @@ export default class Component extends Element {
 
   labelIsHidden() {
     return !this.component.label ||
-      (!this.inDataGrid &amp;&amp; this.component.hideLabel) ||
+      ((!this.inDataGrid &amp;&amp; this.component.hideLabel) ||
       (this.inDataGrid &amp;&amp; !this.component.dataGridLabel) ||
-      this.options.inputsOnly;
+      this.options.inputsOnly) &amp;&amp; !this.builderMode;
   }
 
   get transform() {
@@ -2690,7 +2690,7 @@ export default class Component extends Element {
       return false;
     }
 
-    if (flags.fromSubmission &amp;&amp; this.component.persistent === true) {
+    if (flags.fromSubmission &amp;&amp; allowOverride &amp;&amp; this.component.persistent === true) {
       this.calculatedValue = calculatedValue;
       return false;
     }
@@ -2963,6 +2963,9 @@ export default class Component extends Element {
       if (this.refs.messageContainer) {
         this.empty(this.refs.messageContainer);
       }
+      if (this.refs.modalMessageContainer) {
+        this.empty(this.refs.modalMessageContainer);
+      }
       this.error = null;
       if (inputRefs) {
         this.setErrorClasses(inputRefs, dirty, hasErrors, !!messages.length);
@@ -3213,6 +3216,12 @@ export default class Component extends Element {
     }
     if (this.refs.input &amp;&amp; this.refs.input[0]) {
       this.refs.input[0].focus();
+    }
+    if (this.refs.openModal) {
+      this.refs.openModal.focus();
+    }
+    if (this.parent.refs.openModal) {
+      this.parent.refs.openModal.focus();
     }
   }
 

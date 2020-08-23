@@ -79,6 +79,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-File">File</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-form">components/form</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/form/Form.js~FormComponent.html">FormComponent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Form">Form</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gpaddress">components/gpaddress</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-GovPilotAddress">GovPilotAddress</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gplabel">components/gplabel</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/gplabel/Label.js~LabelComponent.html">LabelComponent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Label">Label</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gppaybutton">components/gppaybutton</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/gppaybutton/PayButton.js~PayButtonComponent.html">PayButtonComponent</a></span></span></li>
@@ -238,8 +239,7 @@
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils-jsonlogic">utils/jsonlogic</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-lodashOperators">lodashOperators</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#validator">validator</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator/Rules.js~Rules.html">Rules</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator/Validator.js~ValidationChecker.html">ValidationChecker</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#widgets">widgets</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/widgets/CalendarWidget.js~CalendarWidget.html">CalendarWidget</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/widgets/InputWidget.js~InputWidget.html">InputWidget</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#widgets">widgets</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/widgets/InputWidget.js~InputWidget.html">InputWidget</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -258,6 +258,7 @@ import NestedDataComponent from &apos;./components/_classes/nesteddata/NestedDat
 import {
   fastCloneDeep,
   currentTimezone,
+  unescapeHTML,
   getStringFromComponentPath,
   searchComponents,
 } from &apos;./utils/utils&apos;;
@@ -1349,8 +1350,9 @@ export default class Webform extends NestedDataComponent {
           const key = e.currentTarget.dataset.componentKey;
           this.focusOnComponent(key);
         });
-        this.addEventListener(el, &apos;keypress&apos;, (e) =&gt; {
+        this.addEventListener(el, &apos;keydown&apos;, (e) =&gt; {
           if (e.keyCode === 13) {
+            e.preventDefault();
             const key = e.currentTarget.dataset.componentKey;
             this.focusOnComponent(key);
           }
@@ -1437,7 +1439,10 @@ export default class Webform extends NestedDataComponent {
             &apos;aria-label&apos;: `${message}. Click to navigate to the field with following error.`
           };
           const li = this.ce(&apos;li&apos;, params);
-          this.setContent(li, message);
+          const p = this.ce(&apos;p&apos;);
+
+          this.setContent(p, unescapeHTML(message));
+          this.appendTo(p, li);
 
           const messageFromIndex = !_.isUndefined(index) &amp;&amp; err.messages &amp;&amp; err.messages[index];
           const keyOrPath = (messageFromIndex &amp;&amp; messageFromIndex.path) || (err.component &amp;&amp; err.component.key);

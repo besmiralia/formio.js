@@ -79,6 +79,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-File">File</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-form">components/form</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/form/Form.js~FormComponent.html">FormComponent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Form">Form</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gpaddress">components/gpaddress</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-GovPilotAddress">GovPilotAddress</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gplabel">components/gplabel</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/gplabel/Label.js~LabelComponent.html">LabelComponent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Label">Label</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gppaybutton">components/gppaybutton</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/gppaybutton/PayButton.js~PayButtonComponent.html">PayButtonComponent</a></span></span></li>
@@ -238,8 +239,7 @@
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils-jsonlogic">utils/jsonlogic</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-lodashOperators">lodashOperators</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#validator">validator</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator/Rules.js~Rules.html">Rules</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator/Validator.js~ValidationChecker.html">ValidationChecker</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#widgets">widgets</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/widgets/CalendarWidget.js~CalendarWidget.html">CalendarWidget</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/widgets/InputWidget.js~InputWidget.html">InputWidget</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#widgets">widgets</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/widgets/InputWidget.js~InputWidget.html">InputWidget</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -249,6 +249,16 @@
 export default [
   {
     weight: 0,
+    type: &apos;textfield&apos;,
+    input: false,
+    disabled: true,
+    key: &apos;key&apos;,
+    label: &apos;Key&apos;,
+    placeholder: &apos;Field Key&apos;,
+    tooltip: &apos;The key for this field that is used in logic.&apos;
+  },
+  {
+    weight: 1,
     type: &apos;textfield&apos;,
     input: true,
     key: &apos;label&apos;,
@@ -392,7 +402,7 @@ export default [
     weight: 1200,
     type: &apos;checkbox&apos;,
     label: &apos;Hide Label&apos;,
-    tooltip: &apos;Hide the label of this component. This allows you to show the label in the form builder, but not when it is rendered.&apos;,
+    tooltip: &apos;Hide the label (title, if no label) of this component. This allows you to show the label in the form builder, but not when it is rendered.&apos;,
     key: &apos;hideLabel&apos;,
     input: true
   },

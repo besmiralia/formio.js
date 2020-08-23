@@ -2,7 +2,7 @@
 import TextFieldComponent from '../textfield/TextField';
 import _ from 'lodash';
 import NativePromise from 'native-promise-only';
-import { uniqueName } from '../../utils/utils';
+import { uniqueName, getIEBrowserVersion } from '../../utils/utils';
 
 export default class TextAreaComponent extends TextFieldComponent {
   static schema(...extend) {
@@ -194,15 +194,18 @@ export default class TextAreaComponent extends TextFieldComponent {
                   editor.setData(value);
                 });
               }
-              const numRows = parseInt(this.component.rows, 10);
-              if (_.isFinite(numRows) && _.has(editor, 'ui.view.editable.editableElement')) {
-                // Default height is 21px with 10px margin + a 14px top margin.
-                const editorHeight = (numRows * 31) + 14;
-                editor.ui.view.editable.editableElement.style.height = `${(editorHeight)}px`;
+              else {
+                const numRows = parseInt(this.component.rows, 10);
+
+                if (_.isFinite(numRows) && _.has(editor, 'ui.view.editable.editableElement')) {
+                  // Default height is 21px with 10px margin + a 14px top margin.
+                  const editorHeight = (numRows * 31) + 14;
+                  editor.ui.view.editable.editableElement.style.height = `${(editorHeight)}px`;
+                }
+                editor.isReadOnly = isReadOnly;
+                editor.data.set(value);
               }
-              dataValue = this.dataValue;
-              dataValue = (this.component.multiple && Array.isArray(dataValue)) ? dataValue[index] : dataValue;
-              editor.data.set(this.setConvertedValue(dataValue, index));
+
               editorReady(editor);
               return editor;
             });

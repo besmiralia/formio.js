@@ -79,6 +79,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-File">File</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-form">components/form</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/form/Form.js~FormComponent.html">FormComponent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Form">Form</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gpaddress">components/gpaddress</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-GovPilotAddress">GovPilotAddress</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gplabel">components/gplabel</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/gplabel/Label.js~LabelComponent.html">LabelComponent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Label">Label</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gppaybutton">components/gppaybutton</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/gppaybutton/PayButton.js~PayButtonComponent.html">PayButtonComponent</a></span></span></li>
@@ -238,8 +239,7 @@
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils-jsonlogic">utils/jsonlogic</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-lodashOperators">lodashOperators</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#validator">validator</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator/Rules.js~Rules.html">Rules</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator/Validator.js~ValidationChecker.html">ValidationChecker</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#widgets">widgets</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/widgets/CalendarWidget.js~CalendarWidget.html">CalendarWidget</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/widgets/InputWidget.js~InputWidget.html">InputWidget</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#widgets">widgets</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/widgets/InputWidget.js~InputWidget.html">InputWidget</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -256,7 +256,7 @@ export default class DateTimeComponent extends Input {
       type: &apos;datetime&apos;,
       label: &apos;Date / Time&apos;,
       key: &apos;dateTime&apos;,
-      format: &apos;yyyy-MM-dd hh:mm a&apos;,
+      format: &apos;MM/dd/yyyy hh:mm:ss a&apos;,
       useLocaleSettings: false,
       allowInput: true,
       enableDate: true,
@@ -307,16 +307,16 @@ export default class DateTimeComponent extends Input {
 
     // Change the format to map to the settings.
     if (!this.component.enableDate) {
-      this.component.format = this.component.format.replace(/yyyy-MM-dd /g, &apos;&apos;);
+      this.component.format = this.component.format.replace(/MM\/dd\/yyyy /g, &apos;&apos;);
     }
     if (!this.component.enableTime) {
-      this.component.format = this.component.format.replace(/ hh:mm a$/g, &apos;&apos;);
+      this.component.format = this.component.format.replace(/ hh:mm:ss a$/g, &apos;&apos;);
     }
     else if (time24hr) {
-      this.component.format = this.component.format.replace(/hh:mm a$/g, &apos;HH:mm&apos;);
+      this.component.format = this.component.format.replace(/hh:mm:ss a$/g, &apos;HH:mm&apos;);
     }
     else {
-      this.component.format = this.component.format.replace(/HH:mm$/g, &apos;hh:mm a&apos;);
+      this.component.format = this.component.format.replace(/HH:mm:ss$/g, &apos;hh:mm:ss a&apos;);
     }
 
     let customOptions = this.component.customOptions || {};
@@ -370,7 +370,7 @@ export default class DateTimeComponent extends Input {
   }
 
   get widget() {
-    const widget = this.component.widget ? new Widgets[this.component.widget.type](this.component.widget, this.component): null;
+    const widget = this.component.widget ? new Widgets[this.component.widget.type](this.component.widget, this.component) : null;
     return widget;
   }
 

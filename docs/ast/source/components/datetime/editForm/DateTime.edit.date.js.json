@@ -5884,10 +5884,10 @@
                       }
                     },
                     "extra": {
-                      "rawValue": "(yyyy-MM-dd) or (yyyy-MM-dd - yyyy-MM-dd)",
-                      "raw": "'(yyyy-MM-dd) or (yyyy-MM-dd - yyyy-MM-dd)'"
+                      "rawValue": "(MM/dd/yyyy) or (yyyy-MM-dd - yyyy-MM-dd)",
+                      "raw": "'(MM/dd/yyyy) or (yyyy-MM-dd - yyyy-MM-dd)'"
                     },
-                    "value": "(yyyy-MM-dd) or (yyyy-MM-dd - yyyy-MM-dd)"
+                    "value": "(MM/dd/yyyy) or (yyyy-MM-dd - yyyy-MM-dd)"
                   }
                 },
                 {
@@ -19087,7 +19087,7 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "(yyyy-MM-dd) or (yyyy-MM-dd - yyyy-MM-dd)",
+      "value": "(MM/dd/yyyy) or (yyyy-MM-dd - yyyy-MM-dd)",
       "start": 2959,
       "end": 3002,
       "loc": {

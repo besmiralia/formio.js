@@ -2443,7 +2443,7 @@ export default class Component extends Element {
       return false;
     }
 
-    if (flags.fromSubmission && this.component.persistent === true) {
+    if (flags.fromSubmission && allowOverride && this.component.persistent === true) {
       this.calculatedValue = calculatedValue;
       return false;
     }
@@ -2716,6 +2716,9 @@ export default class Component extends Element {
       if (this.refs.messageContainer) {
         this.empty(this.refs.messageContainer);
       }
+      if (this.refs.modalMessageContainer) {
+        this.empty(this.refs.modalMessageContainer);
+      }
       this.error = null;
       if (inputRefs) {
         this.setErrorClasses(inputRefs, dirty, hasErrors, !!messages.length);
@@ -2966,6 +2969,12 @@ export default class Component extends Element {
     }
     if (this.refs.input && this.refs.input[0]) {
       this.refs.input[0].focus();
+    }
+    if (this.refs.openModal) {
+      this.refs.openModal.focus();
+    }
+    if (this.parent.refs.openModal) {
+      this.parent.refs.openModal.focus();
     }
   }
 

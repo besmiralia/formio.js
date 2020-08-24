@@ -1,4 +1,4 @@
-/* globals Quill, ClassicEditor */
+/* globals Quill, ClassicEditor, CKEDITOR */
 import { conformToMask } from 'vanilla-text-mask';
 import NativePromise from 'native-promise-only';
 import Tooltip from 'tooltip.js';
@@ -11,8 +11,14 @@ import Templates from '../../../templates/Templates';
 import { fastCloneDeep, boolValue } from '../../../utils/utils';
 import Element from '../../../Element';
 import ComponentModal from '../componentModal/ComponentModal';
-const CKEDITOR = 'https://cdn.form.io/ckeditor/19.0.0/ckeditor.js';
-const QUILL_URL = 'https://cdn.quilljs.com/2.0.0-dev.3';
+
+const isIEBrowser = FormioUtils.getIEBrowserVersion();
+const CKEDITOR_URL = isIEBrowser
+  ? 'https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js'
+  : 'https://cdn.form.io/ckeditor/19.0.0/ckeditor.js';
+const QUILL_URL = isIEBrowser
+  ? 'https://cdn.quilljs.com/1.3.7'
+  : 'https://cdn.quilljs.com/2.0.0-dev.3';
 const QUILL_TABLE_URL = 'https://cdn.form.io/quill/quill-table.js';
 const ACE_URL = 'https://cdn.form.io/ace/1.4.10/ace.js';
 
@@ -27,11 +33,6 @@ export default class Component extends Element {
        * Determines if this component provides an input.
        */
       input: true,
-      /**
-       * GovPilot ID
-       */
-
-      gpid: '',
 
       /**
        * The data key for this component (how the data is stored in the database).
@@ -521,9 +522,6 @@ export default class Component extends Element {
     return Component.schema();
   }
 
-  get gpid() {
-    return _.get(this.component, 'gpid', '');
-  }
   get key() {
     return _.get(this.component, 'key', '');
   }
@@ -737,8 +735,8 @@ export default class Component extends Element {
   labelIsHidden() {
     return !this.component.label ||
       ((!this.inDataGrid && this.component.hideLabel) ||
-      (this.inDataGrid && !this.component.dataGridLabel) ||
-      this.options.inputsOnly) && !this.builderMode;
+        (this.inDataGrid && !this.component.dataGridLabel) ||
+        this.options.inputsOnly) && !this.builderMode;
   }
 
   get transform() {
@@ -823,7 +821,6 @@ export default class Component extends Element {
     data.t = this.t.bind(this);
     data.transform = this.transform;
     data.id = data.id || this.id;
-    data.gpid = data.gpid || this.gpid;
     data.key = data.key || this.key;
     data.value = data.value || this.dataValue;
     data.disabled = this.disabled;
@@ -1307,7 +1304,7 @@ export default class Component extends Element {
     const handleCloseClick = (e) => {
       if (confirm) {
         confirm().then(() => close(e))
-        .catch(() => {});
+          .catch(() => { });
       }
       else {
         close(e);
@@ -1921,15 +1918,28 @@ export default class Component extends Element {
     settings.base64Upload = true;
     settings.mediaEmbed = { previewsInData: true };
     settings = _.merge(this.wysiwygDefault.ckeditor, _.get(this.options, 'editors.ckeditor.settings', {}), settings);
-    return Formio.requireLibrary('ckeditor', 'ClassicEditor', _.get(this.options, 'editors.ckeditor.src', CKEDITOR), true)
+
+    return Formio.requireLibrary(
+      'ckeditor',
+      isIEBrowser ? 'CKEDITOR' : 'ClassicEditor',
+      _.get(this.options, 'editors.ckeditor.src',
+        CKEDITOR_URL
+      ), true)
       .then(() => {
         if (!element.parentNode) {
           return NativePromise.reject();
         }
-        return ClassicEditor.create(element, settings).then(editor => {
-          editor.model.document.on('change', () => onChange(editor.data.get()));
-          return editor;
-        });
+        if (isIEBrowser) {
+          const editor = CKEDITOR.replace(element);
+          editor.on('change', () => onChange(editor.getData()));
+          return NativePromise.resolve(editor);
+        }
+        else {
+          return ClassicEditor.create(element, settings).then(editor => {
+            editor.model.document.on('change', () => onChange(editor.data.get()));
+            return editor;
+          });
+        }
       });
   }
 
@@ -1955,7 +1965,7 @@ export default class Component extends Element {
             if (!element.parentNode) {
               return NativePromise.reject();
             }
-            this.quill = new Quill(element, settings);
+            this.quill = new Quill(element, isIEBrowser ? { ...settings, modules: {} } : settings);
 
             /** This block of code adds the [source] capabilities.  See https://codepen.io/anon/pen/ZyEjrQ **/
             const txtArea = document.createElement('textarea');
@@ -2462,8 +2472,8 @@ export default class Component extends Element {
     }
     // Set the new value.
     const changed = flags.dataSourceInitialLoading || _.isEqual(this.dataValue, calculatedValue)
-    ? false
-    : this.setValue(calculatedValue, flags);
+      ? false
+      : this.setValue(calculatedValue, flags);
     this.calculatedValue = calculatedValue;
     return changed;
   }

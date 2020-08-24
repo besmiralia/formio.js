@@ -10,6 +10,7 @@ export default class NumberComponent extends Input {
       type: 'number',
       label: 'Number',
       key: 'number',
+      defaultValue: 0,
       validate: {
         min: '',
         max: '',
@@ -181,7 +182,7 @@ export default class NumberComponent extends Input {
   getMaskedValue(value) {
     value = value === null ? '0' : value.toString();
 
-    if (value.includes('.') && '.'!== this.decimalSeparator) {
+    if (value.includes('.') && '.' !== this.decimalSeparator) {
       value = value.replace('.', this.decimalSeparator);
     }
 

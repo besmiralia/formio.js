@@ -414,10 +414,10 @@ export function uniqueName(name, template, evalContext) {
 
 export function guid() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-    const r = Math.random()*16|0;
+    const r = Math.random() * 16 | 0;
     const v = c === 'x'
       ? r
-      : (r&0x3|0x8);
+      : (r & 0x3 | 0x8);
     return v.toString(16);
   });
 }
@@ -669,7 +669,7 @@ export function getLocaleDateFormatInfo(locale) {
  */
 export function convertFormatToFlatpickr(format) {
   return format
-  // Remove the Z timezone offset, not supported by flatpickr.
+    // Remove the Z timezone offset, not supported by flatpickr.
     .replace(/Z/g, '')
 
     // Year conversion.
@@ -706,7 +706,7 @@ export function convertFormatToFlatpickr(format) {
  */
 export function convertFormatToMoment(format) {
   return format
-  // Year conversion.
+    // Year conversion.
     .replace(/y/g, 'Y')
     // Day in month.
     .replace(/d/g, 'D')
@@ -720,7 +720,7 @@ export function convertFormatToMoment(format) {
 
 export function convertFormatToMask(format) {
   return format
-  // Long month replacement.
+    // Long month replacement.
     .replace(/M{4}/g, 'MM')
     // Initial short month conversion.
     .replace(/M{3}/g, '***')
@@ -825,11 +825,11 @@ export function getNumberDecimalLimit(component, defaultLimit) {
 }
 
 export function getCurrencyAffixes({
-   currency = 'USD',
-   decimalLimit,
-   decimalSeparator,
-   lang,
- }) {
+  currency = 'USD',
+  decimalLimit,
+  decimalSeparator,
+  lang,
+}) {
   // Get the prefix and suffix from the localized string.
   let regex = '(.*)?100';
   if (decimalLimit) {
@@ -1170,4 +1170,17 @@ export function round(number, precision) {
     return number.toFixed(precision);
   }
   return number;
+}
+
+/**
+ * Check for Internet Explorer browser version
+ *
+ * @return {(number|null)}
+ */
+export function getIEBrowserVersion() {
+  if (typeof document === 'undefined' || !('documentMode' in document)) {
+    return null;
+  }
+
+  return document['documentMode'];
 }

@@ -25,7 +25,7 @@ export default class Form extends Element {
   constructor(...args) {
     let options = args[0] instanceof HTMLElement ? args[2] : args[1];
     if (Formio.options && Formio.options.form) {
-      options = Object.assign(options, Formio.options.form);
+      options = Object.assign(options || {}, Formio.options.form);
     }
     super(options);
     this.ready = new NativePromise((resolve, reject) => {
@@ -122,7 +122,7 @@ export default class Form extends Element {
         })
         .then((submission) => {
           return formio.loadForm()
-          // If the form returned an error, show it instead of the form.
+            // If the form returned an error, show it instead of the form.
             .catch(err => {
               error = err;
             })

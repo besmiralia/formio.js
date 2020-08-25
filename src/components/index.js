@@ -13,6 +13,7 @@ import DataMapComponent from './datamap/DataMap';
 import DateTimeComponent from './datetime/DateTime';
 import DayComponent from './day/Day';
 import EditGridComponent from './editgrid/EditGrid';
+import GovPilotGridComponent from './gpgrid/GovPilotGrid';
 import EmailComponent from './email/Email';
 import FieldsetComponent from './fieldset/Fieldset';
 import FileComponent from './file/File';
@@ -66,6 +67,7 @@ export default {
   datetime: DateTimeComponent,
   day: DayComponent,
   editgrid: EditGridComponent,
+  gpgrid: GovPilotGridComponent,
   email: EmailComponent,
   input: Input,
   field: Field,

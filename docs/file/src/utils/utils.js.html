@@ -80,6 +80,8 @@
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-form">components/form</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/form/Form.js~FormComponent.html">FormComponent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Form">Form</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gpaddress">components/gpaddress</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-GovPilotAddress">GovPilotAddress</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gpgrid">components/gpgrid</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/gpgrid/GovPilotGrid.js~GovPilotGridComponent.html">GovPilotGridComponent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-GovPilotGrid">GovPilotGrid</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gplabel">components/gplabel</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/gplabel/Label.js~LabelComponent.html">LabelComponent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Label">Label</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gppaybutton">components/gppaybutton</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/gppaybutton/PayButton.js~PayButtonComponent.html">PayButtonComponent</a></span></span></li>
@@ -204,6 +206,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getCurrencyAffixes">getCurrencyAffixes</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getDateSetting">getDateSetting</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getElementRect">getElementRect</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getIEBrowserVersion">getIEBrowserVersion</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getInputMask">getInputMask</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLocaleDateFormatInfo">getLocaleDateFormatInfo</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getNumberDecimalLimit">getNumberDecimalLimit</a></span></span></li>
@@ -661,10 +664,10 @@ export function uniqueName(name, template, evalContext) {
 
 export function guid() {
   return &apos;xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx&apos;.replace(/[xy]/g, (c) =&gt; {
-    const r = Math.random()*16|0;
+    const r = Math.random() * 16 | 0;
     const v = c === &apos;x&apos;
       ? r
-      : (r&amp;0x3|0x8);
+      : (r &amp; 0x3 | 0x8);
     return v.toString(16);
   });
 }
@@ -916,7 +919,7 @@ export function getLocaleDateFormatInfo(locale) {
  */
 export function convertFormatToFlatpickr(format) {
   return format
-  // Remove the Z timezone offset, not supported by flatpickr.
+    // Remove the Z timezone offset, not supported by flatpickr.
     .replace(/Z/g, &apos;&apos;)
 
     // Year conversion.
@@ -953,7 +956,7 @@ export function convertFormatToFlatpickr(format) {
  */
 export function convertFormatToMoment(format) {
   return format
-  // Year conversion.
+    // Year conversion.
     .replace(/y/g, &apos;Y&apos;)
     // Day in month.
     .replace(/d/g, &apos;D&apos;)
@@ -967,7 +970,7 @@ export function convertFormatToMoment(format) {
 
 export function convertFormatToMask(format) {
   return format
-  // Long month replacement.
+    // Long month replacement.
     .replace(/M{4}/g, &apos;MM&apos;)
     // Initial short month conversion.
     .replace(/M{3}/g, &apos;***&apos;)
@@ -1072,11 +1075,11 @@ export function getNumberDecimalLimit(component, defaultLimit) {
 }
 
 export function getCurrencyAffixes({
-   currency = &apos;USD&apos;,
-   decimalLimit,
-   decimalSeparator,
-   lang,
- }) {
+  currency = &apos;USD&apos;,
+  decimalLimit,
+  decimalSeparator,
+  lang,
+}) {
   // Get the prefix and suffix from the localized string.
   let regex = &apos;(.*)?100&apos;;
   if (decimalLimit) {
@@ -1417,6 +1420,19 @@ export function round(number, precision) {
     return number.toFixed(precision);
   }
   return number;
+}
+
+/**
+ * Check for Internet Explorer browser version
+ *
+ * @return {(number|null)}
+ */
+export function getIEBrowserVersion() {
+  if (typeof document === &apos;undefined&apos; || !(&apos;documentMode&apos; in document)) {
+    return null;
+  }
+
+  return document[&apos;documentMode&apos;];
 }
 </code></pre>
 

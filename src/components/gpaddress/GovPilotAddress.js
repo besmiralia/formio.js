@@ -120,7 +120,7 @@ export default class GovPilotAddressComponent extends ContainerComponent {
           provider,
           providerOptions,
         } = this.component;
-        if (!providerOptions.params.uid) providerOptions.params.uid = this.root.form.uid;
+        if (!providerOptions.params.uid && this.root && this.root.form && this.root.form.uid) providerOptions.params.uid = this.root.form.uid;
         this.provider = this.initializeProvider(provider, providerOptions);
       }
     }

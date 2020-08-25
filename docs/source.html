@@ -80,6 +80,8 @@
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-form">components/form</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/form/Form.js~FormComponent.html">FormComponent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Form">Form</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gpaddress">components/gpaddress</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-GovPilotAddress">GovPilotAddress</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gpgrid">components/gpgrid</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/gpgrid/GovPilotGrid.js~GovPilotGridComponent.html">GovPilotGridComponent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-GovPilotGrid">GovPilotGrid</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gplabel">components/gplabel</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/gplabel/Label.js~LabelComponent.html">LabelComponent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Label">Label</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-gppaybutton">components/gppaybutton</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/gppaybutton/PayButton.js~PayButtonComponent.html">PayButtonComponent</a></span></span></li>
@@ -204,6 +206,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getCurrencyAffixes">getCurrencyAffixes</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getDateSetting">getDateSetting</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getElementRect">getElementRect</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getIEBrowserVersion">getIEBrowserVersion</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getInputMask">getInputMask</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLocaleDateFormatInfo">getLocaleDateFormatInfo</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getNumberDecimalLimit">getNumberDecimalLimit</a></span></span></li>
@@ -244,7 +247,7 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">302/2140</span></h1>
+<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">303/2151</span></h1>
 
 <table class="files-summary" data-ice="files" data-use-coverage="true">
   <thead>
@@ -412,12 +415,12 @@
       <td style="display: none;" data-ice="updated">2020-06-05 22:10:55 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/components/_classes/component/Component.js.html#errorLines=1007,1011,1016,1059,1072,1097,1116,1137,1142,1175,1179,1192,1222,1239,1246,1270,1280,1365,14,1415,1422,1456,1464,1479,1485,1492,15,1500,1508,1599,16,1644,1670,17,1740,1746,1780,1799,1819,1828,1871,1919,1936,1958,1995,2015,2045,2110,2125,2245,2249,2314,232,2389,24,2408,2548,2584,2590,2645,2649,2654,2667,2671,2678,275,2756,2772,2777,2806,2819,2840,2854,2872,2879,2884,2888,2892,2896,2905,2960,2966,3004,3080,350,352,358,359,387,417,420,453,457,461,466,470,495,499,504,508,512,516,520,524,527,531,539,543,551,592,596,597,600,604,608,613,617,621,625,634,638,642,646,737,744,748,786,801,813,886,890,926,950,961,965,971,978,982">src/components/_classes/component/Component.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/src/components/_classes/component/Component.js.html#errorLines=1004,1008,1013,1056,1069,1094,1113,1134,1139,1172,1176,1189,1219,1236,1243,1267,1277,1362,1412,1419,1453,1461,1476,1482,1489,1497,15,1505,1596,16,1641,1667,1737,1743,1777,1796,1816,1825,1868,19,1916,1946,1968,2005,2025,2055,2120,2135,22,2255,2259,23,2324,233,2399,2418,2558,2594,2600,2655,2659,2664,2677,2681,2688,276,2766,2782,2787,2816,2829,2850,2864,2882,2889,2894,2898,2902,2906,2915,2970,2976,30,3014,3090,351,353,359,360,388,418,421,454,458,462,467,471,496,500,505,509,513,517,521,525,529,537,541,549,590,594,595,598,602,606,611,615,619,623,632,636,640,644,735,742,746,784,799,811,883,887,923,947,958,962,968,975,979">src/components/_classes/component/Component.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/_classes/component/Component.js~Component.html">Component</a></span></td>
       <td class="coverage"><span data-ice="coverage">39 %</span><span data-ice="coverageCount" class="coverage-count">89/227</span></td>
-      <td style="display: none;" data-ice="size">83657 byte</td>
-      <td style="display: none;" data-ice="lines">3089</td>
-      <td style="display: none;" data-ice="updated">2020-08-01 17:47:04 (UTC)</td>
+      <td style="display: none;" data-ice="size">84058 byte</td>
+      <td style="display: none;" data-ice="lines">3099</td>
+      <td style="display: none;" data-ice="updated">2020-08-02 01:44:32 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/src/components/_classes/component/Component.unit.js.html">src/components/_classes/component/Component.unit.js</a></span></td>
@@ -1900,6 +1903,94 @@
       <td style="display: none;" data-ice="updated">2020-08-05 20:36:05 (UTC)</td>
     </tr>
 <tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/gpgrid/GovPilotGrid.form.js.html#errorLines=8">src/components/gpgrid/GovPilotGrid.form.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-GovPilotGrid">GovPilotGrid</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">864 byte</td>
+      <td style="display: none;" data-ice="lines">29</td>
+      <td style="display: none;" data-ice="updated">2020-08-02 22:39:48 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/gpgrid/GovPilotGrid.js.html#errorLines=13,24,37,4,5,59,69,73,75">src/components/gpgrid/GovPilotGrid.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/gpgrid/GovPilotGrid.js~GovPilotGridComponent.html">GovPilotGridComponent</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/9</span></td>
+      <td style="display: none;" data-ice="size">2598 byte</td>
+      <td style="display: none;" data-ice="lines">79</td>
+      <td style="display: none;" data-ice="updated">2020-08-02 22:55:15 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/gpgrid/GovPilotGrid.unit.js.html">src/components/gpgrid/GovPilotGrid.unit.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">23609 byte</td>
+      <td style="display: none;" data-ice="lines">486</td>
+      <td style="display: none;" data-ice="updated">2020-08-02 22:12:50 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/gpgrid/fixtures/comp1.js.html">src/components/gpgrid/fixtures/comp1.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">3489 byte</td>
+      <td style="display: none;" data-ice="lines">126</td>
+      <td style="display: none;" data-ice="updated">2020-08-02 22:09:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/gpgrid/fixtures/comp2.js.html">src/components/gpgrid/fixtures/comp2.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">3262 byte</td>
+      <td style="display: none;" data-ice="lines">112</td>
+      <td style="display: none;" data-ice="updated">2020-08-02 22:09:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/gpgrid/fixtures/comp3.js.html">src/components/gpgrid/fixtures/comp3.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">673 byte</td>
+      <td style="display: none;" data-ice="lines">26</td>
+      <td style="display: none;" data-ice="updated">2020-08-02 22:09:34 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/gpgrid/fixtures/comp4.js.html">src/components/gpgrid/fixtures/comp4.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">458 byte</td>
+      <td style="display: none;" data-ice="lines">23</td>
+      <td style="display: none;" data-ice="updated">2020-08-02 22:09:34 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/gpgrid/fixtures/comp5.js.html">src/components/gpgrid/fixtures/comp5.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">355 byte</td>
+      <td style="display: none;" data-ice="lines">20</td>
+      <td style="display: none;" data-ice="updated">2020-08-02 22:09:34 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/gpgrid/fixtures/comp6.js.html">src/components/gpgrid/fixtures/comp6.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">1227 byte</td>
+      <td style="display: none;" data-ice="lines">56</td>
+      <td style="display: none;" data-ice="updated">2020-08-02 22:09:34 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/gpgrid/fixtures/index.js.html">src/components/gpgrid/fixtures/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">180 byte</td>
+      <td style="display: none;" data-ice="lines">6</td>
+      <td style="display: none;" data-ice="updated">2020-08-02 22:09:34 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/gpgrid/templates/index.js.html">src/components/gpgrid/templates/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">99 byte</td>
+      <td style="display: none;" data-ice="lines">3</td>
+      <td style="display: none;" data-ice="updated">2020-08-02 22:09:34 (UTC)</td>
+    </tr>
+<tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/src/components/gplabel/Label.form.js.html#errorLines=6">src/components/gplabel/Label.form.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-Label">Label</a></span></td>
       <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
@@ -2151,9 +2242,9 @@
       <td data-ice="filePath"><span><a href="file/src/components/index.js.html">src/components/index.js</a></span></td>
       <td data-ice="identifier" class="identifiers">-</td>
       <td class="coverage"><span data-ice="coverage">-</span></td>
-      <td style="display: none;" data-ice="size">4115 byte</td>
-      <td style="display: none;" data-ice="lines">104</td>
-      <td style="display: none;" data-ice="updated">2020-08-06 18:13:51 (UTC)</td>
+      <td style="display: none;" data-ice="size">4209 byte</td>
+      <td style="display: none;" data-ice="lines">106</td>
+      <td style="display: none;" data-ice="updated">2020-08-02 22:40:57 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/src/components/number/Number.form.js.html#errorLines=7">src/components/number/Number.form.js</a></span></td>
@@ -2164,12 +2255,12 @@
       <td style="display: none;" data-ice="updated">2020-06-05 22:10:56 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/components/number/Number.js.html#errorLines=108,120,133,142,146,162,173,181,191,202,22,33,35,39,47,54,62,7,8,84,88,96">src/components/number/Number.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/src/components/number/Number.js.html#errorLines=109,121,134,143,147,163,174,182,192,203,23,34,36,40,48,55,63,7,8,85,89,97">src/components/number/Number.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/number/Number.js~NumberComponent.html">NumberComponent</a></span></td>
       <td class="coverage"><span data-ice="coverage">4 %</span><span data-ice="coverageCount" class="coverage-count">1/23</span></td>
-      <td style="display: none;" data-ice="size">6234 byte</td>
-      <td style="display: none;" data-ice="lines">209</td>
-      <td style="display: none;" data-ice="updated">2020-08-01 17:47:04 (UTC)</td>
+      <td style="display: none;" data-ice="size">6259 byte</td>
+      <td style="display: none;" data-ice="lines">210</td>
+      <td style="display: none;" data-ice="updated">2020-08-02 18:47:10 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/src/components/number/Number.unit.js.html">src/components/number/Number.unit.js</a></span></td>
@@ -3136,9 +3227,9 @@
       <td data-ice="filePath"><span><a href="file/src/components/textarea/TextArea.js.html#errorLines=107,110,222,229,25,276,280,284,320,331,340,344,36,362,38,39,390,40,407,46,486,50,510,516,520,524,532,544,557,59,63,7,8,84">src/components/textarea/TextArea.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/textarea/TextArea.js~TextAreaComponent.html">TextAreaComponent</a></span></td>
       <td class="coverage"><span data-ice="coverage">2 %</span><span data-ice="coverageCount" class="coverage-count">1/35</span></td>
-      <td style="display: none;" data-ice="size">17133 byte</td>
-      <td style="display: none;" data-ice="lines">563</td>
-      <td style="display: none;" data-ice="updated">2020-08-01 18:53:39 (UTC)</td>
+      <td style="display: none;" data-ice="size">17135 byte</td>
+      <td style="display: none;" data-ice="lines">564</td>
+      <td style="display: none;" data-ice="updated">2020-08-01 18:57:36 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/src/components/textarea/TextArea.unit.js.html">src/components/textarea/TextArea.unit.js</a></span></td>
@@ -4650,6 +4741,7 @@
 <span><a href="function/index.html#static-function-getCurrencyAffixes">getCurrencyAffixes</a></span>
 <span><a href="function/index.html#static-function-getDateSetting">getDateSetting</a></span>
 <span><a href="function/index.html#static-function-getElementRect">getElementRect</a></span>
+<span><a href="function/index.html#static-function-getIEBrowserVersion">getIEBrowserVersion</a></span>
 <span><a href="function/index.html#static-function-getInputMask">getInputMask</a></span>
 <span><a href="function/index.html#static-function-getLocaleDateFormatInfo">getLocaleDateFormatInfo</a></span>
 <span><a href="function/index.html#static-function-getNumberDecimalLimit">getNumberDecimalLimit</a></span>
@@ -4678,10 +4770,10 @@
 <span><a href="function/index.html#static-function-uniqueName">uniqueName</a></span>
 <span><a href="function/index.html#static-function-withSwitch">withSwitch</a></span>
 <span><a href="function/index.html#static-function-zonesLoaded">zonesLoaded</a></span></td>
-      <td class="coverage"><span data-ice="coverage">62 %</span><span data-ice="coverageCount" class="coverage-count">34/54</span></td>
-      <td style="display: none;" data-ice="size">30088 byte</td>
-      <td style="display: none;" data-ice="lines">1173</td>
-      <td style="display: none;" data-ice="updated">2020-07-02 20:29:18 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">63 %</span><span data-ice="coverageCount" class="coverage-count">35/55</span></td>
+      <td style="display: none;" data-ice="size">30369 byte</td>
+      <td style="display: none;" data-ice="lines">1186</td>
+      <td style="display: none;" data-ice="updated">2020-08-02 16:39:48 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/src/utils/utils.unit.js.html#errorLines=10,11,6,7,8,9">src/utils/utils.unit.js</a></span></td>

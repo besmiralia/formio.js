@@ -1243,3 +1243,6 @@ div[read-only="true"] {
   }
 }
 
+.table-responsive[ref=component] {
+  overflow-x: visible;
+}

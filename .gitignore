@@ -9,6 +9,6 @@ bower_components
 .idea
 .ruby-version
 .ruby-gemset
+package-lock.json
 dist
 docs
-package-lock.json

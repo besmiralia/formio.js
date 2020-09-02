@@ -1025,7 +1025,7 @@ export default class Formio {
         cookies.erase(tokenName, { path: '/' });
       }
       Formio.tokens[tokenName] = token;
-      return Promise.resolve(null);
+      return NativePromise.resolve(null);
     }
 
     if (Formio.tokens[tokenName] !== token) {

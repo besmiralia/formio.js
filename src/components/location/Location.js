@@ -66,6 +66,8 @@ export default class LocationComponent extends TextFieldComponent {
     }
 
     super.setValue(value, flags);
+
+    if (value) this.emit('locationChanged', value);
   }
 
   get inputInfo() {
@@ -84,7 +86,7 @@ export default class LocationComponent extends TextFieldComponent {
 
   attach(element) {
     const ret = super.attach(element);
-    this.loadRefs(element, { gmapElement: 'multiple' });
+    this.loadRefs(element, { gmapElement: 'single' });
     return ret;
   }
 
@@ -116,12 +118,11 @@ export default class LocationComponent extends TextFieldComponent {
         ]
       };
 
-      if (!this.refs.gmapElement) this.refs.gmapElement = [];
-
-      if (!this.refs.gmapElement[index]) {
+      //if (!this.refs.gmapElement) this.refs.gmapElement = {};
+      if (!this.refs.gmapElement) {
         return;
       }
-      element.map = new google.maps.Map(this.refs.gmapElement[index], options);
+      element.map = new google.maps.Map(this.refs.gmapElement, options);
       this.addMarker(defaultLatlng, 'Marker Location', element);
 
       // let autocompleteOptions = {};
@@ -156,21 +157,41 @@ export default class LocationComponent extends TextFieldComponent {
       //   const latLngStr = `${place.geometry.location.lng()}  ${place.geometry.location.lat()}`;
       //   this.setValue(latLngStr);
       // });
+    });
 
-      this.on('addressSelected', (addressInfo) => {
-        console.log('Address change event picked up in location', addressInfo);
-        if (addressInfo.cent) {
-          const latlngObj = JSON.parse(addressInfo.cent);
-          const latlngLocation = new google.maps.LatLng(latlngObj.Lat, latlngObj.Lon);
-          this.setValue(addressInfo.cent);
+    this.on('addressSelected', (addressInfo) => {
+      console.log('Address change event picked up in location', addressInfo);
+      if (addressInfo.cent) {
+        this.setValue(addressInfo.cent);
 
-          //recenter the marker
+        // const latlngObj = JSON.parse(addressInfo.cent);
+        // const latlngLocation = new google.maps.LatLng(latlngObj.Lat, latlngObj.Lon);
+
+        // //recenter the marker
+        // element.marker.setPosition(latlngLocation);
+
+        // //set map center
+        // if (element.map) {
+        //   element.map.setCenter(latlngLocation);
+        // }
+      }
+    });
+
+    this.on('locationChanged', (lonLat) => {
+      console.log('locationChanged fired', lonLat);
+      if (!lonLat || lonLat === '') return;
+      const latLngArr = lonLat.split(' ');
+      if (latLngArr.length !== 2) return;
+      Formio.libraryReady('googleMaps').then(() => {
+        const latlngLocation = new google.maps.LatLng(latLngArr[1], latLngArr[0]);
+
+        //recenter the marker
+        if (element.marker) {
           element.marker.setPosition(latlngLocation);
-
-          //set map center
-          if (element.map) {
-            element.map.setCenter(latlngLocation);
-          }
+        }
+        //set map center
+        if (element.map) {
+          element.map.setCenter(latlngLocation);
         }
       });
     });

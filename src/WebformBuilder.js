@@ -1268,6 +1268,7 @@ export default class WebformBuilder extends Component {
               this.editForm.everyComponent(component => {
                 if (component.key === 'key' && component.parent.component.key === 'tabs') {
                   component.setValue(_.camelCase(
+                    event.data.key ||
                     event.data.title ||
                     event.data.label ||
                     event.data.placeholder ||

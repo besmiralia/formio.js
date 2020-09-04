@@ -2,7 +2,6 @@ import autocompleter from 'autocompleter';
 import _ from 'lodash';
 
 import Formio from '../../Formio';
-//import { GoogleAddressProvider } from '../../providers/address/GoogleAddressProvider';
 
 import Field from '../_classes/field/Field';
 import NestedComponent from '../_classes/nested/NestedComponent';

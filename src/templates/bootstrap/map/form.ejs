@@ -1,1 +1,6 @@
-<div id="{{ctx.mapId}}" style="min-height: 300px; height: calc(100vh - 600px);" ref="gmapElement"></div>
+<div style="min-height: 300px; height: {{ctx.height}}px;position:relative;" >
+    {% if(ctx.component.disableMarker){ %}
+        <div style="width:100%;position:absolute;top:0;bottom:0;left:0;opacity:.1;z-index:99;"></div>
+    {% } %}
+    <div id="{{ctx.mapId}}" style="height: 100%;width: 100%" ref="gmapElement"></div>
+</div>

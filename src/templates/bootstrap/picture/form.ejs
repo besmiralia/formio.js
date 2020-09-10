@@ -12,7 +12,7 @@
         {% } %}
       </div>
     </li>
-    {% ctx.files.forEach(function(file) { %}
+    {% if(ctx.file && ctx.file.url) { %}
       <li class="list-group-item">
         <div class="row">
           {% if (!ctx.disabled) { %}
@@ -20,17 +20,17 @@
           {% } %}
           <div class="col-md-{% if (ctx.self.hasTypes) { %}7{% } else { %}9{% } %}">
             {% if (ctx.component.uploadOnly) { %}
-              {{file.originalName || file.name}}
+              {{ctx.file.originalName || ctx.file.name}}
             {% } else { %}
-              <a href="{{file.url || '#'}}" target="_blank" ref="fileLink">{{file.originalName || file.name}}</a>
+              <a href="{{ctx.file.url || '#'}}" target="_blank" ref="fileLink">{{ctx.file.originalName || ctx.file.name}}</a>
             {% } %}
           </div>
-          <div class="col-md-2">{{ctx.fileSize(file.size)}}</div>
+          <div class="col-md-2">{{ctx.fileSize(ctx.file.size)}}</div>
           {% if (ctx.self.hasTypes && !ctx.disabled) { %}
             <div class="col-md-2">
               <select class="file-type" ref="fileType">
                 {% ctx.component.fileTypes.map(function(type) { %}
-                  <option class="test" value="{{ type.value }}" {% if (type.label === file.fileType) { %}selected="selected"{% } %}>{{ type.label }}</option>
+                  <option class="test" value="{{ type.value }}" {% if (type.label === ctx.file.fileType) { %}selected="selected"{% } %}>{{ type.label }}</option>
                 {% }); %}
               </select>
             </div>
@@ -40,22 +40,28 @@
           {% } %}
         </div>
       </li>
-    {% }) %}
+    {% } %}
   </ul>
 {% } else { %}
   <div class='picture-list-container'>
-    {% ctx.files.forEach(function(file) { %}
+    {% if (ctx.file && ctx.file.url) { %}
       <div class="picture-container">
-        <img ref="fileImage" src="" alt="{{file.originalName || file.name}}" {% if(ctx.component.imageSize > 0) { %} style="width:{{ctx.component.imageSize}}px" {% } else { %} class="img-fluid img-thumbnail" {% } %} >
+        <img ref="fileImage" src="" alt="{{ctx.file.originalName || ctx.file.name}}" 
+            {% if (ctx.component.imageSize > 0) { %} 
+              style="width:{{ctx.component.imageSize}}px" 
+            {% } else { %} 
+              class="img-fluid img-thumbnail" 
+            {% } %} 
+        >
         {% if (!ctx.disabled) { %}
           <i class="{{ctx.iconClass('remove')}} removeLink" ref="removeLink"></i>
         {% } %}
       </div>
-    {% }) %}
+    {% } %}
   </div>
 {% } %}
 
-{% if (!ctx.disabled && (ctx.component.multiple || !ctx.files.length)) { %}
+{% if (!ctx.disabled && (ctx.component.multiple || !ctx.file || !ctx.file.url)) { %}
   {% if (ctx.self.useWebViewCamera) { %}
     <div class="fileSelector">
       <button class="btn btn-primary" ref="galleryButton"><i class="fa fa-book"></i> {{ctx.t('Gallery')}}</button>
@@ -76,7 +82,9 @@
     <button class="btn btn-primary" ref="takePictureButton"><i class="fa fa-camera"></i> {{ctx.t('Take Picture')}}</button>
     <button class="btn btn-primary" ref="toggleCameraMode">{{ctx.t('Switch to file upload')}}</button>
   {% } %}
+
 {% } %}
+
 {% ctx.statuses.forEach(function(status) { %}
   <div class="file {{ctx.statuses.status === 'error' ? ' has-error' : ''}}">
     <div class="row">
@@ -100,6 +108,7 @@
     </div>
   </div>
 {% }) %}
+
 {% if (!ctx.component.storage || ctx.support.hasWarning) { %}
   <div class="alert alert-warning">
     {% if (!ctx.component.storage) { %}

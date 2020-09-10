@@ -1,6 +1,6 @@
 import Formio from '../../Formio';
 import Field from '../_classes/field/Field';
-import { uniqueName } from '../../utils/utils';
+import { /*getComponent, */uniqueName } from '../../utils/utils';
 import download from 'downloadjs';
 import _ from 'lodash';
 import NativePromise from 'native-promise-only';
@@ -125,7 +125,7 @@ export default class PictureComponent extends Field {
   render() {
     return super.render(this.renderTemplate('picture', {
       fileSize: this.fileSize,
-      files: this.dataValue || [],
+      file: this.dataValue,
       statuses: this.statuses,
       disabled: this.disabled,
       support: this.support,
@@ -274,7 +274,7 @@ export default class PictureComponent extends Field {
 
   deleteFile(fileInfo) {
     if (fileInfo && (this.component.storage === 'govpilot')) {
-      const fileService = this.fileService;
+      const { fileService } = this;
       if (fileService && typeof fileService.deleteFile === 'function') {
         fileService.deleteFile(fileInfo);
       }
@@ -297,11 +297,11 @@ export default class PictureComponent extends Field {
       takePictureButton: 'single',
       toggleCameraMode: 'single',
       videoPlayer: 'single',
-      fileLink: 'multiple',
-      removeLink: 'multiple',
-      fileStatusRemove: 'multiple',
-      fileImage: 'multiple',
-      fileType: 'multiple',
+      fileLink: 'single',
+      removeLink: 'single',
+      fileStatusRemove: 'single',
+      fileImage: 'single',
+      fileType: 'single',
     });
     // Ensure we have an empty input refs. We need this for the setValue method to redraw the control when it is set.
     this.refs.input = [];
@@ -336,31 +336,29 @@ export default class PictureComponent extends Field {
       });
     }
 
-    this.refs.fileLink.forEach((fileLink, index) => {
-      this.addEventListener(fileLink, 'click', (event) => {
+    if (this.refs.fileLink) {
+      this.addEventListener(this.refs.fileLink, 'click', (event) => {
         event.preventDefault();
-        this.getFile(this.dataValue[index]);
+        this.getFile(this.dataValue);
       });
-    });
+    }
 
-    this.refs.removeLink.forEach((removeLink, index) => {
-      this.addEventListener(removeLink, 'click', (event) => {
-        const fileInfo = this.dataValue[index];
-
-        this.deleteFile(fileInfo);
+    if (this.refs.removeLink) {
+      this.addEventListener(this.refs.removeLink, 'click', (event) => {
+        this.deleteFile(this.dataValue);
         event.preventDefault();
-        this.splice(index);
+        this.dataValue = null;
         this.redraw();
       });
-    });
+    }
 
-    this.refs.fileStatusRemove.forEach((fileStatusRemove, index) => {
-      this.addEventListener(fileStatusRemove, 'click', (event) => {
+    if (this.refs.fileStatusRemove) {
+      this.addEventListener(this.refs.fileStatusRemove, 'click', (event) => {
         event.preventDefault();
-        this.statuses.splice(index, 1);
+        this.statuses = [];
         this.redraw();
       });
-    });
+    }
 
     if (this.refs.galleryButton && webViewCamera) {
       this.addEventListener(this.refs.galleryButton, 'click', (event) => {
@@ -429,24 +427,12 @@ export default class PictureComponent extends Field {
       });
     }
 
-    this.refs.fileType.forEach((fileType, index) => {
-      this.dataValue[index].fileType = this.component.fileTypes[0].label;
-
-      this.addEventListener(fileType, 'change', (event) => {
-        event.preventDefault();
-
-        const fileType = this.component.fileTypes.find((typeObj) => typeObj.value === event.target.value);
-
-        this.dataValue[index].fileType = fileType.label;
-      });
-    });
-
     const fileService = this.fileService;
     if (fileService) {
       const loadingImages = [];
-      this.refs.fileImage.forEach((image, index) => {
-        loadingImages.push(this.loadImage(this.dataValue[index]).then((url) => (image.src = url)));
-      });
+      if (this.refs.fileImage) {
+        loadingImages.push(this.loadImage(this.dataValue).then((url) => (this.refs.fileImage.src = url)));
+      }
       if (loadingImages.length) {
         NativePromise.all(loadingImages).then(() => {
           this.filesReadyResolve();
@@ -644,15 +630,17 @@ export default class PictureComponent extends Field {
             this.redraw();
           }, url, options, fileKey, groupPermissions, groupResourceId)
             .then((fileInfo) => {
-              const index = this.statuses.indexOf(fileUpload);
-              if (index !== -1) {
-                this.statuses.splice(index, 1);
-              }
+              this.statuses = [];
               fileInfo.originalName = file.name;
-              if (!this.hasValue()) {
-                this.dataValue = [];
-              }
-              this.dataValue.push(fileInfo);
+              /*if (!this.hasValue()) {
+                this.dataValue = null;
+              }*/
+              /* besmir alia - set the related field value to the filename */
+              //let comp = getComponent(form.components, this.component.pictureField);
+              //if (comp) comp.setValue(fileInfo.originalName);
+              this.root.submission.data[this.component.pictureField] = fileInfo.data.name;
+
+              this.dataValue = fileInfo;
               this.redraw();
               this.triggerChange();
             })

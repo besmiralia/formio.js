@@ -1,4 +1,5 @@
 import { eachComponent } from '../../../utils/utils';
+import Formio from '../../../Formio';
 
 export default [
   {
@@ -160,11 +161,11 @@ export default [
     input: true,
     dataSrc: 'url',
     data: {
-      url: '/lookups?select=_id,title',
+      url: `/lookups/${Formio.getTid()}`,
     },
     authenticate: true,
     template: '<span>{{ item.title }}</span>',
-    valueProperty: '_id',
+    valueProperty: 'tid',
     clearOnHide: false,
     label: 'Resource',
     key: 'data.resource',
@@ -204,9 +205,9 @@ export default [
     onSetItems(component, form) {
       const newItems = form.type === 'resource'
         ? [{
-            label: '{Entire Object}',
-            key: 'data',
-          }]
+          label: '{Entire Object}',
+          key: 'data',
+        }]
         : [];
 
       eachComponent(form.components, (component, path) => {
@@ -444,7 +445,7 @@ export default [
     weight: 18,
     tooltip: 'The HTML template for the result data items.',
     allowCalculateOverride: true,
-    calculateValue:(context) => {
+    calculateValue: (context) => {
       if (!context.data.template) {
         if (context.instance && context.instance._currentForm.options.editComponent) {
           return context.instance._currentForm.options.editComponent.template;

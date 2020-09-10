@@ -1110,6 +1110,13 @@ export default class Formio {
     }
   }
 
+  static getTid() {
+    return Formio.tid;
+  }
+  static setTid(tid) {
+    Formio.tid = tid;
+  }
+
   static getHost() {
     return Formio.host;
   }

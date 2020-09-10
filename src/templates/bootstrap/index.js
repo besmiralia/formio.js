@@ -22,6 +22,7 @@ import editgrid from './editgrid';
 import field from './field';
 import fieldset from './fieldset';
 import file from './file';
+import picture from './picture';
 import html from './html';
 import gplabel from './gplabel';
 import gplabelbuilder from './gplabelbuilder';
@@ -98,6 +99,7 @@ export default {
   field,
   fieldset,
   file,
+  picture,
   html,
   gplabel,
   gplabelbuilder,

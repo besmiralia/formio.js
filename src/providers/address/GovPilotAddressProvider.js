@@ -1,5 +1,6 @@
 import { AddressProvider } from './AddressProvider';
 import NativePromise from 'native-promise-only';
+import Formio from '../../Formio';
 
 export class GovPilotAddressProvider extends AddressProvider {
   static get name() {
@@ -48,6 +49,6 @@ export class GovPilotAddressProvider extends AddressProvider {
   getRequestUrl(options = {}) {
     const { params } = options;
 
-    return `https://map-sandbox.govpilot.com/api/v1/address?${this.serialize(params)}`;
+    return `https://map-${Formio.getHost()}/api/v1/address?${this.serialize(params)}`;
   }
 }

@@ -72,6 +72,7 @@ export default class Formio {
 
     this.tid = '';
     this.uid = '';
+    this.host = 'sandbox.govpilot.com';
 
     // Store the original path and options.
     this.path = path;
@@ -1107,6 +1108,13 @@ export default class Formio {
     catch (e) {
       return JSON.parse(cookies.get(userName));
     }
+  }
+
+  static getHost() {
+    return Formio.host;
+  }
+  static setHost(host) {
+    Formio.host = host;
   }
 
   static getAccount() {

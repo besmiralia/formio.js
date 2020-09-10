@@ -290,30 +290,45 @@ td > .form-group {
 }
 /* end fix for choices.js deletable items in rtl */
 
-.formio-component-file .fileSelector {
-  padding: 15px;
-  border: 2px dashed #ddd;
-  text-align: center;
-}
+.formio-component-file, .formio-component-picture{
 
-.formio-component-file .fileSelector.fileDragOver {
-  border-color: #127abe;
-}
+  .fileSelector {
+    padding: 15px;
+    border: 2px dashed #ddd;
+    text-align: center;
+  }
 
-.formio-component-file .fileSelector .glyphicon, .formio-component-file .fileSelector .fa {
-  font-size: 20px;
-  margin-right: 5px;
-}
+  .fileSelector.fileDragOver {
+    border-color: #127abe;
+  }
 
-[dir="rtl"] .formio-component-file .fileSelector .fa, [dir="rtl"] .formio-component-file .fileSelector .glyphicon {
-  margin-right: unset;
-  margin-left: 5px;
+  .fileSelector .glyphicon, .fileSelector .fa {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+  /*
+  [dir="rtl"] .formio-component-file .fileSelector .fa, [dir="rtl"] .formio-component-file .fileSelector .glyphicon {
+    margin-right: unset;
+    margin-left: 5px;
+  }
+  */
+  .fileSelector .browse {
+    cursor: pointer;
+  }
+  i.removeLink{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: white;
+    opacity: .8;
+    border-radius: 2px;
+    font-size: 20px;
+    padding: 3px 5px;
+  }
+  .picture-list-container {
+    position: relative;
+  }
 }
-
-.formio-component-file .fileSelector .browse {
-  cursor: pointer;
-}
-
 @-webkit-keyframes formio-dialog-fadeout {
   0% {
     opacity: 1;

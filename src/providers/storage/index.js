@@ -4,6 +4,7 @@ import s3 from './s3';
 import azure from './azure';
 import url from './url';
 import indexeddb from './indexeddb';
+import govpilot from './govpilot';
 
 export default {
   base64,
@@ -12,4 +13,5 @@ export default {
   url,
   azure,
   indexeddb,
+  govpilot
 };

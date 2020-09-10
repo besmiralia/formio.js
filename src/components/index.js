@@ -17,6 +17,7 @@ import GovPilotGridComponent from './gpgrid/GovPilotGrid';
 import EmailComponent from './email/Email';
 import FieldsetComponent from './fieldset/Fieldset';
 import FileComponent from './file/File';
+import PictureComponent from './picture/Picture';
 import FormComponent from './form/Form';
 import HiddenComponent from './hidden/Hidden';
 import Input from './_classes/input/Input';
@@ -75,6 +76,7 @@ export default {
   multivalue: Multivalue,
   fieldset: FieldsetComponent,
   file: FileComponent,
+  picture: PictureComponent,
   form: FormComponent,
   hidden: HiddenComponent,
   htmlelement: HTMLComponent,

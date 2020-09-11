@@ -1,9 +1,8 @@
-//import _ from 'lodash';
 export default [
   {
     key: 'placeholder',
     ignore: true
-  },
+  }/*,
   {
     type: 'select',
     label: 'Picture Field',
@@ -32,5 +31,5 @@ export default [
         return values;
       }
     },
-  },
+  },*/
 ];

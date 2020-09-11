@@ -93,8 +93,9 @@ const govpilot = (formio) => {
           response.data.project = form ? form.project : '';
           response.data.form = form ? form._id : '';
           return {
-            storage: 'url',
-            name,
+            storage: 'govpilot',
+            originalName: name,
+            name: response.name,
             url: response.url,
             size: file.size,
             type: file.type,

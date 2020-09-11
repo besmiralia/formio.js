@@ -109,6 +109,16 @@ export default class PictureComponent extends Field {
   getValue() {
     return this.dataValue;
   }
+  setValue(value, flags) {
+    if (flags && flags.fromSubmission && value) {
+      this.dataValue = {
+        name: value,
+        storage: 'govpilot',
+        url: `https://${Formio.getHost()}/uuploads/${Formio.getAccount()}/${value}`
+      };
+    }
+    super.setValue(value);
+  }
 
   get defaultValue() {
     const value = super.defaultValue;
@@ -631,14 +641,14 @@ export default class PictureComponent extends Field {
           }, url, options, fileKey, groupPermissions, groupResourceId)
             .then((fileInfo) => {
               this.statuses = [];
-              fileInfo.originalName = file.name;
+              //fileInfo.originalName = file.name;
               /*if (!this.hasValue()) {
                 this.dataValue = null;
               }*/
               /* besmir alia - set the related field value to the filename */
               //let comp = getComponent(form.components, this.component.pictureField);
               //if (comp) comp.setValue(fileInfo.originalName);
-              this.root.submission.data[this.component.pictureField] = fileInfo.data.name;
+              //this.root.submission.data[this.component.pictureField] = fileInfo.data.name;
 
               this.dataValue = fileInfo;
               this.redraw();

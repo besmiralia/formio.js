@@ -46,6 +46,7 @@ import pdfBuilder from './pdfBuilder';
 import pdfBuilderUpload from './pdfBuilderUpload';
 import radio from './radio';
 import resourceAdd from './resourceAdd';
+import scheduler from './scheduler';
 import select from './select';
 import selectOption from './selectOption';
 import signature from './signature';
@@ -122,6 +123,7 @@ export default {
   pdfBuilderUpload,
   radio,
   resourceAdd,
+  scheduler,
   select,
   selectOption,
   signature,

@@ -161,7 +161,7 @@ export default [
     input: true,
     dataSrc: 'url',
     data: {
-      url: `/lookups/${Formio.getTid()}`,
+      url: `https://form-${Formio.getHost()}/forms/lookups/${Formio.getTid()}`,
     },
     authenticate: true,
     template: '<span>{{ item.title }}</span>',

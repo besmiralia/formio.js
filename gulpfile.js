@@ -118,17 +118,17 @@ gulp.task('styles-full', gulp.series('builder-fonts', function fullStyles() {
 const webpackDev = require('./config/webpack.dev');
 const webpackProd = require('./config/webpack.prod');
 const buildDev = (input, output) => {
-  let devConfig = _.cloneDeep(webpackDev);
+  const devConfig = _.cloneDeep(webpackDev);
   devConfig.entry = `./lib/${input}`;
   devConfig.output.filename = output;
   return webpackStream(devConfig, webpack).pipe(gulp.dest('dist'));
 };
 const buildProd = (input, output) => {
-  let prodConfig = _.cloneDeep(webpackProd);
+  const prodConfig = _.cloneDeep(webpackProd);
   prodConfig.entry = `./lib/${input}`;
   prodConfig.output.filename = output;
   return webpackStream(prodConfig, webpack).pipe(gulp.dest('dist'));
-}
+};
 const build = (input, output) => {
   const prodFile = output.replace(/\.js$/, '.min.js');
   gulp.task(output, () => buildDev(input, output));

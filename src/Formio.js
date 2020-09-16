@@ -324,8 +324,14 @@ export default class Formio {
     return this.load('form', query, opts)
       .then((currentForm) => {
         //if uid and tid are provided, update them here
-        if (currentForm.tid) this.tid = currentForm.tid;
-        if (currentForm.uid) this.uid = currentForm.uid;
+        if (currentForm.tid) {
+          this.tid = currentForm.tid;
+          Formio.setTid(currentForm.tid);
+        }
+        if (currentForm.uid) {
+          this.uid = currentForm.uid;
+          Formio.setAccount(currentForm.uid);
+        }
 
         // Check to see if there isn't a number in vId.
         if (!currentForm.revisions || isNaN(parseInt(this.vId))) {

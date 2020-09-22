@@ -46,7 +46,7 @@
   <div class='picture-list-container'>
     {% if (ctx.file && ctx.file.url) { %}
       <div class="picture-container">
-        <img ref="fileImage" src="" alt="{{ctx.file.originalName || ctx.file.name}}" 
+        <img ref="fileImage" src="{{ctx.file.url}}" alt="{{ctx.file.originalName || ctx.file.name}}" 
             {% if (ctx.component.imageSize > 0) { %} 
               style="width:{{ctx.component.imageSize}}px" 
             {% } else { %} 

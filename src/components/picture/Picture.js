@@ -42,6 +42,7 @@ export default class PictureComponent extends Field {
       fileMinSize: '0KB',
       fileMaxSize: '25MB',
       storage: 'govpilot',
+      dataImage: {},
       uploadOnly: false,
     }, ...extend);
   }
@@ -95,7 +96,7 @@ export default class PictureComponent extends Field {
   }
 
   get emptyValue() {
-    return [];
+    return '';
   }
 
   getValueAsString(value) {
@@ -107,22 +108,32 @@ export default class PictureComponent extends Field {
   }
 
   getValue() {
-    return this.dataValue;
+    return this.value;
   }
   setValue(value, flags) {
-    if (flags && flags.fromSubmission && value) {
-      this.dataValue = {
-        name: value,
-        storage: 'govpilot',
-        url: `https://${Formio.getHost()}/uuploads/${Formio.getAccount()}/${value}`
-      };
+    if (value) {
+      this.dataValue = value;
+      if (typeof value == 'string') {
+        const url = `https://${Formio.getHost()}/uuploads/${Formio.getAccount()}/${value}`;
+        this.dataImage = {
+          storage: 'govpilot',
+          name: value,
+          originalName: value,
+          url,
+          data: {
+            name: value,
+            url
+          }
+        };
+        this.value = this.dataImage;
+        this.redraw();
+      }
     }
-    super.setValue(value);
   }
 
   get defaultValue() {
     const value = super.defaultValue;
-    return Array.isArray(value) ? value : [];
+    return Array.isArray(value) ? value : '';
   }
 
   get hasTypes() {
@@ -135,7 +146,7 @@ export default class PictureComponent extends Field {
   render() {
     return super.render(this.renderTemplate('picture', {
       fileSize: this.fileSize,
-      file: this.dataValue,
+      file: this.dataImage,
       statuses: this.statuses,
       disabled: this.disabled,
       support: this.support,
@@ -349,15 +360,17 @@ export default class PictureComponent extends Field {
     if (this.refs.fileLink) {
       this.addEventListener(this.refs.fileLink, 'click', (event) => {
         event.preventDefault();
-        this.getFile(this.dataValue);
+        this.getFile(this.value);
       });
     }
 
     if (this.refs.removeLink) {
       this.addEventListener(this.refs.removeLink, 'click', (event) => {
-        this.deleteFile(this.dataValue);
+        this.deleteFile(this.value);
         event.preventDefault();
-        this.dataValue = null;
+        this.value = null;
+        this.dataImage = null;
+        this.dataValue = '';
         this.redraw();
       });
     }
@@ -441,7 +454,7 @@ export default class PictureComponent extends Field {
     if (fileService) {
       const loadingImages = [];
       if (this.refs.fileImage) {
-        loadingImages.push(this.loadImage(this.dataValue).then((url) => (this.refs.fileImage.src = url)));
+        loadingImages.push(this.loadImage(this.value).then((url) => (this.refs.fileImage.src = url)));
       }
       if (loadingImages.length) {
         NativePromise.all(loadingImages).then(() => {
@@ -650,7 +663,9 @@ export default class PictureComponent extends Field {
               //if (comp) comp.setValue(fileInfo.originalName);
               //this.root.submission.data[this.component.pictureField] = fileInfo.data.name;
 
-              this.dataValue = fileInfo;
+              this.value = fileInfo;
+              this.dataImage = fileInfo;
+              this.dataValue = fileInfo.data.name;
               this.redraw();
               this.triggerChange();
             })

@@ -364,16 +364,16 @@ export default class FileComponent extends Field {
         event.preventDefault();
         webViewCamera.getPicture((success) => {
           window.resolveLocalFileSystemURL(success, (fileEntry) => {
-              fileEntry.file((file) => {
-                const reader = new FileReader();
-                reader.onloadend = (evt) => {
-                  const blob = new Blob([new Uint8Array(evt.target.result)], { type: file.type });
-                  blob.name = file.name;
-                  this.upload([blob]);
-                };
-                reader.readAsArrayBuffer(file);
-              });
-            }
+            fileEntry.file((file) => {
+              const reader = new FileReader();
+              reader.onloadend = (evt) => {
+                const blob = new Blob([new Uint8Array(evt.target.result)], { type: file.type });
+                blob.name = file.name;
+                this.upload([blob]);
+              };
+              reader.readAsArrayBuffer(file);
+            });
+          }
           );
         }, (err) => {
           console.error(err);
@@ -388,16 +388,16 @@ export default class FileComponent extends Field {
         event.preventDefault();
         webViewCamera.getPicture((success) => {
           window.resolveLocalFileSystemURL(success, (fileEntry) => {
-              fileEntry.file((file) => {
-                const reader = new FileReader();
-                reader.onloadend = (evt) => {
-                  const blob = new Blob([new Uint8Array(evt.target.result)], { type: file.type });
-                  blob.name = file.name;
-                  this.upload([blob]);
-                };
-                reader.readAsArrayBuffer(file);
-              });
-            }
+            fileEntry.file((file) => {
+              const reader = new FileReader();
+              reader.onloadend = (evt) => {
+                const blob = new Blob([new Uint8Array(evt.target.result)], { type: file.type });
+                blob.name = file.name;
+                this.upload([blob]);
+              };
+              reader.readAsArrayBuffer(file);
+            });
+          }
           );
         }, (err) => {
           console.error(err);
@@ -611,6 +611,7 @@ export default class FileComponent extends Field {
             file.private = true;
           }
           const { storage, options = {} } = this.component;
+          this.component.url = `https://api-${fileService.getHost()}/api/v1/file/upload?uid=${fileService.getAccount()}`;
           const url = this.interpolate(this.component.url);
           let groupKey = null;
           let groupPermissions = null;

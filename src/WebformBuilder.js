@@ -143,6 +143,7 @@ export default class WebformBuilder extends Component {
 
       return this.renderTemplate('builderComponent', {
         html,
+        type: self.type,
         disableBuilderActions: self?.component?.disableBuilderActions,
       });
     };

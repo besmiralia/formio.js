@@ -72,8 +72,8 @@ export default class SchedulerComponent extends Field {
   }
   onRemoveScheduleClick(event) {
     event.preventDefault();
-    this.dataValue = {};
-    this.redraw();
+    this.setValue({});
+    //this.redraw();
   }
 
   attachScheduler() {
@@ -85,14 +85,11 @@ export default class SchedulerComponent extends Field {
       this.addEventListener(this.removeScheduleButton, 'click', this.onRemoveScheduleClick.bind(this));
     }
 
+    this.off('eventScheduled');
     this.on('eventScheduled', (eventInfo) => {
       if (eventInfo) {
-        this.dataValue = eventInfo;
-        this.redraw();
-        /*
-        this.triggerChange({
-          modified: true,
-        });*/
+        this.setValue(eventInfo);
+        //this.triggerChange();
       }
     }, true);
 
@@ -140,12 +137,11 @@ export default class SchedulerComponent extends Field {
     return this.dataValue;
   }
   setValue(value, flags = {}) {
-    //const previousValue = this.dataValue;
-    const changed = this.updateValue(value, flags);
-    //value = this.dataValue;
+    //const changed = this.updateValue(value, flags);
     //this.dataValue = value;
+    super.setValue(value, flags);
     this.redraw();
-    return changed;
+    //return changed;
   }
 
   createWrapper() {

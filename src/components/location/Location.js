@@ -92,6 +92,7 @@ export default class LocationComponent extends TextFieldComponent {
 
   attachElement(element, index) {
     super.attachElement(element, index);
+    /*
     Formio.libraryReady('googleMaps').then(() => {
       const defaultLatlng = new google.maps.LatLng(0, 0);
       const options = {
@@ -124,40 +125,40 @@ export default class LocationComponent extends TextFieldComponent {
       }
       element.map = new google.maps.Map(this.refs.gmapElement, options);
       this.addMarker(defaultLatlng, 'Marker Location', element);
+      */
+    // let autocompleteOptions = {};
+    // if (this.component.map) {
+    //   autocompleteOptions = this.component.map.autocompleteOptions || {};
+    // }
+    // const autocomplete = new google.maps.places.Autocomplete(element, autocompleteOptions);
+    // autocomplete.addListener('place_changed', () => {
+    //   const place = autocomplete.getPlace();
+    //   if (!place.geometry) {
+    //     console.log('Autocomplete\'s returned place contains no geometry');
+    //     return;
+    //   }
 
-      // let autocompleteOptions = {};
-      // if (this.component.map) {
-      //   autocompleteOptions = this.component.map.autocompleteOptions || {};
-      // }
-      // const autocomplete = new google.maps.places.Autocomplete(element, autocompleteOptions);
-      // autocomplete.addListener('place_changed', () => {
-      //   const place = autocomplete.getPlace();
-      //   if (!place.geometry) {
-      //     console.log('Autocomplete\'s returned place contains no geometry');
-      //     return;
-      //   }
-
-      //   // If the place has a geometry, then present it on a map.
-      //   if (place.geometry.viewport) {
-      //     element.map.fitBounds(place.geometry.viewport);
-      //   }
-      //   else {
-      //     element.map.setCenter(place.geometry.location);
-      //     element.map.setZoom(17);  // Why 17? Because it looks good.
-      //   }
-      //   element.marker.setIcon(/** @type {google.maps.Icon} */({
-      //     url: place.icon,
-      //     size: new google.maps.Size(71, 71),
-      //     origin: new google.maps.Point(0, 0),
-      //     anchor: new google.maps.Point(17, 34),
-      //     scaledSize: new google.maps.Size(35, 35)
-      //   }));
-      //   element.marker.setPosition(place.geometry.location);
-      //   //this.setValue(place.name);
-      //   const latLngStr = `${place.geometry.location.lng()}  ${place.geometry.location.lat()}`;
-      //   this.setValue(latLngStr);
-      // });
-    });
+    //   // If the place has a geometry, then present it on a map.
+    //   if (place.geometry.viewport) {
+    //     element.map.fitBounds(place.geometry.viewport);
+    //   }
+    //   else {
+    //     element.map.setCenter(place.geometry.location);
+    //     element.map.setZoom(17);  // Why 17? Because it looks good.
+    //   }
+    //   element.marker.setIcon(/** @type {google.maps.Icon} */({
+    //     url: place.icon,
+    //     size: new google.maps.Size(71, 71),
+    //     origin: new google.maps.Point(0, 0),
+    //     anchor: new google.maps.Point(17, 34),
+    //     scaledSize: new google.maps.Size(35, 35)
+    //   }));
+    //   element.marker.setPosition(place.geometry.location);
+    //   //this.setValue(place.name);
+    //   const latLngStr = `${place.geometry.location.lng()}  ${place.geometry.location.lat()}`;
+    //   this.setValue(latLngStr);
+    // });
+    //});
 
     this.on('addressSelected', (addressInfo) => {
       console.log('Address change event picked up in location', addressInfo);
@@ -185,13 +186,42 @@ export default class LocationComponent extends TextFieldComponent {
       Formio.libraryReady('googleMaps').then(() => {
         const latlngLocation = new google.maps.LatLng(latLngArr[1], latLngArr[0]);
 
-        //recenter the marker
-        if (element.marker) {
-          element.marker.setPosition(latlngLocation);
+        if (!element.map) {
+          const options = {
+            zoom: 19,
+            center: latlngLocation,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            styles: [
+              {
+                'featureType': 'poi',
+                'stylers': [
+                  {
+                    'visibility': 'off'
+                  }
+                ]
+              },
+              {
+                'featureType': 'transit',
+                'stylers': [
+                  {
+                    'visibility': 'off'
+                  }
+                ]
+              }
+            ]
+          };
+          element.map = new google.maps.Map(this.refs.gmapElement, options);
+          this.addMarker(latlngLocation, 'Marker Location', element);
         }
-        //set map center
-        if (element.map) {
-          element.map.setCenter(latlngLocation);
+        else {
+          //recenter the marker
+          if (element.marker) {
+            element.marker.setPosition(latlngLocation);
+          }
+          //set map center
+          if (element.map) {
+            element.map.setCenter(latlngLocation);
+          }
         }
       });
     });

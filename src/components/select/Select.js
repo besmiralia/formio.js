@@ -56,6 +56,19 @@ export default class SelectComponent extends Field {
   }
 
   init() {
+    if (this.component.dataSrc === 'url') {
+      if (this.root && this.root.formio) {
+        this.component.data.url = `${this.root.formio.formUrl}/dropdown/${Formio.getTid()}/${this.key}`;
+      }
+      else {
+        this.component.data.url = `${Formio.getProjectUrl()}/dropdown/${Formio.getTid()}/${this.key}`;
+      }
+    }
+    /*}
+    else {
+      this.data.url = `${Formio.baseUrl}/dropdown/${Formio.getTid()}/${this.key}`;
+    }*/
+
     super.init();
     this.validators = this.validators.concat(['select']);
 

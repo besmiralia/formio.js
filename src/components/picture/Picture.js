@@ -110,7 +110,7 @@ export default class PictureComponent extends Field {
   getValue() {
     return this.value;
   }
-  setValue(value, flags) {
+  setValue(value) {
     if (value) {
       this.dataValue = value;
       if (typeof value == 'string') {

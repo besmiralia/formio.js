@@ -1193,7 +1193,7 @@ export default class Webform extends NestedDataComponent {
           };
           const li = this.ce('li', params);
           const span = this.ce('span');
-          li.style='cursor:pointer';
+          li.style.cursor = 'pointer';
 
           this.setContent(span, unescapeHTML(message));
           this.appendTo(span, li);
@@ -1321,7 +1321,7 @@ export default class Webform extends NestedDataComponent {
     }
 
     if (!flags || !flags.noEmit) {
-      this.emit('change', value, flags);
+      this.emit('change', value, flags, modified);
       isChangeEventEmitted = true;
     }
 

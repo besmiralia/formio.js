@@ -48,7 +48,7 @@ export default class FileComponent extends Field {
       title: 'File',
       group: 'premium',
       icon: 'file',
-      documentation: 'http://help.form.io/userguide/#file',
+      documentation: '/userguide/#file',
       weight: 100,
       schema: FileComponent.schema(),
     };
@@ -427,7 +427,7 @@ export default class FileComponent extends Field {
     }
 
     this.refs.fileType.forEach((fileType, index) => {
-      this.dataValue[index].fileType = this.component.fileTypes[0].label;
+      this.dataValue[index].fileType = this.dataValue[index].fileType || this.component.fileTypes[0].label;
 
       this.addEventListener(fileType, 'change', (event) => {
         event.preventDefault();
@@ -612,7 +612,7 @@ export default class FileComponent extends Field {
           }
           const { storage, options = {} } = this.component;
           this.component.url = `https://api-${fileService.getHost()}/api/v1/file/upload?uid=${fileService.getAccount()}`;
-          const url = this.interpolate(this.component.url);
+          const url = this.interpolate(this.component.url, { file: fileUpload });
           let groupKey = null;
           let groupPermissions = null;
 
@@ -634,7 +634,7 @@ export default class FileComponent extends Field {
 
           const fileKey = this.component.fileKey || 'file';
           const groupResourceId = groupKey ? this.currentForm.submission.data[groupKey]._id : null;
-          fileService.uploadFile(storage, file, fileName, dir, (evt) => {
+          const filePromise = fileService.uploadFile(storage, file, fileName, dir, (evt) => {
             fileUpload.status = 'progress';
             fileUpload.progress = parseInt(100.0 * evt.loaded / evt.total);
             delete fileUpload.message;
@@ -658,7 +658,11 @@ export default class FileComponent extends Field {
               fileUpload.message = response;
               delete fileUpload.progress;
               this.redraw();
+            })
+            .finally(() => {
+              this.emit('fileUploadingEnd', filePromise);
             });
+          this.emit('fileUploadingStart', filePromise);
         }
       });
     }

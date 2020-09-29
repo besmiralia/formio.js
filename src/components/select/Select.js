@@ -57,12 +57,13 @@ export default class SelectComponent extends Field {
 
   init() {
     if (this.component.dataSrc === 'url') {
+      /*
       if (this.root && this.root.formio) {
         this.component.data.url = `${this.root.formio.formUrl}/dropdown/${Formio.getTid()}/${this.key}`;
       }
-      else {
-        this.component.data.url = `${Formio.getProjectUrl()}/dropdown/${Formio.getTid()}/${this.key}`;
-      }
+      else {*/
+      this.component.data.url = `${Formio.getProjectUrl()}/dropdown/${this.gptid}/${this.key}`;
+      //}
     }
     /*}
     else {

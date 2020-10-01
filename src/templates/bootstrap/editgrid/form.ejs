@@ -33,7 +33,7 @@
   </li>
   {% } %}
 </ul>
-{% if (!ctx.readOnly && ctx.hasAddButton) { %}
+{% if (!ctx.readOnly && ctx.hasAddButton && !ctx.hasOpenRows) { %}
 <button class="btn btn-primary" ref="{{ctx.ref.addRow}}">
   <i class="{{ctx.iconClass('plus')}}"></i> {{ctx.t(ctx.component.addAnother || 'Add Another')}}
 </button>

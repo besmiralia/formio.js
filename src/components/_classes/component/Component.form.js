@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 import ComponentEditConditional from './editForm/Component.edit.conditional';
 import ComponentEditData from './editForm/Component.edit.data';
-import ComponentEditAPI from './editForm/Component.edit.api';
+//import ComponentEditAPI from './editForm/Component.edit.api';
 import ComponentEditDisplay from './editForm/Component.edit.display';
 import ComponentEditLogic from './editForm/Component.edit.logic';
 import ComponentEditValidation from './editForm/Component.edit.validation';
@@ -32,13 +32,13 @@ export default function(...extend) {
           key: 'validation',
           weight: 20,
           components: ComponentEditValidation
-        },
+        },/*
         {
           label: 'API',
           key: 'api',
           weight: 30,
           components: ComponentEditAPI
-        },
+        },*/
         {
           label: 'Conditional',
           key: 'conditional',

@@ -62,7 +62,7 @@ export default class SelectComponent extends Field {
         this.component.data.url = `${this.root.formio.formUrl}/dropdown/${Formio.getTid()}/${this.key}`;
       }
       else {*/
-      this.component.data.url = `${Formio.getProjectUrl()}/dropdown/${this.gptid}/${this.key}`;
+      this.component.data.url = `${Formio.getProjectUrl()}/dropdown/${this.schema.gptid}/${this.key}`;
       //}
     }
     /*}

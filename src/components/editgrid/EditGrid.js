@@ -272,6 +272,7 @@ export default class EditGridComponent extends NestedArrayComponent {
       openRows: this.editRows.map((row) => this.isOpen(row)),
       errors: this.editRows.map((row) => row.error),
       hasAddButton: this.hasAddButton(),
+      hasOpenRows: this.editRows.some((row) => this.isOpen(row)),
       hasRemoveButtons: this.hasRemoveButtons(),
     }));
   }
@@ -939,4 +940,4 @@ export default class EditGridComponent extends NestedArrayComponent {
   }
 }
 
-EditGridComponent.prototype.hasChanged = Component.prototype.hasChanged;
+    EditGridComponent.prototype.hasChanged = Component.prototype.hasChanged;

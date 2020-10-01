@@ -25,6 +25,7 @@ import Multivalue from './_classes/multivalue/Multivalue';
 import Field from './_classes/field/Field';
 import HTMLComponent from './html/HTML';
 import LabelComponent from './gplabel/Label';
+import LineComponent from './gpline/Line';
 import LocationComponent from './location/Location';
 import NestedComponent from './_classes/nested/NestedComponent';
 import NestedDataComponent from './_classes/nesteddata/NestedDataComponent';
@@ -82,6 +83,7 @@ export default {
   hidden: HiddenComponent,
   htmlelement: HTMLComponent,
   gplabel: LabelComponent,
+  gpline: LineComponent,
   location: LocationComponent,
   nested: NestedComponent,
   nesteddata: NestedDataComponent,

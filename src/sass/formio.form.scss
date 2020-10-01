@@ -1297,3 +1297,10 @@ div[read-only="true"] {
 .table-responsive[ref=component] {
   overflow-x: visible;
 }
+
+/*gp custom*/
+.long-paragraph{
+  max-height: 300px;
+  overflow: auto;
+  border: 1px solid #ccc;
+}

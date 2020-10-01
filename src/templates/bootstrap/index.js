@@ -25,6 +25,7 @@ import file from './file';
 import picture from './picture';
 import html from './html';
 import gplabel from './gplabel';
+import gpline from './gpline';
 import gplabelbuilder from './gplabelbuilder';
 import icon from './icon';
 import iconClass from './iconClass';
@@ -103,6 +104,7 @@ export default {
   picture,
   html,
   gplabel,
+  gpline,
   gplabelbuilder,
   icon,
   input,

@@ -79,7 +79,7 @@ export function eachComponent(components, fn, includeAll, path, parent) {
         component.key &&
         !['panel', 'table', 'well', 'columns', 'fieldset', 'tabs', 'form'].includes(component.type) &&
         (
-          ['datagrid', 'container', 'editgrid', 'address'].includes(component.type) ||
+          ['datagrid', 'container', 'editgrid', 'gpgrid', 'address', 'gpaddress'].includes(component.type) ||
           component.tree
         )
       ) {
@@ -578,7 +578,7 @@ export function getStrings(form) {
       }
     }
 
-    if (component.type === 'editgrid') {
+    if (['editgrid', 'gpgrid'].includes(component.type)) {
       const string = component.addAnother || 'Add Another';
       if (component.addAnother) {
         strings.push({

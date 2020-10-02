@@ -677,6 +677,11 @@ export default class EditGridComponent extends NestedArrayComponent {
       editRow.alerts = false;
     }
 
+    this.emit('gridRowSaved', {
+      row: editRow,
+      data: this.editRows
+    });
+
     return true;
   }
 
@@ -710,6 +715,10 @@ export default class EditGridComponent extends NestedArrayComponent {
     editRow.state = EditRowState.Removed;
     this.destroyComponents(rowIndex);
 
+    this.emit('gridRowRemoved', {
+      row: editRow,
+      data: this.editRows
+    });
     return editRow;
   }
 

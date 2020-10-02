@@ -10,12 +10,14 @@ import NativePromise from 'native-promise-only';
 import dompurify from 'dompurify';
 import { getValue } from './formUtils';
 import Evaluator from './Evaluator';
+
 const interpolate = Evaluator.interpolate;
 const { fetch } = fetchPonyfill({
   Promise: NativePromise
 });
 
 export * from './formUtils';
+export * from './govpilot';
 
 // Configure JsonLogic
 lodashOperators.forEach((name) => jsonLogic.add_operation(`_${name}`, _[name]));
@@ -194,7 +196,7 @@ export function checkCalculated(component, submission, rowData) {
 /**
  * Check if a simple conditional evaluates to true.
  *
- * @param condition
+ * @param component
  * @param condition
  * @param row
  * @param data

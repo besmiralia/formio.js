@@ -5,6 +5,7 @@ import PayButtonComponent from './gppaybutton/PayButton';
 import CheckBoxComponent from './checkbox/Checkbox';
 import ColumnsComponent from './columns/Columns';
 import Component from './_classes/component/Component';
+import ComponentModal from './_classes/componentModal/ComponentModal';
 import ContainerComponent from './container/Container';
 import ContentComponent from './content/Content';
 import CurrencyComponent from './currency/Currency';
@@ -60,6 +61,7 @@ export default {
   gpaddress: GovPilotAddressComponent,
   base: Component,
   component: Component,
+  componentmodal: ComponentModal,
   button: ButtonComponent,
   gppaybutton: PayButtonComponent,
   checkbox: CheckBoxComponent,

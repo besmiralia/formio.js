@@ -629,7 +629,9 @@ export default class WebformBuilder extends Component {
   }
 
   searchFields(searchString) {
-    if (!this.refs['sidebar-groups']) {
+    const sidebar = this.refs['sidebar'];
+    const sidebarGroups = this.refs['sidebar-groups'];
+    if (!sidebar || !sidebarGroups) {
       return;
     }
     if (searchString) {
@@ -641,7 +643,7 @@ export default class WebformBuilder extends Component {
         }
       }
       this.fieldsList.componentOrder = filteredComponentsOrder;
-      this.refs['sidebar-groups'].innerHTML = this.renderTemplate('builderSidebarGroup', {
+      sidebarGroups.innerHTML = this.renderTemplate('builderSidebarGroup', {
         group: this.fieldsList,
         groupKey: 'searchFields',
         groupId: `builder-sidebar-${this.id}`,
@@ -649,10 +651,10 @@ export default class WebformBuilder extends Component {
       });
     }
     else {
-      this.refs['sidebar-groups'].innerHTML = this.groupOrder.map((groupKey) => this.renderTemplate('builderSidebarGroup', {
+      sidebarGroups.innerHTML = this.groupOrder.map((groupKey) => this.renderTemplate('builderSidebarGroup', {
         group: this.groups[groupKey],
         groupKey,
-        groupId: `builder-sidebar-${this.id}`,
+        groupId: sidebar.id,
         subgroups: this.groups[groupKey].subgroups.map((group) => this.renderTemplate('builderSidebarGroup', {
           group,
           groupKey: group.key,
@@ -982,7 +984,7 @@ export default class WebformBuilder extends Component {
       remove = window.confirm(this.t(message));
     }
     if (!original) {
-      original = parent.formioContainer.find((comp) => comp.key === component.key);
+      original = parent.formioContainer.find((comp) => comp.id === component.id);
     }
     const index = parent.formioContainer ? parent.formioContainer.indexOf(original) : 0;
     if (remove && index !== -1) {
@@ -1279,7 +1281,8 @@ export default class WebformBuilder extends Component {
                     event.data.label ||
                     event.data.placeholder ||
                     event.data.type
-                  ));
+                  ).replace(/^[0-9]*/, ''));
+
                   return false;
                 }
               });

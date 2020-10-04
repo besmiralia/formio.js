@@ -4,6 +4,33 @@ All notable changes to this project will be documented in this file
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 4.12.1-rc.8
+#### Changed
+ - VPAT-000 Added types for further extension of ComponentModal for 2.0 VPAT release
+
+### 4.12.1-rc.7, 4.12.1-rc.6
+#### Fixed
+ - Adding calculateServer handling and also restructure calculated value handling.
+ - FJS-1145: fix logic for close button in the Modal Edit dialog
+ - FJS-1261: fix generation of property names when creating a component
+ - Fixed issues when removed one of two fields with keys duplication in the form builder.
+ - FJS-1245: fixed an issue where dataGrid with initEmpty option hides rows when viewing a submission
+
+### 4.12.1-rc.5
+#### Fixed
+ - Fixing anomaly with calculated value checks to make them so they will handle changing calculated values between passes.
+ - FJS-1251: Unable to open/close field tabs in builder after search/filtering fields
+ - FJS-1157: fix showing error after closing a modal dialog window
+
+### 4.12.1-rc.4
+#### Fixed
+ - Fixed an issue where data on conditional Wizard pages is not saved
+ - FJS-1240: fixed an issue where address submission data is not shown inside dataGrid
+ - FJS-1158: hiding Password under bullets in a Modal button
+
+#### Changed
+ - Upgrade dragula@3.7.3
+
 ### 4.12.1-rc.3
 #### Fixed
  - FJS-1133, FJS-1028, FJS-1242: fixes an issue where DateTime's value has incorrect formatting on Data Tab

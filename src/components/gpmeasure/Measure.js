@@ -26,8 +26,8 @@ export default class MeasureComponent extends Input {
   static get builderInfo() {
     return {
       title: 'Measure',
-      icon: 'measure',
-      group: 'basic',
+      icon: 'sigma',
+      group: 'data',
       documentation: '/userguide/#textfield',
       weight: 0,
       schema: MeasureComponent.schema()

@@ -679,7 +679,8 @@ export default class EditGridComponent extends NestedArrayComponent {
 
     this.emit('gridRowSaved', {
       row: editRow,
-      data: this.editRows
+      data: this.editRows,
+      tid: this.component.tid
     });
 
     return true;
@@ -717,7 +718,8 @@ export default class EditGridComponent extends NestedArrayComponent {
 
     this.emit('gridRowRemoved', {
       row: editRow,
-      data: this.editRows
+      data: this.editRows,
+      tid: this.component.tid
     });
     return editRow;
   }
@@ -949,4 +951,4 @@ export default class EditGridComponent extends NestedArrayComponent {
   }
 }
 
-    EditGridComponent.prototype.hasChanged = Component.prototype.hasChanged;
+EditGridComponent.prototype.hasChanged = Component.prototype.hasChanged;

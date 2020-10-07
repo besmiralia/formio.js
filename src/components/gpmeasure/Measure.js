@@ -59,6 +59,7 @@ export default class MeasureComponent extends Input {
   }
 
   calcMeasure(data) {
+    if (this.component.gptid !== data.tid) return;
     console.log('Calculating measure', this.key, data);
     const summaryFieldKey = `cf${this.component.gpfid}`;
     const filteredData = this.applyFiltersToData(this.component.gpFilter, data.data.filter(x => x.state === 'saved').map(x => x.data)).map(x => x[summaryFieldKey]);
@@ -72,7 +73,7 @@ export default class MeasureComponent extends Input {
         break;
       }
       case 'A': {
-        this.setValue(Math.avg(...filteredData));
+        if (filteredData.length > 0) this.setValue(filteredData.reduce((accumulator, currentValue) => accumulator + currentValue, 0) / filteredData.length);
         break;
       }
       case 'MX': {
@@ -98,7 +99,7 @@ export default class MeasureComponent extends Input {
             }
           }
         }
-        let minValue = Math.max(...filteredData);
+        let minValue = Math.min(...filteredData);
         if (this.component.renderType === 'datetime' && minValue) {
           minValue = moment(minValue).format('MM/DD/YYYY');
         }

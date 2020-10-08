@@ -744,12 +744,22 @@ export default class WebformBuilder extends Component {
         info = fastCloneDeep(groupComponents[key].schema);
       }
     }
-    if (group.slice(0, group.indexOf('-')) === 'resource') {
+    else if (group.slice(0, group.indexOf('-')) === 'resource') {
       // This is an existing resource field.
       const resourceGroups = this.groups.resource.subgroups;
       const resourceGroup = _.find(resourceGroups, { key: group });
       if (resourceGroup && resourceGroup.components.hasOwnProperty(key)) {
         info = fastCloneDeep(resourceGroup.components[key].schema);
+      }
+    }
+    else if (group === 'searchFields') {//Besmir Alia
+      const resourceGroups = this.groups.resource.subgroups;
+      for (let ix = 0; ix < resourceGroups.length; ix++) {
+        const resourceGroup = resourceGroups[ix];
+        if (resourceGroup.components.hasOwnProperty(key)) {
+          info = fastCloneDeep(resourceGroup.components[key].schema);
+          break;
+        }
       }
     }
 

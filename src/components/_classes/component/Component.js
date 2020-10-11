@@ -1871,7 +1871,9 @@ export default class Component extends Element {
   onChange(flags, fromRoot) {
     flags = flags || {};
     if (flags.modified) {
-      this.pristine = false;
+      if (!flags.noPristineChangeOnModified) {
+        this.pristine = false;
+      }
       this.addClass(this.getElement(), 'formio-modified');
     }
 
@@ -2268,7 +2270,7 @@ export default class Component extends Element {
     ) {
       this.redraw();
     }
-    if (this.options.renderMode === 'html') {
+    if (this.options.renderMode === 'html' && changed) {
       this.redraw();
       return changed;
     }

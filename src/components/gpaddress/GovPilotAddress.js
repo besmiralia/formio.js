@@ -12,6 +12,7 @@ export const GovPilotAddressComponentMode = {
   Manual: 'manual',
 };
 
+const AddressLoadingClass = 'address-loading';
 const RemoveValueIconHiddenClass = 'address-autocomplete-remove-value-icon--hidden';
 const ChildConditional = 'show = _.get(instance, \'parent.manualMode\', false);';
 
@@ -396,10 +397,12 @@ export default class GovPilotAddressComponent extends ContainerComponent {
           input: element,
           debounceWaitMs: 300,
           fetch: (text, update) => {
+            this.addClass(element, AddressLoadingClass);
             const query = text;
             this.provider.search(query).then(update);
           },
           render: (address) => {
+            this.removeClass(element, AddressLoadingClass);
             const div = this.ce('div');
             div.textContent = this.getDisplayValue(address);
             return div;

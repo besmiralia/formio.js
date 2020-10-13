@@ -1,3 +1,4 @@
+import Formio from '../../../Formio';
 export default [
   {
     type: 'select',
@@ -15,7 +16,7 @@ export default [
     valueProperty: 'id',
     dataSrc: 'url',
     data: {
-      url: 'https://form-sandbox.govpilot.com/forms/users'
+      url: `https://form-${Formio.getHost()}/forms/users`
     },
     template: '<span>{{ item.name }}</span>',
     selectThreshold: 0.3,

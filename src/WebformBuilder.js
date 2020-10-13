@@ -613,10 +613,12 @@ export default class WebformBuilder extends Component {
         });
       }
 
-      this.addEventListener(this.refs['sidebar-search'], 'input', (e) => {
-        const searchString = e.target.value;
-        this.searchFields(searchString);
-      });
+      this.addEventListener(this.refs['sidebar-search'], 'input',
+        _.debounce((e) => {
+          const searchString = e.target.value;
+          this.searchFields(searchString);
+        }, 300)
+      );
 
       if (this.dragDropEnabled) {
         this.initDragula();

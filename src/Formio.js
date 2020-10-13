@@ -72,7 +72,8 @@ export default class Formio {
 
     this.tid = '';
     this.uid = '';
-    this.host = 'sandbox.govpilot.com';
+    const hostPrefix = (window.location.hostname.indexOf('main') >= 0 ? 'main' : window.location.hostname.indexOf('beta') >= 0 ? 'beta' : 'sandbox');
+    this.host = `${hostPrefix}.govpilot.com`;
 
     // Store the original path and options.
     this.path = path;

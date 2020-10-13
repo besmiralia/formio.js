@@ -74,6 +74,7 @@ export default class MeasureComponent extends Input {
       }
       case 'A': {
         if (filteredData.length > 0) this.setValue(filteredData.reduce((accumulator, currentValue) => accumulator + currentValue, 0) / filteredData.length);
+        else this.setValue(0);
         break;
       }
       case 'MX': {

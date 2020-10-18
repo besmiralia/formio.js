@@ -1336,7 +1336,7 @@ export default class SelectComponent extends Field {
 
     // Add the value options.
     this.addValueOptions();
-    this.setChoicesValue(value, hasPreviousValue);
+    this.setChoicesValue(value, hasPreviousValue, flags);
     return changed;
   }
 
@@ -1349,7 +1349,7 @@ export default class SelectComponent extends Field {
       this.visible && (this.component.searchField || this.component.valueProperty);
   }
 
-  setChoicesValue(value, hasPreviousValue) {
+  setChoicesValue(value, hasPreviousValue, flags = {}) {
     const hasValue = Array.isArray(value) ? value.length : value;
     hasPreviousValue = (hasPreviousValue === undefined) ? true : hasPreviousValue;
     if (this.choices) {
@@ -1363,7 +1363,7 @@ export default class SelectComponent extends Field {
         }
         this.choices.setChoiceByValue(value);
       }
-      else if (hasPreviousValue) {
+      else if (hasPreviousValue || flags.resetValue) {
         this.choices.removeActiveItems();
       }
     }

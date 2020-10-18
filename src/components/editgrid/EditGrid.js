@@ -94,6 +94,13 @@ export default class EditGridComponent extends NestedArrayComponent {
   `;
   }
 
+  /**
+   * Returns true if the component has nested components which don't trigger changes on the root level
+   */
+  get hasScopedChildren() {
+    return !this.inlineEditMode;
+  }
+
   get defaultSchema() {
     return EditGridComponent.schema();
   }
@@ -666,7 +673,7 @@ export default class EditGridComponent extends NestedArrayComponent {
     editRow.backup = null;
 
     this.updateValue();
-    this.triggerChange({ modified, noPristineChangeOnModified: modified && this.component.rowDrafts });
+    this.triggerChange({ modified, noPristineChangeOnModified: modified && this.component.rowDrafts, isolateRow: true });
     if (this.component.rowDrafts) {
       editRow.components.forEach(comp => comp.setPristine(this.pristine));
     }
@@ -734,7 +741,7 @@ export default class EditGridComponent extends NestedArrayComponent {
     this.editRows.splice(rowIndex, 1);
     this.updateRowsComponents(rowIndex);
     this.updateValue();
-    this.triggerChange({ modified, noPristineChangeOnModified: modified && this.component.rowDrafts });
+    this.triggerChange({ modified, noPristineChangeOnModified: modified && this.component.rowDrafts, isolateRow: true });
     this.checkValidity(null, true);
     this.checkData();
     this.redraw();

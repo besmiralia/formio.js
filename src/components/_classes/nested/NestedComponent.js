@@ -36,7 +36,7 @@ export default class NestedComponent extends Field {
   set collapsed(value) {
     this._collapsed = value;
     this.redraw();
-    if (!value) {
+    if (!value && !this.pristine) {
       this.checkValidity(this.data, true);
     }
   }
@@ -534,7 +534,7 @@ export default class NestedComponent extends Field {
     data = data || this.rootValue;
     flags = flags || {};
     row = row || this.data;
-    components = components || this.getComponents();
+    components = components && _.isArray(components) ? components : this.getComponents();
     return components.reduce((valid, comp) => {
       return comp.checkData(data, flags, row) && valid;
     }, super.checkData(data, flags, row));

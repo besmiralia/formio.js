@@ -8,7 +8,7 @@ import Formio from '../../../Formio';
 import * as FormioUtils from '../../../utils/utils';
 import Validator from '../../../validator/Validator';
 import Templates from '../../../templates/Templates';
-import { fastCloneDeep, boolValue } from '../../../utils/utils';
+import { fastCloneDeep, boolValue, getComponentPathWithoutIndicies, getDataParentComponent } from '../../../utils/utils';
 import Element from '../../../Element';
 import ComponentModal from '../componentModal/ComponentModal';
 import Widgets from '../../../widgets';
@@ -1120,7 +1120,7 @@ export default class Component extends Element {
       this.refresh(this.data, changed, flags);
     }
     else if (
-      (changePath && changePath === refreshData) && changed && changed.instance &&
+      (changePath && getComponentPathWithoutIndicies(changePath) === refreshData) && changed && changed.instance &&
       // Make sure the changed component is not in a different "context". Solves issues where refreshOn being set
       // in fields inside EditGrids could alter their state from other rows (which is bad).
       this.inContext(changed.instance)
@@ -1131,6 +1131,9 @@ export default class Component extends Element {
 
   checkRefreshOn(changes, flags = {}) {
     changes = changes || [];
+    if (flags.noRefresh) {
+      return;
+    }
     if (!changes.length && flags.changed) {
       changes = [flags.changed];
     }
@@ -1842,7 +1845,8 @@ export default class Component extends Element {
   clearOnHide() {
     // clearOnHide defaults to true for old forms (without the value set) so only trigger if the value is false.
     if (
-      !this.rootPristine &&
+      // if change happens inside EditGrid's row, it doesn't trigger change on the root level, so rootPristine will be true
+      (!this.rootPristine || getDataParentComponent(this)?.hasScopedChildren) &&
       this.component.clearOnHide !== false &&
       !this.options.readOnly &&
       !this.options.showHiddenFields
@@ -2500,7 +2504,6 @@ export default class Component extends Element {
         return false;
       }
 
-      this.calculatedValue = calculatedValue;
       if (flags.fromSubmission && this.component.persistent === true) {
         return false;
       }
@@ -2511,6 +2514,8 @@ export default class Component extends Element {
         return true;
       }
     }
+
+    this.calculatedValue = calculatedValue;
 
     return changed ? this.setValue(calculatedValue, flags) : false;
   }

@@ -104,9 +104,46 @@ export default [
                     },
                   },
                   {
+                    type: 'select',
+                    input: true,
+                    label: 'Operator:',
+                    key: 'conditional.op',
+                    dataSrc: 'values',
+                    valueProperty: 'value',
+                    tableView: false,
+                    data: {
+                      values: [
+                        {
+                          value: '=',
+                          label: 'Equals',
+                        },
+                        {
+                          value: '!=',
+                          label: 'Not Equal',
+                        },
+                        {
+                          value: '<',
+                          label: 'Less Than',
+                        },
+                        {
+                          value: '<=',
+                          label: 'Less Than or Equal',
+                        },
+                        {
+                          value: '>',
+                          label: 'Greater Than',
+                        },
+                        {
+                          value: '>=',
+                          label: 'Great Than or Equal',
+                        },
+                      ],
+                    },
+                  },
+                  {
                     type: 'textfield',
                     input: true,
-                    label: 'Has the value:',
+                    label: 'Value:',
                     key: 'eq',
                     tableView: false,
                   },

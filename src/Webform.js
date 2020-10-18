@@ -1112,7 +1112,7 @@ export default class Webform extends NestedDataComponent {
         });
       });
     }
-    this.prepend(this.alert);
+    this.append(this.alert);
   }
 
   /**

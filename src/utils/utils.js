@@ -217,6 +217,7 @@ export function checkSimpleConditional(component, condition, row, data) {
 
   const eq = String(condition.eq);
   const show = String(condition.show);
+  const op = condition.op || '=';
 
   // Special check for selectboxes component.
   if (_.isObject(value) && _.has(value, condition.eq)) {
@@ -227,7 +228,16 @@ export function checkSimpleConditional(component, condition, row, data) {
     return show === 'true';
   }
 
-  return (String(value) === eq) === (show === 'true');
+  const ops = {
+    '=': (a, b) => a === b,
+    '!=': (a, b) => a !== b,
+    '>': (a, b) => a > b,
+    '>=': (a, b) => a >= b,
+    '<': (a, b) => a < b,
+    '<=': (a, b) => a <= b,
+  };
+
+  return (ops[op](String(value), eq)) === (show === 'true');
 }
 
 /**

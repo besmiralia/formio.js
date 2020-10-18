@@ -15,31 +15,31 @@ export default {
     eachComponent(container, (comp) => {
       formKeys[comp.key] = true;
 
-      if (['address', 'container', 'datagrid', 'editgrid', 'tree'].includes(component.type) || component.tree || component.arrayTree) {
+      if (['address', 'gpaddress', 'container', 'datagrid', 'editgrid', 'gpgrid', 'tree'].includes(comp.type) || comp.tree || comp.arrayTree) {
         return true;
       }
     }, true);
 
     // Recurse into all child components.
-    eachComponent([component], (component) => {
+    eachComponent([component], (comp) => {
       // Skip key uniquification if this component doesn't have a key.
-      if (!component.key) {
+      if (!comp.key) {
         return;
       }
 
-      if (!component.gpid) {
-        component.gpid = this.generateKey();
+      if (!comp.gpid) {
+        comp.gpid = this.generateKey();
       }
 
-      const newKey = uniqueKey(formKeys, component.key);
-      if (newKey !== component.key) {
-        component.key = newKey;
+      const newKey = uniqueKey(formKeys, comp.key);
+      if (newKey !== comp.key) {
+        comp.key = newKey;
         changed = true;
       }
 
       formKeys[newKey] = true;
 
-      if (['address', 'container', 'datagrid', 'editgrid', 'tree'].includes(component.type) || component.tree || component.arrayTree) {
+      if (['address', 'gpaddress', 'container', 'datagrid', 'editgrid', 'gpgrid', 'tree'].includes(comp.type) || comp.tree || comp.arrayTree) {
         return true;
       }
     }, true);
@@ -99,10 +99,10 @@ export default {
 
   generateKey() {
     // Generate a hex key of 5 characters
-    var result           = '';
-    var characters       = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    var result = '';
+    var characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
-    for ( var i = 0; i < 5; i++ ) {
+    for (var i = 0; i < 5; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;

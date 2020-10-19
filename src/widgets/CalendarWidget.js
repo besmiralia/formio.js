@@ -292,7 +292,7 @@ export default class CalendarWidget extends InputWidget {
         const dateMask = /\d{4}-\d{2}-\d{2}/g;
         const dates = item.match(dateMask);
         if (dates && dates.length) {
-          return dates.length === 1 ?  item.match(dateMask)[0] : {
+          return dates.length === 1 ? item.match(dateMask)[0] : {
             from: item.match(dateMask)[0],
             to: item.match(dateMask)[1],
           };
@@ -392,6 +392,12 @@ export default class CalendarWidget extends InputWidget {
       return this.getDateValue(value, format);
     }
     return formatDate(value, format, this.timezone, convertFormatToMoment(this.settings.dateFormat));
+  }
+
+  setPlaceholder(input) {
+    if (input && !input.getAttribute('placeholder')) {
+      input.setAttribute('placeholder', this.settings.format);
+    }
   }
 
   validationValue(value) {

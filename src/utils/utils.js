@@ -609,8 +609,8 @@ export function momentDate(value, format, timezone) {
  * @param timezone
  * @return {string}
  */
-export function formatDate(value, format, timezone) {
-  const momentDate = moment(value);
+export function formatDate(value, format, timezone, flatPickrInputFormat) {
+  const momentDate = moment(value, flatPickrInputFormat || undefined);
   if (timezone === currentTimezone()) {
     // See if our format contains a "z" timezone character.
     if (format.match(/\s(z$|z\s)/)) {
@@ -1166,6 +1166,15 @@ export function getArrayFromComponentPath(pathStr) {
     .replace(/(^\.)|(\.$)/g, '')
     .split('.')
     .map(part => _.defaultTo(_.toNumber(part), part));
+}
+
+export function  hasInvalidComponent(component) {
+  return component.getComponents().some((comp) => {
+    if (_.isArray(comp.components)) {
+      return hasInvalidComponent(comp);
+    }
+      return comp.error;
+  });
 }
 
 export function getStringFromComponentPath(path) {

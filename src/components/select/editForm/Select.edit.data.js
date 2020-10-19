@@ -14,6 +14,7 @@ export default [
     data: {
       values: [
         { label: 'Values', value: 'values' },
+        { label: 'GovPilot', value: 'govpilot' },
         { label: 'URL', value: 'url' },
         { label: 'Resource', value: 'resource' },
         { label: 'Custom', value: 'custom' },

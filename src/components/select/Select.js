@@ -56,19 +56,9 @@ export default class SelectComponent extends Field {
   }
 
   init() {
-    if (this.component.dataSrc === 'url') {
-      /*
-      if (this.root && this.root.formio) {
-        this.component.data.url = `${this.root.formio.formUrl}/dropdown/${Formio.getTid()}/${this.key}`;
-      }
-      else {*/
+    if (this.component.dataSrc === 'govpilot') {
       this.component.data.url = `${Formio.getProjectUrl()}/dropdown/${this.schema.gptid}/${this.key}`;
-      //}
     }
-    /*}
-    else {
-      this.data.url = `${Formio.baseUrl}/dropdown/${Formio.getTid()}/${this.key}`;
-    }*/
 
     super.init();
     this.validators = this.validators.concat(['select']);
@@ -173,7 +163,7 @@ export default class SelectComponent extends Field {
   }
 
   get isSelectURL() {
-    return this.component.dataSrc === 'url';
+    return this.component.dataSrc === 'url' || this.component.dataSrc === 'govpilot';
   }
 
   get isInfiniteScrollProvided() {
@@ -469,7 +459,7 @@ export default class SelectComponent extends Field {
 
     const limit = this.component.limit || 100;
     const skip = this.isScrollLoading ? this.selectOptions.length : 0;
-    const query = (this.component.dataSrc === 'url') ? {} : {
+    const query = (this.isSelectURL) ? {} : {
       limit,
       skip,
     };
@@ -674,7 +664,8 @@ export default class SelectComponent extends Field {
         }
         break;
       }
-      case 'url': {
+      case 'url':
+      case 'govpilot': {
         if (!forceUpdate && !this.active && !this.calculatedValue) {
           // If we are lazyLoading, wait until activated.
           return;
@@ -778,7 +769,7 @@ export default class SelectComponent extends Field {
         disabled: true,
       }], 'value', 'label', true);
     }
-    else if (this.component.dataSrc === 'url' || this.component.dataSrc === 'resource') {
+    else if (['url', 'govpilot', 'resource'].includes(this.component.dataSrc)) {
       this.addOption('', this.t('loading...'));
     }
     this.triggerUpdate();

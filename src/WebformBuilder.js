@@ -526,7 +526,7 @@ export default class WebformBuilder extends Component {
     }
 
     // Some components are their own namespace.
-    if (['address', 'container', 'datagrid', 'editgrid', 'tree'].includes(component.type) || component.tree || component.arrayTree) {
+    if (['address', 'gpaddress', 'container', 'datagrid', 'editgrid', 'gpgrid', 'tree'].includes(component.type) || component.tree || component.arrayTree) {
       return component.key;
     }
 

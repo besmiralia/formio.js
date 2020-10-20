@@ -2197,15 +2197,25 @@ export default class Component extends Element {
       );
     }
 
-    if (this.defaultMask) {
-      if (typeof defaultValue === 'string') {
-        defaultValue = conformToMask(defaultValue, this.defaultMask).conformedValue;
-        if (!FormioUtils.matchInputMask(defaultValue, this.defaultMask)) {
-          defaultValue = '';
+    const checkMask = (value) => {
+      if (typeof value === 'string') {
+        value = conformToMask(value, this.defaultMask).conformedValue;
+        if (!FormioUtils.matchInputMask(value, this.defaultMask)) {
+          value = '';
         }
       }
       else {
-        defaultValue = '';
+        value = '';
+      }
+      return value;
+    };
+
+    if (this.defaultMask) {
+      if (Array.isArray(defaultValue)) {
+        defaultValue = defaultValue.map(checkMask);
+      }
+      else {
+        defaultValue = checkMask(defaultValue);
       }
     }
 
@@ -2494,9 +2504,8 @@ export default class Component extends Element {
       const previousCalculatedValue = this.normalizeValue(this.convertNumberOrBoolToString(this.calculatedValue));
       const calculationChanged = !_.isEqual(previousCalculatedValue, newCalculatedValue);
       const previousChanged = !_.isEqual(dataValue, previousCalculatedValue);
-
       // Check to ensure that the calculated value is different than the previously calculated value.
-      if (this.calculatedValue && previousChanged && !calculationChanged) {
+      if (previousCalculatedValue && previousChanged && !calculationChanged) {
         return false;
       }
 
@@ -2505,6 +2514,8 @@ export default class Component extends Element {
       }
 
       if (flags.fromSubmission && this.component.persistent === true) {
+        // If we set value from submission and it differs from calculated one, set the calculated value to prevent overriding dataValue in the next pass
+        this.calculatedValue = calculatedValue;
         return false;
       }
 

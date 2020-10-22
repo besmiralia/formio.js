@@ -499,46 +499,6 @@ export default class FileComponent extends Field {
     return superAttach;
   }
 
-  /* eslint-disable max-depth */
-  globStringToRegex(str) {
-    let regexp = '', excludes = [];
-    if (str.length > 2 && str[0] === '/' && str[str.length - 1] === '/') {
-      regexp = str.substring(1, str.length - 1);
-    }
-    else {
-      const split = str.split(',');
-      if (split.length > 1) {
-        for (let i = 0; i < split.length; i++) {
-          const r = this.globStringToRegex(split[i]);
-          if (r.regexp) {
-            regexp += `(${r.regexp})`;
-            if (i < split.length - 1) {
-              regexp += '|';
-            }
-          }
-          else {
-            excludes = excludes.concat(r.excludes);
-          }
-        }
-      }
-      else {
-        if (str.startsWith('!')) {
-          excludes.push(`^((?!${this.globStringToRegex(str.substring(1)).regexp}).)*$`);
-        }
-        else {
-          if (str.startsWith('.')) {
-            str = `*${str}`;
-          }
-          regexp = `^${str.replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\-]', 'g'), '\\$&')}$`;
-          regexp = regexp.replace(/\\\*/g, '.*').replace(/\\\?/g, '.');
-        }
-      }
-    }
-    return { regexp, excludes };
-  }
-
-  /* eslint-enable max-depth */
-
   translateScalars(str) {
     if (typeof str === 'string') {
       if (str.search(/kb/i) === str.length - 2) {
@@ -592,6 +552,46 @@ export default class FileComponent extends Field {
   validateMaxSize(file, val) {
     return file.size - 0.1 <= this.translateScalars(val);
   }
+
+  /* eslint-disable max-depth */
+  globStringToRegex(str) {
+    let regexp = '', excludes = [];
+    if (str.length > 2 && str[0] === '/' && str[str.length - 1] === '/') {
+      regexp = str.substring(1, str.length - 1);
+    }
+    else {
+      const split = str.split(',');
+      if (split.length > 1) {
+        for (let i = 0; i < split.length; i++) {
+          const r = this.globStringToRegex(split[i]);
+          if (r.regexp) {
+            regexp += `(${r.regexp})`;
+            if (i < split.length - 1) {
+              regexp += '|';
+            }
+          }
+          else {
+            excludes = excludes.concat(r.excludes);
+          }
+        }
+      }
+      else {
+        if (str.startsWith('!')) {
+          excludes.push(`^((?!${this.globStringToRegex(str.substring(1)).regexp}).)*$`);
+        }
+        else {
+          if (str.startsWith('.')) {
+            str = `*${str}`;
+          }
+          regexp = `^${str.replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\-]', 'g'), '\\$&')}$`;
+          regexp = regexp.replace(/\\\*/g, '.*').replace(/\\\?/g, '.');
+        }
+      }
+    }
+    return { regexp, excludes };
+  }
+
+  /* eslint-enable max-depth */
 
   upload(files) {
     // Only allow one upload if not multiple.
@@ -713,9 +713,35 @@ export default class FileComponent extends Field {
   }
 
   /* eslint-disable max-len */
-  fileSize(a, b, c, d, e) {
-    //a = this.translateScalars(a);
-    return `${(b = Math, c = b.log, d = 1024, e = c(a) / c(d) | 0, a / b.pow(d, e)).toFixed(2)} ${e ? `${'kMGTPEZY'[--e]}B` : 'Bytes'}`;
+  fileSize(str) {
+    let val = str;
+    if (typeof str === 'string') {
+      if (str.search(/kb/i) === str.length - 2) {
+        val = parseFloat(str.substring(0, str.length - 2) * 1024);
+      }
+      if (str.search(/mb/i) === str.length - 2) {
+        val = parseFloat(str.substring(0, str.length - 2) * 1024 * 1024);
+      }
+      if (str.search(/gb/i) === str.length - 2) {
+        val = parseFloat(str.substring(0, str.length - 2) * 1024 * 1024 * 1024);
+      }
+      if (str.search(/b/i) === str.length - 1) {
+        val = parseFloat(str.substring(0, str.length - 1));
+      }
+      if (str.search(/s/i) === str.length - 1) {
+        val = parseFloat(str.substring(0, str.length - 1));
+      }
+      if (str.search(/m/i) === str.length - 1) {
+        val = parseFloat(str.substring(0, str.length - 1) * 60);
+      }
+      if (str.search(/h/i) === str.length - 1) {
+        val = parseFloat(str.substring(0, str.length - 1) * 3600);
+      }
+    }
+    const c = Math.log;
+    const d = 1024;
+    let e = c(val) / c(d) | 0;
+    return `${(val / Math.pow(d, e)).toFixed(2)} ${e ? `${'kMGTPEZY'[--e]}B` : 'Bytes'}`;
   }
   /* eslint-enable max-len */
 

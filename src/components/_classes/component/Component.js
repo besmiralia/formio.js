@@ -444,7 +444,7 @@ export default class Component extends Element {
     }
 
     // Allow anyone to hook into the component creation.
-    this.hook('component');
+    this.hook('component', this);
 
     if (!this.options.skipInit) {
       this.init();

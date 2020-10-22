@@ -1,3 +1,4 @@
+import Formio from '../../Formio';
 import Field from '../_classes/field/Field';
 import { uniqueName } from '../../utils/utils';
 import download from 'downloadjs';
@@ -36,9 +37,10 @@ export default class FileComponent extends Field {
       image: false,
       privateDownload: false,
       imageSize: '200',
-      filePattern: '*',
+      filePattern: 'image/*,video/*,.zip,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.pdf',
       fileMinSize: '0KB',
-      fileMaxSize: '1GB',
+      fileMaxSize: '25MB',
+      storage: 'govpilot',
       uploadOnly: false,
     }, ...extend);
   }
@@ -104,12 +106,56 @@ export default class FileComponent extends Field {
   }
 
   getValue() {
-    return this.dataValue;
+    return this.value;
   }
+  setValue(value) {
+    if (value) {//todo
+      if (typeof value == 'string') {
+        this.dataValue = value;
+        const files = [];
+        if (value.indexOf('^') >= 0) {
+          value.split('^').forEach((img) => {
+            if (img.indexOf('|') >= 0) {
+              const [fname, size] = img.split('|');
+              const url = `https://${Formio.getHost()}/uuploads/${Formio.getAccount()}/${fname}`;
 
+              files.push({
+                storage: 'govpilot',
+                name: fname,
+                originalName: fname,
+                url,
+                size: size.toLowerCase(),
+                data: {
+                  name: fname,
+                  url
+                }
+              });
+            }
+          });
+        }
+        this.value = files;
+        this.redraw();
+      }
+      else if (Array.isArray(value)) {
+        this.value = value;
+        this.dataValue = value.map(x => `${x.originalName}|${x.size}`).join('^');
+      }
+    }
+  }
+  splice(index) {
+    if (this.hasValue()) {
+      const value = this.value || [];
+      if (_.isArray(value) && value.hasOwnProperty(index)) {
+        value.splice(index, 1);
+        this.value = value;
+        this.dataValue = value.map(x => `${x.originalName}|${x.size}`).join('^');
+        this.triggerChange();
+      }
+    }
+  }
   get defaultValue() {
     const value = super.defaultValue;
-    return Array.isArray(value) ? value : [];
+    return Array.isArray(value) ? value : '';
   }
 
   get hasTypes() {
@@ -122,7 +168,7 @@ export default class FileComponent extends Field {
   render() {
     return super.render(this.renderTemplate('file', {
       fileSize: this.fileSize,
-      files: this.dataValue || [],
+      files: this.value || [],
       statuses: this.statuses,
       disabled: this.disabled,
       support: this.support,
@@ -270,16 +316,16 @@ export default class FileComponent extends Field {
   }
 
   deleteFile(fileInfo) {
-    if (fileInfo && (this.component.storage === 'url')) {
-      const fileService = this.fileService;
+    if (fileInfo && (this.component.storage === 'govpilot')) {
+      const { fileService } = this;
       if (fileService && typeof fileService.deleteFile === 'function') {
         fileService.deleteFile(fileInfo);
       }
       else {
         const formio = this.options.formio || (this.root && this.root.formio);
-
-        if (formio) {
-          formio.makeRequest('', fileInfo.url, 'delete');
+        const url = `https://api-${Formio.getHost()}/api/v1/file/delete?uid=${Formio.getAccount()}&fileName=${fileInfo.name}`;
+        if (Formio) {
+          Formio.makeRequest(formio, 'form', url, 'delete');
         }
       }
     }
@@ -336,13 +382,13 @@ export default class FileComponent extends Field {
     this.refs.fileLink.forEach((fileLink, index) => {
       this.addEventListener(fileLink, 'click', (event) => {
         event.preventDefault();
-        this.getFile(this.dataValue[index]);
+        this.getFile(this.value[index]);
       });
     });
 
     this.refs.removeLink.forEach((removeLink, index) => {
       this.addEventListener(removeLink, 'click', (event) => {
-        const fileInfo = this.dataValue[index];
+        const fileInfo = this.value[index];
 
         this.deleteFile(fileInfo);
         event.preventDefault();
@@ -427,22 +473,22 @@ export default class FileComponent extends Field {
     }
 
     this.refs.fileType.forEach((fileType, index) => {
-      this.dataValue[index].fileType = this.dataValue[index].fileType || this.component.fileTypes[0].label;
+      this.value[index].fileType = this.value[index].fileType || this.component.fileTypes[0].label;
 
       this.addEventListener(fileType, 'change', (event) => {
         event.preventDefault();
 
         const fileType = this.component.fileTypes.find((typeObj) => typeObj.value === event.target.value);
 
-        this.dataValue[index].fileType = fileType.label;
+        this.value[index].fileType = fileType.label;
       });
     });
 
-    const fileService = this.fileService;
+    const { fileService } = this;
     if (fileService) {
       const loadingImages = [];
       this.refs.fileImage.forEach((image, index) => {
-        loadingImages.push(this.loadImage(this.dataValue[index]).then((url) => (image.src = url)));
+        loadingImages.push(this.loadImage(this.value[index]).then((url) => (image.src = url)));
       });
       if (loadingImages.length) {
         NativePromise.all(loadingImages).then(() => {
@@ -452,13 +498,6 @@ export default class FileComponent extends Field {
     }
     return superAttach;
   }
-
-  /* eslint-disable max-len */
-  fileSize(a, b, c, d, e) {
-    return `${(b = Math, c = b.log, d = 1024, e = c(a) / c(d) | 0, a / b.pow(d, e)).toFixed(2)} ${e ? `${'kMGTPEZY'[--e]}B` : 'Bytes'}`;
-  }
-
-  /* eslint-enable max-len */
 
   /* eslint-disable max-depth */
   globStringToRegex(str) {
@@ -611,8 +650,8 @@ export default class FileComponent extends Field {
             file.private = true;
           }
           const { storage, options = {} } = this.component;
-          this.component.url = `https://api-${fileService.getHost()}/api/v1/file/upload?uid=${fileService.getAccount()}`;
-          const url = this.interpolate(this.component.url, { file: fileUpload });
+          this.component.url = `https://api-${Formio.getHost()}/api/v1/file/upload?uid=${Formio.getAccount()}`;
+          const url = this.interpolate(this.component.url);
           let groupKey = null;
           let groupPermissions = null;
 
@@ -646,10 +685,15 @@ export default class FileComponent extends Field {
                 this.statuses.splice(index, 1);
               }
               fileInfo.originalName = file.name;
+              fileInfo.name = fileInfo.data.name;
+
               if (!this.hasValue()) {
-                this.dataValue = [];
+                this.value = [];
+                this.dataValue = '';
               }
-              this.dataValue.push(fileInfo);
+              if (!this.value) this.value = [];
+              this.value.push(fileInfo);
+              this.dataValue = this.value.map(x => `${x.originalName}|${x.size}`).join('^');
               this.redraw();
               this.triggerChange();
             })
@@ -667,6 +711,13 @@ export default class FileComponent extends Field {
       });
     }
   }
+
+  /* eslint-disable max-len */
+  fileSize(a, b, c, d, e) {
+    //a = this.translateScalars(a);
+    return `${(b = Math, c = b.log, d = 1024, e = c(a) / c(d) | 0, a / b.pow(d, e)).toFixed(2)} ${e ? `${'kMGTPEZY'[--e]}B` : 'Bytes'}`;
+  }
+  /* eslint-enable max-len */
 
   getFile(fileInfo) {
     const { options = {} } = this.component;
@@ -686,12 +737,11 @@ export default class FileComponent extends Field {
           window.open(file.url, '_blank');
         }
       }
-    })
-      .catch((response) => {
-        // Is alert the best way to do this?
-        // User is expecting an immediate notification due to attempting to download a file.
-        alert(response);
-      });
+    }).catch((response) => {
+      // Is alert the best way to do this?
+      // User is expecting an immediate notification due to attempting to download a file.
+      alert(response);
+    });
   }
 
   focus() {

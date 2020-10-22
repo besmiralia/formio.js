@@ -56,7 +56,7 @@
     {% }) %}
   </div>
 {% } %}
-{% if (!ctx.disabled && (ctx.component.multiple || !ctx.files.length)) { %}
+{% if (!ctx.disabled) { %}
   {% if (ctx.self.useWebViewCamera) { %}
     <div class="fileSelector">
       <button class="btn btn-primary" ref="galleryButton"><i class="fa fa-book"></i> {{ctx.t('Gallery')}}</button>

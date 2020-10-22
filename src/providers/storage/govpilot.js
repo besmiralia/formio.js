@@ -1,3 +1,4 @@
+import Formio from '../../Formio';
 import NativePromise from 'native-promise-only';
 
 const govpilot = (formio) => {
@@ -113,7 +114,8 @@ const govpilot = (formio) => {
     deleteFile(fileInfo) {
       return new NativePromise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
-        xhr.open('DELETE', fileInfo.url, true);
+        const url = `https://api-${Formio.getHost()}/api/v1/file/delete?uid=${Formio.getAccount()}&fileName=${fileInfo.originalName}`;
+        xhr.open('DELETE', url, true);
         xhr.onload = () => {
           if (xhr.status >= 200 && xhr.status < 300) {
             resolve('File deleted');

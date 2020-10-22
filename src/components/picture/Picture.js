@@ -1,6 +1,6 @@
 import Formio from '../../Formio';
 import Field from '../_classes/field/Field';
-import { /*getComponent, */uniqueName } from '../../utils/utils';
+import { uniqueName } from '../../utils/utils';
 import download from 'downloadjs';
 import _ from 'lodash';
 import NativePromise from 'native-promise-only';
@@ -52,7 +52,7 @@ export default class PictureComponent extends Field {
       title: 'Picture',
       group: 'premium',
       icon: 'image',
-      documentation: 'http://help.form.io/userguide/#file',
+      documentation: '/userguide/#file',
       weight: 100,
       schema: PictureComponent.schema(),
     };
@@ -450,7 +450,7 @@ export default class PictureComponent extends Field {
       });
     }
 
-    const fileService = this.fileService;
+    const { fileService } = this;
     if (fileService) {
       const loadingImages = [];
       if (this.refs.fileImage) {

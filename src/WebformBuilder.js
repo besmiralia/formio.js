@@ -1232,7 +1232,9 @@ export default class WebformBuilder extends Component {
           editor: 'ace',
           weight: 10,
           input: true,
+          rows: 40,
           key: 'componentJson',
+          autoExpand: true,
           label: 'Component JSON',
           tooltip: 'Edit the JSON for this component.'
         }

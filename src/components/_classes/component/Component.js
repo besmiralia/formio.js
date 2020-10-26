@@ -1937,7 +1937,7 @@ export default class Component extends Element {
       },
       ace: {
         theme: 'ace/theme/xcode',
-        maxLines: 12,
+        maxLines: 60,
         minLines: 12,
         tabSize: 2,
         mode: 'javascript',

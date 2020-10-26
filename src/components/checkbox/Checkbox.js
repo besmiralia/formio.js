@@ -168,6 +168,7 @@ export default class CheckBoxComponent extends Field {
   }
 
   setValue(value, flags = {}) {
+    if (typeof value === 'string') value = value.toLowerCase();
     if (
       this.setCheckedState(value) !== undefined ||
       (!this.input && value !== undefined && (this.visible || !this.component.clearOnHide))

@@ -134,12 +134,12 @@ export default class FileComponent extends Field {
           });
         }
         this.value = files;
-        this.redraw();
       }
       else if (Array.isArray(value)) {
         this.value = value;
-        this.dataValue = value.map(x => `${x.originalName}|${x.size}`).join('^');
       }
+      this.dataValue = this.value.map(x => `${x.originalName}|${this.fileSize(x.size)}`).join('^').concat('^');
+      this.redraw();
     }
   }
   splice(index) {
@@ -147,8 +147,7 @@ export default class FileComponent extends Field {
       const value = this.value || [];
       if (_.isArray(value) && value.hasOwnProperty(index)) {
         value.splice(index, 1);
-        this.value = value;
-        this.dataValue = value.map(x => `${x.originalName}|${x.size}`).join('^');
+        this.setValue(value);
         this.triggerChange();
       }
     }
@@ -393,7 +392,7 @@ export default class FileComponent extends Field {
         this.deleteFile(fileInfo);
         event.preventDefault();
         this.splice(index);
-        this.redraw();
+        //this.redraw(); //setValue inside splice does redraw
       });
     });
 
@@ -684,7 +683,7 @@ export default class FileComponent extends Field {
               if (index !== -1) {
                 this.statuses.splice(index, 1);
               }
-              fileInfo.originalName = file.name;
+              fileInfo.originalName = fileInfo.data.name;//file.name;
               fileInfo.name = fileInfo.data.name;
 
               if (!this.hasValue()) {
@@ -692,9 +691,10 @@ export default class FileComponent extends Field {
                 this.dataValue = '';
               }
               if (!this.value) this.value = [];
-              this.value.push(fileInfo);
-              this.dataValue = this.value.map(x => `${x.originalName}|${x.size}`).join('^');
-              this.redraw();
+              const vals = this.value;
+              vals.push(fileInfo);
+              this.setValue(vals);
+              //this.redraw();
               this.triggerChange();
             })
             .catch((response) => {
@@ -741,7 +741,7 @@ export default class FileComponent extends Field {
     const c = Math.log;
     const d = 1024;
     let e = c(val) / c(d) | 0;
-    return `${(val / Math.pow(d, e)).toFixed(2)} ${e ? `${'kMGTPEZY'[--e]}B` : 'Bytes'}`;
+    return `${(val / Math.pow(d, e)).toFixed(2)}${e ? `${'kMGTPEZY'[--e]}B` : 'Bytes'}`;
   }
   /* eslint-enable max-len */
 

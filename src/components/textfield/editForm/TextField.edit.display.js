@@ -25,6 +25,32 @@ export default [
     }
   },
   {
+    type: 'select',
+    input: true,
+    key: 'fieldType',
+    label: 'Input Type',
+    tooltip: 'This is the input type used for this field.',
+    dataSrc: 'values',
+    weight: 401,
+    data: {
+      values: [
+        { label: 'Text Field (One Line)', value: 'input' },
+        { label: 'Text Area (Multi Line)', value: 'textarea' },
+      ],
+    },
+  },
+  {
+    weight: 402,
+    type: 'number',
+    input: true,
+    key: 'textareaRows',
+    label: 'How many rows',
+    defaultValue: 4,
+    conditional: {
+      json: { '===': [{ var: 'data.fieldType' }, 'textarea'] }
+    }
+  },
+  {
     weight: 405,
     type: 'textarea',
     key: 'widget',

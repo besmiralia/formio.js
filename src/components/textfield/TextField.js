@@ -10,6 +10,8 @@ export default class TextFieldComponent extends Input {
       type: 'textfield',
       mask: false,
       inputType: 'text',
+      fieldType: 'input',//or textarea
+      textareaRows: 4,
       inputFormat: 'plain',
       inputMask: '',
       tableView: true,
@@ -40,6 +42,10 @@ export default class TextFieldComponent extends Input {
   get inputInfo() {
     const info = super.inputInfo;
     info.type = 'input';
+    if (this.component.fieldType === 'textarea') {
+      info.type = this.component.fieldType;
+      info.attr.rows = this.component.textareaRows || 4;
+    }
 
     if (this.component.hasOwnProperty('spellcheck')) {
       info.attr.spellcheck = this.component.spellcheck;
@@ -115,7 +121,7 @@ export default class TextFieldComponent extends Input {
     value = this.maskValue(value, flags);
     const textValue = value.value || '';
     const textInput = this.refs.mask ? this.refs.mask[index] : null;
-    const maskInput = this.refs.select ? this.refs.select[index]: null;
+    const maskInput = this.refs.select ? this.refs.select[index] : null;
     const mask = this.getMaskPattern(value.maskName);
     if (textInput && maskInput && mask) {
       textInput.value = conformToMask(textValue, FormioUtils.getInputMask(mask)).conformedValue;
@@ -137,7 +143,7 @@ export default class TextFieldComponent extends Input {
       return super.getValueAt(index);
     }
     const textInput = this.refs.mask ? this.refs.mask[index] : null;
-    const maskInput = this.refs.select ? this.refs.select[index]: null;
+    const maskInput = this.refs.select ? this.refs.select[index] : null;
     return {
       value: textInput ? textInput.value : undefined,
       maskName: maskInput ? maskInput.value : undefined

@@ -1264,3 +1264,6 @@ export function getDataParentComponent(componentInstance) {
     return getDataParentComponent(parent);
   }
 }
+
+// Export lodash to save space with other libraries.
+export { _ };

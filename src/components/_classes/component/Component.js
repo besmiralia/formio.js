@@ -1944,6 +1944,22 @@ export default class Component extends Element {
         placeholder: this.t(this.component.placeholder)
       },
       ckeditor: {
+        toolbar: [
+          'heading',
+          'bold',
+          'italic',
+          'underline',
+          'strikethrough',
+          'code',
+          'superscript',
+          'link',
+          'bulletedList',
+          'numberedList',
+          'imageUpload',
+          'blockQuote',
+          'undo',
+          'redo'
+        ],
         image: {
           toolbar: [
             'imageTextAlternative',

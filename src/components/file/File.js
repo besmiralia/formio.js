@@ -370,7 +370,9 @@ export default class FileComponent extends Field {
     if (this.refs.fileBrowse) {
       this.addEventListener(this.refs.fileBrowse, 'click', (event) => {
         event.preventDefault();
-
+        if (!this.component.multiple && this.statuses.some(fileUpload => fileUpload.status === 'progress')) {
+          return;
+        }
         this.browseFiles(this.browseOptions)
           .then((files) => {
             this.upload(files);
@@ -387,9 +389,9 @@ export default class FileComponent extends Field {
 
     this.refs.removeLink.forEach((removeLink, index) => {
       this.addEventListener(removeLink, 'click', (event) => {
-        const fileInfo = this.value[index];
+        //const fileInfo = this.value[index];
 
-        this.deleteFile(fileInfo);
+        //this.deleteFile(fileInfo);
         event.preventDefault();
         this.splice(index);
         //this.redraw(); //setValue inside splice does redraw
@@ -741,7 +743,7 @@ export default class FileComponent extends Field {
     const c = Math.log;
     const d = 1024;
     let e = c(val) / c(d) | 0;
-    return `${(val / Math.pow(d, e)).toFixed(2)}${e ? `${'kMGTPEZY'[--e]}B` : 'Bytes'}`;
+    return `${(val / Math.pow(d, e)).toFixed(2)}${e ? `${'kMGTPEZY'[--e]}B` : 'B'}`;
   }
   /* eslint-enable max-len */
 

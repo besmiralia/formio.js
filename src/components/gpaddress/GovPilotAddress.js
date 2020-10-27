@@ -33,6 +33,9 @@ export default class GovPilotAddressComponent extends ContainerComponent {
       hideLabel: false,
       disableClearIcon: false,
       enableManualMode: false,
+      validate: {
+        required: true,
+      },
       components: [
         {
           label: 'Address 1',

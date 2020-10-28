@@ -16,7 +16,7 @@ import {
 } from '../utils/utils';
 import moment from 'moment';
 import _ from 'lodash';
-const DEFAULT_FORMAT = 'yyyy-MM-dd hh:mm a';
+const DEFAULT_FORMAT = 'MM/dd/yyyy hh:mm a';
 const ISO_8601_FORMAT = 'yyyy-MM-ddTHH:mm:ssZ';
 const CDN_URL = 'https://cdn.form.io/';
 

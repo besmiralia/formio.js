@@ -9,7 +9,7 @@ export default class DateTimeComponent extends Input {
       type: 'datetime',
       label: 'Date / Time',
       key: 'dateTime',
-      format: 'MM/dd/yyyy hh:mm:ss a',
+      format: 'MM/dd/yyyy hh:mm a',
       useLocaleSettings: false,
       allowInput: true,
       enableDate: true,

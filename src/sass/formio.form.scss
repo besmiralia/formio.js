@@ -1301,7 +1301,7 @@ div[read-only="true"] {
   overflow-x: visible;
 }
 
-.formio-component-textfield {
+.formio-component-textfield,
 .formio-component-textfield,
 .formio-component-textarea,
 .formio-component-password {
@@ -1311,7 +1311,7 @@ div[read-only="true"] {
 }
 
 /*gp custom*/
-.long-paragraph{
+.long-paragraph {
   max-height: 300px;
   overflow: auto;
   border: 1px solid #ccc;

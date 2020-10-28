@@ -29,6 +29,7 @@ export default class GovPilotAddressComponent extends ContainerComponent {
           uid: Formio.getAccount()
         }
       },
+      disableSiblings: true,
       manualModeViewString: '',
       hideLabel: false,
       disableClearIcon: false,

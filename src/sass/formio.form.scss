@@ -1307,6 +1307,10 @@ div[read-only="true"] {
   }
 }
 
+.formio-form > div > nav > ul.pagination {
+  flex-flow: wrap row;
+}
+
 /*gp custom*/
 .long-paragraph {
   max-height: 300px;

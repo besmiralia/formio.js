@@ -58,7 +58,7 @@ export default class EditGridComponent extends NestedArrayComponent {
         {% if (!component.hasOwnProperty('tableView') || component.tableView) { %}
           <div class="col-sm-2">{{ component.label }}</div>
         {% } %}
-      {% }) %}
+      {% }, true) %}
     </div>`;
   }
 
@@ -947,6 +947,7 @@ export default class EditGridComponent extends NestedArrayComponent {
     if (changed || flags.resetValue) {
       this.rebuild();
     }
+    this.redraw();
     return changed;
   }
 

@@ -1109,6 +1109,9 @@ export function getContextComponents(context) {
  * @returns {*}
  */
 export function sanitize(string, options) {
+  if (typeof dompurify.sanitize !== 'function') {
+    return string;
+  }
   // Dompurify configuration
   const sanitizeOptions = {
     ADD_ATTR: ['ref', 'target'],

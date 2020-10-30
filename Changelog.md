@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 4.12.1-rc.21
+#### Fixed
+ - Problem where the form JSON would remove function based evals.
+
+### 4.12.1-rc.20
+#### Fixed
+ - Sanitize method to not execute if the sanitize method is not defined (node.js)
+
 ### 4.12.1-rc.19
 #### Fixed
  - FJS-1301 & FJS-1302 Regressions on examples of github (Problem with Formio global object)
@@ -17,6 +25,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
  - FJS-1348: remove the DynamicWizard component from the Webform builder
  - FJS-1382: fixed an issue where date value is changed when reopening modal row in editGrid after setting submission
  - FJS-1355: add disableSiblings logic for the builder
+ - FJS-1349: fix EditGrid reset after cancel
+ - FOR-2815 : Fixes an issue where scripts passed to TextArea/TextField are executed while rendering
+ - FJS-1092: Wizard form page navigation bar needs to be responsive
 
 ### 4.12.1-rc.18
 #### Fixed

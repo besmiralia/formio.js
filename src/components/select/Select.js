@@ -57,7 +57,10 @@ export default class SelectComponent extends Field {
 
   init() {
     if (this.component.dataSrc === 'govpilot') {
-      this.component.data.url = `${Formio.getProjectUrl()}/dropdown/${this.schema.gptid}/${this.key}`;
+      if (this.component.feeschedule) {
+        this.component.data.url = `${Formio.getProjectUrl()}/${Formio.getTid()}/feeschedule`;
+      }
+      else this.component.data.url = `${Formio.getProjectUrl()}/dropdown/${this.schema.gptid}/${this.key}`;
     }
 
     super.init();

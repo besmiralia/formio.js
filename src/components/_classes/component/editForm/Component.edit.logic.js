@@ -1,5 +1,5 @@
 import { getContextComponents } from '../../../../utils/utils';
-
+import BuilderUtils from '../../../../utils/builder';
 /* eslint-disable quotes, max-len */
 export default [
   {
@@ -108,36 +108,13 @@ export default [
                     input: true,
                     label: 'Operator:',
                     key: 'conditional.op',
-                    dataSrc: 'values',
+                    dataSrc: 'custom',
                     valueProperty: 'value',
                     tableView: false,
                     data: {
-                      values: [
-                        {
-                          value: '=',
-                          label: 'Equals',
-                        },
-                        {
-                          value: '!=',
-                          label: 'Not Equal',
-                        },
-                        {
-                          value: '<',
-                          label: 'Less Than',
-                        },
-                        {
-                          value: '<=',
-                          label: 'Less Than or Equal',
-                        },
-                        {
-                          value: '>',
-                          label: 'Greater Than',
-                        },
-                        {
-                          value: '>=',
-                          label: 'Great Than or Equal',
-                        },
-                      ],
+                      custom() {
+                        return BuilderUtils.getLogicOperators();
+                      }
                     },
                   },
                   {
@@ -230,6 +207,8 @@ export default [
                   required: true,
                 },
                 type: 'textfield',
+                allowCalculateOverride: true,
+                calculateValue: "value='SET ' + (row.type === 'property' && row.property?(row.property.label + ' ' + (row.property.type === 'boolean'? row.state: row.text)):(row.type === 'value'? row.value: row.text))"
               },
               {
                 weight: 10,

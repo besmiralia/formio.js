@@ -1,4 +1,5 @@
 import EditFormUtils from './utils';
+import BuilderUtils from '../../../../utils/builder';
 import { getContextComponents } from '../../../../utils/utils';
 /* eslint-disable quotes, max-len */
 export default [
@@ -39,36 +40,13 @@ export default [
         input: true,
         label: 'Operator:',
         key: 'conditional.op',
-        dataSrc: 'values',
+        dataSrc: 'custom',
         valueProperty: 'value',
         tableView: false,
         data: {
-          values: [
-            {
-              value: '=',
-              label: 'Equals',
-            },
-            {
-              value: '!=',
-              label: 'Not Equal',
-            },
-            {
-              value: '<',
-              label: 'Less Than',
-            },
-            {
-              value: '<=',
-              label: 'Less Than or Equal',
-            },
-            {
-              value: '>',
-              label: 'Greater Than',
-            },
-            {
-              value: '>=',
-              label: 'Great Than or Equal',
-            },
-          ],
+          custom() {
+            return BuilderUtils.getLogicOperators();
+          }
         },
       },
       {

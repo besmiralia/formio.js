@@ -53,6 +53,35 @@ export default {
     ]
   },
 
+  getLogicOperators() {
+    return [
+      {
+        value: '=',
+        label: 'Equals',
+      },
+      {
+        value: '!=',
+        label: 'Not Equal',
+      },
+      {
+        value: '<',
+        label: 'Less Than',
+      },
+      {
+        value: '<=',
+        label: 'Less Than or Equal',
+      },
+      {
+        value: '>',
+        label: 'Greater Than',
+      },
+      {
+        value: '>=',
+        label: 'Great Than or Equal',
+      },
+    ];
+  },
+
   getAlphaShortcuts() {
     return _.range('A'.charCodeAt(), 'Z'.charCodeAt() + 1).map((charCode) => String.fromCharCode(charCode));
   },

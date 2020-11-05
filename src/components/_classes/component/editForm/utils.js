@@ -42,20 +42,22 @@ const EditFormUtils = {
       tag: 'div',
       /* eslint-disable prefer-template */
       content: '<p>The following variables are available in all scripts.</p>' +
-      '<table class="table table-bordered table-condensed table-striped">' +
-      additional +
-      '<tr><th>form</th><td>The complete form JSON object</td></tr>' +
-      '<tr><th>submission</th><td>The complete submission object.</td></tr>' +
-      '<tr><th>data</th><td>The complete submission data object.</td></tr>' +
-      '<tr><th>row</th><td>Contextual "row" data, used within DataGrid, EditGrid, and Container components</td></tr>' +
-      '<tr><th>component</th><td>The current component JSON</td></tr>' +
-      '<tr><th>instance</th><td>The current component instance.</td></tr>' +
-      '<tr><th>value</th><td>The current value of the component.</td></tr>' +
-      '<tr><th>moment</th><td>The moment.js library for date manipulation.</td></tr>' +
-      '<tr><th>_</th><td>An instance of <a href="https://lodash.com/docs/" target="_blank">Lodash</a>.</td></tr>' +
-      '<tr><th>utils</th><td>An instance of the <a href="http://formio.github.io/formio.js/docs/identifiers.html#utils" target="_blank">FormioUtils</a> object.</td></tr>' +
-      '<tr><th>util</th><td>An alias for "utils".</td></tr>' +
-      '</table><br/>'
+        '<table class="table table-bordered table-condensed table-striped">' +
+        additional +
+        '<tr><th>form</th><td>The complete form JSON object</td></tr>' +
+        '<tr><th>submission</th><td>The complete submission object.</td></tr>' +
+        '<tr><th>data</th><td>The complete submission data object.</td></tr>' +
+        '<tr><th>row</th><td>Contextual "row" data, used within DataGrid, EditGrid, and Container components</td></tr>' +
+        '<tr><th>component</th><td>The current component JSON</td></tr>' +
+        '<tr><th>instance</th><td>The current component instance.</td></tr>' +
+        '<tr><th>value</th><td>The current value of the component.</td></tr>' +
+        '<tr><th>moment</th><td>The moment.js library for date manipulation.</td></tr>' +
+        '<tr><th>_</th><td>An instance of <a href="https://lodash.com/docs/" target="_blank">Lodash</a>.</td></tr>' +
+        '<tr><th>utils</th><td>An instance of the <a href="http://formio.github.io/formio.js/docs/identifiers.html#utils" target="_blank">FormioUtils</a> object.</td></tr>' +
+        '<tr><th>util</th><td>An alias for "utils".</td></tr>' +
+        '<tr><th>user</th><td>The current logged in user. Available fields: id, userid, email, fullname.</td></tr>' +
+        '<tr><th>config</th><td>The variables (account and module specific, refer to Variables tab in left menu).</td></tr>' +
+        '</table><br/>'
       /* eslint-enable prefer-template */
     };
   },
@@ -82,12 +84,26 @@ const EditFormUtils = {
           },
           components: [
             {
+              type: 'select',
+              input: false,
+              label: 'Fee Items',
+              key: `${property}_fs`,
+              dataSrc: 'govpilot',
+              feeschedule: true,
+              //valueProperty: 'id',
+              tableView: false,
+              data: {
+                url: ''
+              },
+            },
+            {
               type: 'textarea',
               key: property,
               rows: 5,
               editor: 'ace',
+              //as: 'javascript',
               hideLabel: true,
-              input: true
+              input: true,
             },
             {
               type: 'htmlelement',
@@ -109,7 +125,7 @@ const EditFormUtils = {
               /* eslint-disable prefer-template */
               content: '<p>Execute custom logic using <a href="http://jsonlogic.com/" target="_blank">JSONLogic</a>.</p>' +
                 '<p>Full <a href="https://lodash.com/docs" target="_blank">Lodash</a> support is provided using an "_" before each operation, such as <code>{"_sum": {var: "data.a"}}</code></p>' +
-                 exampleJSON
+                exampleJSON
               /* eslint-enable prefer-template */
             },
             {

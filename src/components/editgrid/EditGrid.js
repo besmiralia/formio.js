@@ -121,6 +121,10 @@ export default class EditGridComponent extends NestedArrayComponent {
     return this.refs[this.rowRef];
   }
 
+  get rowRefs() {
+    return this.refs[`editgrid-${this.component.key}-row`];
+  }
+
   get addRowRef() {
     return `${this.editgridKey}-addRow`;
   }
@@ -867,10 +871,8 @@ export default class EditGridComponent extends NestedArrayComponent {
 
       rowsValid &= rowValid;
 
-      const rowRefs = this.refs[`editgrid-${this.component.key}-row`];
-
-      if (rowRefs) {
-        const rowContainer = rowRefs[index];
+      if (this.rowRefs) {
+        const rowContainer = this.rowRefs[index];
 
         if (rowContainer) {
           const errorContainer = rowContainer.querySelector('.editgrid-row-error');

@@ -21,7 +21,8 @@ const QUILL_URL = isIEBrowser
   ? 'https://cdn.quilljs.com/1.3.7'
   : 'https://cdn.quilljs.com/2.0.0-dev.3';
 const QUILL_TABLE_URL = 'https://cdn.form.io/quill/quill-table.js';
-const ACE_URL = 'https://cdn.form.io/ace/1.4.10/ace.js';
+//const ACE_URL = [{ type: 'script', src: 'js/plugins/ace/ace.lang.js' }, { type: 'script', src: 'js/plugins/ace/ext-language_tools.js' }];
+const ACE_URL = 'js/plugins/ace/ace.lang.js';
 
 /**
  * This is the Component class
@@ -2079,11 +2080,41 @@ export default class Component extends Element {
         settings.mode = mode;
       }
     }
+    var autoCompleteList = [];
+
+    //if (this.builderMode) {
+    settings = _.merge(settings, {
+      enableBasicAutocompletion: true,
+      enableSnippets: true,
+      enableLiveAutocompletion: true
+    });
+    FormioUtils.eachComponent(this.options.editForm.components, function(component) {
+      if (component.key.indexOf('cf') >= 0) autoCompleteList.push(component);
+    }, true);
+    //}
     settings = _.merge(this.wysiwygDefault.ace, _.get(this.options, 'editors.ace.settings', {}), settings || {});
     return Formio.requireLibrary('ace', 'ace', _.get(this.options, 'editors.ace.src', ACE_URL), true)
-      .then((editor) => {
-        editor = editor.edit(element);
+      .then((aceLib) => {
+        aceLib.require('ace/ext/language_tools');
+        var editor = aceLib.edit(element);
         editor.removeAllListeners('change');
+        /* Besmir Alia
+         * Add Autocomplete for fields
+         */
+        //if (this.builderMode) {
+        var staticWordCompleter = {
+          getCompletions: function(editor, session, pos, prefix, callback) {
+            callback(null, autoCompleteList.map(function(word) {
+              return {
+                caption: word.label,
+                value: `data.${word.key}`,
+                meta: 'data'
+              };
+            }));
+          }
+        };
+        editor.completers = [staticWordCompleter];
+        //}
         editor.setOptions(settings);
         editor.getSession().setMode(settings.mode);
         editor.on('change', () => onChange(editor.getValue()));

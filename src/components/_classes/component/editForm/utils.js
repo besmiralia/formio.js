@@ -101,7 +101,7 @@ const EditFormUtils = {
               key: property,
               rows: 5,
               editor: 'ace',
-              //as: 'javascript',
+              as: 'javascript',
               hideLabel: true,
               input: true,
             },

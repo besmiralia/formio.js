@@ -704,11 +704,30 @@ export default class FileComponent extends Field {
               fileUpload.message = response;
               delete fileUpload.progress;
               this.redraw();
+            }, url, options, fileKey, groupPermissions, groupResourceId,
+              () => this.emit('fileUploadingStart', filePromise)
+            )
+            .then((fileInfo) => {
+              const index = this.statuses.indexOf(fileUpload);
+              if (index !== -1) {
+                this.statuses.splice(index, 1);
+              }
+              fileInfo.originalName = file.name;
+              if (!this.hasValue()) {
+                this.dataValue = [];
+              }
+              this.dataValue.push(fileInfo);
+              this.redraw();
+              this.triggerChange();
+              this.emit('fileUploadingEnd', filePromise);
             })
-            .finally(() => {
+            .catch((response) => {
+              fileUpload.status = 'error';
+              fileUpload.message = response;
+              delete fileUpload.progress;
+              this.redraw();
               this.emit('fileUploadingEnd', filePromise);
             });
-          this.emit('fileUploadingStart', filePromise);
         }
       });
     }

@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 4.12.1-rc.28
+#### Fixed
+ - PDF-213: Fix ids mismatch
+ - FJS-1427: Component settings can't be opened after the Property name is cleared
+ - PDF-197: Set Formio base url and project url for pdf iframe
+ - FJS-1298: fix page display in one line when condition is set
+ - Fix: fix the modalEdit logic for the EditGrid component
+
+### 4.12.1-rc.27
+#### Fixed
+ - FJS-1426: Fixes an issue where NestedForm's data is not shown when it is inside DataGrid
+
+#### Changed
+ - Upgrade json-logic-js@2.0.0 which resolves https://www.npmjs.com/advisories/1542
+ - Upgrade marked@1.2.3, jwt-decode@3.1.1, eslint@7.13.0
+
 ### 4.12.1-rc.26
 #### Added
  - Pass along the saved flag to the submit event.

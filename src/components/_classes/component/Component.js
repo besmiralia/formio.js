@@ -21,8 +21,7 @@ const QUILL_URL = isIEBrowser
   ? 'https://cdn.quilljs.com/1.3.7'
   : 'https://cdn.quilljs.com/2.0.0-dev.3';
 const QUILL_TABLE_URL = 'https://cdn.form.io/quill/quill-table.js';
-//const ACE_URL = [{ type: 'script', src: 'js/plugins/ace/ace.lang.js' }, { type: 'script', src: 'js/plugins/ace/ext-language_tools.js' }];
-const ACE_URL = 'js/plugins/ace/ace.lang.js';
+const ACE_URL = 'https://cdn.form.io/ace/1.4.10/ace.js';
 
 /**
  * This is the Component class
@@ -1025,6 +1024,7 @@ export default class Component extends Element {
     // If this already has an id, get it from the dom. If SSR, it could be different from the initiated id.
     if (this.element.id) {
       this.id = this.element.id;
+      this.component.id = this.id;
     }
 
     this.loadRefs(element, {
@@ -2089,13 +2089,13 @@ export default class Component extends Element {
       enableLiveAutocompletion: true
     });
     FormioUtils.eachComponent(this.options.editForm.components, function(component) {
-      if (component.key.indexOf('cf') >= 0) autoCompleteList.push(component);
+      if (component.key.indexOf('cf') >= 0) autoCompleteList.push({ key: `data.${component.key}`, label: component.label, meda: 'data' });
     }, true);
     //}
     settings = _.merge(this.wysiwygDefault.ace, _.get(this.options, 'editors.ace.settings', {}), settings || {});
     return Formio.requireLibrary('ace', 'ace', _.get(this.options, 'editors.ace.src', ACE_URL), true)
       .then((aceLib) => {
-        aceLib.require('ace/ext/language_tools');
+        //aceLib.require('ace/ext/language_tools');
         var editor = aceLib.edit(element);
         editor.removeAllListeners('change');
         /* Besmir Alia
@@ -2107,8 +2107,8 @@ export default class Component extends Element {
             callback(null, autoCompleteList.map(function(word) {
               return {
                 caption: word.label,
-                value: `data.${word.key}`,
-                meta: 'data'
+                value: word.key,
+                meta: word.meta
               };
             }));
           }

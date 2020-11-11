@@ -854,6 +854,7 @@ export default class SelectComponent extends Field {
         containerOuter: 'choices form-group formio-choices',
         containerInner: this.transform('class', 'form-control ui fluid selection dropdown')
       },
+      addItems: false,
       addItemText: false,
       placeholder: !!this.component.placeholder,
       placeholderValue: placeholderValue,
@@ -863,6 +864,8 @@ export default class SelectComponent extends Field {
       shouldSort: false,
       position: (this.component.dropdown || 'auto'),
       searchEnabled: useSearch,
+      prependValue: null,
+      appendValue: null,
       searchChoices: !this.component.searchField,
       searchFields: _.get(this, 'component.searchFields', ['label']),
       fuseOptions: Object.assign(

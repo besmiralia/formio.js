@@ -640,7 +640,7 @@ export default class WebformBuilder extends Component {
       const filteredComponentsOrder = [];
       for (const type in this.fieldsList.components) {
         const builderInfo = this.fieldsList.components[type];
-        if (builderInfo.title.toLowerCase().indexOf(searchString.toLowerCase()) !== -1) {
+        if (builderInfo.title.toLowerCase().indexOf(searchString.toLowerCase()) !== -1 || builderInfo.key.toLowerCase().indexOf(searchString.toLowerCase()) !== -1) {
           filteredComponentsOrder.push(type);
         }
       }

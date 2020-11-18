@@ -65,6 +65,16 @@ export default class TextFieldComponent extends Input {
     return '';
   }
 
+  get validationValue() {
+    //Besmir Alia - convert value to match the mask before validating it
+    var dataVal = this.dataValue;
+    if (dataVal !== '' && !this.isMultipleMasksField && this.component.inputMask) {
+      dataVal = conformToMask(dataVal, FormioUtils.getInputMask(this.component.inputMask), { guide: false }).conformedValue;
+      this.dataValue = dataVal;
+    }
+    return dataVal;
+  }
+
   /**
    * Returns the mask value object.
    *
@@ -116,6 +126,10 @@ export default class TextFieldComponent extends Input {
    */
   setValueAt(index, value, flags = {}) {
     if (!this.isMultipleMasksField) {
+      if (value !== '') {
+        value = conformToMask(value, FormioUtils.getInputMask(this.component.inputMask), { guide: false }).conformedValue;
+        this.dataValue = value;
+      }
       return super.setValueAt(index, value, flags);
     }
     value = this.maskValue(value, flags);

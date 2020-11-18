@@ -770,7 +770,7 @@ body.formio-dialog-open {
 }
 
 .formio-choices.form-group {
-  min-width: 200px;
+  /*min-width: 200px;*/
   margin-bottom: 0;
 }
 
@@ -791,36 +791,66 @@ body.formio-dialog-open {
   width: 100%;
 }
 
-.formio-component .table {
-  margin-bottom: 0;
-}
+
 /*
   BESMIR ALIA
   2020-09-23
 */
-.formio-component .col-form-label{
-  font-size: 0.815em;
-  padding-bottom: calc(.2rem + 1px);
-  font-family: ProximaNova-SemiBold;
-  color: #4d4d4d;
-}
-.formio-component .formio-component-fieldset legend{
-  color: #4a90e2;
-  font-size: 1.1em;
-  font-family: ProximaNova-SemiBold;
-  margin-bottom: 0rem;
-}
-.formio-component .form-group{
-  margin-bottom: 13px;
-}
-.formio-component .form-control{
-  height: auto;
-  line-height: 1.2;
-  padding-top: 5px;
-  padding-bottom: 4px;
-}
-.formio-component .formio-component-content p{
-  margin-bottom: 0;
+.formio-component {
+  .table {
+    margin-bottom: 0;
+  }
+
+  .col-form-label{
+    font-size: 0.815em;
+    padding-bottom: calc(.2rem + 1px);
+    font-family: ProximaNova-SemiBold;
+    color: #4d4d4d;
+  }
+
+  .formio-component-fieldset legend{
+    color: #4a90e2;
+    font-size: 1.1em;
+    font-family: ProximaNova-SemiBold;
+    margin-bottom: 0rem;
+  }
+
+  .form-group{
+    margin-bottom: 13px;
+  }
+
+  .form-control{
+    height: auto;
+    line-height: 1.2;
+    padding-top: 5px;
+    padding-bottom: 4px;
+  }
+
+  .formio-component-content p{
+    margin-bottom: 0;
+  }
+
+  .card{
+    margin-bottom: 15px;
+  
+    &.card-primary{
+      border-color: var(--primary);
+      &>.card-header{
+        color: white;
+        background-color: var(--primary);
+      }
+    }
+    &.card-info{
+      border-color: var(--info);
+      &>.card-header{
+        color: white;
+        background-color: var(--info);
+      }
+    }
+  }
+  .list-group-item.list-group-header {
+    background-color: rgba(0,0,0,.03);
+  }
 }
 #googleMap{
   background: #f2f2f2;
@@ -829,24 +859,7 @@ body.formio-dialog-open {
   background: url('../images/loading.gif') center right no-repeat;
 }
 /*END CUSTOM CHANGES*/
-.formio-component .card{
-  margin-bottom: 15px;
 
-  &.card-primary{
-    border-color: var(--primary);
-    &>.card-header{
-      color: white;
-      background-color: var(--primary);
-    }
-  }
-  &.card-info{
-    border-color: var(--info);
-    &>.card-header{
-      color: white;
-      background-color: var(--info);
-    }
-  }
-}
 
 .formio-hide-label-panel-tooltip {
   margin-top: -10px;

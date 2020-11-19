@@ -496,6 +496,9 @@ export default class FileComponent extends Field {
           this.filesReadyResolve();
         }).catch(() => this.filesReadyReject());
       }
+      else {
+        this.filesReadyResolve();
+      }
     }
     return superAttach;
   }

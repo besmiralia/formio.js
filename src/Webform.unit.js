@@ -40,6 +40,7 @@ import disableSubmitButton from '../test/forms/disableSubmitButton';
 import formWithAddressComponent from '../test/forms/formWithAddressComponent';
 import formWithDataGridInitEmpty from '../test/forms/dataGridWithInitEmpty';
 import nestedFormInsideDataGrid from '../test/forms/dataGrid-nestedForm';
+import formWithDataGrid from '../test/forms/formWithDataGrid';
 
 /* eslint-disable max-statements */
 describe('Webform tests', function() {
@@ -60,6 +61,29 @@ describe('Webform tests', function() {
         assert.equal(formWithPanel.components[0].collapsed, false);
         done();
       }, 200);
+    }).catch((err) => done(err));
+  });
+
+  it('Should remove dataGrid extra rows and components after setting value with less row number', function(done) {
+    const formElement = document.createElement('div');
+    const formWithDG = new Webform(formElement);
+
+    formWithDG.setForm(formWithDataGrid.form).then(() => {
+    formWithDG.setSubmission(formWithDataGrid.submission3rows);
+
+      setTimeout(() => {
+        assert.equal(formWithDG.components[0].rows.length, 3);
+        assert.equal(formWithDG.components[0].components.length, 3);
+
+        formWithDG.setSubmission(formWithDataGrid.submission1row);
+
+        setTimeout(() => {
+          assert.equal(formWithDG.components[0].rows.length, 1);
+          assert.equal(formWithDG.components[0].components.length, 1);
+
+          done();
+        }, 200);
+      }, 100);
     }).catch((err) => done(err));
   });
 

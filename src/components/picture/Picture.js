@@ -461,6 +461,9 @@ export default class PictureComponent extends Field {
           this.filesReadyResolve();
         }).catch(() => this.filesReadyReject());
       }
+      else {
+        this.filesReadyResolve();
+      }
     }
     return superAttach;
   }

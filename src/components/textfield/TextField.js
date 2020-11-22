@@ -126,7 +126,7 @@ export default class TextFieldComponent extends Input {
    */
   setValueAt(index, value, flags = {}) {
     if (!this.isMultipleMasksField) {
-      if (value !== '') {
+      if (value !== '' && this.component.inputMask !== '') {
         value = conformToMask(value, FormioUtils.getInputMask(this.component.inputMask), { guide: false }).conformedValue;
         this.dataValue = value;
       }

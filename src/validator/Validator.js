@@ -56,8 +56,7 @@ class ValidationChecker {
             data: component.data
           });
         },
-        /* eslint-disable no-unused-vars */
-        check(component, setting, value) {
+        check(component, setting) {
           return !boolValue(setting);
         }
       },

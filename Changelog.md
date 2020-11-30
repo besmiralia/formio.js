@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 4.12.2-rc.5
+#### Fixed
+ - FJS-1466: focus on the default value in the currency field
+ - FJS-1470: fixed infinite loop in wizard with dataGrid
+
+### 4.12.2-rc.4
+#### Fixed
+ - FJS-1297: fix editing nested wizards
+ - Fixing issues where clearOnHide would cause data to erroneously reset within nested conditionals
+ - FJS-1470: fixed an issue where infinite loop is created in wizard after internal form schema change
+ - FJS-1312: fix display of subform errors in wizards
+ - UIP-263: EditGrid: fix values with html tags got injected in template
+ - FJS-1429: fixed currency validation regexp
+ - FJS-1456: add line breaks for fields in modal preview
+ - FJS-1333: Fixes an issue where all the validation errors are shown for the modal draft row
+
 ### 4.12.2-rc.3
 #### Added
  - FJS-1380: Adds a validation which checks if the value is available within component's values setting

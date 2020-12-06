@@ -166,11 +166,11 @@ export default class CalendarWidget extends InputWidget {
             if (this._input) {
               const dateValue = this._input.value;
               // Create a new flatpickr.
-              this.calendar = new Flatpickr(this._input, this.settings);
+              this.calendar = new Flatpickr(this._input, { ...this.settings, disableMobile: true });
+
               if (dateValue) {
                 this.calendar.setDate(dateValue, false, this.settings.altFormat);
               }
-
               this.calendar.altInput.addEventListener('input', (event) => {
                 if (this.settings.allowInput) {
                   this.settings.manualInputValue = event.target.value;
@@ -397,6 +397,19 @@ export default class CalendarWidget extends InputWidget {
   setPlaceholder(input) {
     if (input && !input.getAttribute('placeholder')) {
       input.setAttribute('placeholder', this.settings.format);
+    }
+  }
+
+  setErrorClasses(hasErrors) {
+    if (!this.input) {
+      return;
+    }
+
+    if (hasErrors) {
+      this.input.className = `${this.input.className} is-invalid`;
+    }
+    else {
+      this.input.className = this.input.className.replace('is-invalid', '');
     }
   }
 

@@ -35,12 +35,14 @@ import {
   formWithCustomFormatDate
 } from '../test/formtest';
 import DataGridOnBlurValidation from '../test/forms/dataGridOnBlurValidation';
+import UpdateErrorClassesWidgets from '../test/forms/updateErrorClasses-widgets';
 import nestedModalWizard from '../test/forms/nestedModalWizard';
 import disableSubmitButton from '../test/forms/disableSubmitButton';
 import formWithAddressComponent from '../test/forms/formWithAddressComponent';
 import formWithDataGridInitEmpty from '../test/forms/dataGridWithInitEmpty';
 import nestedFormInsideDataGrid from '../test/forms/dataGrid-nestedForm';
 import formWithDataGrid from '../test/forms/formWithDataGrid';
+import formWithDataGridWithCondColumn from '../test/forms/dataGridWithConditionalColumn';
 
 /* eslint-disable max-statements */
 describe('Webform tests', function() {
@@ -61,6 +63,29 @@ describe('Webform tests', function() {
         assert.equal(formWithPanel.components[0].collapsed, false);
         done();
       }, 200);
+    }).catch((err) => done(err));
+  });
+
+  it('Should display dataGrid conditional column once the condition is met', function(done) {
+    const formElement = document.createElement('div');
+    const formWithCondDataGridColumn = new Webform(formElement);
+
+    formWithCondDataGridColumn.setForm(formWithDataGridWithCondColumn).then(() => {
+      const condDataGridField = formWithCondDataGridColumn.element.querySelector('[name="data[dataGrid][0][numberCond]"]');
+      assert.equal(!!condDataGridField, false);
+
+      const textField = formWithCondDataGridColumn.element.querySelector('[name="data[textField]"]');
+      textField.value = 'show';
+
+      const inputEvent = new Event('input');
+      textField.dispatchEvent(inputEvent);
+
+      setTimeout(() => {
+        const condDataGridFieldAfterFulfillingCond = formWithCondDataGridColumn.element.querySelector('[name="data[dataGrid][0][numberCond]"]');
+        assert.equal(!!condDataGridFieldAfterFulfillingCond, true);
+
+        done();
+      }, 300);
     }).catch((err) => done(err));
   });
 
@@ -699,7 +724,7 @@ describe('Webform tests', function() {
         assert.equal(formWithPattern.element.querySelector('.formio-component-textField').querySelectorAll('.error').length, 1);
         assert.equal(formWithPattern.errors[0].messages.length, 1);
         assert.equal(formWithPattern.errors[0].messages[0].message, 'Text Field is required');
-        assert.equal(formWithPattern.element.querySelector('[ref="errorRef"]').textContent, 'Text Field: Text Field is required');
+        assert.equal(formWithPattern.element.querySelector('[ref="errorRef"]').textContent, 'Text Field is required');
         done();
       }, 500);
     })
@@ -2119,6 +2144,65 @@ describe('Webform tests', function() {
         assert.deepEqual(nestedForm.dataValue, submissionWithIdOnly, 'Should not set to defaultValue after restore');
         done();
       }, 150);
+    }).catch(done);
+  });
+
+  it('Should add and clear input error classes correclty', (done) => {
+    const formElement = document.createElement('div');
+    const form = new Webform(formElement, { language: 'en', template: 'bootstrap3' });
+
+    form.setForm(UpdateErrorClassesWidgets).then(() => {
+      const checkbox = form.getComponent('showDate');
+      checkbox.setValue(true);
+      setTimeout(() => {
+        const dateTimeComponent = form.getComponent('condtionalDate');
+        const dateComponentElement = dateTimeComponent.element;
+        assert.equal(!dateComponentElement.className.includes('formio-hidden'), true, 'Should not be hidden');
+
+        form.submit();
+
+        setTimeout(() => {
+          const dateVisibleInput = dateComponentElement.querySelector('.input');
+          const flatpickerInput = dateComponentElement.querySelector('.flatpickr-input');
+
+          assert(dateVisibleInput.className.includes('is-invalid'), 'Visible field should has invalid class');
+          assert(flatpickerInput.className.includes('is-invalid'), 'Flatpickr field should has invalid class as well');
+
+          dateTimeComponent.setValue('2020-12-09T00:00:00');
+
+          setTimeout(() => {
+            assert.equal(dateTimeComponent.dataValue, '2020-12-09T00:00:00', 'Should set value');
+            assert(!dateVisibleInput.className.includes('is-invalid'), 'Invalid class should be removed');
+            assert(!flatpickerInput.className.includes('is-invalid'), 'Invalid class should be removed from flatpickr field as well');
+
+            checkbox.setValue(false);
+
+            setTimeout(() => {
+              const dateComponentElement = dateTimeComponent.element;
+              assert.equal(dateComponentElement.className.includes('formio-hidden'), true, 'Should be hidden');
+              checkbox.setValue(true);
+
+              setTimeout(() => {
+                const dateComponentElement = dateTimeComponent.element;
+                assert.equal(!dateComponentElement.className.includes('formio-hidden'), true, 'Should be visible');
+                const dateVisibleInput = dateComponentElement.querySelector('.input:not([type="hidden"]');
+                const flatpickerInput = dateComponentElement.querySelector('.flatpickr-input');
+
+                assert(dateVisibleInput.className.includes('is-invalid'), 'Visible field should has invalid class');
+                assert(flatpickerInput.className.includes('is-invalid'), 'Flatpickr field should has invalid class as well');
+
+                dateTimeComponent.setValue('2020-10-19T00:00:00');
+                setTimeout(() => {
+                  assert.equal(dateTimeComponent.dataValue, '2020-10-19T00:00:00', 'Should set value');
+                  assert(!dateVisibleInput.className.includes('is-invalid'), 'Invalid class should be removed');
+                  assert(!flatpickerInput.className.includes('is-invalid'), 'Invalid class should be removed from flatpickr field as well');
+                  done();
+                }, 300);
+              }, 400);
+            }, 300);
+          }, 300);
+        }, 300);
+      }, 350);
     }).catch(done);
   });
 

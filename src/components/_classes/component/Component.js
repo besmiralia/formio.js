@@ -2148,7 +2148,7 @@ export default class Component extends Element {
             callback(null, autoCompleteList.map(function(word) {
               return {
                 caption: word.label,
-                value: word.key,
+                value: `${word.key} /*${word.label}*/`,
                 meta: word.meta
               };
             }));

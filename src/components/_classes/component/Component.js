@@ -14,7 +14,7 @@ import ComponentModal from '../componentModal/ComponentModal';
 import Widgets from '../../../widgets';
 import { getFormioUploadAdapterPlugin } from '../../../providers/storage/uploadAdapter';
 
-const isIEBrowser = FormioUtils.getIEBrowserVersion();
+const isIEBrowser = FormioUtils.getBrowserInfo().ie;
 const CKEDITOR_URL = isIEBrowser
   ? 'https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js'
   : 'https://cdn.form.io/ckeditor/19.0.0/ckeditor.js';
@@ -121,6 +121,7 @@ export default class Component extends Element {
        * The input label provided to this component.
        */
       label: '',
+      dataGridLabel: false,
       labelPosition: 'top',
       description: '',
       errorLabel: '',
@@ -715,6 +716,13 @@ export default class Component extends Element {
   }
 
   /**
+   * Returns true if component is inside DataGrid
+   */
+  get isInDataGrid() {
+    return this.inDataGrid;
+  }
+
+  /**
    * Translate a text using the i18n system.
    *
    * @param {string} text - The i18n identifier.
@@ -732,9 +740,9 @@ export default class Component extends Element {
 
   labelIsHidden() {
     return !this.component.label ||
-      ((!this.inDataGrid && this.component.hideLabel) ||
-        (this.inDataGrid && !this.component.dataGridLabel) ||
-        this.options.inputsOnly) && !this.builderMode;
+      ((!this.isInDataGrid && this.component.hideLabel) ||
+      (this.isInDataGrid && !this.component.dataGridLabel) ||
+      this.options.inputsOnly) && !this.builderMode;
   }
 
   get transform() {
@@ -806,10 +814,15 @@ export default class Component extends Element {
     return null;
   }
 
+  getFormattedTooltip(tooltipValue) {
+    const tooltip = this.interpolate(tooltipValue || '').replace(/(?:\r\n|\r|\n)/g, '<br />');
+
+    return tooltip ? this.t(tooltip) : '';
+  }
+
   renderTemplate(name, data = {}, modeOption) {
     // Need to make this fall back to form if renderMode is not found similar to how we search templates.
     const mode = modeOption || this.options.renderMode || 'form';
-
     data.component = this.component;
     data.self = this;
     data.options = this.options;
@@ -830,7 +843,7 @@ export default class Component extends Element {
       return this.renderTemplate(...args);
     };
     data.label = this.labelInfo;
-    data.tooltip = this.interpolate(this.component.tooltip || '').replace(/(?:\r\n|\r|\n)/g, '<br />');
+    data.tooltip = this.getFormattedTooltip(this.component.tooltip);
 
     // Allow more specific template names
     const names = [
@@ -872,7 +885,6 @@ export default class Component extends Element {
     if (!template) {
       return '';
     }
-
     // Interpolate the template and populate
     return this.interpolate(template, data);
   }
@@ -1010,6 +1022,23 @@ export default class Component extends Element {
     }
   }
 
+  attachTooltips(toolTipsRefs, tooltipValue) {
+    toolTipsRefs.forEach((tooltip, index) => {
+      const tooltipText = this.interpolate(tooltip.getAttribute('data-title') || tooltipValue).replace(/(?:\r\n|\r|\n)/g, '<br />');
+      this.tooltips[index] = new Tooltip(tooltip, {
+        trigger: 'hover click focus',
+        placement: 'right',
+        html: true,
+        title: this.t(tooltipText),
+        template: `
+          <div class="tooltip" style="opacity: 1;" role="tooltip">
+            <div class="tooltip-arrow"></div>
+            <div class="tooltip-inner"></div>
+          </div>`,
+      });
+    });
+  }
+
   attach(element) {
     if (!this.builderMode && this.component.modalEdit) {
       const modalShouldBeOpened = this.componentModal ? this.componentModal.isOpened : false;
@@ -1033,20 +1062,7 @@ export default class Component extends Element {
       tooltip: 'multiple'
     });
 
-    this.refs.tooltip.forEach((tooltip, index) => {
-      const title = this.interpolate(tooltip.getAttribute('data-title') || this.t(this.component.tooltip)).replace(/(?:\r\n|\r|\n)/g, '<br />');
-      this.tooltips[index] = new Tooltip(tooltip, {
-        trigger: 'hover click focus',
-        placement: 'right',
-        html: true,
-        title: title,
-        template: `
-          <div class="tooltip" style="opacity: 1;" role="tooltip">
-            <div class="tooltip-arrow"></div>
-            <div class="tooltip-inner"></div>
-          </div>`,
-      });
-    });
+    this.attachTooltips(this.refs.tooltip, this.component.tooltip);
 
     // Attach logic.
     this.attachLogic();
@@ -1539,6 +1555,7 @@ export default class Component extends Element {
   rebuild() {
     this.destroy();
     this.init();
+    this.visible = this.conditionallyVisible(null, null);
     return this.redraw();
   }
 
@@ -1701,6 +1718,10 @@ export default class Component extends Element {
   }
 
   isIE() {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
     const userAgent = window.navigator.userAgent;
 
     const msie = userAgent.indexOf('MSIE ');
@@ -2138,6 +2159,9 @@ export default class Component extends Element {
         editor.setOptions(settings);
         editor.getSession().setMode(settings.mode);
         editor.on('change', () => onChange(editor.getValue()));
+        if (settings.isUseWorkerDisabled) {
+          editor.session.setUseWorker(false);
+        }
         return editor;
       });
   }
@@ -2208,17 +2232,17 @@ export default class Component extends Element {
       !this.key ||
       (!this.visible && this.component.clearOnHide && !this.rootPristine)
     ) {
-      return value;
+      return;
     }
     if ((value !== null) && (value !== undefined)) {
       value = this.hook('setDataValue', value, this.key, this._data);
     }
     if ((value === null) || (value === undefined)) {
       this.unset();
-      return value;
+      return;
     }
     _.set(this._data, this.key, value);
-    return value;
+    return;
   }
 
   /**
@@ -2267,7 +2291,9 @@ export default class Component extends Element {
 
     const checkMask = (value) => {
       if (typeof value === 'string') {
-        value = conformToMask(value, this.defaultMask).conformedValue;
+        const placeholderChar = this.placeholderChar;
+
+        value = conformToMask(value, this.defaultMask, { placeholderChar }).conformedValue;
         if (!FormioUtils.matchInputMask(value, this.defaultMask)) {
           value = '';
         }
@@ -2677,7 +2703,7 @@ export default class Component extends Element {
   }
 
   setComponentValidity(messages, dirty, silentCheck) {
-    const hasErrors = !!messages.filter(message => message.level === 'error').length;
+    const hasErrors = !!messages.filter(message => message.level === 'error' && !message.fromServer).length;
     if (messages.length && (!silentCheck || this.error) && (dirty || !this.pristine)) {
       this.setCustomValidity(messages, dirty);
     }
@@ -2707,9 +2733,14 @@ export default class Component extends Element {
     }
 
     const check = Validator.checkComponent(this, data, row, true, async);
+    let validations = check;
+
+    if (this.serverErrors?.length) {
+      validations = check.concat(this.serverErrors);
+    }
     return async ?
-      check.then((messages) => this.setComponentValidity(messages, dirty, silentCheck)) :
-      this.setComponentValidity(check, dirty, silentCheck);
+    validations.then((messages) => this.setComponentValidity(messages, dirty, silentCheck)) :
+      this.setComponentValidity(validations, dirty, silentCheck);
   }
 
   checkValidity(data, dirty, row, silentCheck) {
@@ -2772,16 +2803,15 @@ export default class Component extends Element {
     if (this.component.validateOn === 'blur' && flags.fromSubmission) {
       return true;
     }
-    const isValid = this.checkComponentValidity(data, isDirty, row);
+    const isValid = this.checkComponentValidity(data, isDirty, row, flags);
     this.checkModal();
     return isValid;
   }
 
-  checkModal(isValid, dirty) {
+  checkModal() {
     if (!this.component.modalEdit || !this.componentModal) {
       return;
     }
-    this.setOpenModalElement();
   }
 
   get validationValue() {
@@ -2823,7 +2853,7 @@ export default class Component extends Element {
     }
 
     inputRefs.forEach((input) => {
-      if (input.widget && input.widget.setErrorClasses) {
+      if (input?.widget && input.widget.setErrorClasses) {
         input.widget.setErrorClasses(hasErrors);
       }
     });
@@ -3116,6 +3146,14 @@ export default class Component extends Element {
     if (hasAutofocus) {
       this.on('render', () => this.focus(), true);
     }
+  }
+
+  scrollIntoView(element = this.element) {
+    if (!element) {
+      return;
+    }
+    const { left, top } = element.getBoundingClientRect();
+    window.scrollTo(left + window.scrollX, top + window.scrollY);
   }
 
   focus(index) {

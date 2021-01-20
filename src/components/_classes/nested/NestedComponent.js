@@ -220,8 +220,9 @@ export default class NestedComponent extends Field {
     originalPath = originalPath || getStringFromComponentPath(path);
     path = getArrayFromComponentPath(path);
     const pathStr = originalPath;
-    let key = path.shift();
-    const remainingPath = path;
+    const newPath = _.clone(path);
+    let key = newPath.shift();
+    const remainingPath = newPath;
     let comp = null;
     let possibleComp = null;
 
@@ -574,11 +575,11 @@ export default class NestedComponent extends Field {
       this.error = {
         component: this.component,
         level: 'hidden',
-        message: this.t('Fix the errors')
+        message: this.t('Fix the errors'),
+        messages,
       };
       this.setErrorClasses([this.refs.openModal], dirty, !isValid, !!messages.length, this.refs.openModalWrapper);
     }
-    this.setOpenModalElement();
   }
 
   checkConditions(data, flags, row) {

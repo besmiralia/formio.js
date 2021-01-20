@@ -17,7 +17,8 @@ export default [
     label: 'Unique',
     tooltip: 'Makes sure the data submitted for this field is unique, and has not been submitted before.',
     key: 'unique',
-    input: true
+    input: true,
+    ignore: true
   },
   {
     weight: 0,

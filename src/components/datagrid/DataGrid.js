@@ -1,8 +1,12 @@
 import _ from 'lodash';
-// Import from "dist" because it would require and "global" would not be defined in Angular apps.
-import dragula from 'dragula/dist/dragula';
 import NestedArrayComponent from '../_classes/nestedarray/NestedArrayComponent';
 import { fastCloneDeep } from '../../utils/utils';
+
+let dragula;
+if (typeof window !== 'undefined') {
+  // Import from "dist" because it would require and "global" would not be defined in Angular apps.
+  dragula = require('dragula/dist/dragula');
+}
 
 export default class DataGridComponent extends NestedArrayComponent {
   static schema(...extend) {
@@ -31,6 +35,7 @@ export default class DataGridComponent extends NestedArrayComponent {
   constructor(...args) {
     super(...args);
     this.type = 'datagrid';
+    this.tabIndex = 0;
   }
 
   init() {
@@ -231,6 +236,7 @@ export default class DataGridComponent extends NestedArrayComponent {
 
   render() {
     const columns = this.getColumns();
+    const colWidth = Math.floor(12 / (columns.length + 1)).toString();
     return super.render(this.renderTemplate('datagrid', {
       rows: this.getRows(),
       columns: columns,
@@ -249,9 +255,11 @@ export default class DataGridComponent extends NestedArrayComponent {
       allowReorder: this.allowReorder,
       builder: this.builderMode,
       canAddColumn: this.canAddColumn,
+      tabIndex: this.tabIndex,
       placeholder: this.renderTemplate('builderPlaceholder', {
         position: this.componentComponents.length,
       }),
+      colWidth
     }));
   }
 
@@ -293,9 +301,11 @@ export default class DataGridComponent extends NestedArrayComponent {
         row.dragInfo = { index };
       });
 
-      this.dragula = dragula([this.refs[`${this.datagridKey}-tbody`]], {
-        moves: (_draggedElement, _oldParent, clickedElement) => clickedElement.classList.contains('formio-drag-button')
-      }).on('drop', this.onReorder.bind(this));
+      if (dragula) {
+        this.dragula = dragula([this.refs[`${this.datagridKey}-tbody`]], {
+          moves: (_draggedElement, _oldParent, clickedElement) => clickedElement.classList.contains('formio-drag-button')
+        }).on('drop', this.onReorder.bind(this));
+      }
     }
 
     this.refs[`${this.datagridKey}-addRow`].forEach((addButton) => {
@@ -429,6 +439,7 @@ export default class DataGridComponent extends NestedArrayComponent {
 
   createRowComponents(row, rowIndex) {
     const components = {};
+    this.tabIndex = 0;
     this.component.components.map((col, colIndex) => {
       const options = _.clone(this.options);
       options.name += `[${rowIndex}]`;
@@ -448,6 +459,12 @@ export default class DataGridComponent extends NestedArrayComponent {
       component.parentDisabled = !!this.disabled;
       component.rowIndex = rowIndex;
       component.inDataGrid = true;
+      if (
+        columnComponent.tabindex &&
+        parseInt(columnComponent.tabindex) > this.tabIndex
+      ) {
+        this.tabIndex = parseInt(columnComponent.tabindex);
+      }
       components[col.key] = component;
     });
     return components;

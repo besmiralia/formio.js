@@ -96,7 +96,7 @@ $font-family: ProximaNova,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"He
   background-color: #fff;
 }
 
-.field-required:after {
+.field-required:after, .tab-error::after {
   content:" *";
   color:red;
 }
@@ -555,6 +555,7 @@ body.formio-dialog-open {
   padding: 1em;
   position: relative;
   width: 80%;
+  display: flex;
 }
 
 .formio-dialog.formio-dialog-theme-default .formio-dialog-close {
@@ -770,7 +771,6 @@ body.formio-dialog-open {
 }
 
 .formio-choices.form-group {
-  /*min-width: 200px;*/
   margin-bottom: 0;
 }
 
@@ -1082,11 +1082,15 @@ body.formio-dialog-open {
   }
 }
 
+.table-responsive[ref=component] {
+  overflow-x: visible;
+}
+
 .formio-component-textarea {
   .alert .ck-editor__editable {
     color: inherit;
   }
-  
+
   .ck.ck-editor__editable .image .ck-progress-bar {
     height: 4px;
   }
@@ -1345,6 +1349,11 @@ div[data-oembed-url] {
 
 .formio-form > div > nav > ul.pagination {
   flex-flow: wrap row;
+}
+
+//styles for google maps dropdown
+.pac-container {
+  z-index: 11000;
 }
 
 /*gp custom*/

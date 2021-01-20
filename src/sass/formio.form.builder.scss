@@ -194,7 +194,10 @@
 
 .component-edit-container {
   height: auto;
-  overflow: hidden;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .component-edit-content {

@@ -79,6 +79,14 @@ export default {
         value: '>=',
         label: 'Great Than or Equal',
       },
+      {
+        value: 'con',
+        label: 'Contains',
+      },
+      {
+        value: 'ncon',
+        label: 'Does not contain',
+      },
     ];
   },
 

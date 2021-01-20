@@ -31,7 +31,8 @@ export default [
       { label: 'None', value: false },
       { label: 'Server', value: true },
       { label: 'Client', value: 'client-only' },
-    ]
+    ],
+    ignore: true
   },
   {
     weight: 150,
@@ -39,7 +40,8 @@ export default [
     label: 'Protected',
     tooltip: 'A protected field will not be returned when queried via API.',
     key: 'protected',
-    input: true
+    input: true,
+    ignore: true
   },
   {
     type: 'checkbox',
@@ -47,7 +49,8 @@ export default [
     weight: 200,
     key: 'dbIndex',
     label: 'Database Index',
-    tooltip: 'Set this field as an index within the database. Increases performance for submission queries.'
+    tooltip: 'Set this field as an index within the database. Increases performance for submission queries.',
+    ignore: true
   },
   {
     weight: 400,
@@ -55,6 +58,7 @@ export default [
     label: 'Encrypted (Enterprise Only)',
     tooltip: 'Encrypt this field on the server. This is two way encryption which is not suitable for passwords.',
     key: 'encrypted',
+    ignore: true,
     input: true
   },
   {
@@ -109,7 +113,8 @@ export default [
     weight: 1100,
     key: 'calculateServer',
     label: 'Calculate Value on server',
-    tooltip: 'Checking this will run the calculation on the server. This is useful if you wish to override the values submitted with the calculations performed on the server.'
+    tooltip: 'Checking this will run the calculation on the server. This is useful if you wish to override the values submitted with the calculations performed on the server.',
+    ignore: true
   },
   {
     type: 'checkbox',

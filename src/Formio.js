@@ -85,7 +85,7 @@ class Formio {
     else if (Formio.baseUrl) {
       this.base = Formio.baseUrl;
     }
-    else {
+    else if (typeof window !== 'undefined') {
       this.base = window.location.href.match(/http[s]?:\/\/api./)[0];
     }
 
@@ -552,7 +552,7 @@ class Formio {
     });
   }
 
-  uploadFile(storage, file, fileName, dir, progressCallback, url, options, fileKey, groupPermissions, groupId, uploadStartCallback) {
+  uploadFile(storage, file, fileName, dir, progressCallback, url, options, fileKey, groupPermissions, groupId, uploadStartCallback, abortCallback) {
     const requestArgs = {
       provider: storage,
       method: 'upload',
@@ -572,7 +572,7 @@ class Formio {
                 if (uploadStartCallback) {
                   uploadStartCallback();
                 }
-                return provider.uploadFile(file, fileName, dir, progressCallback, url, options, fileKey, groupPermissions, groupId);
+                return provider.uploadFile(file, fileName, dir, progressCallback, url, options, fileKey, groupPermissions, groupId, abortCallback);
               }
               else {
                 throw ('Storage provider not found');
@@ -795,7 +795,7 @@ class Formio {
       .then(() => getFormio().pluginGet('staticRequest', requestArgs)
         .then((result) => {
           if (isNil(result)) {
-            return getFormio().request(url, method, requestArgs.data, requestArgs.opts.header, requestArgs.opts);
+            return getFormio().request(requestArgs.url, requestArgs.method, requestArgs.data, requestArgs.opts.header, requestArgs.opts);
           }
           return result;
         }));
@@ -824,7 +824,7 @@ class Formio {
       .then(() => getFormio().pluginGet('request', requestArgs)
         .then((result) => {
           if (isNil(result)) {
-            return getFormio().request(url, method, requestArgs.data, requestArgs.opts.header, requestArgs.opts);
+            return getFormio().request(requestArgs.url, requestArgs.method, requestArgs.data, requestArgs.opts.header, requestArgs.opts);
           }
           return result;
         }));
@@ -1577,8 +1577,12 @@ if (typeof window !== 'undefined') {
 
 // It makes sure that we use global Formio.
 function getFormio() {
-  if (typeof (window || global) === 'object' && typeof (window || global).Formio !== 'undefined') {
-    return (window || global).Formio;
+  if (typeof window === 'object' && typeof window.Formio !== 'undefined') {
+    return window.Formio;
+  }
+
+  if (typeof global === 'object' && typeof global.Formio !== 'undefined') {
+    return global.Formio;
   }
 
   return Formio;

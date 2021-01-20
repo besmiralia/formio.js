@@ -197,6 +197,9 @@ export default class FormComponent extends Component {
     if (this.options.fileService) {
       options.fileService = this.options.fileService;
     }
+    if (this.options.onChange) {
+      options.onChange = this.options.onChange;
+    }
     return options;
   }
 
@@ -235,6 +238,10 @@ export default class FormComponent extends Component {
     }
     return super.attach(element)
       .then(() => {
+        if (this.isSubFormLazyLoad() && !this.hasLoadedForm && !this.subFormLoading) {
+          this.createSubForm(true);
+        }
+
         return this.subFormReady.then(() => {
           this.empty(element);
           if (this.options.builder) {
@@ -330,8 +337,8 @@ export default class FormComponent extends Component {
    *
    * @return {*}
    */
-  createSubForm() {
-    this.subFormReady = this.loadSubForm().then((form) => {
+  createSubForm(fromAttach) {
+    this.subFormReady = this.loadSubForm(fromAttach).then((form) => {
       if (!form) {
         return;
       }
@@ -390,8 +397,8 @@ export default class FormComponent extends Component {
   /**
    * Load the subform.
    */
-  loadSubForm() {
-    if (this.builderMode || this.isHidden()) {
+  loadSubForm(fromAttach) {
+    if (this.builderMode || this.isHidden() || (this.isSubFormLazyLoad() && !fromAttach)) {
       return NativePromise.resolve();
     }
 
@@ -403,21 +410,26 @@ export default class FormComponent extends Component {
       return NativePromise.resolve(this.formObj);
     }
     else if (this.formSrc) {
+      this.subFormLoading = true;
       return (new Formio(this.formSrc)).loadForm({ params: { live: 1 } })
         .then((formObj) => {
           this.formObj = formObj;
+          this.subFormLoading = false;
           return formObj;
         });
     }
     return NativePromise.resolve();
   }
 
-  checkComponentValidity(data, dirty, row) {
+  checkComponentValidity(data, dirty, row, options) {
+    options = options || {};
+    const silentCheck = options.silentCheck || false;
+
     if (this.subForm) {
-      return this.subForm.checkValidity(this.dataValue.data, dirty);
+      return this.subForm.checkValidity(this.dataValue.data, dirty, null, silentCheck);
     }
 
-    return super.checkComponentValidity(data, dirty, row);
+    return super.checkComponentValidity(data, dirty, row, options);
   }
 
   checkComponentConditions(data, flags, row) {
@@ -430,6 +442,15 @@ export default class FormComponent extends Component {
 
     if (this.subForm) {
       return this.subForm.checkConditions(this.dataValue.data);
+    }
+    // There are few cases when subForm is not loaded when a change is triggered,
+    // so we need to perform checkConditions after it is ready, or some conditional fields might be hidden in View mode
+    else if (this.subFormReady) {
+      this.subFormReady.then(() => {
+        if (this.subForm) {
+          return this.subForm.checkConditions(this.dataValue.data);
+        }
+      });
     }
 
     return visible;
@@ -534,6 +555,10 @@ export default class FormComponent extends Component {
         return this.dataValue;
       })
       .then(() => super.beforeSubmit());
+  }
+
+  isSubFormLazyLoad() {
+    return  this.root?._form?.display === 'wizard' && this.component.lazyLoad;
   }
 
   isHidden() {

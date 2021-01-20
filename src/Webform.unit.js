@@ -117,21 +117,22 @@ describe('Webform tests', function() {
     const formWithDate = new Webform(formElement);
 
     formWithDate.setForm(formWithCustomFormatDate).then(() => {
-      const clickEvent = new Event('click');
-
-      const dateCompInputWidget = formWithDate.element.querySelector('.formio-component-textField').querySelector('.flatpickr-input').widget;
-      const dateAltFormat = dateCompInputWidget.calendar.config.altFormat;
-      dateCompInputWidget.calendar.setDate('30-05-2020', true, dateAltFormat);
-
-      const dateCompInputWidget1 = formWithDate.element.querySelector('.formio-component-dateTime').querySelector('.flatpickr-input').widget;
-      const dateAltFormat1 = dateCompInputWidget1.calendar.config.altFormat;
-      dateCompInputWidget1.calendar.setDate('30-05-2020', true, dateAltFormat1);
-
-      const dateCompInputWidget2 = formWithDate.element.querySelector('.formio-component-textField2').querySelector('.flatpickr-input').widget;
-      const dateAltFormat2 = dateCompInputWidget2.calendar.config.altFormat;
-      dateCompInputWidget2.calendar.setDate('30-05-2020', true, dateAltFormat2);
-
       setTimeout(() => {
+        const clickEvent = new Event('click');
+
+        const dateCompInputWidget = formWithDate.element.querySelector('.formio-component-textField').querySelector('.flatpickr-input').widget;
+        const dateAltFormat = dateCompInputWidget.calendar.config.altFormat;
+        dateCompInputWidget.calendar.setDate('30-05-2020', true, dateAltFormat);
+
+        const dateCompInputWidget1 = formWithDate.element.querySelector('.formio-component-dateTime').querySelector('.flatpickr-input').widget;
+        const dateAltFormat1 = dateCompInputWidget1.calendar.config.altFormat;
+        dateCompInputWidget1.calendar.setDate('30-05-2020', true, dateAltFormat1);
+
+        const dateCompInputWidget2 = formWithDate.element.querySelector('.formio-component-textField2').querySelector('.flatpickr-input').widget;
+        const dateAltFormat2 = dateCompInputWidget2.calendar.config.altFormat;
+        dateCompInputWidget2.calendar.setDate('30-05-2020', true, dateAltFormat2);
+
+        setTimeout(() => {
         const dateCompAltInput = formWithDate.element.querySelector('.formio-component-textField').querySelector('.flatpickr-input');
         const dateComp = formWithDate.element.querySelector('.formio-component-textField').querySelector('[type="text"]');
 
@@ -141,14 +142,14 @@ describe('Webform tests', function() {
         const dateCompAltInput2 = formWithDate.element.querySelector('.formio-component-textField2').querySelector('.flatpickr-input');
         const dateComp2 = formWithDate.element.querySelector('.formio-component-textField2').querySelector('[type="text"]');
 
-        assert.equal(dateCompAltInput.value, '30-05-2020');
-        assert.equal(dateComp.value, '30-05-2020');
+        assert.equal(dateCompAltInput.value,'30-05-2020');
+        assert.equal(dateComp.value,'30-05-2020');
 
-        assert.equal(dateCompAltInput1.value, '2020-05-30T00:00:00');
-        assert.equal(dateComp1.value, '30-05-2020');
+        assert.equal(dateCompAltInput1.value,'2020-05-30T00:00:00');
+        assert.equal(dateComp1.value,'30-05-2020');
 
-        assert.equal(dateCompAltInput2.value, '2020-05-30T00:00:00');
-        assert.equal(dateComp2.value, '30-05-2020');
+        assert.equal(dateCompAltInput2.value,'2020-05-30T00:00:00');
+        assert.equal(dateComp2.value,'30-05-2020');
 
         const addNewRowBtn = formWithDate.element.querySelector('.formio-button-add-row');
         addNewRowBtn.dispatchEvent(clickEvent);
@@ -166,18 +167,19 @@ describe('Webform tests', function() {
           const dateCompAltInputAfterAddingRow2 = formWithDate.element.querySelectorAll('.formio-component-textField2')[0].querySelector('.flatpickr-input');
           const dateCompAfterAddingRow2 = formWithDate.element.querySelectorAll('.formio-component-textField2')[0].querySelector('[type="text"]');
 
-          assert.equal(dateCompAltInputAfterAddingRow.value, '30-05-2020');
-          assert.equal(dateCompAfterAddingRow.value, '30-05-2020');
+          assert.equal(dateCompAltInputAfterAddingRow.value,'30-05-2020');
+          assert.equal(dateCompAfterAddingRow.value,'30-05-2020');
 
-          assert.equal(dateCompAltInputAfterAddingRow1.value, '2020-05-30T00:00:00');
-          assert.equal(dateCompAfterAddingRow1.value, '30-05-2020');
+          assert.equal(dateCompAltInputAfterAddingRow1.value,'2020-05-30T00:00:00');
+          assert.equal(dateCompAfterAddingRow1.value,'30-05-2020');
 
-          assert.equal(dateCompAltInputAfterAddingRow2.value, '2020-05-30T00:00:00');
-          assert.equal(dateCompAfterAddingRow2.value, '30-05-2020');
+          assert.equal(dateCompAltInputAfterAddingRow2.value,'2020-05-30T00:00:00');
+          assert.equal(dateCompAfterAddingRow2.value,'30-05-2020');
 
           done();
-        }, 150);
-      }, 50);
+         }, 150);
+        }, 50);
+      }, 100);
     }).catch((err) => done(err));
   });
 
@@ -894,6 +896,15 @@ describe('Webform tests', function() {
 
       done();
     }).catch(done);
+  });
+
+  it('Should get the language passed via options', () => {
+    const formElement = document.createElement('div');
+    const form = new Webform(formElement, {
+      language: 'es'
+    });
+
+    assert.equal(form.language, 'es');
   });
 
   it('Should translate form errors in alerts', () => {

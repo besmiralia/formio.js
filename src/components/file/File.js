@@ -9,7 +9,16 @@ let Camera;
 let webViewCamera = navigator.camera || Camera;
 
 // canvas.toBlob polyfill.
-if (!HTMLCanvasElement.prototype.toBlob) {
+
+let htmlCanvasElement;
+if (typeof window !== 'undefined') {
+  htmlCanvasElement = window.HTMLCanvasElement;
+}
+else if (typeof global !== 'undefined') {
+  htmlCanvasElement = global.HTMLCanvasElement;
+}
+
+if (htmlCanvasElement && !htmlCanvasElement.prototype.toBlob) {
   Object.defineProperty(HTMLCanvasElement.prototype, 'toBlob', {
     value: function(callback, type, quality) {
       var canvas = this;
@@ -60,8 +69,8 @@ export default class FileComponent extends Field {
     super.init();
     webViewCamera = navigator.camera || Camera;
     const fileReaderSupported = (typeof FileReader !== 'undefined');
-    const formDataSupported = Boolean(window.FormData);
-    const progressSupported = window.XMLHttpRequest ? ('upload' in new XMLHttpRequest) : false;
+    const formDataSupported = typeof window !== 'undefined' ? Boolean(window.FormData) : false;
+    const progressSupported = (typeof window !== 'undefined' && window.XMLHttpRequest) ? ('upload' in new XMLHttpRequest) : false;
 
     this.support = {
       filereader: fileReaderSupported,
@@ -319,9 +328,20 @@ export default class FileComponent extends Field {
     if (this.component.multiple) {
       options.multiple = true;
     }
+    //use "accept" attribute only for desktop devices because of its limited support by mobile browsers
+    if (!this.isMobile.any) {
+      const filePattern = this.component.filePattern.trim() || '';
+      const imagesPattern = 'image/*';
 
-    if (this.imageUpload) {
-      options.accept = 'image/*';
+      if (this.imageUpload && (!filePattern || filePattern === '*')) {
+        options.accept = imagesPattern;
+      }
+      else if (this.imageUpload && !filePattern.includes(imagesPattern)) {
+        options.accept = `${imagesPattern},${filePattern}`;
+      }
+      else {
+        options.accept = filePattern;
+      }
     }
 
     return options;
@@ -414,6 +434,9 @@ export default class FileComponent extends Field {
     this.refs.fileStatusRemove.forEach((fileStatusRemove, index) => {
       this.addEventListener(fileStatusRemove, 'click', (event) => {
         event.preventDefault();
+        if (this.abortUpload) {
+          this.abortUpload();
+        }
         this.statuses.splice(index, 1);
         this.redraw();
       });
@@ -627,6 +650,23 @@ export default class FileComponent extends Field {
           message: this.t('Starting upload'),
         };
 
+        // Check if file with the same name is being uploaded
+        const fileWithSameNameUploaded = this.value.some(fileStatus => fileStatus.originalName === file.name);
+        const fileWithSameNameUploadedWithError = this.statuses.findIndex(fileStatus =>
+          fileStatus.originalName === file.name
+          && fileStatus.status === 'error'
+        );
+
+        if (fileWithSameNameUploaded) {
+          fileUpload.status = 'error';
+          fileUpload.message = this.t('File with the same name is already uploaded');
+        }
+
+        if (fileWithSameNameUploadedWithError !== -1) {
+          this.statuses.splice(fileWithSameNameUploadedWithError, 1);
+          this.redraw();
+        }
+
         // Check file pattern
         if (this.component.filePattern && !this.validatePattern(file, this.component.filePattern)) {
           fileUpload.status = 'error';
@@ -668,7 +708,7 @@ export default class FileComponent extends Field {
           }
           const { storage, options = {} } = this.component;
           this.component.url = `https://api-${Formio.getHost()}/api/v1/file/upload?uid=${Formio.getAccount()}`;
-          const url = this.interpolate(this.component.url);
+          const url = this.interpolate(this.component.url, { file: fileUpload });
           let groupKey = null;
           let groupPermissions = null;
 
@@ -690,13 +730,31 @@ export default class FileComponent extends Field {
 
           const fileKey = this.component.fileKey || 'file';
           const groupResourceId = groupKey ? this.currentForm.submission.data[groupKey]._id : null;
-          const filePromise = fileService.uploadFile(storage, file, fileName, dir, (evt) => {
-            fileUpload.status = 'progress';
-            fileUpload.progress = parseInt(100.0 * evt.loaded / evt.total);
-            delete fileUpload.message;
-            this.redraw();
-          }, url, options, fileKey, groupPermissions, groupResourceId)
-            .then((fileInfo) => {
+          const filePromise = fileService.uploadFile(
+            storage,
+            file,
+            fileName,
+            dir,
+            // Progress callback
+            (evt) => {
+              fileUpload.status = 'progress';
+              fileUpload.progress = parseInt(100.0 * evt.loaded / evt.total);
+              delete fileUpload.message;
+              this.redraw();
+            },
+            url,
+            options,
+            fileKey,
+            groupPermissions,
+            groupResourceId,
+            // Upload start callback
+            () => {
+              this.fileDropHidden = true;
+              this.emit('fileUploadingStart', filePromise);
+            },
+            // Abort upload callback
+            (abort) => this.abortUpload = abort,
+          ).then((fileInfo) => {
               const index = this.statuses.indexOf(fileUpload);
               if (index !== -1) {
                 this.statuses.splice(index, 1);
@@ -712,30 +770,7 @@ export default class FileComponent extends Field {
               const vals = this.value;
               vals.push(fileInfo);
               this.setValue(vals);
-              //this.redraw();
-              this.triggerChange();
-            })
-            .catch((response) => {
-              fileUpload.status = 'error';
-              fileUpload.message = response;
-              delete fileUpload.progress;
-              this.redraw();
-            }, url, options, fileKey, groupPermissions, groupResourceId,
-              () => {
-                this.fileDropHidden = true;
-                this.emit('fileUploadingStart', filePromise);
-              }
-            )
-            .then((fileInfo) => {
-              const index = this.statuses.indexOf(fileUpload);
-              if (index !== -1) {
-                this.statuses.splice(index, 1);
-              }
-              fileInfo.originalName = file.name;
-              if (!this.hasValue()) {
-                this.dataValue = [];
-              }
-              this.dataValue.push(fileInfo);
+
               this.fileDropHidden = false;
               this.redraw();
               this.triggerChange();

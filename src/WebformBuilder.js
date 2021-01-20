@@ -1,7 +1,5 @@
 import Webform from './Webform';
 import Component from './components/_classes/component/Component';
-// Import from "dist" because it would require and "global" would not be defined in Angular apps.
-import dragula from 'dragula/dist/dragula';
 import Tooltip from 'tooltip.js';
 import NativePromise from 'native-promise-only';
 import Components from './components/Components';
@@ -12,6 +10,12 @@ import BuilderUtils from './utils/builder';
 import _ from 'lodash';
 import Templates from './templates/Templates';
 require('./components/builder');
+
+let dragula;
+if (typeof window !== 'undefined') {
+  // Import from "dist" because it would require and "global" would not be defined in Angular apps.
+  dragula = require('dragula/dist/dragula');
+}
 
 export default class WebformBuilder extends Component {
   // eslint-disable-next-line max-statements
@@ -37,16 +41,6 @@ export default class WebformBuilder extends Component {
 
     this.sideBarScroll = _.get(this.options, 'sideBarScroll', true);
     this.sideBarScrollOffset = _.get(this.options, 'sideBarScrollOffset', 0);
-
-    const componentInfo = {};
-    for (const type in Components.components) {
-      const component = Components.components[type];
-      if (component.builderInfo) {
-        component.type = type;
-        componentInfo[type] = component.builderInfo;
-      }
-    }
-
     this.dragDropEnabled = true;
 
     // Setup the builder options.
@@ -83,7 +77,7 @@ export default class WebformBuilder extends Component {
 
     for (const type in Components.components) {
       const component = Components.components[type];
-      if (component.builderInfo) {
+      if (component.builderInfo && component.builderInfo.schema) {
         this.schemas[type] = component.builderInfo.schema;
         component.type = type;
         const builderInfo = component.builderInfo;
@@ -91,27 +85,35 @@ export default class WebformBuilder extends Component {
         this.addBuilderComponentInfo(builderInfo);
       }
     }
+
     // Filter out any extra components.
     // Add the components in each group.
     for (const group in this.groups) {
       const info = this.groups[group];
       for (const key in info.components) {
-        const comp = info.components[key];
-        if (comp) {
-          if (comp.schema) {
-            this.schemas[key] = comp.schema;
-          }
-          info.components[key] = comp === true ? componentInfo[key] : comp;
+        let comp = info.components[key];
+        if (
+          comp === true &&
+          Components.components[key] &&
+          Components.components[key].builderInfo
+        ) {
+          comp = Components.components[key].builderInfo;
+        }
+        if (comp && comp.schema) {
+          this.schemas[key] = comp.schema;
+          info.components[key] = comp;
           info.components[key].key = key;
         }
+        else {
+          // Do not include this component in the components array.
+          delete info.components[key];
+        }
       }
-    }
 
-    // Need to create a component order for each group.
-    for (const group in this.groups) {
-      if (this.groups[group] && this.groups[group].components) {
-        this.groups[group].componentOrder = Object.keys(this.groups[group].components)
-          .map(key => this.groups[group].components[key])
+      // Order the compoennts.
+      if (info.components) {
+        info.componentOrder = Object.keys(info.components)
+          .map(key => info.components[key])
           .filter(component => component && !component.ignore && !component.ignoreForForm)
           .sort((a, b) => a.weight - b.weight)
           .map(component => component.key);
@@ -267,7 +269,7 @@ export default class WebformBuilder extends Component {
         });
 
         component.addEventListener(component.refs.editComponent, 'click', () =>
-          this.editComponent(component.schema, parent, false, false, component.component));
+          this.editComponent(component.schema, parent, false, false, component.component, { inDataGrid: component.isInDataGrid }));
       }
 
       if (component.refs.editJson) {
@@ -288,8 +290,19 @@ export default class WebformBuilder extends Component {
           title: this.t('Remove')
         });
 
-        component.addEventListener(component.refs.removeComponent, 'click', () =>
-          this.removeComponent(component.schema, parent, component.component));
+        component.addEventListener(component.refs.removeComponent, 'click', () =>{
+          /* BESMIR ALIA
+           * warn before deleting if component has logic
+           */
+          let logicCount = component.logic.length;
+          if (logicCount > 0 && window.confirm('This component has logic attached. Do you still want to remove it?')) {
+            logicCount = 0;
+          }
+          if (logicCount === 0) {
+            this.removeComponent(component.schema, parent, component.component);
+          }
+        }
+        );
       }
 
       return element;
@@ -565,7 +578,7 @@ export default class WebformBuilder extends Component {
       }
 
       // Add the paste status in form
-      if (window.sessionStorage) {
+      if (typeof window !== 'undefined' && window.sessionStorage) {
         const data = window.sessionStorage.getItem('formio.clipboard');
         if (data) {
           this.addClass(this.refs.form, 'builder-paste-mode');
@@ -633,11 +646,13 @@ export default class WebformBuilder extends Component {
       const filteredOrder = [];
 
       for (const key in components) {
-        const isMatchedToTitle = components[key].title.toLowerCase().match(searchValue);
-        const isMatchedToKey = components[key].key.toLowerCase().match(searchValue);
+        if (!components.hasOwnProperty(key)) continue; //ignore prototype extensions
+        const comp = components[key];
+        const isMatchedToTitle = comp.title.toLowerCase().match(searchValue);
+        const isMatchedToKey = comp.key.toLowerCase().match(searchValue);
 
         if (isMatchedToTitle || isMatchedToKey) {
-          filteredOrder.push(components[key].key);
+          filteredOrder.push(comp.key);
         }
       }
 
@@ -711,6 +726,10 @@ export default class WebformBuilder extends Component {
     const containersArray = Array.prototype.slice.call(this.refs['sidebar-container']).filter(item => {
       return item.id !== 'group-container-resource';
     });
+
+    if (!dragula) {
+      return;
+    }
 
     this.dragula = dragula(containersArray, {
       moves(el) {
@@ -916,8 +935,10 @@ export default class WebformBuilder extends Component {
       parent.addChildComponent(info, element, target, source, sibling);
     }
 
+    const componentInDataGrid = parent.type === 'datagrid';
+
     if (isNew && !this.options.noNewEdit && !info.noNewEdit) {
-      this.editComponent(info, target, isNew);
+      this.editComponent(info, target, isNew, null, null, { inDataGrid: componentInDataGrid });
     }
 
     // Only rebuild the parts needing to be rebuilt.
@@ -1018,15 +1039,16 @@ export default class WebformBuilder extends Component {
       return;
     }
     let remove = true;
-    if (
-      !component.skipRemoveConfirm &&
+    const removingComponentsGroup = !component.skipRemoveConfirm &&
       (
         (Array.isArray(component.components) && component.components.length) ||
         (Array.isArray(component.rows) && component.rows.length) ||
         (Array.isArray(component.columns) && component.columns.length)
-      )
-    ) {
-      const message = 'Removing this component will also remove all of its children. Are you sure you want to do this?';
+      );
+
+    if (this.options.alwaysConfirmComponentRemoval || removingComponentsGroup) {
+      const message = removingComponentsGroup ? 'Removing this component will also remove all of its children. Are you sure you want to do this?'
+        : 'Are you sure you want to remove this component?';
       remove = window.confirm(this.t(message));
     }
     if (!original) {
@@ -1222,7 +1244,7 @@ export default class WebformBuilder extends Component {
     return NativePromise.resolve();
   }
 
-  editComponent(component, parent, isNew, isJsonEdit, original) {
+  editComponent(component, parent, isNew, isJsonEdit, original, flags = {}) {
     if (!component.key) {
       return;
     }
@@ -1250,6 +1272,7 @@ export default class WebformBuilder extends Component {
     // Pass along the form being edited.
     editFormOptions.editForm = this.form;
     editFormOptions.editComponent = component;
+    editFormOptions.flags = flags;
     this.editForm = new Webform(
       {
         ..._.omit(this.options, ['hooks', 'builder', 'events', 'attachMode', 'skipInit']),
@@ -1298,7 +1321,7 @@ export default class WebformBuilder extends Component {
       ]));
     }
 
-    this.componentEdit = this.ce('div', { 'class': 'component-edit-container' });
+    this.componentEdit = this.ce('div', { 'class': 'component-edit-container container-fluid' });
     this.setContent(this.componentEdit, this.renderTemplate('builderEditForm', {
       componentInfo: ComponentClass.builderInfo,
       editForm: this.editForm.render(),

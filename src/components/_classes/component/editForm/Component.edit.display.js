@@ -109,6 +109,7 @@ export default [
     as: 'html',
     wysiwyg: {
       minLines: 3,
+      isUseWorkerDisabled: true,
     },
   },
   {
@@ -123,6 +124,7 @@ export default [
     as: 'html',
     wysiwyg: {
       minLines: 3,
+      isUseWorkerDisabled: true,
     },
   },
   {
@@ -175,7 +177,7 @@ export default [
     key: 'dataGridLabel',
     input: true,
     customConditional(context) {
-      return context.instance.options.editComponent.inDataGrid;
+      return context.instance.options.flags.inDataGrid;
     }
   },
   {
@@ -200,7 +202,8 @@ export default [
     label: 'Modal Edit',
     tooltip: 'Opens up a modal to edit the value of this component.',
     key: 'modalEdit',
-    input: true
+    input: true,
+    ignore: true
   },
 ];
 /* eslint-enable max-len */

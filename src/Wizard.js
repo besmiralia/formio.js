@@ -204,6 +204,7 @@ export default class Wizard extends Webform {
       ctx.panels.map(panel => {
         if (panel.key === this.component.key) {
           this.currentPanel = panel;
+          ctx.wizardPageTooltip = this.getFormattedTooltip(panel.tooltip);
         }
       });
     }
@@ -250,7 +251,8 @@ export default class Wizard extends Webform {
         headerElement.outerHTML = this.renderTemplate('wizardHeader', this.renderContext);
         headerElement = this.element.querySelector(`#${this.wizardKey}-header`);
         this.loadRefs(headerElement, {
-          [`${this.wizardKey}-link`]: 'multiple'
+          [`${this.wizardKey}-link`]: 'multiple',
+          [`${this.wizardKey}-tooltip`]: 'multiple'
         });
         this.attachHeader();
       }
@@ -266,6 +268,7 @@ export default class Wizard extends Webform {
       [`${this.wizardKey}-next`]: 'single',
       [`${this.wizardKey}-submit`]: 'single',
       [`${this.wizardKey}-link`]: 'multiple',
+      [`${this.wizardKey}-tooltip`]: 'multiple'
     });
     if ((this.options.readOnly || this.editMode) && !this.enabledIndex) {
       this.enabledIndex = this.pages?.length - 1;
@@ -278,7 +281,23 @@ export default class Wizard extends Webform {
     ]);
     this.attachNav();
     this.attachHeader();
-    return promises.then(() => this.emit('render', { component: this.currentPage, page: this.page }));
+    return promises.then(() => {
+      this.emit('render', { component: this.currentPage, page: this.page });
+      this.scrollPageToTop();
+    });
+  }
+
+  scrollPageToTop() {
+    if (!this.refs[this.wizardKey]) {
+      return;
+    }
+
+    if ('scrollIntoView' in this.refs[this.wizardKey]) {
+      this.refs[this.wizardKey].scrollIntoView(true);
+    }
+    else {
+      this.scrollIntoView(this.refs[this.wizardKey]);
+    }
   }
 
   isBreadcrumbClickable() {
@@ -331,6 +350,7 @@ export default class Wizard extends Webform {
 
   attachHeader() {
     const isAllowPrevious = this.isAllowPrevious();
+    this.attachTooltips(this.refs[`${this.wizardKey}-tooltip`], this.currentPanel.tooltip);
 
     if (this.isBreadcrumbClickable() || isAllowPrevious) {
       this.refs[`${this.wizardKey}-link`].forEach((link, index) => {
@@ -747,8 +767,11 @@ export default class Wizard extends Webform {
     this.setComponentSchema();
   }
 
-  pageFieldLogicHandler() {
-    this.pageFieldLogic(this.page);
+  setEditMode(submission) {
+    if (!this.editMode && submission._id && !this.options.readOnly) {
+      this.editMode = true;
+      this.redraw();
+    }
   }
 
   setValue(submission, flags = {}, ignoreEstablishment) {
@@ -763,12 +786,9 @@ export default class Wizard extends Webform {
     const changed = this.getPages({ all: true }).reduce((changed, page) => {
       return this.setNestedValue(page, submission.data, flags, changed) || changed;
     }, false);
-    this.pageFieldLogicHandler();
 
-    if (!this.editMode && submission._id && !this.options.readOnly) {
-      this.editMode = true;
-      this.redraw();
-    }
+    this.pageFieldLogic(this.page);
+    this.setEditMode(submission);
 
     return changed;
   }

@@ -17,7 +17,7 @@ import { getFormioUploadAdapterPlugin } from '../../../providers/storage/uploadA
 const isIEBrowser = FormioUtils.getBrowserInfo().ie;
 const CKEDITOR_URL = isIEBrowser
   ? 'https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js'
-  : 'https://cdn.form.io/ckeditor/19.0.0/ckeditor.js';
+  : 'https://sandbox.govpilot.com/jet/js/plugins/ckeditor/ckeditor.js';
 const QUILL_URL = isIEBrowser
   ? 'https://cdn.quilljs.com/1.3.7'
   : 'https://cdn.quilljs.com/2.0.0-dev.3';
@@ -1982,22 +1982,35 @@ export default class Component extends Element {
         placeholder: this.t(this.component.placeholder)
       },
       ckeditor: {
-        toolbar: [
-          'heading',
-          'bold',
-          'italic',
-          'underline',
-          'strikethrough',
-          'code',
-          'superscript',
-          'link',
-          'bulletedList',
-          'numberedList',
-          'imageUpload',
-          'blockQuote',
-          'undo',
-          'redo'
-        ],
+				toolbar: {
+					items: [
+						'heading',
+						'fontSize',
+						'|',
+						'bold',
+						'italic',
+						'underline',
+						'|',
+						'link',
+						'|',
+						'bulletedList',
+						'numberedList',
+						'|',
+						'indent',
+						'outdent',
+						'|',
+						'imageUpload',
+						'blockQuote',
+						'insertTable',
+						'mediaEmbed',
+						'|',
+						'undo',
+						'redo',
+						'|',
+						'highlight',
+						'removeFormat'
+					]
+				},
         image: {
           toolbar: [
             'imageTextAlternative',
@@ -2034,8 +2047,8 @@ export default class Component extends Element {
       'ckeditor',
       isIEBrowser ? 'CKEDITOR' : 'ClassicEditor',
       _.get(this.options, 'editors.ckeditor.src',
-        CKEDITOR_URL
-      ), true)
+      CKEDITOR_URL
+    ), true)
       .then(() => {
         if (!element.parentNode) {
           return NativePromise.reject();

@@ -1333,6 +1333,7 @@ export default class Component extends Element {
       dialogOverlay: 'single',
       dialogContents: 'single',
       dialogClose: 'single',
+      dialogFooter: 'single',
     });
 
     dialog.refs.dialogContents.appendChild(element);

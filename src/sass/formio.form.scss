@@ -381,6 +381,12 @@ td > .form-group {
   &.formio-modaledit-dialog {
     font-size: inherit;
   }
+  
+  .confirmationDialog{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
 }
 
 .formio-dialog *,
@@ -391,6 +397,7 @@ td > .form-group {
 
 .formio-dialog {
   display: flex;
+  flex-direction: column;
   position: fixed;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -542,20 +549,27 @@ body.formio-dialog-open {
   animation: formio-dialog-flyout .5s;
 }
 
-.formio-dialog.formio-dialog-theme-default .formio-dialog-content {
-  -webkit-animation: formio-dialog-flyin .5s;
-  animation: formio-dialog-flyin .5s;
-  background: #f0f0f0;
-  border-radius: 5px;
-  font-family: 'Helvetica',sans-serif;
-  font-size: 1.1em;
-  line-height: 1.5em;
-  margin: auto;
-  max-width: 100%;
-  padding: 1em;
-  position: relative;
-  width: 80%;
-  display: flex;
+.formio-dialog.formio-dialog-theme-default {
+  .formio-dialog-content {
+    -webkit-animation: formio-dialog-flyin .5s;
+    animation: formio-dialog-flyin .5s;
+    background: #f0f0f0;
+    border-radius: 5px;
+    font-family: 'Helvetica',sans-serif;
+    font-size: 1.1em;
+    line-height: 1.5em;
+    margin: auto;
+    max-width: 100%;
+    padding: 1em;
+    position: relative;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formio-dialog-body{
+    flex: 1;
+  }
 }
 
 .formio-dialog.formio-dialog-theme-default .formio-dialog-close {

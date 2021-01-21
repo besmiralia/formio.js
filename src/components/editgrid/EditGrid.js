@@ -546,7 +546,7 @@ export default class EditGridComponent extends NestedArrayComponent {
       delete editRow.dialog;
     });
 
-    dialog.refs.dialogContents.appendChild(this.ce('button', {
+    dialog.refs.dialogFooter.appendChild(this.ce('button', {
       class: 'btn btn-primary',
       onClick: () => {
         if (this.validateRow(editRow, true) || this.component.rowDrafts) {
@@ -570,7 +570,7 @@ export default class EditGridComponent extends NestedArrayComponent {
       return NativePromise.resolve();
     }
 
-    const wrapper = this.ce('div', { ref: 'confirmationDialog' });
+    const wrapper = this.ce('div', { ref: 'confirmationDialog', class: 'confirmationDialog' });
     const dialogContent = this.component.dialogTemplate || this.defaultDialogTemplate;
 
     wrapper.innerHTML = dialogContent;

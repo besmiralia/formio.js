@@ -55,6 +55,7 @@ import TreeComponent from './tree/Tree';
 import UnknownComponent from './unknown/Unknown';
 import UrlComponent from './url/Url';
 import WellComponent from './well/Well';
+import UserLookupComponent from './userLookup/UserLookup';
 
 export default {
   address: AddressComponent,
@@ -114,5 +115,6 @@ export default {
   tree: TreeComponent,
   unknown: UnknownComponent,
   url: UrlComponent,
+  userLookup: UserLookupComponent,
   well: WellComponent,
 };

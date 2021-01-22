@@ -3,20 +3,16 @@ import FormioUtils from '../../utils';
 import SelectComponent from '../select/Select';
 
 export default class UserLookupComponent extends SelectComponent {
-  constructor() {
-    super();
-  }
-
   static schema(...extend) {
     return SelectComponent.schema({
-      type: 'select',
+      type: 'userLookup',
       label: 'User Lookup',
       key: 'userLookup',
       idPath: 'id',
       data: {
         values: [],
         json: '',
-        url: `${Formio.getProjectUrl()}/forms/users`,
+        url: `${Formio.getProjectUrl()}/users`,
         resource: '',
         custom: ''
       },
@@ -27,12 +23,12 @@ export default class UserLookupComponent extends SelectComponent {
       lazyLoad: true,
       filter: '',
       searchEnabled: true,
-      searchField: '',
+      searchField: 'q',
       minSearch: 0,
       readOnlyValue: false,
       authenticate: false,
       ignoreCache: false,
-      template: '<span>{{ item.name }}</span>',
+      template: '<span>{{ item.fullName }}</span>',
       selectFields: '',
       searchThreshold: 0.3,
       uniqueOptions: false,
@@ -69,6 +65,9 @@ export default class UserLookupComponent extends SelectComponent {
     return UserLookupComponent.schema();
   }
 
+  init() {
+    super.init();
+  }
   /* eslint-disable max-statements */
   attach(element) {
     const superAttach = super.attach(element);
@@ -80,23 +79,23 @@ export default class UserLookupComponent extends SelectComponent {
         const components = this.root.component.components;
 
         if (this.userInfo.firstName !== '') {
-          const component = FormioUtils.getComponent(components, this.userInfo.firstName);
+          const component = FormioUtils.getComponent(components, this.userInfo.firstName, true);
           component.setValue(selectedUser.firstName);
         }
         if (this.userInfo.lastName !== '') {
-          const component = FormioUtils.getComponent(components, this.userInfo.lastName);
+          const component = FormioUtils.getComponent(components, this.userInfo.lastName, true);
           component.setValue(selectedUser.lastName);
         }
         if (this.userInfo.fullName !== '') {
-          const component = FormioUtils.getComponent(components, this.userInfo.fullName);
+          const component = FormioUtils.getComponent(components, this.userInfo.fullName, true);
           component.setValue(selectedUser.name);
         }
         if (this.userInfo.email !== '') {
-          const component = FormioUtils.getComponent(components, this.userInfo.email);
+          const component = FormioUtils.getComponent(components, this.userInfo.email, true);
           component.setValue(selectedUser.email);
         }
         if (this.userInfo.phone !== '') {
-          const component = FormioUtils.getComponent(components, this.userInfo.phone);
+          const component = FormioUtils.getComponent(components, this.userInfo.phone, true);
           component.setValue(selectedUser.phone);
         }
         this.setValue(event.target.value);

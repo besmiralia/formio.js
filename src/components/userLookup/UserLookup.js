@@ -1,5 +1,4 @@
 import Formio from '../../Formio';
-import FormioUtils from '../../utils';
 import SelectComponent from '../select/Select';
 
 export default class UserLookupComponent extends SelectComponent {

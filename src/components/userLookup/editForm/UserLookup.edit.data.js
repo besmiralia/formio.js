@@ -1,6 +1,3 @@
-import { eachComponent } from '../../../utils/utils';
-import Formio from '../../../Formio';
-
 export default [
   {
     type: 'select',
@@ -21,55 +18,6 @@ export default [
         { label: 'Raw JSON', value: 'json' },
         { label: 'IndexedDB', value: 'indexeddb' },
       ],
-    },
-  },
-  {
-    type: 'textfield',
-    weight: 10,
-    input: true,
-    key: 'indexeddb.database',
-    label: 'Database name',
-    tooltip: 'The name of the indexeddb database.',
-    conditional: {
-      json: { '===': [{ var: 'data.dataSrc' }, 'indexeddb'] },
-    },
-  },
-  {
-    type: 'textfield',
-    input: true,
-    key: 'indexeddb.table',
-    label: 'Table name',
-    weight: 16,
-    tooltip: 'The name of table in the indexeddb database.',
-    conditional: {
-      json: { '===': [{ var: 'data.dataSrc' }, 'indexeddb'] },
-    }
-  },
-  {
-    type: 'textarea',
-    as: 'json',
-    editor: 'ace',
-    weight: 18,
-    input: true,
-    key: 'indexeddb.filter',
-    label: 'Row Filter',
-    tooltip: 'Filter table items that match the object.',
-    defaultValue: {},
-    conditional: {
-      json: { '===': [{ var: 'data.dataSrc' }, 'indexeddb'] },
-    },
-  },
-  {
-    type: 'textarea',
-    as: 'json',
-    editor: 'ace',
-    weight: 10,
-    input: true,
-    key: 'data.json',
-    label: 'Data Source Raw JSON',
-    tooltip: 'A raw JSON array to use as a data source.',
-    conditional: {
-      json: { '===': [{ var: 'data.dataSrc' }, 'json'] },
     },
   },
   {
@@ -129,141 +77,6 @@ export default [
     },
   },
   {
-    type: 'datagrid',
-    input: true,
-    label: 'Data Source Values',
-    key: 'data.values',
-    tooltip: 'Values to use as the data source. Labels are shown in the select field. Values are the corresponding values saved with the submission.',
-    weight: 10,
-    reorder: true,
-    defaultValue: [{ label: '', value: '' }],
-    components: [
-      {
-        label: 'Label',
-        key: 'label',
-        input: true,
-        type: 'textfield',
-      },
-      {
-        label: 'Value',
-        key: 'value',
-        input: true,
-        type: 'textfield',
-        allowCalculateOverride: true,
-        calculateValue: { _camelCase: [{ var: 'row.label' }] },
-      },
-    ],
-    conditional: {
-      json: { '===': [{ var: 'data.dataSrc' }, 'values'] },
-    },
-  },
-  {
-    type: 'select',
-    input: true,
-    dataSrc: 'url',
-    data: {
-      url: `https://form-${Formio.getHost()}/forms/lookups/${Formio.getTid()}`,
-    },
-    authenticate: true,
-    template: '<span>{{ item.title }}</span>',
-    valueProperty: 'tid',
-    clearOnHide: false,
-    label: 'Resource',
-    key: 'data.resource',
-    lazyLoad: false,
-    weight: 10,
-    tooltip: 'The resource to be used with this field.',
-    conditional: {
-      json: { '===': [{ var: 'data.dataSrc' }, 'resource'] },
-    },
-  },
-  {
-    type: 'textfield',
-    input: true,
-    label: 'Data Path',
-    key: 'selectValues',
-    weight: 12,
-    description: 'The object path to the iterable items.',
-    tooltip: 'The property within the source data, where iterable items reside. For example: results.items or results[0].items',
-    conditional: {
-      json: { '===': [{ var: 'data.dataSrc' }, 'url'] },
-    },
-  },
-  {
-    type: 'select',
-    input: true,
-    label: 'Value Property',
-    key: 'valueProperty',
-    skipMerge: true,
-    clearOnHide: false,
-    tooltip: 'The field to use as the value.',
-    weight: 11,
-    refreshOn: 'data.resource',
-    template: '<span>{{ item.label }}</span>',
-    valueProperty: 'key',
-    dataSrc: 'url',
-    lazyLoad: false,
-    onSetItems(component, form) {
-      const newItems = form.type === 'resource'
-        ? [{
-          label: '{Entire Object}',
-          key: 'data',
-        }]
-        : [];
-
-      eachComponent(form.components, (component, path) => {
-        if (component.input) {
-          newItems.push({
-            label: component.label || component.key,
-            key: `data.${path}`
-          });
-        }
-      });
-      return newItems;
-    },
-    onChange(context) {
-      if (context && context.flags && context.flags.modified) {
-        const valueProp = context.instance.data.valueProperty;
-        const templateProp = valueProp ? valueProp : 'data';
-        const template = `<span>{{ item.${templateProp} }}</span>`;
-        const searchField = valueProp ? `${valueProp}__regex` : '';
-        context.instance.root.getComponent('template').setValue(template);
-        context.instance.root.getComponent('searchField').setValue(searchField);
-      }
-    },
-    data: {
-      url: '/form/{{ data.data.resource }}',
-    },
-    conditional: {
-      json: {
-        and: [
-          { '===': [{ var: 'data.dataSrc' }, 'resource'] },
-          { var: 'data.data.resource' },
-        ],
-      },
-    },
-  },
-  {
-    type: 'select',
-    input: true,
-    label: 'Storage Type',
-    key: 'dataType',
-    clearOnHide: true,
-    tooltip: 'The type to store the data. If you select something other than autotype, it will force it to that type.',
-    weight: 12,
-    template: '<span>{{ item.label }}</span>',
-    dataSrc: 'values',
-    data: {
-      values: [
-        { label: 'Autotype', value: 'auto' },
-        { label: 'String', value: 'string' },
-        { label: 'Number', value: 'number' },
-        { label: 'Boolean', value: 'boolean' },
-        { label: 'Object', value: 'object' },
-      ],
-    },
-  },
-  {
     type: 'textfield',
     input: true,
     key: 'idPath',
@@ -293,34 +106,6 @@ export default [
           ],
         ],
       },
-    },
-  },
-  {
-    type: 'textfield',
-    input: true,
-    label: 'Select Fields',
-    key: 'selectFields',
-    tooltip: 'The properties on the resource to return as part of the options. Separate property names by commas. If left blank, all properties will be returned.',
-    placeholder: 'Comma separated list of fields to select.',
-    weight: 14,
-    conditional: {
-      json: {
-        and: [
-          { '===': [{ var: 'data.dataSrc' }, 'resource'] },
-          { '===': [{ var: 'data.valueProperty' }, ''] },
-        ],
-      },
-    },
-  },
-  {
-    type: 'checkbox',
-    input: true,
-    key: 'disableLimit',
-    label: 'Disable limiting response',
-    tooltip: 'When enabled the request will not include the limit and skip options in the query string',
-    weight: 15,
-    conditional: {
-      json: { '===': [{ var: 'data.dataSrc' }, 'url'] },
     },
   },
   {
@@ -419,20 +204,6 @@ export default [
           ],
         ],
       },
-    },
-  },
-  {
-    type: 'textarea',
-    input: true,
-    key: 'data.custom',
-    label: 'Custom Values',
-    editor: 'ace',
-    rows: 10,
-    weight: 14,
-    placeholder: "values = data['mykey'];",
-    tooltip: 'Write custom code to return the value options. The form data object is available.',
-    conditional: {
-      json: { '===': [{ var: 'data.dataSrc' }, 'custom'] },
     },
   },
   {
@@ -670,6 +441,174 @@ export default [
         { '===': [{ var: 'data.dataSrc' }, 'url'] },
         { '===': [{ var: 'data.dataSrc' }, 'resource'] },
       ] },
+    },
+  },
+  {
+    type: 'select',
+    label: 'First Name',
+    key: 'userInfo.firstName',
+    input: true,
+    weight: 50,
+    tooltip: 'The field which will copy the first name from the selected user.',
+    dataSrc: 'custom',
+    valueProperty: 'value',
+    validate: {
+      required: true
+    },
+    data: {
+      custom(context) {
+        var values = [];
+        //values.push({ label: 'Any Change', value: 'data' });
+        context.utils.eachComponent(context.instance.options.editForm.components, function(component) {
+          if (component.key !== context.data.key && ['textfield', 'textarea', 'gplabel', 'select', 'content'].includes(component.type)) {
+            values.push({
+              label: component.label || component.key,
+              value: component.key
+            });
+          }
+        });
+        return values;
+      }
+    },
+  },
+  {
+    type: 'select',
+    label: 'Last Name',
+    key: 'userInfo.lastName',
+    input: true,
+    weight: 50,
+    tooltip: 'The field which will copy the last name from the selected user.',
+    dataSrc: 'custom',
+    valueProperty: 'value',
+    validate: {
+      required: true
+    },
+    data: {
+      custom(context) {
+        var values = [];
+        //values.push({ label: 'Any Change', value: 'data' });
+        context.utils.eachComponent(context.instance.options.editForm.components, function(component) {
+          if (component.key !== context.data.key && ['textfield', 'textarea', 'gplabel', 'select', 'content'].includes(component.type)) {
+            values.push({
+              label: component.label || component.key,
+              value: component.key
+            });
+          }
+        });
+        return values;
+      }
+    },
+  },
+  {
+    type: 'select',
+    label: 'Full Name',
+    key: 'userInfo.fullName',
+    input: true,
+    weight: 50,
+    tooltip: 'The field which will copy the full name from the selected user.',
+    dataSrc: 'custom',
+    valueProperty: 'value',
+    validate: {
+      required: true
+    },
+    data: {
+      custom(context) {
+        var values = [];
+        //values.push({ label: 'Any Change', value: 'data' });
+        context.utils.eachComponent(context.instance.options.editForm.components, function(component) {
+          if (component.key !== context.data.key && ['textfield', 'textarea', 'gplabel', 'select', 'content'].includes(component.type)) {
+            values.push({
+              label: component.label || component.key,
+              value: component.key
+            });
+          }
+        });
+        return values;
+      }
+    },
+  },
+  {
+    type: 'select',
+    label: 'Email',
+    key: 'userInfo.email',
+    input: true,
+    weight: 50,
+    tooltip: 'The field which will copy the email from the selected user.',
+    dataSrc: 'custom',
+    valueProperty: 'value',
+    validate: {
+      required: true
+    },
+    data: {
+      custom(context) {
+        var values = [];
+        //values.push({ label: 'Any Change', value: 'data' });
+        context.utils.eachComponent(context.instance.options.editForm.components, function(component) {
+          if (component.key !== context.data.key && ['email', 'textfield', 'textarea', 'gplabel', 'select', 'content'].includes(component.type)) {
+            values.push({
+              label: component.label || component.key,
+              value: component.key
+            });
+          }
+        });
+        return values;
+      }
+    },
+  },
+  {
+    type: 'select',
+    label: 'Phone',
+    key: 'userInfo.phone',
+    input: true,
+    weight: 50,
+    tooltip: 'The field which will copy the phone number from the selected user.',
+    dataSrc: 'custom',
+    valueProperty: 'value',
+    validate: {
+      required: true
+    },
+    data: {
+      custom(context) {
+        var values = [];
+        //values.push({ label: 'Any Change', value: 'data' });
+        context.utils.eachComponent(context.instance.options.editForm.components, function(component) {
+          if (component.key !== context.data.key && ['phone'].includes(component.type)) {
+            values.push({
+              label: component.label || component.key,
+              value: component.key
+            });
+          }
+        });
+        return values;
+      }
+    },
+  },
+  {
+    type: 'select',
+    label: 'User ID',
+    key: 'userInfo.id',
+    input: true,
+    weight: 50,
+    tooltip: 'The field which will copy the id from the selected user.',
+    dataSrc: 'custom',
+    valueProperty: 'value',
+    validate: {
+      required: true
+    },
+    data: {
+      custom(context) {
+        var values = [];
+        //values.push({ label: 'Any Change', value: 'data' });
+        context.utils.eachComponent(context.instance.options.editForm.components, function(component) {
+          if (component.key !== context.data.key && ['textfield', 'textarea', 'gplabel', 'select', 'content'].includes(component.type)) {
+            values.push({
+              label: component.label || component.key,
+              value: component.key
+            });
+          }
+        });
+        return values;
+      }
     },
   },
 ];

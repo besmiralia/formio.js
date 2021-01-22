@@ -1,8 +1,7 @@
-import _ from 'lodash';
 import Formio from '../../Formio';
+import FormioUtils from '../../utils';
 import Field from '../_classes/field/Field';
 import SelectComponent from '../select/Select';
-import NativePromise from 'native-promise-only';
 
 export default class UserLookupComponent extends SelectComponent {
   constructor() {
@@ -18,7 +17,7 @@ export default class UserLookupComponent extends SelectComponent {
       data: {
         values: [],
         json: '',
-        url: 'https://form-sandbox.govpilot.com/forms/users',
+        url: `https://form-${Formio.getHost()}/forms/users`,
         resource: '',
         custom: ''
       },
@@ -43,6 +42,14 @@ export default class UserLookupComponent extends SelectComponent {
         include: 'score',
         threshold: 0.3,
       },
+      userInfo:{
+        firstName: '',
+        lastName: '',
+        fullName: '',
+        email: '',
+        phone: '',
+        id: ''
+      },
       customOptions: {},
       useExactSearch: false,
     }, ...extend);
@@ -55,72 +62,48 @@ export default class UserLookupComponent extends SelectComponent {
       icon: 'user',
       weight: 70,
       documentation: '',
-      schema: SelectComponent.schema()
+      schema: UserLookupComponent.schema()
     };
-  }
-
-  init() {
-    if (this.component.dataSrc === 'govpilot') {
-      if (this.component.feeschedule) {
-        this.component.data.url = `${Formio.getProjectUrl()}/${Formio.getTid()}/feeschedule`;
-      }
-      else this.component.data.url = `${Formio.getProjectUrl()}/dropdown/${this.schema.gptid}/${this.key}`;
-    }
-
-    super.init();
-    this.validators = this.validators.concat(['select', 'onlyAvailableItems']);
-
-    // Trigger an update.
-    let updateArgs = [];
-    const triggerUpdate = _.debounce((...args) => {
-      updateArgs = [];
-      return this.updateItems.apply(this, args);
-    }, 100);
-    this.triggerUpdate = (...args) => {
-      if (args.length) {
-        updateArgs = args;
-      }
-      return triggerUpdate(...updateArgs);
-    };
-
-    // Keep track of the select options.
-    this.selectOptions = [];
-
-    if (this.isInfiniteScrollProvided) {
-      this.isFromSearch = false;
-
-      this.searchServerCount = null;
-      this.defaultServerCount = null;
-
-      this.isScrollLoading = false;
-
-      this.searchDownloadedResources = [];
-      this.defaultDownloadedResources = [];
-    }
-
-    // If this component has been activated.
-    this.activated = false;
-
-    // Determine when the items have been loaded.
-    this.itemsLoaded = new NativePromise((resolve) => {
-      this.itemsLoadedResolve = resolve;
-    });
-  }
-
-  get dataReady() {
-    // If the root submission has been set, and we are still not attached, then assume
-    // that our data is ready.
-    if (
-      this.root &&
-      this.root.submissionSet &&
-      !this.attached
-    ) {
-      return NativePromise.resolve();
-    }
-    return this.itemsLoaded;
   }
 
   get defaultSchema() {
-    return SelectComponent.schema();
+    return UserLookupComponent.schema();
+  }
+
+  /* eslint-disable max-statements */
+  attach(element) {
+    const superAttach = super.attach(element);
+
+    const autocompleteInput = this.refs.autocompleteInput;
+    if (autocompleteInput) {
+      this.addEventListener(autocompleteInput, 'change', (event) => {
+        const selectedUser = event.target.value;
+        const components = this.root.component.components;
+
+        if (this.userInfo.firstName !== '') {
+          const component = FormioUtils.getComponent(components, this.userInfo.firstName);
+          component.setValue(selectedUser.firstName);
+        }
+        if (this.userInfo.lastName !== '') {
+          const component = FormioUtils.getComponent(components, this.userInfo.lastName);
+          component.setValue(selectedUser.lastName);
+        }
+        if (this.userInfo.fullName !== '') {
+          const component = FormioUtils.getComponent(components, this.userInfo.fullName);
+          component.setValue(selectedUser.fullName);
+        }
+        if (this.userInfo.email !== '') {
+          const component = FormioUtils.getComponent(components, this.userInfo.email);
+          component.setValue(selectedUser.email);
+        }
+        if (this.userInfo.phone !== '') {
+          const component = FormioUtils.getComponent(components, this.userInfo.phone);
+          component.setValue(selectedUser.phone);
+        }
+        this.setValue(event.target.value);
+      });
+    }
+
+    return superAttach;
   }
 }

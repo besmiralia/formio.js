@@ -76,29 +76,24 @@ export default class UserLookupComponent extends SelectComponent {
     if (autocompleteInput) {
       this.addEventListener(autocompleteInput, 'change', (event) => {
         const selectedUser = event.detail.value;
-        const components = this.root.component.components;
 
+        const submissionData = this.root.submission;
         if (this.component.userInfo.firstName !== '') {
-          const component = FormioUtils.getComponent(components, this.component.userInfo.firstName, true);
-          if (component) component.value = selectedUser.firstName;
+          submissionData.data[this.component.userInfo.firstName] = selectedUser.firstName;
         }
         if (this.component.userInfo.lastName !== '') {
-          const component = FormioUtils.getComponent(components, this.component.userInfo.lastName, true);
-          if (component) component.value = selectedUser.lastName;
+          submissionData.data[this.component.userInfo.lastName] = selectedUser.lastName;
         }
         if (this.component.userInfo.fullName !== '') {
-          const component = FormioUtils.getComponent(components, this.component.userInfo.fullName, true);
-          if (component) component.value = selectedUser.fullName;
+          submissionData.data[this.component.userInfo.fullName] = selectedUser.fullName;
         }
         if (this.component.userInfo.email !== '') {
-          const component = FormioUtils.getComponent(components, this.component.userInfo.email, true);
-          if (component) component.value = selectedUser.email;
+          submissionData.data[this.component.userInfo.email] = selectedUser.email;
         }
         if (this.component.userInfo.phone !== '') {
-          const component = FormioUtils.getComponent(components, this.component.userInfo.phone, true);
-          if (component) component.value = selectedUser.phone;
+          submissionData.data[this.component.userInfo.phone] = selectedUser.phone;
         }
-        this.setValue(event.detail.value);
+        this.root.setSubmission(submissionData);
         this.dataValue = '';
       });
     }

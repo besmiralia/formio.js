@@ -113,7 +113,7 @@ export default [
         var values = [];
         //values.push({ label: 'Any Change', value: 'data' });
         context.utils.eachComponent(context.instance.options.editForm.components, function(component) {
-          if (component.key !== context.data.key && ['phone'].includes(component.type)) {
+          if (component.key !== context.data.key && ['phoneNumber'].includes(component.type)) {
             values.push({
               label: component.label || component.key,
               value: component.key

@@ -72,33 +72,34 @@ export default class UserLookupComponent extends SelectComponent {
   attach(element) {
     const superAttach = super.attach(element);
 
-    const autocompleteInput = this.refs.autocompleteInput;
+    const autocompleteInput = this.refs.selectContainer;
     if (autocompleteInput) {
       this.addEventListener(autocompleteInput, 'change', (event) => {
-        const selectedUser = event.target.value;
+        const selectedUser = event.detail.value;
         const components = this.root.component.components;
 
-        if (this.userInfo.firstName !== '') {
-          const component = FormioUtils.getComponent(components, this.userInfo.firstName, true);
-          component.setValue(selectedUser.firstName);
+        if (this.component.userInfo.firstName !== '') {
+          const component = FormioUtils.getComponent(components, this.component.userInfo.firstName, true);
+          if (component) component.value = selectedUser.firstName;
         }
-        if (this.userInfo.lastName !== '') {
-          const component = FormioUtils.getComponent(components, this.userInfo.lastName, true);
-          component.setValue(selectedUser.lastName);
+        if (this.component.userInfo.lastName !== '') {
+          const component = FormioUtils.getComponent(components, this.component.userInfo.lastName, true);
+          if (component) component.value = selectedUser.lastName;
         }
-        if (this.userInfo.fullName !== '') {
-          const component = FormioUtils.getComponent(components, this.userInfo.fullName, true);
-          component.setValue(selectedUser.name);
+        if (this.component.userInfo.fullName !== '') {
+          const component = FormioUtils.getComponent(components, this.component.userInfo.fullName, true);
+          if (component) component.value = selectedUser.fullName;
         }
-        if (this.userInfo.email !== '') {
-          const component = FormioUtils.getComponent(components, this.userInfo.email, true);
-          component.setValue(selectedUser.email);
+        if (this.component.userInfo.email !== '') {
+          const component = FormioUtils.getComponent(components, this.component.userInfo.email, true);
+          if (component) component.value = selectedUser.email;
         }
-        if (this.userInfo.phone !== '') {
-          const component = FormioUtils.getComponent(components, this.userInfo.phone, true);
-          component.setValue(selectedUser.phone);
+        if (this.component.userInfo.phone !== '') {
+          const component = FormioUtils.getComponent(components, this.component.userInfo.phone, true);
+          if (component) component.value = selectedUser.phone;
         }
-        this.setValue(event.target.value);
+        this.setValue(event.detail.value);
+        this.dataValue = '';
       });
     }
 

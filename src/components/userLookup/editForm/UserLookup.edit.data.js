@@ -13,38 +13,38 @@ export default [
     dataSrc: 'values',
     data: {
       values: [
-        { label: 'Values', value: 'values' },
-        { label: 'GovPilot', value: 'govpilot' },
+        // { label: 'Values', value: 'values' },
+        // { label: 'GovPilot', value: 'govpilot' },
         { label: 'URL', value: 'url' },
-        { label: 'Resource', value: 'resource' },
-        { label: 'Custom', value: 'custom' },
-        { label: 'Raw JSON', value: 'json' },
-        { label: 'IndexedDB', value: 'indexeddb' },
+        // { label: 'Resource', value: 'resource' },
+        // { label: 'Custom', value: 'custom' },
+        // { label: 'Raw JSON', value: 'json' },
+        // { label: 'IndexedDB', value: 'indexeddb' },
       ],
     },
   },
-  {
-    type: 'textfield',
-    weight: 10,
-    input: true,
-    key: 'indexeddb.database',
-    label: 'Database name',
-    tooltip: 'The name of the indexeddb database.',
-    conditional: {
-      json: { '===': [{ var: 'data.dataSrc' }, 'indexeddb'] },
-    },
-  },
-  {
-    type: 'textfield',
-    input: true,
-    key: 'indexeddb.table',
-    label: 'Table name',
-    weight: 16,
-    tooltip: 'The name of table in the indexeddb database.',
-    conditional: {
-      json: { '===': [{ var: 'data.dataSrc' }, 'indexeddb'] },
-    }
-  },
+  // {
+  //   type: 'textfield',
+  //   weight: 10,
+  //   input: true,
+  //   key: 'indexeddb.database',
+  //   label: 'Database name',
+  //   tooltip: 'The name of the indexeddb database.',
+  //   conditional: {
+  //     json: { '===': [{ var: 'data.dataSrc' }, 'indexeddb'] },
+  //   },
+  // },
+  // {
+  //   type: 'textfield',
+  //   input: true,
+  //   key: 'indexeddb.table',
+  //   label: 'Table name',
+  //   weight: 16,
+  //   tooltip: 'The name of table in the indexeddb database.',
+  //   conditional: {
+  //     json: { '===': [{ var: 'data.dataSrc' }, 'indexeddb'] },
+  //   }
+  // },
   {
     type: 'textarea',
     as: 'json',
@@ -59,19 +59,19 @@ export default [
       json: { '===': [{ var: 'data.dataSrc' }, 'indexeddb'] },
     },
   },
-  {
-    type: 'textarea',
-    as: 'json',
-    editor: 'ace',
-    weight: 10,
-    input: true,
-    key: 'data.json',
-    label: 'Data Source Raw JSON',
-    tooltip: 'A raw JSON array to use as a data source.',
-    conditional: {
-      json: { '===': [{ var: 'data.dataSrc' }, 'json'] },
-    },
-  },
+  // {
+  //   type: 'textarea',
+  //   as: 'json',
+  //   editor: 'ace',
+  //   weight: 10,
+  //   input: true,
+  //   key: 'data.json',
+  //   label: 'Data Source Raw JSON',
+  //   tooltip: 'A raw JSON array to use as a data source.',
+  //   conditional: {
+  //     json: { '===': [{ var: 'data.dataSrc' }, 'json'] },
+  //   },
+  // },
   {
     type: 'textfield',
     input: true,
@@ -91,17 +91,17 @@ export default [
     key: 'lazyLoad',
     tooltip: 'When set, this will not fire off the request to the URL until this control is within focus. This can improve performance if you have many Select dropdowns on your form where the API\'s will only fire when the control is activated.',
     weight: 11,
-    conditional: {
-      json: {
-        in: [
-          { var: 'data.dataSrc' },
-          [
-            'resource',
-            'url',
-          ],
-        ],
-      },
-    },
+    // conditional: {
+    //   json: {
+    //     in: [
+    //       { var: 'data.dataSrc' },
+    //       [
+    //         'resource',
+    //         'url',
+    //       ],
+    //     ],
+    //   },
+    // },
   },
   {
     type: 'datagrid',

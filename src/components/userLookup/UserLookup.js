@@ -18,7 +18,7 @@ export default class UserLookupComponent extends SelectComponent {
       data: {
         values: [],
         json: '',
-        url: 'https://form-sandbox.govpilot.com/forms/users',
+        url: `${Formio.getProjectUrl()}/forms/users`,
         resource: '',
         custom: ''
       },

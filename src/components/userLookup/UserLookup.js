@@ -17,7 +17,7 @@ export default class UserLookupComponent extends SelectComponent {
       data: {
         values: [],
         json: '',
-        url: `https://form-${Formio.getHost()}/forms/users`,
+        url: `${Formio.getProjectUrl()}/forms/users`,
         resource: '',
         custom: ''
       },

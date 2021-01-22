@@ -10,13 +10,13 @@ export default [
     dataSrc: 'values',
     data: {
       values: [
-        { label: 'Values', value: 'values' },
-        { label: 'GovPilot', value: 'govpilot' },
+        // { label: 'Values', value: 'values' },
+        // { label: 'GovPilot', value: 'govpilot' },
         { label: 'URL', value: 'url' },
-        { label: 'Resource', value: 'resource' },
-        { label: 'Custom', value: 'custom' },
-        { label: 'Raw JSON', value: 'json' },
-        { label: 'IndexedDB', value: 'indexeddb' },
+        // { label: 'Resource', value: 'resource' },
+        // { label: 'Custom', value: 'custom' },
+        // { label: 'Raw JSON', value: 'json' },
+        // { label: 'IndexedDB', value: 'indexeddb' },
       ],
     },
   },
@@ -39,17 +39,17 @@ export default [
     key: 'lazyLoad',
     tooltip: 'When set, this will not fire off the request to the URL until this control is within focus. This can improve performance if you have many Select dropdowns on your form where the API\'s will only fire when the control is activated.',
     weight: 11,
-    conditional: {
-      json: {
-        in: [
-          { var: 'data.dataSrc' },
-          [
-            'resource',
-            'url',
-          ],
-        ],
-      },
-    },
+    // conditional: {
+    //   json: {
+    //     in: [
+    //       { var: 'data.dataSrc' },
+    //       [
+    //         'resource',
+    //         'url',
+    //       ],
+    //     ],
+    //   },
+    // },
   },
   {
     type: 'datagrid',

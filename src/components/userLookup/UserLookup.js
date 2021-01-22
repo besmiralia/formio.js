@@ -1,6 +1,5 @@
 import Formio from '../../Formio';
 import FormioUtils from '../../utils';
-import Field from '../_classes/field/Field';
 import SelectComponent from '../select/Select';
 
 export default class UserLookupComponent extends SelectComponent {
@@ -9,7 +8,7 @@ export default class UserLookupComponent extends SelectComponent {
   }
 
   static schema(...extend) {
-    return Field.schema({
+    return SelectComponent.schema({
       type: 'select',
       label: 'User Lookup',
       key: 'userLookup',
@@ -33,7 +32,7 @@ export default class UserLookupComponent extends SelectComponent {
       readOnlyValue: false,
       authenticate: false,
       ignoreCache: false,
-      template: '<span>{{ item.label }}</span>',
+      template: '<span>{{ item.name }}</span>',
       selectFields: '',
       searchThreshold: 0.3,
       uniqueOptions: false,
@@ -90,7 +89,7 @@ export default class UserLookupComponent extends SelectComponent {
         }
         if (this.userInfo.fullName !== '') {
           const component = FormioUtils.getComponent(components, this.userInfo.fullName);
-          component.setValue(selectedUser.fullName);
+          component.setValue(selectedUser.name);
         }
         if (this.userInfo.email !== '') {
           const component = FormioUtils.getComponent(components, this.userInfo.email);

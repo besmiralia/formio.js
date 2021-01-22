@@ -20,6 +20,9 @@
         <i class="{{ctx.iconClass('cog')}}"></i>
       </div>
       <div class="float-left text-dark mr-2">{{ctx.type}}</div>
+      {% if (ctx.hasLogic) { %}
+        <div class="float-left text-danger mr-2" title="This component has logic"><i class="fa fa-function"></i></div>
+      {% } %}
     </div>
   {% } %}
   {{ctx.html}}

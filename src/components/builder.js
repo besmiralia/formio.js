@@ -48,6 +48,7 @@ import TimeForm from './time/Time.form';
 import TreeForm from './tree/Tree.form';
 import UnknownForm from './unknown/Unknown.form';
 import UrlForm from './url/Url.form';
+import UserLookupForm from './userLookup/UserLookup.form';
 import WellForm from './well/Well.form';
 
 Components.address.editForm = AddressForm;
@@ -99,6 +100,7 @@ Components.time.editForm = TimeForm;
 Components.tree.editForm = TreeForm;
 Components.unknown.editForm = UnknownForm;
 Components.url.editForm = UrlForm;
+Components.userLookup.editForm = UserLookupForm;
 Components.well.editForm = WellForm;
 
 export default Components;

@@ -50,6 +50,15 @@ export default [
     tooltip: 'Logo URL'
   },
   {
+    weight: 51,
+    type: 'number',
+    input: true,
+    key: 'maxWidth',
+    label: 'Maximum Width (px)',
+    placeholder: '0',
+    tooltip: 'The maximum width the image can have. Leave zero (0) for responsive image.'
+  },
+  {
     type: 'textfield',
     input: true,
     key: 'className',

@@ -7,9 +7,9 @@ export default class LogoComponent extends Component {
       label: 'Logo',
       type: 'logo',
       tag: 'img',
-      attrs: ['src'],
       content: '',
       url: '',
+      maxWidth: 0,
       input: false,
       persistent: false
     }, ...extend);
@@ -57,10 +57,12 @@ export default class LogoComponent extends Component {
 
   renderContent() {
     const submission = _.get(this.root, 'submission', {});
+    const attrArr =  [{ attr: 'src', value: this.component.url }];
+    if (this.component.maxWidth > 0) attrArr.push({ attr: 'width', value: `${this.component.maxWidth}px` });
     return this.renderTemplate('html', {
       component: this.component,
       tag: 'img',
-      attrs: (this.component.attrs || []).map((attr) => {
+      attrs: (attrArr).map((attr) => {
         return {
           attr: attr.attr,
           value: this.interpolate(attr.value, {

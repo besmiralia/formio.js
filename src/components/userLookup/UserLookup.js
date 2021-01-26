@@ -92,7 +92,10 @@ export default class UserLookupComponent extends SelectComponent {
         if (this.component.userInfo.phone !== '') {
           submissionData.data[this.component.userInfo.phone] = selectedUser.phone;
         }
-        this.root.setSubmission(submissionData);
+        if (this.component.userInfo.id !== '') {
+          submissionData.data[this.component.userInfo.id] = selectedUser.id;
+        }
+        this.root.setSubmission(submissionData, { manual: true });
         this.dataValue = '';
       });
     }

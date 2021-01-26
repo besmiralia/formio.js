@@ -56,6 +56,7 @@ import UnknownComponent from './unknown/Unknown';
 import UrlComponent from './url/Url';
 import WellComponent from './well/Well';
 import UserLookupComponent from './userLookup/UserLookup';
+import LogoComponent from './logo/Logo';
 
 export default {
   address: AddressComponent,
@@ -116,5 +117,6 @@ export default {
   unknown: UnknownComponent,
   url: UrlComponent,
   userLookup: UserLookupComponent,
+  logo: LogoComponent,
   well: WellComponent,
 };

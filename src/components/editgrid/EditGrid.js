@@ -429,6 +429,7 @@ export default class EditGridComponent extends NestedArrayComponent {
         rowTemplate,
         {
           row: dataValue[rowIndex] || {},
+          rowsCount: dataValue.length - 1,
           data: this.data,
           rowIndex,
           components: this.component.components,
@@ -813,10 +814,6 @@ export default class EditGridComponent extends NestedArrayComponent {
     const ix = direction === 'up' ? rowIndex - 1 : rowIndex + 1;
 
     if (ix >= 0 && ix < this.editRows.length) {
-      const elToChange = this.editRows[ix];
-      this.editRows[ix] = this.editRows[rowIndex];
-      this.editRows[rowIndex] = elToChange;
-
       if (this.hasValue()) {
         const dataValue = this.dataValue || [];
         if (_.isArray(dataValue) && dataValue.hasOwnProperty(ix)) {
@@ -824,15 +821,13 @@ export default class EditGridComponent extends NestedArrayComponent {
           dataValue[ix] = dataValue[rowIndex];
           dataValue[rowIndex] = dataValueEl;
           this.dataValue = dataValue;
-          //this.triggerChange();
         }
       }
 
-      this.updateRowsComponents(rowIndex);
-      this.updateRowsComponents(ix);
-
+      // this.updateRowsComponents(rowIndex);
+      // this.updateRowsComponents(ix);
+      //
       this.updateValue();
-      this.triggerChange();
       this.redraw();
     }
   }

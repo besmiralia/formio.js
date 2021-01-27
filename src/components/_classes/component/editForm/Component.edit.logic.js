@@ -1,6 +1,7 @@
 import { getContextComponents } from '../../../../utils/utils';
 import BuilderUtils from '../../../../utils/builder';
 /* eslint-disable quotes, max-len */
+
 export default [
   {
     weight: 0,
@@ -9,7 +10,7 @@ export default [
     key: 'logic',
     templates: {
       header: '<div class="row"> \n  <div class="col-sm-6">\n    <strong>{{ value.length }} {{ ctx.t("Advanced Logic Configured") }}</strong>\n  </div>\n</div>',
-      row: '<div class="row">\n<div class="col-sm-8">\n<div>{{ row.name }}</div>\n</div>\n<div class="col-sm-4">\n<div class="btn-group pull-right">\n<div class="btn btn-default rowUp"><i class="fa fa-arrow-up"></i></div>\n<div class="btn btn-default rowDown"><i class="fa fa-arrow-down"></i></div>\n<div class="btn btn-default editRow">{{ ctx.t("Edit") }}</div>\n<div class="btn btn-danger removeRow">{{ ctx.t("Delete") }}</div>\n</div>\n</div>\n</div>',
+      row: '<div class="row">\n<div class="col-sm-8">\n<div>{{ row.name }}</div>\n</div>\n<div class="col-sm-4">\n<div class="btn-group pull-right">\n{% if (rowIndex != 0) { %}<div class="btn btn-default rowUp"><i class="fa fa-arrow-up"></i></div>{% } %}\n{% if (rowIndex != ctx.rowsCount) { %}<div class="btn btn-default rowDown"><i class="fa fa-arrow-down"></i></div>{% } %}\n<div class="btn btn-default editRow">{{ ctx.t("Edit") }}</div>\n<div class="btn btn-danger removeRow">{{ ctx.t("Delete") }}</div>\n</div>\n</div>\n</div>',
       footer: '',
     },
     type: 'editgrid',

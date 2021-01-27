@@ -14,7 +14,7 @@
         {% if (ctx.group.icon) { %}
         <i class="{{ctx.group.icon}}"></i>
         {% } %}
-        {{ctx.t(ctx.group.title)}}
+        {{ctx.t(ctx.group.title, { _userInput: true })}}
       </button>
     </h5>
   </div>
@@ -38,7 +38,7 @@
             {% if (ctx.group.components[componentKey].icon) { %}
               <i class="{{ctx.iconClass(ctx.group.components[componentKey].icon)}}" style="margin-right: 5px;"></i>
             {% } %}
-            {{ctx.t(ctx.group.components[componentKey].title)}}
+            {{ctx.t(ctx.group.components[componentKey].title, { _userInput: true })}}
           </span>
         {% }) %}
         {{ctx.subgroups.join('')}}

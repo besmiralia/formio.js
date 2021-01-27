@@ -205,10 +205,10 @@ export default class SelectComponent extends Field {
     // Perform a fast interpretation if we should not use the template.
     if (data && !this.component.template) {
       const itemLabel = data.label || data;
-      return (typeof itemLabel === 'string') ? this.t(itemLabel) : itemLabel;
+      return (typeof itemLabel === 'string') ? this.t(itemLabel, { _userInput: true }) : itemLabel;
     }
     if (typeof data === 'string') {
-      return this.t(data);
+      return this.t(data, { _userInput: true });
     }
 
     if (data.data) {
@@ -221,8 +221,8 @@ export default class SelectComponent extends Field {
     const template = this.sanitize(this.component.template ? this.interpolate(this.component.template, { item: data }) : data.label);
     if (template) {
       const label = template.replace(/<\/?[^>]+(>|$)/g, '');
-      if (!label || !this.t(label)) return;
-      return template.replace(label, this.t(label));
+      if (!label || !this.t(label, { _userInput: true })) return;
+      return template.replace(label, this.t(label, { _userInput: true }));
     }
     else {
       return JSON.stringify(data);
@@ -814,7 +814,7 @@ export default class SelectComponent extends Field {
 
   choicesOptions() {
     const useSearch = this.component.hasOwnProperty('searchEnabled') ? this.component.searchEnabled : true;
-    const placeholderValue = this.t(this.component.placeholder);
+    const placeholderValue = this.t(this.component.placeholder, { _userInput: true });
     let customOptions = this.component.customOptions || {};
     if (typeof customOptions == 'string') {
       try {
@@ -889,7 +889,11 @@ export default class SelectComponent extends Field {
 
     if (this.component.widget === 'html5') {
       this.triggerUpdate(null, true);
-      this.setItems(this.selectOptions || []);
+
+      if (this.visible) {
+        this.setItems(this.selectOptions || []);
+      }
+
       this.focusableElement = input;
       this.addEventListener(input, 'focus', () => this.update());
       this.addEventListener(input, 'keydown', (event) => {
@@ -1146,11 +1150,9 @@ export default class SelectComponent extends Field {
       if (this.choices) {
         this.choices.setChoices(notFoundValuesToAdd, 'value', 'label');
       }
-      else {
-        notFoundValuesToAdd.map(notFoundValue => {
-          this.addOption(notFoundValue.value, notFoundValue.label);
-        });
-      }
+      notFoundValuesToAdd.map(notFoundValue => {
+        this.addOption(notFoundValue.value, notFoundValue.label);
+      });
     }
     return added;
   }
@@ -1179,7 +1181,7 @@ export default class SelectComponent extends Field {
       if (
         !this.component.multiple &&
         this.component.placeholder &&
-        (value === this.t(this.component.placeholder))
+        (value === this.t(this.component.placeholder, { _userInput: true }))
       ) {
         value = this.emptyValue;
       }

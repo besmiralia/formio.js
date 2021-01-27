@@ -326,6 +326,12 @@ export default class WebformBuilder extends Component {
     const formio = new Formio(Formio.projectUrl);
     const isResourcesDisabled = this.options.builder && this.options.builder.resource === false;
 
+    formio.loadProject().then((project) => {
+      if (project && _.get(project, 'settings.addConfigToForms', false)) {
+        this.options.formConfig = project.config || {};
+      }
+    });
+
     if (/*!formio.noProject && */!isResourcesDisabled) {
       const resourceOptions = this.options.builder && this.options.builder.resource;
       query.params.tid = resourceOptions.tid;
@@ -1084,7 +1090,8 @@ export default class WebformBuilder extends Component {
           'logic',
           'autofocus',
           'customConditional',
-        ])]
+        ])],
+        config: this.options.formConfig || {}
       };
       const previewElement = this.componentEdit.querySelector('[ref="preview"]');
       if (previewElement) {
@@ -1178,12 +1185,20 @@ export default class WebformBuilder extends Component {
 
   highlightInvalidComponents() {
     const repeatablePaths = this.findRepeatablePaths();
+    let hasInvalidComponents = false;
 
-    eachComponent(this.webform.getComponents(), (comp, path) => {
+    this.webform.everyComponent((comp) => {
+      const path = comp.path;
       if (repeatablePaths.includes(path)) {
         comp.setCustomValidity(`API Key is not unique: ${comp.key}`);
+        hasInvalidComponents = true;
+      }
+      else if (comp.error?.message?.startsWith('API Key is not unique')) {
+        comp.setCustomValidity('');
       }
     });
+
+    this.emit('error', hasInvalidComponents);
   }
 
   /**
@@ -1303,7 +1318,7 @@ export default class WebformBuilder extends Component {
     const instance = new ComponentClass(componentCopy);
     this.editForm.submission = isJsonEdit ? {
       data: {
-        componentJson: instance.component
+        componentJson: component
       },
     } : {
         data: instance.component,

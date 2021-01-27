@@ -5,9 +5,7 @@ import i18next from 'i18next';
 import _ from 'lodash';
 import moment from 'moment';
 import maskInput from 'vanilla-text-mask';
-import { lodashOperators } from './utils/jsonlogic/operators';
 
-const lodash = lodashOperators.reduce((obj, operator) => _.set(obj, operator, _[operator]), {});
 /**
  * The root component for all elements within the Form.io renderer.
  */
@@ -512,7 +510,7 @@ export default class Element {
    */
   evalContext(additional) {
     return Object.assign({
-      _: lodash,
+      _,
       utils: FormioUtils,
       util: FormioUtils,
       user: Formio.getUser(),
@@ -522,7 +520,11 @@ export default class Element {
       token: Formio.getToken({
         decode: true
       }),
-      config: this.root && this.root.form && this.root.form.config ? this.root.form.config : {},
+      config: this.root && this.root.form && this.root.form.config
+        ? this.root.form.config
+        : this.options?.formConfig
+          ? this.options.formConfig
+          : {},
     }, additional, _.get(this.root, 'options.evalContext', {}));
   }
 

@@ -9,7 +9,7 @@ export default [
     key: 'logic',
     templates: {
       header: '<div class="row"> \n  <div class="col-sm-6">\n    <strong>{{ value.length }} {{ ctx.t("Advanced Logic Configured") }}</strong>\n  </div>\n</div>',
-      row: '<div class="row"> \n  <div class="col-sm-6">\n    <div>{{ row.name }} </div>\n  </div>\n  <div class="col-sm-2"> \n    <div class="btn-group pull-right"> \n      <div class="btn btn-default editRow">{{ ctx.t("Edit") }}</div> \n      <div class="btn btn-danger removeRow">{{ ctx.t("Delete") }}</div> \n    </div> \n  </div> \n</div>',
+      row: '<div class="row"> \n  <div class="col-sm-10">\n<div class="col-sm-5">\n  <div class="btn btn-default rowUp"><i class="fa fa-arrow-up"></i></div>\n<div class="btn btn-default rowDown"><i class="fa fa-arrow-down"></i></div></div>\n<div>{{ row.name }} </div>\n  </div>\n  <div class="col-sm-2"> \n    <div class="btn-group pull-right"> \n      <div class="btn btn-default editRow">{{ ctx.t("Edit") }}</div> \n      <div class="btn btn-danger removeRow">{{ ctx.t("Delete") }}</div> \n    </div> \n  </div> \n</div>',
       footer: '',
     },
     type: 'editgrid',
@@ -183,7 +183,7 @@ export default [
         tableView: false,
         templates: {
           header: '<div class="row"> \n  <div class="col-sm-6"><strong>{{ value.length }} {{ ctx.t("actions") }}</strong></div>\n</div>',
-          row: '<div class="row"> \n  <div class="col-sm-6">\n    <div>{{ row.name }} </div>\n  </div>\n  <div class="col-sm-2"> \n    <div class="btn-group pull-right"> \n      <div class="btn btn-default editRow">{{ ctx.t("Edit") }}</div> \n      <div class="btn btn-danger removeRow">{{ ctx.t("Delete") }}</div> \n    </div> \n  </div> \n</div>',
+          row: '<div class="row">\n<div class="col-sm-10">\n<div class="col-sm-5">\n  <div class="btn btn-default rowUp"><i class="fa fa-arrow-up"></i></div>\n<div class="btn btn-default rowDown"><i class="fa fa-arrow-down"></i></div></div>\n<div>{{ row.name }} </div>\n  </div>\n  <div class="col-sm-2"> \n    <div class="btn-group pull-right"> \n      <div class="btn btn-default editRow">{{ ctx.t("Edit") }}</div> \n      <div class="btn btn-danger removeRow">{{ ctx.t("Delete") }}</div> \n    </div> \n  </div> \n</div>',
           footer: '',
         },
         type: 'editgrid',

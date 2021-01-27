@@ -346,6 +346,17 @@ export default class EditGridComponent extends NestedArrayComponent {
               });
             },
           },
+          /** Priority Change Events (Up, Down) **/
+          {
+            className: 'rowUp',
+            event: 'click',
+            action: () => this.changeOrder(rowIndex, 'up'),
+          },
+          {
+            className: 'rowDown',
+            event: 'click',
+            action: () => this.changeOrder(rowIndex, 'down'),
+          },
           {
             className: 'row',
             event: 'click',
@@ -795,6 +806,26 @@ export default class EditGridComponent extends NestedArrayComponent {
     this.triggerChange({ modified, noPristineChangeOnModified: modified && this.component.rowDrafts, isolateRow: true });
     this.checkValidity(null, true);
     this.checkData();
+    this.redraw();
+  }
+
+  changeOrder(rowIndex, direction) {
+    console.log('123', this.editRows);
+    const elToChange = direction === 'up' ? this.editRows[rowIndex - 1] : this.editRows[rowIndex + 1];
+
+    if (elToChange) {
+      switch (direction) {
+        case 'up':
+          this.editRows[rowIndex - 1] = this.editRows[rowIndex];
+          break;
+        case 'down':
+          this.editRows[rowIndex + 1] = this.editRows[rowIndex];
+          break;
+      }
+      this.editRows[rowIndex] = elToChange;
+    }
+
+    console.log('321', this.editRows);
     this.redraw();
   }
 

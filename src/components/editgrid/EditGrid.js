@@ -810,23 +810,31 @@ export default class EditGridComponent extends NestedArrayComponent {
   }
 
   changeOrder(rowIndex, direction) {
-    console.log('123', this.editRows);
-    const elToChange = direction === 'up' ? this.editRows[rowIndex - 1] : this.editRows[rowIndex + 1];
+    const ix = direction === 'up' ? rowIndex - 1 : rowIndex + 1;
 
-    if (elToChange) {
-      switch (direction) {
-        case 'up':
-          this.editRows[rowIndex - 1] = this.editRows[rowIndex];
-          break;
-        case 'down':
-          this.editRows[rowIndex + 1] = this.editRows[rowIndex];
-          break;
-      }
+    if (ix >= 0 && ix < this.editRows.length) {
+      const elToChange = this.editRows[ix];
+      this.editRows[ix] = this.editRows[rowIndex];
       this.editRows[rowIndex] = elToChange;
-    }
 
-    console.log('321', this.editRows);
-    this.redraw();
+      if (this.hasValue()) {
+        const dataValue = this.dataValue || [];
+        if (_.isArray(dataValue) && dataValue.hasOwnProperty(ix)) {
+          const dataValueEl = dataValue[ix];
+          dataValue[ix] = dataValue[rowIndex];
+          dataValue[rowIndex] = dataValueEl;
+          this.dataValue = dataValue;
+          //this.triggerChange();
+        }
+      }
+
+      this.updateRowsComponents(rowIndex);
+      this.updateRowsComponents(ix);
+
+      this.updateValue();
+      this.triggerChange();
+      this.redraw();
+    }
   }
 
   createRowComponents(row, rowIndex) {

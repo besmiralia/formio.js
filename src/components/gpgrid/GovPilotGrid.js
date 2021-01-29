@@ -67,6 +67,38 @@ export default class GovPilotGridComponent extends EditGridComponent {
   `;
   }
 
+  setValue(value, flags = []) {
+    const changed = super.setValue(value, flags);
+
+    this.emit('editGridValueSet', {
+      row: null,
+      data: this.editRows,
+      tid: this.component.tid
+    });
+    return changed;
+  }
+  saveRow(rowIndex, modified) {
+    const saved = super.saveRow(rowIndex, modified);
+    const editRow = this.editRows[rowIndex];
+    if (saved) {
+        this.emit('gridRowSaved', {
+        row: editRow,
+        data: this.editRows,
+        tid: this.component.tid
+      });
+    }
+    return saved;
+  }
+  baseRemoveRow(rowIndex) {
+    const editRow = super.baseRemoveRow(rowIndex);
+    this.emit('gridRowRemoved', {
+      row: editRow,
+      data: this.editRows,
+      tid: this.component.tid
+    });
+    return editRow;
+  }
+
   get defaultSchema() {
     return GovPilotGridComponent.schema();
   }

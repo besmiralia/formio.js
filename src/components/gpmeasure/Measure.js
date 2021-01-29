@@ -36,19 +36,21 @@ export default class MeasureComponent extends Input {
 
   attachElement(element, index) {
     super.attachElement(element, index);
-    this.on('gridRowSaved', (rowInfo) => {
-      console.log('Grid Record Saved', rowInfo);
-      //calcMeasure();
-      //this.emit('calculateMeasure', { ...rowInfo, measure: this.key });
-      this.calcMeasure(rowInfo);
+    ['gridRowRemoved', 'editGridValueSet', 'gridRowSaved'].forEach((event) => {
+      this.on(event, (rowInfo) => {
+        console.log('Grid Event', event, rowInfo);
+        //calcMeasure();
+        //this.emit('calculateMeasure', { ...rowInfo, measure: this.key });
+        this.calcMeasure(rowInfo);
+      });
     });
+    /*
     this.on('gridRowRemoved', (rowInfo) => {
       console.log('Grid Record Removed', rowInfo);
       //calcMeasure();
       //this.emit('calculateMeasure', { ...rowInfo, measure: this.key });
       this.calcMeasure(rowInfo);
     });
-    /*
     this.on('measureCalculated', (measureInfo) => {
       if (this.component.key === measureInfo.id) {
         console.log('Measure calculated', measureInfo);
@@ -69,11 +71,11 @@ export default class MeasureComponent extends Input {
         break;
       }
       case 'S': {
-        this.setValue(filteredData.reduce((accumulator, currentValue) => accumulator + currentValue, 0));
+        this.setValue(filteredData.reduce((accumulator, currentValue) => accumulator + Number(currentValue), 0));
         break;
       }
       case 'A': {
-        if (filteredData.length > 0) this.setValue(filteredData.reduce((accumulator, currentValue) => accumulator + currentValue, 0) / filteredData.length);
+        if (filteredData.length > 0) this.setValue(filteredData.reduce((accumulator, currentValue) => accumulator + Number(currentValue), 0) / filteredData.length);
         else this.setValue(0);
         break;
       }
@@ -221,6 +223,7 @@ export default class MeasureComponent extends Input {
    * @param flags
    */
   setValueAt(index, value, flags = {}) {
+    if (flags && flags.fromSubmission) return false;//Besmir Alia - Ignore stored data, always calculate the value
     if (!this.isMultipleMasksField) {
       return super.setValueAt(index, value, flags);
     }

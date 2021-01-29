@@ -735,11 +735,11 @@ export default class EditGridComponent extends NestedArrayComponent {
       editRow.alerts = false;
     }
 
-    this.emit('gridRowSaved', {
-      row: editRow,
-      data: this.editRows,
-      tid: this.component.tid
-    });
+    // this.emit('gridRowSaved', {
+    //   row: editRow,
+    //   data: this.editRows,
+    //   tid: this.component.tid
+    // });
 
     return true;
   }
@@ -774,11 +774,11 @@ export default class EditGridComponent extends NestedArrayComponent {
     editRow.state = EditRowState.Removed;
     this.destroyComponents(rowIndex);
 
-    this.emit('gridRowRemoved', {
-      row: editRow,
-      data: this.editRows,
-      tid: this.component.tid
-    });
+    // this.emit('gridRowRemoved', {
+    //   row: editRow,
+    //   data: this.editRows,
+    //   tid: this.component.tid
+    // });
     return editRow;
   }
 
@@ -1031,7 +1031,6 @@ export default class EditGridComponent extends NestedArrayComponent {
     else {
       this.redraw();
     }
-
     return changed;
   }
 
